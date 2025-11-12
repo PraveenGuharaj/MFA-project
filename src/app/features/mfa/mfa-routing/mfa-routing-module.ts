@@ -5,11 +5,11 @@ const routes: Routes = [
   {
     path: '',
      children: [
-      { path: '', loadComponent: () => import('../ui/mfa-list/mfa-list').then(c => c.MfaList) },
-      { path: 'add', loadComponent: () => import('../ui/mfa-add/mfa-add').then(c => c.MfaAdd) },
-      { path: 'edit/:id', loadComponent: () => import('../ui/mfa-edit/mfa-edit').then(c => c.MfaEdit) },
-      { path: 'view/:id', loadComponent: () => import('../ui/mfa-view/mfa-view').then(c => c.MfaView) },
-      { path: 'delete/:id', loadComponent: () => import('../ui/mfa-delete/mfa-delete').then(c => c.MfaDelete) },
+      { path: '', loadComponent: () => import('../../../component/mfa-management/mfa-list/mfa-list').then(c => c.MfaList) },
+      { path: 'add', loadComponent: () => import('../../../component/mfa-management/mfa-add/mfa-add').then(c => c.MfaAdd) },
+      { path: 'edit/:id', loadComponent: () => import('../../../component/mfa-management/mfa-edit/mfa-edit').then(c => c.MfaEdit) },
+      { path: 'view/:id', loadComponent: () => import('../../../component/mfa-management/mfa-view/mfa-view').then(c => c.MfaView) },
+      { path: 'delete/:id', loadComponent: () => import('../../../component/mfa-management/mfa-delete/mfa-delete').then(c => c.MfaDelete) },
     ]
   }
 ];
