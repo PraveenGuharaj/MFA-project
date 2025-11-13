@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MfaHeader } from '../../../core/layout/common/mfa-header/mfa-header';
+import { Layout } from '../../../core/layout/common/layout/layout';
 
 @Component({
   selector: 'app-mfa-list',
-  imports: [CommonModule,MfaHeader],
+  imports: [CommonModule,Layout],
   templateUrl: './mfa-list.html',
   styleUrl: './mfa-list.scss',
 })

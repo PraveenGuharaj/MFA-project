@@ -10,6 +10,19 @@
     align-items: center;
     gap: 12px;
 
+    .menu-btn {
+      margin-right: 4px;
+      color: #444;
+
+      mat-icon {
+        font-size: 24px;
+      }
+
+      &:hover {
+        color: #1976d2;
+      }
+    }
+
     .logo {
       height: 40px;
       width: auto;
@@ -17,75 +30,64 @@
 
     .header-title {
       font-size: 12px;
-      // font-weight: 600;
       color: black;
       letter-spacing: 0.5px;
     }
   }
 
   .header-right {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-
-  .user-section {
     display: flex;
     align-items: center;
-    gap: 8px;
-    cursor: pointer;
+    gap: 24px;
 
-    .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .user-details {
+    .user-section {
       display: flex;
-      flex-direction: column;
-      align-items: end;
-      line-height: 1.2;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
 
-      .username {
-        font-weight: 600;
-        font-size: 13px;
-        color: #222;
+      .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
       }
 
-      .role {
-        font-size: 11px;
-        color: black;
-        font-weight: 400;
+      .user-details {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        line-height: 1.2;
+
+        .username {
+          font-weight: 600;
+          font-size: 13px;
+          color: #222;
+        }
+
+        .role {
+          font-size: 11px;
+          color: black;
+          font-weight: 400;
+        }
       }
     }
 
-    .dropdown-icon {
-      font-size: 18px;
-      color: #666;
-    }
+    .logout {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #444;
+      cursor: pointer;
 
-    &:hover .dropdown-icon {
-      color: #1976d2;
-    }
-  }
+      mat-icon {
+        font-size: 18px;
+      }
 
-  .logout {
-    display: flex;
-    align-items: end;
-    gap: 6px;
-    font-size: 13px;
-    color: #444;
-    cursor: pointer;
-
-    mat-icon {
-      font-size: 18px;
-    }
-
-    &:hover {
-      color: #1976d2;
+      &:hover {
+        color: #1976d2;
+      }
     }
   }
-}
-
 }
