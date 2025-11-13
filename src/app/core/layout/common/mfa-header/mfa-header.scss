@@ -1,0 +1,91 @@
+.mfa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  height: 64px;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .header-title {
+      font-size: 12px;
+      // font-weight: 600;
+      color: black;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  .user-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      line-height: 1.2;
+
+      .username {
+        font-weight: 600;
+        font-size: 13px;
+        color: #222;
+      }
+
+      .role {
+        font-size: 11px;
+        color: black;
+        font-weight: 400;
+      }
+    }
+
+    .dropdown-icon {
+      font-size: 18px;
+      color: #666;
+    }
+
+    &:hover .dropdown-icon {
+      color: #1976d2;
+    }
+  }
+
+  .logout {
+    display: flex;
+    align-items: end;
+    gap: 6px;
+    font-size: 13px;
+    color: #444;
+    cursor: pointer;
+
+    mat-icon {
+      font-size: 18px;
+    }
+
+    &:hover {
+      color: #1976d2;
+    }
+  }
+}
+
+}
