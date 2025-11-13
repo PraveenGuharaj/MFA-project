@@ -1,11 +1,15 @@
 .sidebar-nav {
-  width: 100%; // compact sidebar width
   height: 100vh;
   background: #fff;
+  border-right: 1px solid #e0e0e0;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #c5c5c5 transparent;
 
   mat-nav-list {
     width: 100%;
@@ -13,6 +17,7 @@
 
     a.mat-list-item {
       justify-content: center;
+      padding: 12px 0;
       min-height: 48px;
       border-radius: 8px;
       margin: 4px 8px;

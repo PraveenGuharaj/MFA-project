@@ -1,17 +1,11 @@
 <mat-sidenav-container class="layout-container">
-  <!-- Sidebar (hidden initially) -->
-  <mat-sidenav
-    #sidenav
-    class="sidebar"
-    [(opened)]="opened"
-    mode="over"         
-  >
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav [(opened)]="opened" mode="over" class="sidebar">
     <app-mfa-sidebar></app-mfa-sidebar>
   </mat-sidenav>
 
-  <!-- Main content area -->
+  <!-- Main Content -->
   <mat-sidenav-content>
-    <!-- Header triggers sidebar -->
     <app-mfa-header (toggleSidebar)="toggleSidebar()"></app-mfa-header>
 
     <div class="page-content">

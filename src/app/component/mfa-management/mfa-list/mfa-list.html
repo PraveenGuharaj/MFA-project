@@ -1,1 +1,191 @@
-<app-layout></app-layout>
+<div class="mfa-list-page">
+  <!-- PAGE HEADER (Outside White Card) -->
+  <div class="page-header">
+    <h2>Multi Factor Authentication</h2>
+    <button mat-raised-button color="primary" (click)="onAddMfa()">
+      <mat-icon>add</mat-icon>
+      Add MFA
+    </button>
+  </div>
+
+  <!-- WHITE BOX CARD -->
+  <div class="mfa-list-container">
+    <div class="list-search">
+      <div class="list-header">
+        <h3>List of MFA's</h3>
+        <span>Recently Added MFA</span>
+      </div>
+
+      <div>
+     <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search MFA</mat-label>
+        <input
+          matInput
+          placeholder="Search by name or type"
+          [(ngModel)]="searchTerm"
+          (keyup)="applyFilter()"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          *ngIf="searchTerm"
+          (click)="clearSearch()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="group-field">
+        <mat-label>Group By</mat-label>
+        <mat-select [(value)]="groupBy" (selectionChange)="onGroupByChange()">
+          <mat-option value="">None</mat-option>
+          <mat-option value="type">Type</mat-option>
+          <mat-option value="status">Status</mat-option>
+          <mat-option value="fromDate">Effective From Date</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+   
+
+    </div>
+    
+    <!-- Filters (Search + Group By) -->
+    <div class="header-actions">
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container mat-elevation-z1">
+      <table mat-table [dataSource]="filteredList" class="mat-elevation-z1">
+        <!-- MFA ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">
+              MFA Id
+              <mat-icon class="filter-icon" matTooltip="Filter by MFA Id"
+                >filter_alt</mat-icon
+              >
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let mfa"> {{ mfa.id }} </td>
+        </ng-container>
+
+        <!-- MFA Name -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">
+              MFA Name
+              <mat-icon class="filter-icon" matTooltip="Filter by MFA Name"
+                >filter_alt</mat-icon
+              >
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let mfa"> {{ mfa.name }} </td>
+        </ng-container>
+
+        <!-- Type -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">
+              MFA Type
+              <mat-icon class="filter-icon" matTooltip="Filter by Type"
+                >filter_alt</mat-icon
+              >
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let mfa"> {{ mfa.type }} </td>
+        </ng-container>
+
+        <!-- Fall Count -->
+        <ng-container matColumnDef="fallCount">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">
+              MFA Fall Count
+              <mat-icon class="filter-icon" matTooltip="Filter by Fall Count"
+                >filter_alt</mat-icon
+              >
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let mfa"> {{ mfa.fallCount }} </td>
+        </ng-container>
+
+        <!-- From Date -->
+        <ng-container matColumnDef="fromDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">
+              Effective From Date
+              <mat-icon class="filter-icon" matTooltip="Filter by From Date"
+                >filter_alt</mat-icon
+              >
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let mfa"> {{ mfa.fromDate }} </td>
+        </ng-container>
+
+        <!-- To Date -->
+        <ng-container matColumnDef="toDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">
+              Effective To Date
+              <mat-icon class="filter-icon" matTooltip="Filter by To Date"
+                >filter_alt</mat-icon
+              >
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let mfa"> {{ mfa.toDate }} </td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">
+              Status
+              <mat-icon class="filter-icon" matTooltip="Filter by Status"
+                >filter_alt</mat-icon
+              >
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">
+            <span class="status" [ngClass]="mfa.status.toLowerCase()">
+              {{ mfa.status }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let mfa" class="action-buttons">
+            <button
+              mat-icon-button
+              color="primary"
+              matTooltip="Edit"
+              (click)="onEditMfa(mfa)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              matTooltip="Delete"
+              (click)="onDeleteMfa(mfa)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+        <!-- Pagination Footer -->
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        [pageSize]="5"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
