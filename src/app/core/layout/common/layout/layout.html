@@ -1,6 +1,7 @@
 <mat-sidenav-container class="layout-container">
   <!-- Sidebar -->
-  <mat-sidenav #sidenav [(opened)]="opened" mode="over" class="sidebar">
+  <mat-sidenav #sidenav [(opened)]="opened" mode="over" [disableClose]="false"
+ class="sidebar">
     <app-mfa-sidebar></app-mfa-sidebar>
   </mat-sidenav>
 
