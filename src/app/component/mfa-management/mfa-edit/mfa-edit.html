@@ -1,1 +1,51 @@
-<p>mfa-edit works!</p>
+<div *ngIf="mfa">
+
+  <h2>Edit MFA Management</h2>
+    <div class="edit-header">
+  <!-- MFA Name -->
+ <div class="field-group">
+  <label>MFA Name</label>
+  <input class="input-small" type="text" [(ngModel)]="mfa.name">
+</div>
+
+<div class="field-group">
+  <label>MFA Type</label>
+  <input class="input-small" type="text" [(ngModel)]="mfa.type">
+</div>
+
+<div class="field-group">
+  <label>Fail Count</label>
+  <input class="input-small" type="number" [(ngModel)]="mfa.fallCount">
+</div>
+
+<div class="field-group">
+  <label>Effective From Date</label>
+  <input class="input-small" type="date" [(ngModel)]="mfa.fromDate">
+</div>
+
+<div class="field-group">
+  <label>Effective To Date</label>
+  <input class="input-small" type="date" [(ngModel)]="mfa.toDate">
+</div>
+
+  <!-- Status Toggle -->
+ <div class="status-toggle">
+  <label>Status</label>
+  <mat-slide-toggle 
+    [(ngModel)]="mfa.status"
+    [ngModelOptions]="{standalone: true}"
+    (change)="mfa.status = $event.checked ? 'Active' : 'Inactive'">
+    {{ mfa.status }}
+  </mat-slide-toggle>
+</div>
+
+  <!-- ACTION BUTTONS -->
+<div class="edit-actions">
+  <button class="discard-btn" (click)="onClose()">Discard</button>
+  <button class="save-btn" (click)="save()">Save</button>
+</div>
+    </div>
+
+
+
+</div>

@@ -1,1 +1,58 @@
-<p>mfa-add works!</p>
+<h2>Add User</h2>
+
+<div class="edit-header">
+
+  <!-- Enter Mobile -->
+  <div class="field-group">
+    <label>Enter Mobile</label>
+    <input class="input-small"
+           type="text"
+           [(ngModel)]="form.mobile">
+  </div>
+
+  <!-- Enter Email -->
+  <div class="field-group">
+    <label>Enter Email</label>
+    <input class="input-small"
+           type="email"
+           [(ngModel)]="form.email">
+  </div>
+
+  <!-- Enter Password -->
+  <div class="field-group">
+    <label>Enter Password</label>
+    <input class="input-small"
+           type="password"
+           [(ngModel)]="form.password">
+  </div>
+
+  <!-- Select MFA Name -->
+  <div class="field-group">
+    <label>Select MFA Name</label>
+    <select class="input-small"
+            [(ngModel)]="form.mfaName">
+      <option value="">-- Select --</option>
+      <option *ngFor="let item of mfaList" [value]="item.name">
+        {{ item.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Status Toggle (Added) -->
+  <div class="status-toggle">
+    <label>Status</label>
+    <mat-slide-toggle 
+      [(ngModel)]="form.status"
+      [ngModelOptions]="{standalone: true}"
+      (change)="form.status = $event.checked ? 'Active' : 'Inactive'">
+      {{ form.status }}
+    </mat-slide-toggle>
+  </div>
+
+  <!-- Buttons -->
+  <div class="edit-actions">
+    <button class="discard-btn" (click)="onClose()">Discard</button>
+    <button class="save-btn" (click)="save()">Save</button>
+  </div>
+
+</div>

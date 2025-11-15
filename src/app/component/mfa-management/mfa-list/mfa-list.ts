@@ -7,12 +7,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MfaEdit } from '../mfa-edit/mfa-edit';
+import { MfaView } from '../mfa-view/mfa-view';
+import { MfaDelete } from '../mfa-delete/mfa-delete';
+import { MfaAdd } from '../mfa-add/mfa-add';
 
 interface MfaItem {
-  id: number;
+  id: number | null;
   name: string;
   type: string;
-  fallCount: number;
+  fallCount: number | null;
   fromDate: string;
   toDate: string;
   status: string;
@@ -30,11 +34,18 @@ interface MfaItem {
     MatTableModule,
     MatInputModule,
     MatSelectModule,
+    MfaEdit,
+    MfaView,
+    MfaDelete,
+    MfaAdd
   ],
   templateUrl: './mfa-list.html',
   styleUrls: ['./mfa-list.scss'],
 })
 export class MfaList {
+
+  drawerMode: 'view' | 'edit' | 'add' | null = null;
+
   displayedColumns = [
     'id',
     'name',
@@ -56,10 +67,13 @@ export class MfaList {
   searchTerm = '';
   groupBy = '';
 
-  // Pagination
   rowsOptions = [5, 10, 20];
   pageSize = 5;
   currentPage = 1;
+
+  isDrawerOpen = false;
+  selectedMfa: MfaItem | null = null;
+  isDeleteOpen = false;
 
   get totalItems() {
     return this.filteredList.length;
@@ -81,16 +95,18 @@ export class MfaList {
     return this.filteredList.slice(this.startIndex, this.endIndex);
   }
 
+  // ---------------- FILTER ----------------
   applyFilter() {
     const term = this.searchTerm.trim().toLowerCase();
+
     this.filteredList = term
-      ? this.mfaList.filter(
-          (mfa) =>
-            mfa.name.toLowerCase().includes(term) ||
-            mfa.type.toLowerCase().includes(term) ||
-            mfa.id.toString().includes(term)
+      ? this.mfaList.filter(mfa =>
+          (mfa.name ?? '').toLowerCase().includes(term) ||
+          (mfa.type ?? '').toLowerCase().includes(term) ||
+          (mfa.id ?? '').toString().includes(term)
         )
       : [...this.mfaList];
+
     this.currentPage = 1;
   }
 
@@ -99,29 +115,71 @@ export class MfaList {
     this.filteredList = [...this.mfaList];
   }
 
+  // ---------------- SORT ----------------
   onGroupByChange() {
     if (!this.groupBy) {
       this.filteredList = [...this.mfaList];
-    } else {
-      const key = this.groupBy as keyof MfaItem;
-      this.filteredList = [...this.mfaList].sort((a, b) =>
-        a[key].toString().localeCompare(b[key].toString())
-      );
+      return;
     }
+
+    const key = this.groupBy as keyof MfaItem;
+
+    this.filteredList = [...this.mfaList].sort((a, b) => {
+      const aVal = a[key] ?? '';
+      const bVal = b[key] ?? '';
+      return aVal.toString().localeCompare(bVal.toString());
+    });
+  }
+
+  // ---------------- DRAWERS ----------------
+  onEditMfa(mfa: MfaItem) {
+    this.selectedMfa = { ...mfa };
+    this.drawerMode = 'edit';
+    this.isDrawerOpen = true;
+  }
+
+  onViewMfa(mfa: MfaItem) {
+    this.selectedMfa = { ...mfa };
+    this.drawerMode = 'view';
+    this.isDrawerOpen = true;
   }
 
   onAddMfa() {
-    console.log('Add MFA clicked');
+    this.drawerMode = 'add';
+    this.selectedMfa = {
+      id: null,
+      name: '',
+      type: '',
+      fallCount: null,
+      fromDate: '',
+      toDate: '',
+      status: 'Active'
+    };
+    this.isDrawerOpen = true;
   }
 
-  onEditMfa(mfa: MfaItem) {
-    console.log('Edit MFA', mfa);
+  closeDrawer() {
+    this.isDrawerOpen = false;
+    this.drawerMode = null;
   }
 
+  // ---------------- DELETE ----------------
   onDeleteMfa(mfa: MfaItem) {
-    console.log('Delete MFA', mfa);
+    this.selectedMfa = { ...mfa };
+    this.isDeleteOpen = true;
   }
 
+  closeDelete() {
+    this.isDeleteOpen = false;
+  }
+
+  deleteMfa(id: number) {
+    this.mfaList = this.mfaList.filter(m => m.id !== id);
+    this.applyFilter();
+    this.isDeleteOpen = false;
+  }
+
+  // ---------------- PAGINATION ----------------
   onRowsChange() {
     this.currentPage = 1;
   }

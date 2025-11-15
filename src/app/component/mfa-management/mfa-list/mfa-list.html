@@ -1,16 +1,18 @@
 <div class="mfa-list-page">
-  <!-- PAGE HEADER (Outside White Card) -->
+
+  <!-- Page Header -->
   <div class="page-header">
-    <h2>Multi Factor Authentication(MFA) Management</h2>
+    <h2>Multi Factor Authentication (MFA) Management</h2>
     <button mat-raised-button color="primary" (click)="onAddMfa()">
       <mat-icon>add</mat-icon>
       Add MFA
     </button>
   </div>
 
-  <!-- WHITE BOX CARD -->
+  <!-- White Box -->
   <div class="mfa-list-container">
-    <!-- Header inside Card -->
+
+    <!-- Search + Group -->
     <div class="list-search">
       <div class="list-header">
         <h3>List of MFA's</h3>
@@ -18,25 +20,15 @@
       </div>
 
       <div class="filters">
+      
+        <!-- Search -->
         <mat-form-field appearance="outline" class="search-field">
           <mat-label>Search</mat-label>
-          <input
-            matInput
-            placeholder="Search by name or type"
-            [(ngModel)]="searchTerm"
-            (keyup)="applyFilter()"
-          />
-          <button
-            mat-icon-button
-            matSuffix
-            *ngIf="searchTerm"
-            (click)="clearSearch()"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
+          <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="applyFilter()" />
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
 
+        <!-- Group By -->
         <mat-form-field appearance="outline" class="group-field">
           <mat-label>Group By</mat-label>
           <mat-select [(value)]="groupBy" (selectionChange)="onGroupByChange()">
@@ -46,117 +38,80 @@
             <mat-option value="fromDate">Effective From Date</mat-option>
           </mat-select>
         </mat-form-field>
+
       </div>
     </div>
 
     <!-- Table -->
     <div class="table-container mat-elevation-z1">
-      <table mat-table [dataSource]="paginatedData" class="mat-elevation-z1">
+      <table mat-table [dataSource]="paginatedData">
+
+        <!-- ID -->
         <ng-container matColumnDef="id">
-               <th mat-header-cell *matHeaderCellDef>
-            <div class="header-cell">
-              MFA Id
-              <mat-icon class="filter-icon" matTooltip="Filter by MFA Id"
-                >filter_alt</mat-icon
-              >
-            </div>
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">MFA Id <mat-icon class="filter-icon">filter_alt</mat-icon></div>
           </th>
           <td mat-cell *matCellDef="let mfa">{{ mfa.id }}</td>
         </ng-container>
 
+        <!-- Name -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>
-            <div class="header-cell">
-              MFA Name
-              <mat-icon class="filter-icon" matTooltip="Filter by MFA Name"
-                >filter_alt</mat-icon
-              >
-            </div>
+            <div class="header-cell">Name <mat-icon class="filter-icon">filter_alt</mat-icon></div>
           </th>
-          <td mat-cell *matCellDef="let mfa"> {{ mfa.name }} </td>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.name }}</td>
         </ng-container>
 
+        <!-- Type -->
         <ng-container matColumnDef="type">
           <th mat-header-cell *matHeaderCellDef>
-            <div class="header-cell">
-              MFA Type
-              <mat-icon class="filter-icon" matTooltip="Filter by Type"
-                >filter_alt</mat-icon
-              >
-            </div>
+            <div class="header-cell">Type <mat-icon class="filter-icon">filter_alt</mat-icon></div>
           </th>
-          <td mat-cell *matCellDef="let mfa"> {{ mfa.type }} </td>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.type }}</td>
         </ng-container>
 
+        <!-- Fall Count -->
         <ng-container matColumnDef="fallCount">
           <th mat-header-cell *matHeaderCellDef>
-            <div class="header-cell">
-              MFA Fail Count
-              <mat-icon class="filter-icon" matTooltip="Filter by Fall Count"
-                >filter_alt</mat-icon
-              >
-            </div>
+            <div class="header-cell">Fail Count <mat-icon class="filter-icon">filter_alt</mat-icon></div>
           </th>
-          <td mat-cell *matCellDef="let mfa"> {{ mfa.fallCount }} </td>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.fallCount }}</td>
         </ng-container>
 
+        <!-- Dates -->
         <ng-container matColumnDef="fromDate">
           <th mat-header-cell *matHeaderCellDef>
-            <div class="header-cell">
-              Effective From Date
-              <mat-icon class="filter-icon" matTooltip="Filter by From Date"
-                >filter_alt</mat-icon
-              >
-            </div>
+            <div class="header-cell">From Date</div>
           </th>
-          <td mat-cell *matCellDef="let mfa"> {{ mfa.fromDate }} </td>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.fromDate }}</td>
         </ng-container>
 
         <ng-container matColumnDef="toDate">
           <th mat-header-cell *matHeaderCellDef>
-            <div class="header-cell">
-              Effective To Date
-              <mat-icon class="filter-icon" matTooltip="Filter by To Date"
-                >filter_alt</mat-icon
-              >
-            </div>
+            <div class="header-cell">To Date</div>
           </th>
-          <td mat-cell *matCellDef="let mfa"> {{ mfa.toDate }} </td>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.toDate }}</td>
         </ng-container>
 
+        <!-- Status -->
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>
-            <div class="header-cell">
-              Status
-              <mat-icon class="filter-icon" matTooltip="Filter by Status"
-                >filter_alt</mat-icon
-              >
-            </div>
-          </th>
+          <th mat-header-cell *matHeaderCellDef>Status</th>
           <td mat-cell *matCellDef="let mfa">
-            <span class="status" [ngClass]="mfa.status.toLowerCase()">
-              {{ mfa.status }}
-            </span>
+            <span class="status" [ngClass]="mfa.status.toLowerCase()">{{ mfa.status }}</span>
           </td>
         </ng-container>
 
+        <!-- Actions -->
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef class="action">Actions</th>
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let mfa" class="action-buttons">
-            <button
-              mat-icon-button
-              color="primary"
-              matTooltip="Edit"
-              (click)="onEditMfa(mfa)"
-            >
+            <button mat-icon-button color="warn" (click)="onViewMfa(mfa)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onEditMfa(mfa)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button
-              mat-icon-button
-              color="warn"
-              matTooltip="Delete"
-              (click)="onDeleteMfa(mfa)"
-            >
+            <button mat-icon-button color="warn"(click)="onDeleteMfa(mfa)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
@@ -164,37 +119,51 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
       </table>
 
-      <!-- Custom Pagination -->
+      <!-- Pagination -->
       <div class="custom-pagination">
         <div class="pagination-info">
-          Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ totalItems }} entries
+          Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ totalItems }}
         </div>
 
         <div class="pagination-controls">
-          <label for="rowsSelect">Rows:</label>
-          <select id="rowsSelect" [(ngModel)]="pageSize" (change)="onRowsChange()">
-            <option *ngFor="let size of rowsOptions" [value]="size">
-              {{ size }}
-            </option>
+          <label>Rows:</label>
+          <select [(ngModel)]="pageSize" (change)="onRowsChange()">
+            <option *ngFor="let size of rowsOptions" [value]="size">{{ size }}</option>
           </select>
 
-          <button mat-stroked-button (click)="previousPage()" [disabled]="currentPage === 1">
-            ‹ Previous
-          </button>
-
+          <button mat-stroked-button (click)="previousPage()" [disabled]="currentPage === 1">‹ Previous</button>
           <span class="page-indicator">{{ currentPage }}</span>
-
-          <button
-            mat-stroked-button
-            (click)="nextPage()"
-            [disabled]="currentPage === totalPages"
-          >
-            Next ›
-          </button>
+          <button mat-stroked-button (click)="nextPage()" [disabled]="currentPage === totalPages">Next ›</button>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Overlay -->
+<div class="drawer-overlay" *ngIf="isDrawerOpen" (click)="closeDrawer()"></div>
+<div class="delete-overlay" *ngIf="isDeleteOpen" (click)="closeDelete()"></div>
+
+
+<!-- Right Drawer Panel -->
+<div class="drawer-panel" [class.open]="isDrawerOpen" [style.display]="isDrawerOpen ? 'block' : 'none'">
+  <app-mfa-view *ngIf="drawerMode === 'view'" [mfa]="selectedMfa" (close)="closeDrawer()">
+  </app-mfa-view>
+  <app-mfa-edit *ngIf="drawerMode === 'edit'" [mfa]="selectedMfa" (close)="closeDrawer()"></app-mfa-edit>
+   <app-mfa-add
+    *ngIf="drawerMode === 'add'"
+    [mfa]="selectedMfa"
+    (close)="closeDrawer()">
+  </app-mfa-add>
+</div>
+
+<div class="delete-modal-wrapper" *ngIf="isDeleteOpen">
+  <app-mfa-delete
+    [mfa]="selectedMfa"
+    (close)="closeDelete()"
+    (delete)="deleteMfa($event)">
+  </app-mfa-delete>
 </div>

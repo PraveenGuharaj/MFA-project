@@ -1,0 +1,58 @@
+.edit-header {
+  padding: 0 30px 0 30px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #444;
+  }
+}
+
+.view-box {
+  height: 32px;
+  padding: 4px 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  color: #444;
+}
+
+/* Buttons (same as edit) */
+.edit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.discard-btn {
+  padding: 6px 18px;
+  border: 1px solid #d0d0d0;
+  background: #ffffff;
+  color: #555;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  width: 30%;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
