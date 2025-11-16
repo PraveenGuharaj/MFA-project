@@ -5,32 +5,25 @@
   <!-- Enter Mobile -->
   <div class="field-group">
     <label>Enter Mobile</label>
-    <input class="input-small"
-           type="text"
-           [(ngModel)]="form.mobile">
+    <input class="input-small" type="text" [(ngModel)]="form.mobile">
   </div>
 
   <!-- Enter Email -->
   <div class="field-group">
     <label>Enter Email</label>
-    <input class="input-small"
-           type="email"
-           [(ngModel)]="form.email">
+    <input class="input-small" type="email" [(ngModel)]="form.email">
   </div>
 
   <!-- Enter Password -->
   <div class="field-group">
     <label>Enter Password</label>
-    <input class="input-small"
-           type="password"
-           [(ngModel)]="form.password">
+    <input class="input-small" type="password" [(ngModel)]="form.password">
   </div>
 
   <!-- Select MFA Name -->
   <div class="field-group">
     <label>Select MFA Name</label>
-    <select class="input-small"
-            [(ngModel)]="form.mfaName">
+    <select class="input-small" [(ngModel)]="form.mfaName">
       <option value="">-- Select --</option>
       <option *ngFor="let item of mfaList" [value]="item.name">
         {{ item.name }}
@@ -38,12 +31,22 @@
     </select>
   </div>
 
+  <!-- Effective from date -->
+  <div class="field-group">
+    <label>Effective from date</label>
+    <input class="input-small" type="date" [(ngModel)]="form.fromDate">
+  </div>
+
+  <!-- Effective to date -->
+  <div class="field-group">
+    <label>Effective to date</label>
+    <input class="input-small" type="date" [(ngModel)]="form.toDate">
+  </div>
+
   <!-- Status Toggle (Added) -->
   <div class="status-toggle">
     <label>Status</label>
-    <mat-slide-toggle 
-      [(ngModel)]="form.status"
-      [ngModelOptions]="{standalone: true}"
+    <mat-slide-toggle [(ngModel)]="form.status" [ngModelOptions]="{standalone: true}"
       (change)="form.status = $event.checked ? 'Active' : 'Inactive'">
       {{ form.status }}
     </mat-slide-toggle>

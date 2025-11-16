@@ -23,32 +23,34 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 export class MfaAdd {
   @Input() mfa: any;
   @Output() close = new EventEmitter<void>();
+  @Output() saveMfa = new EventEmitter<any>();
 
 
   form = {
-  mobile: '',
-  email: '',
-  password: '',
-  mfaName: '',
-    status: 'Active'
+    mobile: '',
+    email: '',
+    password: '',
+    mfaName: '',
+    status: 'Active',
+    fromDate: '',
+    toDate: ''
 
-};
+  };
 
-mfaList = [
-  { name: 'Email OTP' },
-  { name: 'SMS OTP' },
-  { name: 'Authenticator App' }
-  // or fetch from API
-];
+  mfaList = [
+    { name: 'Email OTP' },
+    { name: 'SMS OTP' },
+    { name: 'Authenticator App' }
+  ];
 
   onClose() {
     this.close.emit();
   }
 
   save() {
-    alert('MFA Added!');
+    this.saveMfa.emit(this.form);
     this.close.emit();
   }
 
-  
+
 }

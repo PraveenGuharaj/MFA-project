@@ -12,14 +12,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   standalone: true,
   selector: 'app-mfa-edit',
   imports: [
-   CommonModule,
-  FormsModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatButtonModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatSlideToggleModule,
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
   ],
   templateUrl: './mfa-edit.html',
   styleUrls: ['./mfa-edit.scss']
@@ -27,13 +27,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 export class MfaEdit {
   @Input() mfa: any;
   @Output() close = new EventEmitter<void>();
+  @Output() update = new EventEmitter<any>();
 
   onClose() {
     this.close.emit();
   }
 
   save() {
-    alert('Save clicked');
+    this.update.emit(this.mfa);
     this.close.emit();
   }
 }

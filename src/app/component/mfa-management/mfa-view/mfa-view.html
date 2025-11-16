@@ -13,7 +13,18 @@
     <!-- MFA Type -->
     <div class="field-group">
       <label>MFA Type</label>
-      <div class="view-box">{{ mfa.type }}</div>
+
+      <div class="radio-group">
+        <label class="radio-item">
+          <input type="radio" name="mfaType" value="OTP" [(ngModel)]="mfa.type" />
+          OTP
+        </label>
+
+        <label class="radio-item">
+          <input type="radio" name="mfaType" value="Secure Value" [(ngModel)]="mfa.type" />
+          Secure Value
+        </label>
+      </div>
     </div>
 
     <!-- Fail Count -->

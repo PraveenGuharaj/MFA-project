@@ -6,7 +6,7 @@ h2 {
 
 .edit-actions {
   display: flex;
-  justify-content: center;   /* Center the buttons */
+  justify-content: center;
   gap: 14px;
   margin-top: 22px;
 }
@@ -65,7 +65,7 @@ h2 {
 
 .small-field {
   width: 100%;
-  
+
   --mat-form-field-container-height: 34px !important;
   --mat-form-field-container-text-size: 12px !important;
   --mat-form-field-container-vertical-padding: 2px !important;
@@ -165,5 +165,10 @@ h2 {
 
 
 .edit-header {
-    padding:0 30px 0 30px;
+  padding: 0 30px 0 30px;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-around;
 }

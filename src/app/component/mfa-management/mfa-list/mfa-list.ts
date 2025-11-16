@@ -101,10 +101,10 @@ export class MfaList {
 
     this.filteredList = term
       ? this.mfaList.filter(mfa =>
-          (mfa.name ?? '').toLowerCase().includes(term) ||
-          (mfa.type ?? '').toLowerCase().includes(term) ||
-          (mfa.id ?? '').toString().includes(term)
-        )
+        (mfa.name ?? '').toLowerCase().includes(term) ||
+        (mfa.type ?? '').toLowerCase().includes(term) ||
+        (mfa.id ?? '').toString().includes(term)
+      )
       : [...this.mfaList];
 
     this.currentPage = 1;
@@ -191,4 +191,35 @@ export class MfaList {
   nextPage() {
     if (this.currentPage < this.totalPages) this.currentPage++;
   }
+
+  onAddMfaSave(newData: any) {
+
+    const newId = this.mfaList.length
+      ? Math.max(...this.mfaList.map(m => m.id ?? 0)) + 1
+      : 1;
+
+    const newMfa: MfaItem = {
+      id: newId,
+      name: newData.mfaName,
+      type: 'User Configured',
+      fallCount: 0,
+      fromDate: newData.fromDate,
+      toDate: newData.toDate,
+      status: newData.status
+    };
+
+    this.mfaList.push(newMfa);
+    this.applyFilter();
+    this.closeDrawer();
+  }
+
+  onUpdateMfa(updatedMfa: any) {
+    const index = this.mfaList.findIndex(m => m.id === updatedMfa.id);
+    if (index !== -1) {
+      this.mfaList[index] = { ...updatedMfa };
+    }
+
+    this.applyFilter();
+  }
+
 }

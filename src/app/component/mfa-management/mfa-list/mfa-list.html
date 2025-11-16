@@ -20,7 +20,7 @@
       </div>
 
       <div class="filters">
-      
+
         <!-- Search -->
         <mat-form-field appearance="outline" class="search-field">
           <mat-label>Search</mat-label>
@@ -111,7 +111,7 @@
             <button mat-icon-button (click)="onEditMfa(mfa)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn"(click)="onDeleteMfa(mfa)">
+            <button mat-icon-button color="warn" (click)="onDeleteMfa(mfa)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
@@ -152,18 +152,14 @@
 <div class="drawer-panel" [class.open]="isDrawerOpen" [style.display]="isDrawerOpen ? 'block' : 'none'">
   <app-mfa-view *ngIf="drawerMode === 'view'" [mfa]="selectedMfa" (close)="closeDrawer()">
   </app-mfa-view>
-  <app-mfa-edit *ngIf="drawerMode === 'edit'" [mfa]="selectedMfa" (close)="closeDrawer()"></app-mfa-edit>
-   <app-mfa-add
-    *ngIf="drawerMode === 'add'"
-    [mfa]="selectedMfa"
+  <app-mfa-edit *ngIf="drawerMode === 'edit'" [mfa]="selectedMfa" (update)="onUpdateMfa($event)"
+    (close)="closeDrawer()"></app-mfa-edit>
+  <app-mfa-add *ngIf="drawerMode === 'add'" [mfa]="selectedMfa" (saveMfa)="onAddMfaSave($event)"
     (close)="closeDrawer()">
   </app-mfa-add>
 </div>
 
 <div class="delete-modal-wrapper" *ngIf="isDeleteOpen">
-  <app-mfa-delete
-    [mfa]="selectedMfa"
-    (close)="closeDelete()"
-    (delete)="deleteMfa($event)">
+  <app-mfa-delete [mfa]="selectedMfa" (close)="closeDelete()" (delete)="deleteMfa($event)">
   </app-mfa-delete>
 </div>
