@@ -51,6 +51,4 @@ export class MfaAdd {
     this.saveMfa.emit(this.form);
     this.close.emit();
   }
-
-
 }

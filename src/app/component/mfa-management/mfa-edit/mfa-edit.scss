@@ -20,7 +20,7 @@ h2 {
   font-size: 13px;
   cursor: pointer;
   transition: 0.2s ease;
-  width: 30%;
+  width: 100%;
 
   &:hover {
     background: #f5f5f5;
@@ -38,6 +38,7 @@ h2 {
   font-weight: 500;
   cursor: pointer;
   transition: 0.2s ease;
+  width: 100%;
 
   &:hover {
     background: #278d5c;

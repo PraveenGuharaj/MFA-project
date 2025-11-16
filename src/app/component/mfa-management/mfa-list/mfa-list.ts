@@ -11,6 +11,7 @@ import { MfaEdit } from '../mfa-edit/mfa-edit';
 import { MfaView } from '../mfa-view/mfa-view';
 import { MfaDelete } from '../mfa-delete/mfa-delete';
 import { MfaAdd } from '../mfa-add/mfa-add';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface MfaItem {
   id: number | null;
@@ -75,6 +76,48 @@ export class MfaList {
   selectedMfa: MfaItem | null = null;
   isDeleteOpen = false;
 
+  constructor(private router: Router, private route: ActivatedRoute) { }
+  ngOnInit() {
+    const stored = localStorage.getItem('mfaList');
+    if (stored) {
+      this.mfaList = JSON.parse(stored);
+      this.filteredList = [...this.mfaList];
+    }
+
+
+    this.route.queryParams.subscribe(params => {
+      const action = params['action'];
+      const id = params['id'];
+
+      if (!action) {
+        this.isDrawerOpen = false;
+        this.drawerMode = null;
+        return;
+      }
+
+      this.drawerMode = action as any;
+      this.isDrawerOpen = true;
+
+      if (action === 'add') {
+        this.onAddMfa();
+      }
+
+      if ((action === 'edit' || action === 'view') && id) {
+        const item = this.mfaList.find(m => m.id === +id);
+        if (item) {
+          this.selectedMfa = { ...item };
+        }
+      }
+    });
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem('mfaList', JSON.stringify(this.mfaList));
+  }
+
+
+
+
   get totalItems() {
     return this.filteredList.length;
   }
@@ -133,18 +176,25 @@ export class MfaList {
 
   // ---------------- DRAWERS ----------------
   onEditMfa(mfa: MfaItem) {
-    this.selectedMfa = { ...mfa };
-    this.drawerMode = 'edit';
-    this.isDrawerOpen = true;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { action: 'edit', id: mfa.id }
+    });
   }
 
+
   onViewMfa(mfa: MfaItem) {
-    this.selectedMfa = { ...mfa };
-    this.drawerMode = 'view';
-    this.isDrawerOpen = true;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { action: 'view', id: mfa.id }
+    });
   }
 
   onAddMfa() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { action: 'add' }
+    });
     this.drawerMode = 'add';
     this.selectedMfa = {
       id: null,
@@ -159,6 +209,11 @@ export class MfaList {
   }
 
   closeDrawer() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {}
+    });
+
     this.isDrawerOpen = false;
     this.drawerMode = null;
   }
@@ -176,6 +231,7 @@ export class MfaList {
   deleteMfa(id: number) {
     this.mfaList = this.mfaList.filter(m => m.id !== id);
     this.applyFilter();
+    this.saveToLocalStorage();
     this.isDeleteOpen = false;
   }
 
@@ -211,6 +267,7 @@ export class MfaList {
     this.mfaList.push(newMfa);
     this.applyFilter();
     this.closeDrawer();
+    this.saveToLocalStorage();
   }
 
   onUpdateMfa(updatedMfa: any) {
@@ -220,6 +277,7 @@ export class MfaList {
     }
 
     this.applyFilter();
+    this.saveToLocalStorage();
   }
 
 }
