@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-mfa-sidebar',
   imports: [
@@ -14,5 +14,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './mfa-sidebar.scss',
 })
 export class MfaSidebar {
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
+  mfaDeal() {
+    this.router.navigate(['/MfaDeals']);
+  }
 }

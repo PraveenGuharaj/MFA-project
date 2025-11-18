@@ -1,0 +1,112 @@
+<mat-toolbar color="primary" class="mfa-header">
+   <span>Deals</span>
+
+   <button mat-raised-button color="accent" class="add-deals">
+      <mat-icon>add</mat-icon>
+      Add MFA
+   </button>
+</mat-toolbar>
+
+<div class="">
+   <button matButton="elevated">Pipeline</button>
+   <button matButton="elevated" class="executed-title">Executed</button>
+</div>
+
+<div class="dashboard-grid">
+
+   <!-- SUMMARY CARD -->
+   <div class="card summary-card">
+      <div class="card-title">Summary</div>
+
+      <div *ngFor="let s of summary" class="summary-row">
+         <div class="icon-circle" [style.background]="s.color">
+            <mat-icon>{{ s.icon }}</mat-icon>
+         </div>
+
+         <div class="summary-text">
+            <div class="summary-label">{{ s.label }}</div>
+            <div class="summary-value">{{ s.value }}</div>
+         </div>
+      </div>
+   </div>
+
+   <!-- SCORE -->
+   <div class="card chart-card">
+      <div class="card-title">Score</div>
+
+      <div class="chart-wrapper">
+         <div>
+
+         </div>
+         <ngx-charts-pie-chart class="ngx-piechart" [results]="scoreChartData" [customColors]="scoreColors"
+            [view]="[150, 150]" [doughnut]="true" [legend]="false" [labels]="false">
+         </ngx-charts-pie-chart>
+
+         <div class="center-scrorenumber">{{ scoreTotal }}</div>
+
+         <div class="score-card">
+            <div class="legend">
+               <div *ngFor="let item of scoreChartData" class="score-legend-row">
+
+                  <!-- LINE 1 -->
+                  <div class="score-legend-line1">
+                     <span class="score-legend-dot" [style.background]="item.color"></span>
+                     <span class="score-legend-label">{{ item.name }}</span>
+                  </div>
+
+                  <!-- LINE 2 -->
+                  <div class="score-legend-line2">
+                     <span class="score-legend-value">{{ item.value }}</span>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+
+      </div>
+   </div>
+
+   <!-- STAGES -->
+   <div class="card chart-card">
+      <div class="card-title">Stages</div>
+
+      <div class="chart-wrapper">
+         <ngx-charts-pie-chart class="ngx-stage-piechart" [results]="stagesChartData" [customColors]="stagesColors"
+            [view]="[150, 150]" [doughnut]="true" [legend]="false">
+         </ngx-charts-pie-chart>
+
+         <div class="center-number">{{ stagesTotal }}</div>
+
+         <div class="legend">
+            <div *ngFor="let item of stagesChartData" class="legend-row small">
+               <span class="legend-dot" [style.background]="item.color"></span>
+               <span>{{ item.name }}</span>
+               <span class="legend-value">{{ item.value }}</span>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- PRIORITY -->
+   <div class="card chart-card">
+      <div class="card-title">Priority</div>
+
+      <div class="chart-wrapper">
+         <ngx-charts-pie-chart class="ngx-stage-piechart" [results]="priorityChartData" [customColors]="priorityColors"
+            [view]="[150, 150]" [doughnut]="true" [legend]="false">
+         </ngx-charts-pie-chart>
+
+         <div class="center-number">{{ priorityTotal }}</div>
+
+         <div class="legend">
+            <div *ngFor="let item of priorityChartData" class="legend-row">
+               <span class="legend-dot" [style.background]="item.color"></span>
+               <span>{{ item.name }}</span>
+               <span class="legend-value">{{ item.value }}</span>
+            </div>
+         </div>
+      </div>
+   </div>
+
+</div>

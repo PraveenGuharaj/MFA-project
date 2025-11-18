@@ -1,0 +1,262 @@
+:host { display:block; padding:12px; box-sizing:border-box; }
+
+.mfa-header { display:flex; justify-content:space-between; align-items:center; }
+.add-deals { background:#2fa36b; color:#fff; }
+
+.pipeline { margin:12px 0; display:flex; gap:10px; }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  padding: 15px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid #eee;
+  min-height: 260px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.summary-card {
+  grid-row: span 2;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.icon-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-right: 12px;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.summary-value {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.chart-card {
+  position: relative;
+}
+
+.chart-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.center-number {
+  position: absolute;
+  left: 66px;
+  top: 80px;
+  font-size: 22px;
+  font-weight: 600;
+}
+.center-scrorenumber {
+  position: absolute;
+  left: 35px;
+  top: 73px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.legend {
+  margin-left: 15px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.legend-value {
+  font-weight: 600;
+  margin-left: 6px;
+}
+.legend-score-dot {
+    width: 16px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.score-card {
+  margin-left:-58px;
+  .legend {
+    margin-left: 50px;
+  }
+
+  .score-legend-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+
+  .score-legend-line1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .score-legend-line2 {
+    margin-left: 18px;  
+    margin-top: 2px;
+  }
+
+  .score-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .score-legend-label {
+    font-size: 13px;
+    color: #444;
+  }
+
+  .score-legend-value {
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+.ngx-piechart {
+  margin-left: -40px;
+  stroke: #ffffff;
+  stroke-width: 1px;
+}
+
+.ngx-stage-piechart {
+    stroke: #ffffff;
+  stroke-width: 1px;
+}
+
+.executed-title {
+  margin-left:18px;
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+/* Tablet (≤ 1024px) */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .summary-card {
+    grid-row: span 1;
+  }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: auto;
+  }
+
+  .ngx-piechart,
+  ngx-charts-pie-chart {
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto;
+  }
+
+  .chart-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center-number,
+  .center-scrorenumber {
+   left: 52% !important;
+        top: 86px;
+    transform: translate(-50%, -50%);
+  }
+
+  .score-card {
+    margin-left: 0 !important;
+    margin-top: 10px;
+
+    .legend {
+      margin-left: 0 !important;
+      text-align: center;
+    }
+
+    .score-legend-row {
+      align-items: center;
+    }
+  }
+
+  .legend {
+    margin-left: 0 !important;
+    text-align: center;
+  }
+
+  .legend-row {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+
+  ngx-charts-pie-chart,
+  .ngx-piechart {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .summary-label {
+    font-size: 12px;
+  }
+
+  .summary-value {
+    font-size: 16px;
+  }
+
+  .score-legend-line2 {
+    margin-left: 0 !important;
+  }
+}
