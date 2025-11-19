@@ -1,0 +1,20 @@
+@use '../mfa-management/mfa-list/mfa-list.scss' as child;
+.actions-column {
+  min-width: 130px;
+  white-space: nowrap;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-buttons mat-icon {
+  font-size: 20px;
+}
+
+.mfa-list-container table td {
+  font-size: 12px;
+}

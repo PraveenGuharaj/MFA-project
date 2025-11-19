@@ -1,0 +1,126 @@
+<div class="mfa-list-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h2>Offer Management</h2>
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon>
+      Add Offer
+    </button>
+  </div>
+
+
+  <div class="mfa-list-container">
+    <div class="list-search">
+      <div class="list-header">
+        <h3>List of Offers</h3>
+        <span>Recently Added Offers</span>
+      </div>
+
+      <div class="filters">
+
+        <!-- Search -->
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="applyFilter()" />
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Group By -->
+        <mat-form-field appearance="outline" class="group-field">
+          <mat-label>Group By</mat-label>
+          <mat-select [(value)]="groupBy" (selectionChange)="onGroupByChange()">
+            <mat-option value="">None</mat-option>
+            <mat-option value="type">Type</mat-option>
+            <mat-option value="status">Status</mat-option>
+            <mat-option value="fromDate">Effective From Date</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <div class="table-container mat-elevation-z1">
+      <table mat-table [dataSource]="paginatedData">
+
+
+
+        <!-- Name -->
+        <ng-container matColumnDef="offerName">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Partner Name <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.offerName }}</td>
+        </ng-container>
+
+        <!-- Type -->
+        <ng-container matColumnDef="offeTitle">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Offer Title <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.offeTitle }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="offerType">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Offer Type <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.offerType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="RewardType">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Reward Type <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.RewardType }}</td>
+        </ng-container>
+
+        <!-- Dates -->
+        <ng-container matColumnDef="fromDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Valid From</div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.fromDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="toDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Valid To</div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.toDate }}</td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let mfa">
+            <span class="status" [ngClass]="mfa.status.toLowerCase()">{{ mfa.status }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let mfa" class="actions-column">
+            <div class="action-buttons">
+              <button mat-icon-button color="warn">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button color="warn">
+                <mat-icon>cached</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>
