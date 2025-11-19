@@ -1,16 +1,21 @@
+<app-mfa-header></app-mfa-header>
+
 <mat-sidenav-container class="layout-container">
-  <!-- Sidebar -->
-  <mat-sidenav #sidenav [(opened)]="opened" mode="over" [disableClose]="false"
- class="sidebar">
+
+  <mat-sidenav
+    mode="side"
+    [opened]="true"
+    class="sidebar">
+
     <app-mfa-sidebar></app-mfa-sidebar>
+
   </mat-sidenav>
 
-  <!-- Main Content -->
+  <!-- RIGHT CONTENT -->
   <mat-sidenav-content>
-    <app-mfa-header (toggleSidebar)="toggleSidebar()"></app-mfa-header>
-
     <div class="page-content">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

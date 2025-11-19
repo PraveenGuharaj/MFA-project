@@ -7,6 +7,7 @@ import { MfaSidebar } from '../mfa-sidebar/mfa-sidebar/mfa-sidebar';
 
 @Component({
   selector: 'app-layout',
+  standalone: true,
   imports: [
     CommonModule,
     MatSidenavModule,
@@ -15,11 +16,6 @@ import { MfaSidebar } from '../mfa-sidebar/mfa-sidebar/mfa-sidebar';
     MfaSidebar
   ],
   templateUrl: './layout.html',
-  styleUrl: './layout.scss',
+  styleUrls: ['./layout.scss']
 })
-export class Layout {
-   opened = false;
-   toggleSidebar() {
-    this.opened = !this.opened;
-  }
-}
+export class Layout {}

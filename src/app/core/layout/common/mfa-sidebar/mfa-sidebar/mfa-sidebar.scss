@@ -1,5 +1,4 @@
 .sidebar-nav {
-  height: 100vh;
   background: #fff;
   border-right: 1px solid #e0e0e0;
   display: flex;
@@ -43,4 +42,8 @@
     // color:grey;
     font-size: 20px;
   }
+}
+
+mat-sidenav.sidebar {
+  height: 100%;   
 }
