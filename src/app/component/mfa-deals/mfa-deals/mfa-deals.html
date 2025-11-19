@@ -128,15 +128,17 @@
    <div class="actions">
       <mat-form-field appearance="outline" class="search-field dense">
          <mat-icon matPrefix>search</mat-icon>
-         <input matInput placeholder="Search">
+         <input matInput placeholder="Search" (input)="applySearch($event)">
       </mat-form-field>
 
-      <button mat-icon-button>
+      <button mat-icon-button (click)="fileInput.click()">
          <div class="header-cell">
             <mat-icon class="filter-icon">file_upload</mat-icon>
             Import
          </div>
       </button>
+
+      <input #fileInput type="file" hidden accept=".csv, .xlsx" (change)="onFileSelected($event)" />
 
       <button mat-icon-button>
          <div class="header-cell">
@@ -145,12 +147,44 @@
          </div>
       </button>
 
-      <button mat-icon-button>
+      <button mat-icon-button [matMenuTriggerFor]="filterMenu">
          <div class="header-cell">
-            <mat-icon class="filter-icon">tune</mat-icon>
+            <mat-icon class="filter-icon">filter_alt</mat-icon>
             Filter
          </div>
       </button>
+      <mat-menu #filterMenu="matMenu" class="filter-menu">
+
+         <div class="filter-title">Filter Deals</div>
+         <mat-form-field appearance="fill" class="filter-field">
+            <mat-label>Name</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value, 'name')" />
+         </mat-form-field>
+
+         <mat-form-field appearance="fill" class="filter-field">
+            <mat-label>Created By</mat-label>
+            <mat-select (selectionChange)="applyFilter($event.value, 'createdBy')">
+               <mat-option value="">All</mat-option>
+               <mat-option *ngFor="let u of createdByList" [value]="u">
+                  {{ u }}
+               </mat-option>
+            </mat-select>
+         </mat-form-field>
+
+
+         <mat-form-field appearance="fill" class="filter-field">
+            <mat-label>Assigned To</mat-label>
+            <mat-select (selectionChange)="applyFilter($event.value, 'assignedTo')">
+               <mat-option value="">All</mat-option>
+               <mat-option *ngFor="let u of assignedToList" [value]="u">
+                  {{ u }}
+               </mat-option>
+            </mat-select>
+         </mat-form-field>
+
+
+         <button mat-button color="warn" (click)="clearFilters()">Clear Filters</button>
+      </mat-menu>
 
 
       <button mat-icon-button>
@@ -163,21 +197,21 @@
    </div>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="main-table">
+<table mat-table [dataSource]="dataSource" matSort class="main-table">
 
    <!-- Checkbox -->
    <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
-         <mat-checkbox></mat-checkbox>
+         <mat-checkbox [(ngModel)]="allSelected" (change)="toggleAllRows()"></mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let row">
-         <mat-checkbox></mat-checkbox>
+         <mat-checkbox [(ngModel)]="row.selected" (change)="checkIfAllSelected()"></mat-checkbox>
       </td>
    </ng-container>
 
    <!-- Name -->
    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef class="name-title">
+      <th mat-header-cell *matHeaderCellDef class="name-title" mat-sort-header="name">
          <div class="header-cell">Name <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">{{ row.name }}</td>
@@ -185,7 +219,7 @@
 
    <!-- Created By -->
    <ng-container matColumnDef="createdBy">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="createdBy">
          <div class="header-cell">Created by <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">
@@ -198,7 +232,7 @@
 
    <!-- Created Date -->
    <ng-container matColumnDef="createdDate">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate">
          <div class="header-cell">Created date <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">{{ row.createdDate }}</td>
@@ -206,7 +240,7 @@
 
    <!-- Size -->
    <ng-container matColumnDef="size">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="size">
          <div class="header-cell">Size <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">{{ row.size }}</td>
@@ -214,7 +248,7 @@
 
    <!-- Assigned To -->
    <ng-container matColumnDef="assignedTo">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="assignedTo">
          <div class="header-cell">Assigned to <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">
@@ -227,7 +261,7 @@
 
    <!-- Stage -->
    <ng-container matColumnDef="stage">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="stage">
          <div class="header-cell">Stage <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">
@@ -239,7 +273,7 @@
 
    <!-- Priority -->
    <ng-container matColumnDef="priority">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="priority">
          <div class="header-cell">Priority <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">
@@ -249,7 +283,7 @@
 
    <!-- Next call -->
    <ng-container matColumnDef="nextCall">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="nextCall">
          <div class="header-cell">Next call date <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
       </th>
       <td mat-cell *matCellDef="let row">{{ row.nextCall }}</td>
@@ -260,4 +294,7 @@
 
 </table>
 
-<mat-paginator [pageSize]="25"></mat-paginator>
+<div class="custom-paginator-wrapper">
+   <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25" showFirstLastButtons>
+   </mat-paginator>
+</div>

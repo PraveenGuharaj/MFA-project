@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,12 +10,19 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-mfa-deals',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
@@ -26,13 +33,19 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     MatFormFieldModule,
     MatTabsModule,
-    NgClass
+    NgClass,
+    MatSelectModule,
+    MatMenuModule,
+    MatSortModule
   ],
   templateUrl: './mfa-deals.html',
-  styleUrls: ['./mfa-deals.scss']
+  styleUrls: ['./mfa-deals.scss'],
 })
 export class MfaDeals {
+  @ViewChild(MatSort) sort!: MatSort;
+
   activeView: 'table' | 'board' = 'table';
+
   summary = [
     { icon: 'insert_chart', label: 'Weighted pipeline value', value: '45', color: '#FF9F43' },
     { icon: 'account_balance_wallet', label: 'Forecasted value', value: '56M', color: '#EA4C89' },
@@ -48,12 +61,12 @@ export class MfaDeals {
   scoreTotal = this.scoreChartData.reduce((a, b) => a + b.value, 0);
 
   stagesChartData = [
-    { name: 'POC', value: 10, color: '#e37a5f' },
+    { name: 'POC', value: 10, color: '#67dae6' },
     { name: 'Pricing', value: 3, color: '#dc3835' },
-    { name: 'Approved', value: 2, color: '#d3499f' },
-    { name: 'Closed', value: 3, color: '#a253cf' },
+    { name: 'Approved', value: 2, color: '#e1d2b3' },
+    { name: 'Closed', value: 3, color: '#d89e97' },
     { name: 'Prospects', value: 10, color: '#2873aa' },
-    { name: 'Lead', value: 6, color: '#1ac69a' },
+    { name: 'Lead', value: 6, color: '#c13f70' },
     { name: 'Presentation', value: 5, color: '#c3d74e' },
   ];
   stagesColors = this.stagesChartData.map(i => ({ name: i.name, value: i.color }));
@@ -79,7 +92,7 @@ export class MfaDeals {
     'nextCall'
   ];
 
-  dataSource = [
+  rawData = [
     {
       name: 'TR Capital',
       createdBy: { name: 'Devon Lane', avatar: 'images/man-user-circle-icon.png' },
@@ -88,8 +101,9 @@ export class MfaDeals {
       assignedTo: { name: 'Cody Fisher', avatar: 'images/man-user-circle-icon.png' },
       stage: 'Prospects',
       stageColor: '#4FC3F7',
-      priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      priorityColor: '#c8c8c8',
+      nextCall: '07/12/2022',
+      selected: false
     },
     {
       name: 'Gillette',
@@ -97,10 +111,11 @@ export class MfaDeals {
       createdDate: '07/12/2022',
       size: '$120,45,121,565',
       assignedTo: { name: 'Cody Fisher', avatar: 'images/man-user-circle-icon.png' },
-      stage: 'Prospects',
-      stageColor: '#4FC3F7',
-      priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      stage: 'Lead',
+      stageColor: '#bb4472',
+      priorityColor: '#8a383b',
+      nextCall: '07/12/2022',
+      selected: false
     },
     {
       name: 'Pizza Hut',
@@ -110,8 +125,9 @@ export class MfaDeals {
       assignedTo: { name: 'Cody Fisher', avatar: 'images/man-user-circle-icon.png' },
       stage: 'Prospects',
       stageColor: '#4FC3F7',
-      priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      priorityColor: '#c2bd43',
+      nextCall: '07/12/2022',
+      selected: false
     },
     {
       name: 'Pulivinar vitae',
@@ -120,9 +136,10 @@ export class MfaDeals {
       size: '$120,45,121,565',
       assignedTo: { name: 'Ralph Edward', avatar: 'images/man-user-circle-icon.png' },
       stage: 'POC',
-      stageColor: '#4FC3F7',
-      priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      stageColor: '#73dfe6',
+      priorityColor: '#c8c8c8',
+      nextCall: '07/12/2022',
+      selected: false
     },
     {
       name: 'Starbucks',
@@ -131,9 +148,10 @@ export class MfaDeals {
       size: '$120,45,121,565',
       assignedTo: { name: 'Ronald Richar', avatar: 'images/man-user-circle-icon.png' },
       stage: 'Closed',
-      stageColor: '#4FC3F7',
+      stageColor: '#f9bcbb',
       priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      nextCall: '07/12/2022',
+      selected: false
     },
     {
       name: 'Louis Vuitton',
@@ -142,9 +160,10 @@ export class MfaDeals {
       size: '$120,45,121,565',
       assignedTo: { name: 'Darreil Stewar', avatar: 'images/man-user-circle-icon.png' },
       stage: 'Pricing',
-      stageColor: '#4FC3F7',
+      stageColor: '#e3aabd',
       priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      nextCall: '07/12/2022',
+      selected: false
     },
     {
       name: 'Louis Vuitton',
@@ -152,10 +171,11 @@ export class MfaDeals {
       createdDate: '07/12/2022',
       size: '$120,45,121,565',
       assignedTo: { name: 'Darreil Stewar', avatar: 'images/man-user-circle-icon.png' },
-      stage: 'Pricing',
-      stageColor: '#4FC3F7',
+      stage: 'Approved',
+      stageColor: '#d9cba8',
       priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      nextCall: '07/12/2022',
+      selected: false
     },
     {
       name: 'TR Capital',
@@ -166,22 +186,142 @@ export class MfaDeals {
       stage: 'Prospects',
       stageColor: '#4FC3F7',
       priorityColor: '#FFEB3B',
-      nextCall: '07/12/2022'
+      nextCall: '07/12/2022',
+      selected: false
     },
   ];
 
+  dataSource = new MatTableDataSource(this.rawData);
+  originalData = [...this.rawData];
+
   priorityColors = this.priorityChartData.map(i => ({ name: i.name, value: i.color }));
   priorityTotal = this.priorityChartData.reduce((a, b) => a + b.value, 0);
+
   headerName = 'Pipeline';
+  allSelected = false;
+
+  tableData: any[] = [];
+  columnFilters: any = {};
+
+  createdByList = [...new Set(this.rawData.map(d => d.createdBy.name))];
+  assignedToList = [...new Set(this.rawData.map(d => d.assignedTo.name))];
+
+  constructor() {}
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+
+    // custom sorting because of nested objects
+    this.dataSource.sortingDataAccessor = (item: any, property: string) => {
+      switch (property) {
+        case 'createdBy':
+          return item.createdBy.name.toLowerCase();
+        case 'assignedTo':
+          return item.assignedTo.name.toLowerCase();
+        default:
+          return item[property]?.toString().toLowerCase();
+      }
+    };
+  }
 
   getDealsByStage(stage: string) {
-    return this.dataSource.filter(d => d.stage === stage);
+    return this.dataSource.data.filter(d => d.stage === stage);
   }
 
   getStageCount(stage: string) {
     return this.getDealsByStage(stage).length;
   }
+
   pipelineButton(event: any) {
     this.headerName = event;
+  }
+
+  toggleAllRows() {
+    this.dataSource.data.forEach(row => (row.selected = this.allSelected));
+  }
+
+  checkIfAllSelected() {
+    this.allSelected = this.dataSource.data.every(row => row.selected);
+  }
+
+  applySearch(event: any) {
+    const value = event.target.value.trim().toLowerCase();
+
+    this.dataSource.data = this.originalData.filter(item =>
+      item.name.toLowerCase().includes(value) ||
+      item.createdBy.name.toLowerCase().includes(value) ||
+      item.assignedTo.name.toLowerCase().includes(value) ||
+      item.stage.toLowerCase().includes(value)
+    );
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const text = reader.result as string;
+      this.parseCSV(text);
+    };
+
+    reader.readAsText(file);
+  }
+
+  parseCSV(csv: string) {
+    const lines = csv.split('\n');
+    const header = lines[0].split(',');
+
+    const importedRows = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const row = lines[i].split(',');
+
+      if (row.length !== header.length) continue;
+
+      let obj: any = {};
+      header.forEach((col, index) => {
+        obj[col.trim()] = row[index]?.trim();
+      });
+
+      importedRows.push(obj);
+    }
+
+    this.tableData = [...this.tableData, ...importedRows];
+  }
+
+  applyFilter(value: string, column: string) {
+    this.columnFilters[column] = value.trim().toLowerCase();
+    this.filterRows();
+  }
+
+  filterRows() {
+    let result = [...this.originalData];
+
+    Object.keys(this.columnFilters).forEach(key => {
+      const filterValue = this.columnFilters[key];
+
+      if (filterValue) {
+        result = result.filter((row: any) => {
+          if (key === 'createdBy') {
+            return row.createdBy.name.toLowerCase().includes(filterValue);
+          }
+
+          if (key === 'assignedTo') {
+            return row.assignedTo.name.toLowerCase().includes(filterValue);
+          }
+
+          return row[key]?.toString().toLowerCase().includes(filterValue);
+        });
+      }
+    });
+
+    this.dataSource.data = result;
+  }
+
+  clearFilters() {
+    this.columnFilters = {};
+    this.dataSource.data = [...this.originalData];
   }
 }

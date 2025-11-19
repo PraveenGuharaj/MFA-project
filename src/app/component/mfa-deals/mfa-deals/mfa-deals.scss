@@ -495,3 +495,30 @@
   color: white !important;
   background-color: #005cc1 !important;
 }
+
+.filter-menu {
+  padding: 12px;
+  width: 260px;
+}
+
+.filter-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.filter-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+
+.custom-paginator-wrapper {
+  background: #fff;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  justify-content: flex-start;   
+  margin-top: 10px;
+}
