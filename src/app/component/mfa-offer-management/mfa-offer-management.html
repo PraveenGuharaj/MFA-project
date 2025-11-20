@@ -3,7 +3,7 @@
   <!-- Page Header -->
   <div class="page-header">
     <h2>Offer Management</h2>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="onAddDiscount()">
       <mat-icon>add</mat-icon>
       Add Offer
     </button>
@@ -11,6 +11,8 @@
 
 
   <div class="mfa-list-container">
+
+    <!-- search + group -->
     <div class="list-search">
       <div class="list-header">
         <h3>List of Offers</h3>
@@ -40,11 +42,9 @@
       </div>
     </div>
 
+    <!-- table -->
     <div class="table-container mat-elevation-z1">
       <table mat-table [dataSource]="paginatedData">
-
-
-
         <!-- Name -->
         <ng-container matColumnDef="offerName">
           <th mat-header-cell *matHeaderCellDef>
@@ -126,7 +126,34 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
 
-      
+      <!-- Pagination -->
+      <div class="custom-pagination">
+        <div class="pagination-info">
+          Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ totalItems }}
+        </div>
+
+        <div class="pagination-controls">
+          <label>Rows:</label>
+          <select [(ngModel)]="pageSize" (change)="onRowsChange()">
+            <option *ngFor="let size of rowsOptions" [value]="size">{{ size }}</option>
+          </select>
+
+          <button mat-stroked-button (click)="previousPage()" [disabled]="currentPage === 1">‹ Previous</button>
+          <span class="page-indicator">{{ currentPage }}</span>
+          <button mat-stroked-button (click)="nextPage()" [disabled]="currentPage === totalPages">Next ›</button>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
+<!-- Overlay -->
+<div class="drawer-overlay" *ngIf="isDrawerOpen" (click)="closeDrawer()"></div>
+<div class="delete-overlay" *ngIf="isDeleteOpen" (click)="closeDelete()"></div>
+
+<!-- Right Drawer Panel -->
+<div class="drawer-panel" [class.open]="isDrawerOpen" [style.display]="isDrawerOpen ? 'block' : 'none'">
+
+  <app-mfa-offer-add *ngIf="drawerMode === 'add'" [mfa]="selectedMfa" (close)="closeDrawer()">
+  </app-mfa-offer-add>
 </div>

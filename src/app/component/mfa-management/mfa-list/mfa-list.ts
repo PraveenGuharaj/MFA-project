@@ -208,15 +208,7 @@ export class MfaList {
     this.isDrawerOpen = true;
   }
 
-  closeDrawer() {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {}
-    });
 
-    this.isDrawerOpen = false;
-    this.drawerMode = null;
-  }
 
   // ---------------- DELETE ----------------
   onDeleteMfa(mfa: MfaItem) {
@@ -278,6 +270,20 @@ export class MfaList {
 
     this.applyFilter();
     this.saveToLocalStorage();
+  }
+
+
+
+
+  closeDrawer() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {}
+    });
+
+    this.isDrawerOpen = false;
+    this.drawerMode = null;
+
   }
 
 }

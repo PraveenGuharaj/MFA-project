@@ -1,5 +1,5 @@
 .layout-container {
-  height: calc(100vh - 64px); /* header height */
+  height: calc(100vh - 64px);
 }
 
 mat-sidenav.sidebar {
@@ -7,7 +7,7 @@ mat-sidenav.sidebar {
   background: #fff;
   border-right: 1px solid #e0e0e0;
   height: 100%;
-  overflow: hidden !important;  
+  overflow: hidden !important;
   border-radius: 0;
 }
 
@@ -16,4 +16,38 @@ mat-sidenav.sidebar {
   height: 100%;
   overflow-y: auto;
   padding: 16px 24px;
+}
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+app-mfa-header {
+  position: relative;
+  z-index: 1000;
+}
+
+.main-body {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+app-mfa-sidebar {
+  position: relative;
+  z-index: 1000;
+}
+
+.content-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.content-dim-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 500;
 }

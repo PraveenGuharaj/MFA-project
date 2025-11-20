@@ -1,0 +1,128 @@
+<h2>Add Offer Management</h2>
+
+<div class="edit-header">
+
+  <!-- Partner Name -->
+  <div class="field-group">
+    <label>Partner Name</label>
+    <select class="input-small" [(ngModel)]="form.partnerName">
+      <option value="">-- Select --</option>
+      <option *ngFor="let item of mfaList" [value]="item.name">
+        {{ item.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Product Name -->
+  <div class="field-group">
+    <label>Product Name</label>
+    <input class="input-small" type="text" [(ngModel)]="form.productName" placeholder="Enter Product Name">
+  </div>
+
+
+  <!-- Offer Title -->
+  <div class="field-group">
+    <label>Offer Title</label>
+    <input class="input-small" type="text" [(ngModel)]="form.offerTitle" placeholder="Enter Offer Title">
+  </div>
+
+  <!-- Offer Tag -->
+  <div class="field-group">
+    <label>Offer Tag</label>
+    <input class="input-small" type="text" [(ngModel)]="form.offerTag" placeholder="Enter Offer Tag">
+  </div>
+
+  <!-- Offer Description -->
+  <div class="field-group">
+    <label>Offer Description</label>
+    <input class="input-small" type="text" [(ngModel)]="form.offerDescription" placeholder="Enter Offer Description">
+  </div>
+
+  <!-- Terms & Conditions -->
+  <div class="field-group">
+    <label>Terms & Conditions</label>
+    <input class="input-small" type="text" [(ngModel)]="form.termsCondition" placeholder="Enter Terms And Conditions">
+  </div>
+
+  <!-- Offer Type -->
+  <div class="field-group">
+    <label>Offer Type</label>
+    <input class="input-small" type="text" [(ngModel)]="form.offerType" placeholder="Enter Offer Type">
+  </div>
+
+  <!-- Reward Type -->
+  <div class="field-group">
+    <label>Reward Type</label>
+    <input class="input-small" type="text" [(ngModel)]="form.rewardType" placeholder="Enter Reward Type">
+  </div>
+
+  <!-- Applicable Channel -->
+  <div class="field-group">
+    <label>Applicable Channel</label>
+    <input class="input-small" type="text" [(ngModel)]="form.applicableChannels" placeholder="Enter Applicable Channel">
+  </div>
+
+
+  <!--Reward Value -->
+  <div class="field-group">
+    <label>Reward Value</label>
+    <input class="input-small" type="text" [(ngModel)]="form.rewardValue" placeholder="Enter Reward Value">
+  </div>
+
+  <!-- Redemption Method-->
+  <div class="field-group">
+    <label>Redemption Method</label>
+    <input class="input-small" type="text" [(ngModel)]="form.redemptionMethod" placeholder="Enter Redemption Method">
+  </div>
+
+
+  <!-- Redemption Limit per User-->
+  <div class="field-group">
+    <label>Redemption Limit per User</label>
+    <input class="input-small" type="text" [(ngModel)]="form.redemptionLimitPerUser"
+      placeholder="Enter Redemption Limit per User">
+  </div>
+
+  <!-- Redemption Limit per User-->
+  <div class="field-group">
+    <label>Total Redemptions Allowed</label>
+    <input class="input-small" type="text" [(ngModel)]="form.totalRedemptionAllowed"
+      placeholder="Enter Total Redemptions Allowed">
+  </div>
+
+
+
+  <!-- Effective from date -->
+  <div class="field-group">
+    <label>Effective from date</label>
+    <input class="input-small" type="date" [(ngModel)]="form.fromDate">
+  </div>
+
+  <!-- Effective to date -->
+  <div class="field-group">
+    <label>Effective to date</label>
+    <input class="input-small" type="date" [(ngModel)]="form.toDate">
+  </div>
+
+  <!-- Status Toggle (Added) -->
+  <div class="status-toggle">
+    <label>Status</label>
+    <mat-slide-toggle [(ngModel)]="form.status" [ngModelOptions]="{standalone: true}"
+      (change)="form.status = $event.checked ? 'Active' : 'Inactive'">
+      {{ form.status }}
+    </mat-slide-toggle>
+  </div>
+
+  <!-- Customer Segment-->
+  <div class="field-group">
+    <label>Customer Segment</label>
+    <input class="input-small" type="text" [(ngModel)]="form.customerSegment">
+  </div>
+
+  <!-- Buttons -->
+  <div class="edit-actions">
+    <button class="discard-btn" (click)="onClose()">Discard</button>
+    <button class="save-btn" (click)="save()">Save</button>
+  </div>
+
+</div>

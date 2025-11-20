@@ -1,21 +1,18 @@
-<app-mfa-header></app-mfa-header>
+<div class="layout-container">
 
-<mat-sidenav-container class="layout-container">
+  <app-mfa-header></app-mfa-header>
 
-  <mat-sidenav
-    mode="side"
-    [opened]="true"
-    class="sidebar">
-
+  <div class="main-body">
     <app-mfa-sidebar></app-mfa-sidebar>
 
-  </mat-sidenav>
+    <div class="content-wrapper">
 
-  <!-- RIGHT CONTENT -->
-  <mat-sidenav-content>
-    <div class="page-content">
-      <router-outlet></router-outlet>
+      <!-- Dim only the content -->
+      <div class="content-dim-overlay" *ngIf="isDrawerOpen"></div>
+
+      <router-outlet (activate)="onChildActivate($event)"></router-outlet>
+
     </div>
-  </mat-sidenav-content>
+  </div>
 
-</mat-sidenav-container>
+</div>

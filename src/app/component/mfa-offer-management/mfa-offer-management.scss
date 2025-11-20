@@ -1,4 +1,5 @@
 @use '../mfa-management/mfa-list/mfa-list.scss' as child;
+
 .actions-column {
   min-width: 130px;
   white-space: nowrap;
@@ -20,9 +21,38 @@
 }
 
 .visibility-icon {
-  color:#335adb;
+  color: #335adb;
 }
 
 .delete-icon {
-  color:#ee4646;
+  color: #ee4646;
+}
+
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 420px;
+  height: 100%;
+  background: #fff !important;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2) !important;
+  transition: right 0.3s ease !important;
+  z-index: 9998 !important;
+
+}
+
+.drawer-panel.open {
+  right: 0;
+}
+
+
+.drawer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 9997;
+  pointer-events: auto;
 }
