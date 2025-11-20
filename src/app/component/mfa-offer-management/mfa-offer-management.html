@@ -116,7 +116,7 @@
               <button mat-icon-button color="warn" class="delete-icon">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-icon-button color="warn" class="visibility-icon">
+              <button mat-icon-button color="warn" class="visibility-icon" (click)="onRenewOffer()">
                 <mat-icon>cached</mat-icon>
               </button>
             </div>
@@ -150,10 +150,18 @@
 <!-- Overlay -->
 <div class="drawer-overlay" *ngIf="isDrawerOpen" (click)="closeDrawer()"></div>
 <div class="delete-overlay" *ngIf="isDeleteOpen" (click)="closeDelete()"></div>
+<div class="delete-overlay" *ngIf="isRenewOpen" (click)="closeRenew()"></div>
 
 <!-- Right Drawer Panel -->
 <div class="drawer-panel" [class.open]="isDrawerOpen" [style.display]="isDrawerOpen ? 'block' : 'none'">
 
   <app-mfa-offer-add *ngIf="drawerMode === 'add'" [mfa]="selectedMfa" (close)="closeDrawer()">
   </app-mfa-offer-add>
+</div>
+
+
+<!-- RENEW POPUP -->
+<div class="delete-modal-wrapper" *ngIf="isRenewOpen">
+  <app-mfa-offer-renew [offer]="selectedOffer" (close)="closeRenew()" (renew)="saveRenew($event)">
+  </app-mfa-offer-renew>
 </div>

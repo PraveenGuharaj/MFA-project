@@ -1,0 +1,64 @@
+.renew-box {
+  width: 420px;                  
+  background: #F2F6FC;
+  padding: 18px;                 
+  border-radius: 16px;
+  margin: 100px auto;            
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 18px;              
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: left;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.label {
+  font-size: 12px;               
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-box {
+  width: 100%;
+  padding: 10px;                 
+  border-radius: 10px;
+  border: none;
+  background: #ffffff;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.cancel-btn,
+.update-btn {
+  width: 48%;
+  padding: 10px;                 
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;               
+}
+
+.cancel-btn {
+  background: #C7C7C7;
+}
+
+.update-btn {
+  background: #0051A8;
+  color: white;
+}

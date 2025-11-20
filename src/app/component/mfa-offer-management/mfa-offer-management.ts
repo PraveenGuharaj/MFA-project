@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MfaOfferAdd } from './mfa-offer-add/mfa-offer-add';
 import { MfaManagementService } from '../../shared/services/mfa-management.service';
+import { MfaOfferRenew } from './mfa-offer-renew/mfa-offer-renew';
 
 interface MfaItem {
   id?: number | null;
@@ -32,7 +33,8 @@ interface MfaItem {
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    MfaOfferAdd
+    MfaOfferAdd,
+    MfaOfferRenew
 
   ],
   templateUrl: './mfa-offer-management.html',
@@ -47,6 +49,8 @@ export class MfaOfferManagement {
   isDrawerOpen = false;
   selectedMfa: MfaItem | null = null;
   isDeleteOpen = false;
+  isRenewOpen = false;
+  selectedOffer: any = null;
   constructor(private router: Router, private route: ActivatedRoute, drawerService: MfaManagementService) { }
 
 
@@ -177,12 +181,12 @@ export class MfaOfferManagement {
     this.isDrawerOpen = true;
   }
 
-
   openDrawer() {
     console.log("Drawer OPEN triggered");
     this.isDrawerOpen = true;
     this.drawerState.emit(true);
   }
+
   closeDrawer() {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -196,5 +200,25 @@ export class MfaOfferManagement {
   closeDelete() {
     this.isDeleteOpen = false;
   }
+
+  onRenewOffer() {
+    this.selectedOffer = this.mfaOffer;
+    console.log('selectedOffer', this.selectedOffer)
+    this.isRenewOpen = true;
+  }
+
+  closeRenew() {
+    this.isRenewOpen = false;
+  }
+
+  saveRenew(updatedOffer: any) {
+    const index = this.mfaOffer.findIndex(o => o.id === updatedOffer.id);
+    if (index !== -1) {
+      this.mfaOffer[index] = updatedOffer;
+    }
+
+    this.isRenewOpen = false;
+  }
+
 
 }
