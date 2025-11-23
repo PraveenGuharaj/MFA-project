@@ -11,32 +11,26 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './mfa-discount-delete.scss',
 })
 export class MfaDiscountDelete {
-  @Input() mfa: any | null = null;
-  @Output() close = new EventEmitter<void>();
+  @Input() mfa: any;
+  @Input() index!: number;
   @Output() delete = new EventEmitter<number>();
 
-  // local editable copy for name (so we don't mutate original until confirm)
   mfaName: string = '';
 
-  // whenever input changes, sync name
-
   ngOnInit() {
-    console.log('mfa', this.mfa)
-  }
-  ngOnChanges(): void {
-    this.mfaName = this.mfa?.name ?? '';
-  }
-
-  onClose() {
-    this.close.emit();
+    if (this.mfa) {
+      this.mfaName = this.mfa.offerName;
+    }
   }
 
   confirmDelete() {
-    // emit the id; if needed, you could also emit the edited name
-    if (this.mfa && typeof this.mfa.id !== 'undefined') {
-      this.delete.emit(this.mfa.id);
-    } else {
-      this.close.emit();
-    }
+    console.log("Deleting:", {
+      id: this.mfa?.id,
+      name: this.mfaName
+    });
+  }
+
+  onClose() {
+    // close modal logic
   }
 }

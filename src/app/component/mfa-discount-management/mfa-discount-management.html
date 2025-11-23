@@ -116,7 +116,7 @@
               <button mat-icon-button color="warn" class="delete-icon" (click)="onDeleteMfa(mfa,i)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-icon-button color="warn" class="visibility-icon" (click)="onRenewOffer()">
+              <button mat-icon-button color="warn" class="visibility-icon" (click)="onRenewOffer(mfa)">
                 <mat-icon>cached</mat-icon>
               </button>
             </div>
@@ -173,6 +173,7 @@
 </div>
 
 <div class="delete-modal-wrapper" *ngIf="isDeleteOpen">
-  <app-mfa-discount-delete [mfa]="selectedMfa" (close)="closeDelete()" (delete)="deleteMfa($event)">
+  <app-mfa-discount-delete [mfa]="selectedMfa" [index]="selectedIndex" (close)="closeDelete()"
+    (delete)="deleteMfa($event)">
   </app-mfa-discount-delete>
 </div>

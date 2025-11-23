@@ -1,17 +1,12 @@
-<p>mfa-discount-renew works!</p>
 <div class="renew-box">
 
   <h2 class="title">Renew Offer</h2>
 
   <label class="label">Valid From</label>
-  <input type="datetime-local"
-         class="input-box"
-         [(ngModel)]="fromDate">
+  <input type="datetime-local" class="input-box" [(ngModel)]="fromDate">
 
   <label class="label">Valid To</label>
-  <input type="datetime-local"
-         class="input-box"
-         [(ngModel)]="toDate">
+  <input type="datetime-local" class="input-box" [(ngModel)]="toDate">
 
   <div class="btn-row">
     <button class="cancel-btn" (click)="close.emit()">Cancel</button>

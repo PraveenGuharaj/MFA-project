@@ -24,12 +24,10 @@ export class MfaOfferRenew {
     }
   }
 
-  /** Convert DD/MM/YYYY HH:mm:ss → yyyy-MM-ddTHH:mm */
   toDatetimeLocal(v: string): string {
     if (!v) return '';
 
     try {
-      // Split into date + time
       const [datePart, timePart] = v.split(' ');
       if (!datePart || !timePart) return '';
 
@@ -42,7 +40,6 @@ export class MfaOfferRenew {
     }
   }
 
-  /** Convert yyyy-MM-ddTHH:mm back → DD/MM/YYYY HH:mm:ss */
   toDisplayFormat(v: string): string {
     if (!v) return '';
 

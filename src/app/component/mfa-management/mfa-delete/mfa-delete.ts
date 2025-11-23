@@ -14,10 +14,9 @@ export class MfaDelete {
   @Output() close = new EventEmitter<void>();
   @Output() delete = new EventEmitter<number>();
 
-  // local editable copy for name (so we don't mutate original until confirm)
   mfaName: string = '';
 
-  // whenever input changes, sync name
+
   ngOnChanges(): void {
     this.mfaName = this.mfa?.name ?? '';
   }

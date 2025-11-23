@@ -1,6 +1,6 @@
 .delete-modal {
   background: #fff;
-  width: 250px;              /* slightly smaller modal */
+  width: 250px;
   padding: 18px;
   border-radius: 10px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
@@ -24,9 +24,12 @@
     }
 
     input {
-      height: 28px;              /* reduced height */
-      padding: 4px 8px;          /* reduced padding */
-      font-size: 12px;           /* smaller text */
+      height: 28px;
+      /* reduced height */
+      padding: 4px 8px;
+      /* reduced padding */
+      font-size: 12px;
+      /* smaller text */
       border: 1px solid #ccc;
       border-radius: 5px;
       background: #fff;
@@ -52,7 +55,7 @@
 
   .cancel-btn,
   .delete-btn {
-    padding: 6px 12px;         /* button size reduced */
+    padding: 6px 12px;
     font-size: 12px;
     border-radius: 5px;
     cursor: pointer;
@@ -91,6 +94,13 @@
 
 
 @keyframes fadeIn {
-  from { transform: scale(0.96); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

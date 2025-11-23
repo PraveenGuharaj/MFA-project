@@ -10,7 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-mfa-offer-edit',
   imports: [
-     CommonModule,
+    CommonModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -23,13 +23,12 @@ import { MatNativeDateModule } from '@angular/material/core';
   styleUrl: './mfa-offer-edit.scss',
 })
 export class MfaOfferEdit {
-   @Input() mfa: any;
+  @Input() mfa: any;
   @Output() close = new EventEmitter<void>();
   @Output() update = new EventEmitter<any>();
 
 
   ngOnInit() {
-    console.log('mfa', this.mfa)
   }
   onClose() {
     this.close.emit();

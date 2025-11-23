@@ -57,6 +57,7 @@ export class MfaOfferManagement {
   isDeleteOpen = false;
   isRenewOpen = false;
   selectedOffer: any = null;
+  selectedIndex: any;
   constructor(private router: Router, private route: ActivatedRoute, drawerService: MfaManagementService) { }
 
 
@@ -102,6 +103,23 @@ export class MfaOfferManagement {
 
       if (action === 'add') {
         this.onAddDiscount();
+      }
+
+      if ((action === 'edit' || action === 'view') && id !== null) {
+
+        const index = +id;
+        const item = this.mfaOffer[index];
+
+        if (item) {
+          this.selectedMfa = { ...item };
+        } else {
+        }
+      }
+
+
+      if (action === 'delete' && id !== undefined) {
+        this.selectedOffer = this.mfaOffer[id];
+        this.isDeleteOpen = true;
       }
 
     })
@@ -207,8 +225,8 @@ export class MfaOfferManagement {
     this.isDeleteOpen = false;
   }
 
-  onRenewOffer() {
-    this.selectedOffer = this.mfaOffer;
+  onRenewOffer(mfa: any) {
+    this.selectedOffer = mfa;
     console.log('selectedOffer', this.selectedOffer)
     this.isRenewOpen = true;
   }
@@ -240,14 +258,15 @@ export class MfaOfferManagement {
     });
   }
 
-  deleteMfa(id: number) {
-    this.mfaOffer = this.mfaOffer.filter(m => m.id !== id);
+  deleteMfa(index: number) {
+    this.mfaOffer.splice(index, 1);
     this.applyFilter();
-    // this.saveToLocalStorage();
     this.isDeleteOpen = false;
   }
 
+
   onDeleteMfa(mfa: MfaItem, index: number) {
+    this.selectedIndex = index;
     this.selectedMfa = { ...mfa };
     this.isDeleteOpen = true;
   }
