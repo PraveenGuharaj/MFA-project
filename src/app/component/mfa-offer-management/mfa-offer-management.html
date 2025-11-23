@@ -105,15 +105,15 @@
           <th mat-header-cell *matHeaderCellDef>
             <div class="header-cell">Actions</div>
           </th>
-          <td mat-cell *matCellDef="let mfa" class="actions-column">
+          <td mat-cell *matCellDef="let mfa; let i = index" class="actions-column">
             <div class="action-buttons">
-              <button mat-icon-button color="warn" class="visibility-icon">
+              <button mat-icon-button color="warn" class="visibility-icon" (click)="onViewMfa(mfa,i)">
                 <mat-icon>visibility</mat-icon>
               </button>
-              <button mat-icon-button class="visibility-icon">
+              <button mat-icon-button class="visibility-icon" (click)="onEditMfa(mfa,i)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button color="warn" class="delete-icon">
+              <button mat-icon-button color="warn" class="delete-icon" (click)="onDeleteMfa(mfa,i)">
                 <mat-icon>delete</mat-icon>
               </button>
               <button mat-icon-button color="warn" class="visibility-icon" (click)="onRenewOffer()">
@@ -157,6 +157,11 @@
 
   <app-mfa-offer-add *ngIf="drawerMode === 'add'" [mfa]="selectedMfa" (close)="closeDrawer()">
   </app-mfa-offer-add>
+
+  <app-mfa-offer-view *ngIf="drawerMode === 'view'" [mfa]="selectedMfa" (close)="closeDrawer()"></app-mfa-offer-view>
+
+  <app-mfa-offer-edit *ngIf="drawerMode === 'edit'" [mfa]="selectedMfa" (update)="onUpdateMfa($event)"
+    (close)="closeDrawer()"></app-mfa-offer-edit>
 </div>
 
 
@@ -164,4 +169,10 @@
 <div class="delete-modal-wrapper" *ngIf="isRenewOpen">
   <app-mfa-offer-renew [offer]="selectedOffer" (close)="closeRenew()" (renew)="saveRenew($event)">
   </app-mfa-offer-renew>
+</div>
+
+
+<div class="delete-modal-wrapper" *ngIf="isDeleteOpen">
+  <app-mfa-offer-delete [mfa]="selectedMfa" (close)="closeDelete()" (delete)="deleteMfa($event)">
+  </app-mfa-offer-delete>
 </div>

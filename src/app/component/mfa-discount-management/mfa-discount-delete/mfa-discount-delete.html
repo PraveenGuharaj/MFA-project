@@ -1,0 +1,26 @@
+<div class="delete-modal">
+  <h2>Delete MFA</h2>
+
+  <p class="confirm-text">
+    Are you sure you want to delete <strong>{{ mfaName || mfa?.name }}</strong>?
+  </p>
+
+
+  <!-- ID (read-only) -->
+  <div class="field">
+    <label>MFA Id</label>
+    <input type="text" [value]="mfa?.id ?? ''" readonly />
+  </div>
+
+  <!-- Name (editable) -->
+  <div class="field">
+    <label>MFA Name</label>
+    <input type="text" [(ngModel)]="mfaName" />
+  </div>
+
+
+  <div class="actions">
+    <button class="cancel-btn" (click)="onClose()">Cancel</button>
+    <button class="delete-btn" (click)="confirmDelete()">Delete</button>
+  </div>
+</div>

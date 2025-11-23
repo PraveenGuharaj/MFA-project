@@ -1,0 +1,57 @@
+<div *ngIf="mfa">
+
+  <h2>Edit Discount Management</h2>
+  <div class="edit-header">
+    <!-- MFA Name -->
+    <div class="field-group">
+      <label>MFA Name</label>
+      <input class="input-small" type="text" [(ngModel)]="mfa.offerName">
+    </div>
+
+    <!-- Discount name -->
+    <div class="field-group">
+      <label>Discount Name</label>
+      <input class="input-small" type="text" [(ngModel)]="mfa.offeTitle">
+    </div>
+
+
+
+    <!-- Discount type -->
+    <div class="field-group">
+      <label>Discount Type</label>
+      <input class="input-small" type="text" [(ngModel)]="mfa.offerType">
+    </div>
+
+    <!-- Reward type -->
+    <div class="field-group">
+      <label>Reward Type</label>
+      <input class="input-small" type="text" [(ngModel)]="mfa.RewardType">
+    </div>
+
+
+    <div class="field-group">
+      <label>Effective From Date</label>
+      <input class="input-small" type="date" [(ngModel)]="mfa.fromDate">
+    </div>
+
+    <div class="field-group">
+      <label>Effective To Date</label>
+      <input class="input-small" type="date" [(ngModel)]="mfa.toDate">
+    </div>
+
+    <!-- Status Toggle -->
+    <div class="status-toggle">
+      <label>Status</label>
+      <mat-slide-toggle [(ngModel)]="mfa.status" [ngModelOptions]="{standalone: true}"
+        (change)="mfa.status = $event.checked ? 'Active' : 'Inactive'">
+        {{ mfa.status }}
+      </mat-slide-toggle>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="edit-actions">
+      <button class="discard-btn" (click)="onClose()">Discard</button>
+      <button class="save-btn" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>

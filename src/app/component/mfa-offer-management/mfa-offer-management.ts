@@ -10,6 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MfaOfferAdd } from './mfa-offer-add/mfa-offer-add';
 import { MfaManagementService } from '../../shared/services/mfa-management.service';
 import { MfaOfferRenew } from './mfa-offer-renew/mfa-offer-renew';
+import { MfaOfferDelete } from './mfa-offer-delete/mfa-offer-delete';
+import { MfaOfferView } from './mfa-offer-view/mfa-offer-view';
+import { MfaOfferEdit } from './mfa-offer-edit/mfa-offer-edit';
 
 interface MfaItem {
   id?: number | null;
@@ -34,7 +37,10 @@ interface MfaItem {
     MatButtonModule,
     MatTableModule,
     MfaOfferAdd,
-    MfaOfferRenew
+    MfaOfferRenew,
+    MfaOfferDelete,
+    MfaOfferView,
+    MfaOfferEdit
 
   ],
   templateUrl: './mfa-offer-management.html',
@@ -220,5 +226,39 @@ export class MfaOfferManagement {
     this.isRenewOpen = false;
   }
 
+  onViewMfa(mfa: any, index: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { action: 'view', id: index }
+    });
+  }
+
+  onEditMfa(mfa: MfaItem, index: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { action: 'edit', id: index }
+    });
+  }
+
+  deleteMfa(id: number) {
+    this.mfaOffer = this.mfaOffer.filter(m => m.id !== id);
+    this.applyFilter();
+    // this.saveToLocalStorage();
+    this.isDeleteOpen = false;
+  }
+
+  onDeleteMfa(mfa: MfaItem, index: number) {
+    this.selectedMfa = { ...mfa };
+    this.isDeleteOpen = true;
+  }
+
+  onUpdateMfa(updatedMfa: any) {
+    const index = this.mfaOffer.findIndex(m => m.id === updatedMfa.id);
+    if (index !== -1) {
+      this.mfaOffer[index] = { ...updatedMfa };
+    }
+
+    this.applyFilter();
+  }
 
 }

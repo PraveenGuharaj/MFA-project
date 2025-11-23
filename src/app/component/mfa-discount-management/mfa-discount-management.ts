@@ -12,6 +12,7 @@ import { MfaManagementService } from '../../shared/services/mfa-management.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { MfaDiscountView } from './mfa-discount-view/mfa-discount-view';
 import { MfaDiscountEdit } from './mfa-discount-edit/mfa-discount-edit';
+import { MfaDiscountDelete } from './mfa-discount-delete/mfa-discount-delete';
 
 interface MfaItem {
   id?: number | null;
@@ -38,7 +39,8 @@ interface MfaItem {
     MfaDiscountAdd,
     MfaDiscountRenew,
     MfaDiscountView,
-    MfaDiscountEdit
+    MfaDiscountEdit,
+    MfaDiscountDelete
   ],
   templateUrl: './mfa-discount-management.html',
   styleUrl: './mfa-discount-management.scss',
@@ -245,6 +247,17 @@ export class MfaDiscountManagement {
       relativeTo: this.route,
       queryParams: { action: 'edit', id: index }
     });
+  }
+
+  deleteMfa(id: number) {
+    this.mfaOffer = this.mfaOffer.filter(m => m.id !== id);
+    this.applyFilter();
+    this.isDeleteOpen = false;
+  }
+
+  onDeleteMfa(mfa: MfaItem, index: number) {
+    this.selectedMfa = { ...mfa };
+    this.isDeleteOpen = true;
   }
 
   onUpdateMfa(updatedMfa: any) {

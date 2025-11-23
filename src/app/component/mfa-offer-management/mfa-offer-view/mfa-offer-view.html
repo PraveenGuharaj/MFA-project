@@ -1,0 +1,57 @@
+<div *ngIf="mfa">
+
+  <h2>View Discount Management</h2>
+
+  <div class="edit-header">
+
+    <!-- MFA Name -->
+    <div class="field-group">
+      <label>MFA Name</label>
+      <div class="view-box">{{ mfa.offerName }}</div>
+    </div>
+
+
+    <!-- Discount name -->
+    <div class="field-group">
+      <label>Discount Name</label>
+      <div class="view-box">{{ mfa.offeTitle }}</div>
+    </div>
+
+    <!-- Discount type -->
+    <div class="field-group">
+      <label>Discount Type</label>
+      <div class="view-box">{{ mfa.offerType }}</div>
+    </div>
+
+    <!-- Reward type -->
+    <div class="field-group">
+      <label>Reward Type</label>
+      <div class="view-box">{{ mfa.RewardType }}</div>
+    </div>
+
+    <!-- Effective From Date -->
+    <div class="field-group">
+      <label>Effective From Date</label>
+      <div class="view-box">{{ mfa.fromDate }}</div>
+    </div>
+
+    <!-- Effective To Date -->
+    <div class="field-group">
+      <label>Effective To Date</label>
+      <div class="view-box">{{ mfa.toDate }}</div>
+    </div>
+
+    <!-- Status -->
+    <div class="field-group">
+      <label>Status</label>
+      <div class="view-box">{{ mfa.status }}</div>
+    </div>
+
+    <!-- Buttons (matching Edit) -->
+    <div class="edit-actions">
+      <button class="discard-btn" (click)="close.emit()">Close</button>
+    </div>
+
+  </div>
+
+</div>
