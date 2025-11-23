@@ -1,0 +1,167 @@
+<div class="mfa-list-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h2>Discount Management</h2>
+    <button mat-raised-button color="primary" (click)="onAddDiscount()">
+      <mat-icon>add</mat-icon>
+      Add Offer
+    </button>
+  </div>
+
+
+  <div class="mfa-list-container">
+
+    <!-- search + group -->
+    <div class="list-search">
+      <div class="list-header">
+        <h3>List of Discounts</h3>
+        <span>Recently Added Discounts</span>
+      </div>
+
+      <div class="filters">
+
+        <!-- Search -->
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="applyFilter()" />
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Group By -->
+        <mat-form-field appearance="outline" class="group-field">
+          <mat-label>Group By</mat-label>
+          <mat-select [(value)]="groupBy" (selectionChange)="onGroupByChange()">
+            <mat-option value="">None</mat-option>
+            <mat-option value="type">Type</mat-option>
+            <mat-option value="status">Status</mat-option>
+            <mat-option value="fromDate">Effective From Date</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <!-- table -->
+    <div class="table-container mat-elevation-z1">
+      <table mat-table [dataSource]="paginatedData">
+        <!-- Name -->
+        <ng-container matColumnDef="offerName">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Partner Name <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.offerName }}</td>
+        </ng-container>
+
+        <!-- Type -->
+        <ng-container matColumnDef="offeTitle">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Discount Name <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.offeTitle }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="offerType">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Discount Type <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.offerType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="RewardType">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Reward Type <mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.RewardType }}</td>
+        </ng-container>
+
+        <!-- Dates -->
+        <ng-container matColumnDef="fromDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Start Date<mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.fromDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="toDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">End Date<mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">{{ mfa.toDate }}</td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Status<mat-icon class="filter-icon">filter_alt</mat-icon></div>
+          </th>
+          <td mat-cell *matCellDef="let mfa">
+            <span class="status" [ngClass]="mfa.status.toLowerCase()">{{ mfa.status }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header-cell">Actions</div>
+          </th>
+          <td mat-cell *matCellDef="let mfa" class="actions-column">
+            <div class="action-buttons">
+              <button mat-icon-button color="warn" class="visibility-icon">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button class="visibility-icon">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" class="delete-icon">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" class="visibility-icon" (click)="onRenewOffer()">
+                <mat-icon>cached</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <!-- Pagination -->
+      <div class="custom-pagination">
+        <div class="pagination-info">
+          Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ totalItems }}
+        </div>
+
+        <div class="pagination-controls">
+          <label>Rows:</label>
+          <select [(ngModel)]="pageSize" (change)="onRowsChange()">
+            <option *ngFor="let size of rowsOptions" [value]="size">{{ size }}</option>
+          </select>
+
+          <button mat-stroked-button (click)="previousPage()" [disabled]="currentPage === 1">‹ Previous</button>
+          <span class="page-indicator">{{ currentPage }}</span>
+          <button mat-stroked-button (click)="nextPage()" [disabled]="currentPage === totalPages">Next ›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div class="drawer-overlay" *ngIf="isDrawerOpen" (click)="closeDrawer()"></div>
+<div class="delete-overlay" *ngIf="isDeleteOpen" (click)="closeDelete()"></div>
+<div class="delete-overlay" *ngIf="isRenewOpen" (click)="closeRenew()"></div>
+
+<!-- Right Drawer Panel -->
+<div class="drawer-panel" [class.open]="isDrawerOpen" [style.display]="isDrawerOpen ? 'block' : 'none'">
+
+  <app-mfa-discount-add *ngIf="drawerMode === 'add'" [mfa]="selectedMfa" (close)="closeDrawer()">
+  </app-mfa-discount-add>
+</div>
+
+
+<!-- RENEW POPUP -->
+<div class="delete-modal-wrapper" *ngIf="isRenewOpen">
+  <app-mfa-discount-renew [offer]="selectedOffer" (close)="closeRenew()" (renew)="saveRenew($event)">
+  </app-mfa-discount-renew>
+</div>
