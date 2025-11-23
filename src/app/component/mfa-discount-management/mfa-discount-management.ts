@@ -10,6 +10,8 @@ import { MfaDiscountAdd } from './mfa-discount-add/mfa-discount-add';
 import { MfaDiscountRenew } from './mfa-discount-renew/mfa-discount-renew';
 import { MfaManagementService } from '../../shared/services/mfa-management.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MfaDiscountView } from './mfa-discount-view/mfa-discount-view';
+import { MfaDiscountEdit } from './mfa-discount-edit/mfa-discount-edit';
 
 interface MfaItem {
   id?: number | null;
@@ -26,7 +28,7 @@ interface MfaItem {
 @Component({
   selector: 'app-mfa-discount-management',
   imports: [
-     CommonModule,
+    CommonModule,
     MatIconModule,
     MatSelectModule,
     FormsModule,
@@ -34,22 +36,24 @@ interface MfaItem {
     MatButtonModule,
     MatTableModule,
     MfaDiscountAdd,
-    MfaDiscountRenew
+    MfaDiscountRenew,
+    MfaDiscountView,
+    MfaDiscountEdit
   ],
   templateUrl: './mfa-discount-management.html',
   styleUrl: './mfa-discount-management.scss',
 })
 export class MfaDiscountManagement {
-    @Output() drawerState = new EventEmitter<boolean>();
+  @Output() drawerState = new EventEmitter<boolean>();
   drawerMode: 'view' | 'edit' | 'add' | null = null;
-   isDrawerOpen = false;
+  isDrawerOpen = false;
   selectedMfa: MfaItem | null = null;
   isDeleteOpen = false;
   isRenewOpen = false;
   selectedOffer: any = null;
   constructor(private router: Router, private route: ActivatedRoute, drawerService: MfaManagementService) { }
 
-   displayedColumns = [
+  displayedColumns = [
     'offerName',
     'offeTitle',
     'offerType',
@@ -60,7 +64,7 @@ export class MfaDiscountManagement {
     'actions'
   ];
 
-   mfaOffer: MfaItem[] = [
+  mfaOffer: MfaItem[] = [
     { offerName: 'Amazon', offeTitle: '10% offer', offerType: 'Welcome', fromDate: '29/10/2025 13:14:00', toDate: '15/11/2025 13:14:00', status: 'Inactive', RewardType: 'Points' },
     { offerName: 'Amazon', offeTitle: 'Product4', offerType: 'Referral', fromDate: '30/10/2025 13:14:00', toDate: '15/11/2025 13:14:00', status: 'Active', RewardType: 'Points' },
     { offerName: 'PARTNER_DKB', offeTitle: 'zoho', offerType: 'Referral', fromDate: '02/10/2025 13:14:00', toDate: '15/11/2025 13:14:00', status: 'Inactive', RewardType: 'Cashback' },
@@ -92,6 +96,20 @@ export class MfaDiscountManagement {
       if (action === 'add') {
         this.onAddDiscount();
       }
+
+      if ((action === 'edit' || action === 'view') && id !== null) {
+
+        const index = +id;
+        const item = this.mfaOffer[index];
+
+        if (item) {
+          this.selectedMfa = { ...item };
+          console.log('selectedMfa', this.selectedMfa);
+        } else {
+          console.log('Item not found for index', index);
+        }
+      }
+
 
     })
 
@@ -214,4 +232,28 @@ export class MfaDiscountManagement {
 
     this.isRenewOpen = false;
   }
+
+  onViewMfa(mfa: any, index: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { action: 'view', id: index }
+    });
+  }
+
+  onEditMfa(mfa: MfaItem, index: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { action: 'edit', id: index }
+    });
+  }
+
+  onUpdateMfa(updatedMfa: any) {
+    const index = this.mfaOffer.findIndex(m => m.id === updatedMfa.id);
+    if (index !== -1) {
+      this.mfaOffer[index] = { ...updatedMfa };
+    }
+
+    this.applyFilter();
+  }
+
 }

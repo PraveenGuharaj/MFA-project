@@ -1,0 +1,175 @@
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.discard-btn {
+  padding: 6px 18px;
+  border: 1px solid #d0d0d0;
+  background: #ffffff;
+  color: #555;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  width: 100%;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+.save-btn {
+  padding: 6px 22px;
+  width: 30%;
+  border: none;
+  background: #2fa36b;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+  width: 100%;
+
+  &:hover {
+    background: #278d5c;
+  }
+}
+
+.status-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.small-field {
+  width: 100%;
+
+  --mat-form-field-container-height: 34px !important;
+  --mat-form-field-container-text-size: 12px !important;
+  --mat-form-field-container-vertical-padding: 2px !important;
+  --mat-form-field-container-horizontal-padding: 6px !important;
+
+  font-size: 12px !important;
+}
+
+/* Datepicker icon sizing */
+.small-field .mat-datepicker-toggle {
+  transform: scale(0.9);
+}
+
+/* FIELD GROUP */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #444;
+  }
+}
+
+/* SMALL INPUT */
+.input-small {
+  height: 32px;
+  padding: 4px 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.2s;
+
+  &:focus {
+    border-color: #2fa36b;
+    box-shadow: 0 0 0 2px rgba(47, 163, 107, 0.2);
+  }
+}
+
+/* STATUS TOGGLE */
+.status-toggle {
+  margin: 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  label {
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+/* CENTERED ACTION BUTTONS */
+.edit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+/* DISCARD BUTTON */
+.discard-btn {
+  padding: 6px 18px;
+  border: 1px solid #d0d0d0;
+  background: #ffffff;
+  color: #555;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background: #f2f2f2;
+  }
+}
+
+/* SAVE BUTTON */
+.save-btn {
+  padding: 6px 22px;
+  border: none;
+  background: #2fa36b;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background: #278d5c;
+  }
+}
+
+
+.edit-header {
+  padding: 0 30px 0 30px;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-around;
+}
