@@ -21,12 +21,10 @@ import { RouterModule } from '@angular/router';
 export class MerchantSideBar {
 
   menuItems = [
-    { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
-    { label: 'Merchants', icon: 'store', route: '/merchants' },
-    { label: 'Categories', icon: 'category', route: '/categories' },
-    { label: 'Products', icon: 'inventory_2', route: '/products' },
-    { label: 'Offers', icon: 'local_offer', route: '/offers' },
-    { label: 'Settings', icon: 'settings', route: '/settings' }
+    { label: 'Merchants', icon: 'store', route: '/merchant/merchants' },
+    { label: 'Categories', icon: 'category', route: '/merchant/categories' },
+    { label: 'Offers', icon: 'local_offer', route: '/merchant/offers' },
+    { label: 'settings', icon: 'local_offer', route: '/merchant/setting' }
   ];
 
 }

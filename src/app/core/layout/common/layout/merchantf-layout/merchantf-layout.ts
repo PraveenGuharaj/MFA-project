@@ -11,16 +11,13 @@ import { MerchantOfferManagement } from '../../../../../component/mechant/mercha
   imports: [
     CommonModule,
     RouterModule,
-    MerchantSideBar,
-    MerchantList ,
-    // MerchantOfferManagement
-    // MerchantCategories
+    MerchantSideBar
 
   ],
   templateUrl: './merchantf-layout.html',
   styleUrl: './merchantf-layout.scss',
 })
 export class MerchantfLayout {
-    isDrawerOpen = false;
+  isDrawerOpen = false;
 
 }

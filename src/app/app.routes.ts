@@ -5,6 +5,10 @@ import { MfaOfferManagement } from './component/mfa-offer-management/mfa-offer-m
 import { MfaDeals } from './component/mfa-deals/mfa-deals/mfa-deals';
 import { MfaDiscountManagement } from './component/mfa-discount-management/mfa-discount-management';
 import { MerchantfLayout } from './core/layout/common/layout/merchantf-layout/merchantf-layout';
+import { MerchantList } from './component/merchant-list/merchant-list';
+import { MerchantCategories } from './component/mechant/merchant-categories/merchant-categories';
+import { MerchantOfferManagement } from './component/mechant/merchant-offer-management/merchant-offer-management';
+import { MerchantSetting } from './component/mechant/merchant-setting/merchant-setting';
 
 export const routes: Routes = [
   {
@@ -38,6 +42,19 @@ export const routes: Routes = [
     ]
   },
   { path: 'MfaDeals', component: MfaDeals },
-  { path: 'merchant_layout', component: MerchantfLayout },
+  // { path: 'merchant_layout', component: MerchantfLayout },
+  {
+    path: 'merchant',
+    component: MerchantfLayout,
+    children: [
+      { path: 'merchants', component: MerchantList },
+      { path: 'categories', component: MerchantCategories },
+      { path: 'offers', component: MerchantOfferManagement },
+       { path: 'setting', component: MerchantSetting },
+
+      { path: '', redirectTo: 'merchants', pathMatch: 'full' }
+    ]
+  }
+
 
 ];

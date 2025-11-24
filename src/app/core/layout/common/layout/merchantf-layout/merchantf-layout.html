@@ -1,16 +1,10 @@
 <div class="layout-container">
 
-  <!-- LEFT SIDEBAR FIXED -->
-  <app-merchant-side-bar class="sidebar-fixed"></app-merchant-side-bar>
+  <!-- LEFT SIDEBAR -->
+  <app-merchant-side-bar></app-merchant-side-bar>
 
-  <!-- RIGHT SIDE CONTENT -->
+  <!-- RIGHT CONTENT AREA -->
   <div class="content-area">
-    <app-merchant-list></app-merchant-list>
-    <!-- <app-merchant-categories></app-merchant-categories> -->
-    <!-- <app-merchant-offer-management></app-merchant-offer-management> -->
-    <!-- Dim background on drawer -->
-    <div class="content-dim-overlay" *ngIf="isDrawerOpen"></div>
-
     <router-outlet></router-outlet>
   </div>
 

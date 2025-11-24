@@ -1,0 +1,155 @@
+.page-container {
+    padding: 24px;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .settings-image {
+        height: 60px;
+        border-radius: 8px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.subtitle {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* GRID */
+.settings-grid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CARD */
+.card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    transition: 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+}
+
+.card-title {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* INPUT */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+
+    label {
+        font-size: 13px;
+        color: #555;
+        margin-bottom: 4px;
+    }
+
+    input {
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+}
+
+/* BUTTONS */
+.primary-btn {
+    background: #1d8df6;
+    border: none;
+    padding: 10px 14px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+.secondary-btn {
+    background: #e5e7eb;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* API key row */
+.api-row {
+    display: flex;
+    gap: 10px;
+
+    input {
+        flex: 1;
+    }
+}
+
+/* TOGGLE SWITCH */
+.switch {
+    position: relative;
+    width: 42px;
+    height: 22px;
+    display: inline-block;
+
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 22px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .3s;
+}
+
+.slider:before {
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    transition: .3s;
+}
+
+input:checked+.slider {
+    background-color: #2196f3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Rows with toggle */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+}
