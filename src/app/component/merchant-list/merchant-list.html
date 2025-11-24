@@ -1,0 +1,56 @@
+<div class="page-container">
+
+  <div class="header-row">
+    <h2>Merchants</h2>
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon>
+      Add Merchant
+    </button>
+  </div>
+
+  <p class="subtitle">Manage your merchant partners and their profiles</p>
+
+  <div class="filter-row">
+    <input type="text" placeholder="Search merchants..." class="search-box" />
+
+    <select [(ngModel)]="statusFilter" class="status-filter">
+      <option>All Status</option>
+      <option>Active</option>
+      <option>Inactive</option>
+    </select>
+  </div>
+
+  <div class="merchant-list">
+    <div class="merchant-card" *ngFor="let m of merchants">
+
+      <!-- Logo -->
+      <img [src]="m.logo" class="logo" />
+
+      <!-- Merchant Info -->
+      <div class="info">
+        <h3>{{ m.name }}</h3>
+        <p>{{ m.email }} · {{ m.phone }}</p>
+      </div>
+
+      <!-- Category -->
+      <div>
+
+        <span class="category-tag">{{ m.category }}</span>
+
+        <!-- Offer Count -->
+        <p class="offer-count">{{ m.offers }} active offers</p>
+      </div>
+
+      <!-- Status Badge -->
+      <span class="status-badge" [class.active]="m.status === 'Active'" [class.inactive]="m.status === 'Inactive'">
+        {{ m.status }}
+      </span>
+
+      <!-- Options -->
+      <button mat-icon-button class="more-btn">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+
+  </div>
+</div>

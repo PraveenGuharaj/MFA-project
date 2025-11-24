@@ -4,6 +4,7 @@ import { Layout } from './core/layout/common/layout/layout';
 import { MfaOfferManagement } from './component/mfa-offer-management/mfa-offer-management';
 import { MfaDeals } from './component/mfa-deals/mfa-deals/mfa-deals';
 import { MfaDiscountManagement } from './component/mfa-discount-management/mfa-discount-management';
+import { MerchantfLayout } from './core/layout/common/layout/merchantf-layout/merchantf-layout';
 
 export const routes: Routes = [
   {
@@ -26,7 +27,7 @@ export const routes: Routes = [
           title: 'Offer Management'
         }
       },
-        {
+      {
         path: 'discount_management',
         component: MfaDiscountManagement,
         data: {
@@ -36,5 +37,7 @@ export const routes: Routes = [
       }
     ]
   },
-  { path: 'MfaDeals', component: MfaDeals }
+  { path: 'MfaDeals', component: MfaDeals },
+  { path: 'merchant_layout', component: MerchantfLayout },
+
 ];

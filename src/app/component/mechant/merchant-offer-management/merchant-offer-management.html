@@ -1,0 +1,36 @@
+<div class="page-container">
+  <div class="header-row">
+    <h2>Offers Management</h2>
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon> Create Offer
+    </button>
+  </div>
+
+  <p class="subtitle">Create and manage promotional offers</p>
+
+  <!-- Offer Cards -->
+  <div class="offer-list">
+    <div class="offer-card" *ngFor="let offer of offers">
+      <!-- Merchant Info -->
+      <div class="merchant-info">
+        <img [src]="offer.logo" class="merchant-logo" />
+        <div class="merchant-details">
+          <h3>{{ offer.merchantName }}</h3>
+          <span class="status-badge" [class.active]="offer.status === 'Active'"
+            [class.pending]="offer.status === 'Pending'">
+            {{ offer.status }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Offer Details -->
+      <div class="offer-details">
+        <h4>{{ offer.title }}</h4>
+        <p>Discount: {{ offer.discount }} ({{ offer.discountType }})</p>
+        <p>Category: {{ offer.category }}</p>
+        <p>Valid: {{ offer.validPeriod }}</p>
+        <button mat-button class="view-details">View Details</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="page-container">
+  <div class="header-row">
+    <h2>Categories</h2>
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon> Add Category
+    </button>
+  </div>
+
+  <p class="subtitle">Organize merchants and products into categories</p>
+
+  <!-- Category Filters -->
+  <div class="filter-row">
+    <input type="text" placeholder="Search categories..." class="search-box" />
+    <select [(ngModel)]="statusFilter" class="status-filter">
+      <option>All Status</option>
+      <option>Active</option>
+      <option>Inactive</option>
+    </select>
+  </div>
+
+  <!-- Category Cards -->
+  <div class="category-list">
+    <div *ngFor="let category of categories" class="category-card">
+
+      <!-- Category Info -->
+      <div class="category-info">
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.description }}</p>
+        <p>{{ category.merchantsCount }} merchants</p>
+      </div>
+
+      <!-- Status Badge -->
+      <div>
+
+        <span class="status-badge" [class.active]="category.status === 'Active'"
+          [class.inactive]="category.status === 'Inactive'">
+          {{ category.status }}
+        </span>
+
+        <!-- Action Buttons (Edit and Delete) -->
+        <div class="actions">
+          <button mat-icon-button color="primary" (click)="editCategory(category)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteCategory(category)">
+            <mat-icon class="delete-icon">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

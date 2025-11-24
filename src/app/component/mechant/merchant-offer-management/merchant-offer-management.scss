@@ -1,0 +1,120 @@
+.page-container {
+  padding: 24px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  /* Light gray bottom border */
+  padding-bottom: 16px;
+  /* Optional: Add some spacing for the border */
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.offer-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.offer-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease;
+}
+
+.offer-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.merchant-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  .merchant-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #f3f4f6;
+  }
+
+  .merchant-details h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .merchant-details {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    text-transform: capitalize;
+    margin-top: 8px;
+  }
+
+  .status-badge.active {
+    background-color: #16a34a;
+    /* Green */
+    padding: 0 25px;
+  }
+
+  .status-badge.pending {
+    background-color: #f59e0b;
+    /* Amber */
+    padding: 0 25px;
+  }
+}
+
+.offer-details {
+  margin-top: 16px;
+
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 8px 0;
+    color: #6b7280;
+    font-size: 14px;
+  }
+
+  .view-details {
+    margin-top: 12px;
+    width: 100%;
+    border: 1px solid grey;
+    color: black;
+    font-weight: 400;
+    border-radius: 0;
+  }
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

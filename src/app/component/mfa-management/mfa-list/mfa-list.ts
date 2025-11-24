@@ -12,7 +12,6 @@ import { MfaView } from '../mfa-view/mfa-view';
 import { MfaDelete } from '../mfa-delete/mfa-delete';
 import { MfaAdd } from '../mfa-add/mfa-add';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MfaOfferRenew } from '../../mfa-offer-management/mfa-offer-renew/mfa-offer-renew';
 
 interface MfaItem {
   id: number | null;
