@@ -24,7 +24,8 @@ export class MerchantSideBar {
     { label: 'Merchants', icon: 'store', route: '/merchant/merchants' },
     { label: 'Categories', icon: 'category', route: '/merchant/categories' },
     { label: 'Offers', icon: 'local_offer', route: '/merchant/offers' },
-    { label: 'settings', icon: 'local_offer', route: '/merchant/setting' }
+    { label: 'settings', icon: 'local_offer', route: '/merchant/setting' },
+    { label: 'Product', icon: 'local_offer', route: '/merchant/product' }
   ];
 
 }

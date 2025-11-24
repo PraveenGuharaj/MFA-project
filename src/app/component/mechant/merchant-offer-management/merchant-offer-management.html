@@ -1,7 +1,8 @@
 <div class="page-container">
   <div class="header-row">
     <h2>Offers Management</h2>
-    <button mat-raised-button color="primary">
+    <!-- Button to create a new offer -->
+    <button mat-raised-button color="primary" (click)="openCreateOfferModal()">
       <mat-icon>add</mat-icon> Create Offer
     </button>
   </div>
@@ -31,6 +32,174 @@
         <p>Valid: {{ offer.validPeriod }}</p>
         <button mat-button class="view-details">View Details</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Create Offer Modal -->
+  <!-- <div *ngIf="showCreateOfferModal" class="create-offer-modal">
+    <div class="modal-content">
+      <h4>Create New Offer - Step 1 of 3</h4>
+      <form (ngSubmit)="submitOffer()">
+        <label for="merchant">Select Merchant</label>
+        <select id="merchant" [(ngModel)]="newOffer.merchant" name="merchant" required>
+          <option value="apple">Apple Store</option>
+          <option value="nike">Nike Store</option>
+          <option value="starbucks">Starbucks</option>
+        </select>
+
+        <label for="category">Product Category</label>
+        <select id="category" [(ngModel)]="newOffer.category" name="category" required>
+          <option value="smartphones">Smartphones</option>
+          <option value="clothing">Clothing</option>
+          <option value="laptops">Laptops</option>
+        </select>
+
+        <label for="sub-product">Sub-Product (Optional)</label>
+        <input type="text" id="sub-product" [(ngModel)]="newOffer.subProduct" name="subProduct"
+          placeholder="e.g., Basketball Shoes">
+
+        <div class="modal-buttons">
+          <button type="button" class="previous-button" (click)="closeCreateOfferModal()">Previous</button>
+          <div class="btn-footer">
+
+            <button type="button" class="cancel-button" (click)="closeCreateOfferModal()">Cancel</button>
+            <button type="submit" class="next-button">Next</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div> -->
+
+  <!-- Create Offer Modal -->
+  <div *ngIf="showCreateOfferModal" class="create-offer-modal">
+    <div class="modal-content">
+      <h4>Create New Offer - Step {{ currentStep }} of 3</h4>
+      <form (ngSubmit)="goToNextStep()">
+        <!-- Step 1 -->
+
+        <!-- Step 1 (Create New Offer) -->
+        <div *ngIf="currentStep === 1">
+          <!-- <h4>Create New Offer - Step 1 of 3</h4> -->
+
+          <!-- Select Merchant -->
+          <div class="form-field">
+            <label for="merchant">Select Merchant</label>
+            <select id="merchant" [(ngModel)]="newOffer.merchant" name="merchant" required>
+              <option value="apple">Apple Store</option>
+              <option value="nike">Nike Store</option>
+              <option value="starbucks">Starbucks</option>
+            </select>
+          </div>
+
+          <!-- Product Category -->
+          <div class="form-field">
+            <label for="category">Product Category</label>
+            <select id="category" [(ngModel)]="newOffer.category" name="category" required>
+              <option value="smartphones">Smartphones</option>
+              <option value="clothing">Clothing</option>
+              <option value="laptops">Laptops</option>
+            </select>
+          </div>
+
+          <!-- Sub-Product (Optional) -->
+          <div class="form-field">
+            <label for="sub-product">Sub-Product (Optional)</label>
+            <input type="text" id="sub-product" [(ngModel)]="newOffer.subProduct" name="subProduct"
+              placeholder="e.g., Basketball Shoes" />
+          </div>
+
+
+        </div>
+
+        <div *ngIf="currentStep === 2">
+          <label for="offer-title">Offer Title</label>
+          <input type="text" id="offer-title" [(ngModel)]="newOffer.offerTitle" name="offerTitle"
+            placeholder="e.g., Summer Sale - 30% Off" required>
+
+          <label for="description">Description</label>
+          <input type="text" id="description" [(ngModel)]="newOffer.description" name="description"
+            placeholder="Detailed offer description" required>
+
+        </div>
+
+        <!-- Step 2 -->
+        <div *ngIf="currentStep === 2">
+          <div class="discount-fields">
+            <div>
+              <label for="discount-type">Discount Type</label>
+              <select id="discount-type" [(ngModel)]="newOffer.discountType" name="discountType" required>
+                <option value="percentage">Percentage</option>
+                <option value="fixed">Fixed</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="discount-value">Discount Value</label>
+              <input type="text" id="discount-value" [(ngModel)]="newOffer.discountValue" name="discountValue"
+                placeholder="e.g., 30 or 100" required>
+            </div>
+          </div>
+
+          <!-- offer category -->
+
+          <label for="offer-title">Offer Category</label>
+          <input type="text" id="offer-title" [(ngModel)]="newOffer.offerCategory" name="offerCategory"
+            placeholder="e.g., Summer Sale - 30% Off" required>
+
+          <label for="eligibility-rule">Eligibility Rule</label>
+          <select id="eligibility-rule" [(ngModel)]="newOffer.eligibilityRule" name="eligibilityRule" required>
+            <option value="first-time">First-time Customers</option>
+            <option value="loyalty">Loyalty Program</option>
+          </select>
+        </div>
+
+        <!-- Step 3 (final step) -->
+        <!-- Step 3 (final step) -->
+        <div *ngIf="currentStep === 3" class="step-3-final">
+          <!-- <h4>Create New Offer - Step 3 of 3</h4> -->
+
+          <!-- Start Date and End Date Fields -->
+          <div class="date-fields">
+            <div class="date-field">
+              <label for="start-date">Start Date</label>
+              <input type="text" id="start-date" placeholder="dd/mm/yyyy" [(ngModel)]="newOffer.startDate"
+                name="startDate" required />
+            </div>
+
+            <div class="date-field">
+              <label for="end-date">End Date</label>
+              <input type="text" id="end-date" placeholder="dd/mm/yyyy" [(ngModel)]="newOffer.endDate" name="endDate"
+                required />
+            </div>
+          </div>
+
+          <!-- Terms & Conditions URL -->
+          <div class="terms-url">
+            <label for="terms-url">Terms & Conditions URL</label>
+            <input type="url" id="terms-url" placeholder="https://example.com/terms"
+              [(ngModel)]="newOffer.termsConditionsUrl" name="termsConditionsUrl" required />
+          </div>
+
+          <!-- <div class="modal-buttons">
+    <button type="button" class="previous-button" (click)="goToPreviousStep()">Previous</button>
+    <div class="btn-footer">
+      <button type="button" class="cancel-button" (click)="closeCreateOfferModal()">Cancel</button>
+      <button type="submit" class="next-button" (click)="submitOffer()">Create Offer</button>
+    </div>
+  </div> -->
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="modal-buttons">
+          <button type="button" class="previous-button" (click)="closeCreateOfferModal()">Previous</button>
+          <div class="btn-footer">
+            <button type="button" class="cancel-button" (click)="closeCreateOfferModal()">Cancel</button>
+            <button type="submit" class="next-button">{{ currentStep === 3 ? 'Submit' : 'Next' }}</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

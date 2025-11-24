@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class MerchantList {
   statusFilter = 'All Status';
+  showAddMerchantModal: boolean = false;
+
 
   merchants = [
     {
@@ -54,5 +56,25 @@ export class MerchantList {
     }
   ];
 
+  newMerchant = {
+    name: '',
+    logoUrl: '',
+    email: '',
+    phone: '',
+    category: '',
+    description: ''
+  };
 
+  openAddMerchantModal() {
+    this.showAddMerchantModal = true;
+  }
+
+  closeAddMerchantModal() {
+    this.showAddMerchantModal = false;
+  }
+
+  submitMerchant() {
+    console.log('New Merchant:', this.newMerchant);
+    this.closeAddMerchantModal();
+  }
 }

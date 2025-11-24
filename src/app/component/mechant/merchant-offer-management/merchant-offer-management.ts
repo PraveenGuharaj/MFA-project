@@ -14,7 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './merchant-offer-management.scss',
 })
 export class MerchantOfferManagement {
-
+  showCreateOfferModal: boolean = false;
+  currentStep: number = 1;
   offers = [
     {
       merchantName: 'Nike Store',
@@ -48,8 +49,53 @@ export class MerchantOfferManagement {
     },
   ];
 
+
+  newOffer = {
+    merchant: '',
+    category: '',
+    subProduct: '',
+    offerTitle: '',
+    offerCategory: '',
+    description: '',
+    discountValue: '',
+    discountType: '',
+    eligibilityRule: '',
+    startDate: '',
+    endDate: '',
+    termsConditionsUrl: '',
+  };
+
   createOffer() {
     console.log('Create a new offer');
   }
 
+  openCreateOfferModal() {
+    this.showCreateOfferModal = true;
+    this.currentStep = 1;
+  }
+
+  closeCreateOfferModal() {
+    this.showCreateOfferModal = false;
+  }
+
+  goToNextStep() {
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    } else {
+      this.submitOffer();
+    }
+  }
+
+
+
+  submitOffer() {
+    console.log('Offer submitted:', this.newOffer);
+    this.closeCreateOfferModal();
+  }
+
+  goToPreviousStep() {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+  }
 }

@@ -3,17 +3,26 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-merchant-categories',
   imports: [
-    CommonModule, MatIconModule, MatButtonModule, FormsModule
+    CommonModule, MatIconModule, MatButtonModule, FormsModule, MatSlideToggleModule
   ],
   templateUrl: './merchant-categories.html',
-  styleUrl: './merchant-categories.scss',
+  styleUrls: ['./merchant-categories.scss'],
 })
 export class MerchantCategories {
   statusFilter = 'All Status';
+  showAddCategoryModal = false;
+
+  // Modal Data
+  newCategory = {
+    name: '',
+    description: '',
+    status: true,
+  };
 
   categories = [
     {
@@ -42,11 +51,37 @@ export class MerchantCategories {
     },
   ];
 
+  // Methods for managing categories
   editCategory(category: any) {
     console.log('Editing category:', category);
   }
 
   deleteCategory(category: any) {
     console.log('Deleting category:', category);
+  }
+
+  // Modal Controls
+  openAddCategoryModal() {
+    this.showAddCategoryModal = true;
+  }
+
+  closeAddCategoryModal() {
+    this.showAddCategoryModal = false;
+    this.resetModal();
+  }
+
+  createCategory() {
+    this.categories.push({
+      ...this.newCategory,
+      status: this.newCategory.status ? 'Active' : 'Inactive',
+      merchantsCount: 0
+    });
+
+    console.log('New Category:', this.newCategory);
+    this.closeAddCategoryModal();
+  }
+
+  resetModal() {
+    this.newCategory = { name: '', description: '', status: true };
   }
 }

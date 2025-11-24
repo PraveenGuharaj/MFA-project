@@ -1,0 +1,38 @@
+<div class="page-container">
+  <div class="header-row">
+    <h2>Products</h2>
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon> Add Product Category
+    </button>
+  </div>
+
+  <p class="subtitle">Manage product categories and sub-products</p>
+
+  <!-- Product Category Cards -->
+  <div class="product-list">
+    <div *ngFor="let category of categories" class="product-card">
+      <!-- Product Category Info -->
+      <div class="category-info">
+        <mat-icon class="category-icon">{{ category.icon }}</mat-icon>
+        <h3>{{ category.name }}</h3>
+        <span class="status-badge" [ngClass]="{ 'active': category.status === 'Active', 'inactive': category.status === 'Inactive' }">
+          {{ category.status }}
+        </span>
+      </div>
+
+      <!-- Sub-Products List -->
+      <div class="sub-products">
+        <div *ngFor="let subProduct of category.subProducts" class="sub-product">
+          <span>{{ subProduct.name }} </span>
+          <span class="item-count">{{ subProduct.itemCount }} items</span>
+        </div>
+        <div>
+
+            <button mat-raised-button color="accent" class="manage-btn" (click)="manageSubProducts(category)">
+              Manage Sub-Products
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

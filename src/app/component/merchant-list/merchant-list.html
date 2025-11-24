@@ -2,7 +2,7 @@
 
   <div class="header-row">
     <h2>Merchants</h2>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="openAddMerchantModal()">
       <mat-icon>add</mat-icon>
       Add Merchant
     </button>
@@ -52,5 +52,60 @@
       </button>
     </div>
 
+  </div>
+</div>
+
+
+
+<div *ngIf="showAddMerchantModal" class="add-merchant-modal">
+  <div class="modal-content">
+    <h4>Add New Merchant</h4>
+
+    <form (ngSubmit)="submitMerchant()">
+      <div class="form-field">
+        <label for="merchant-name">Merchant Name</label>
+        <input type="text" id="merchant-name" [(ngModel)]="newMerchant.name" name="name"
+          placeholder="Enter merchant name" required />
+      </div>
+
+      <div class="form-field">
+        <label for="logo-url">Logo URL</label>
+        <input type="url" id="logo-url" [(ngModel)]="newMerchant.logoUrl" name="logoUrl"
+          placeholder="https://example.com/logo.png" required />
+      </div>
+
+      <div class="form-field">
+        <label for="contact-email">Contact Email</label>
+        <input type="email" id="contact-email" [(ngModel)]="newMerchant.email" name="email"
+          placeholder="contact@merchant.com" required />
+      </div>
+
+      <div class="form-field">
+        <label for="contact-phone">Contact Phone</label>
+        <input type="text" id="contact-phone" [(ngModel)]="newMerchant.phone" name="phone" placeholder="+1 234 567 8900"
+          required />
+      </div>
+
+      <div class="form-field">
+        <label for="category">Category</label>
+        <select id="category" [(ngModel)]="newMerchant.category" name="category" required>
+          <option value="">Select category</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="food">Food & Beverage</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="description">Description</label>
+        <textarea id="description" [(ngModel)]="newMerchant.description" name="description"
+          placeholder="Brief description of the merchant" required></textarea>
+      </div>
+
+      <div class="modal-buttons">
+        <button type="button" class="cancel-button" (click)="closeAddMerchantModal()">Cancel</button>
+        <button type="submit" class="submit-button">Create Merchant</button>
+      </div>
+    </form>
   </div>
 </div>

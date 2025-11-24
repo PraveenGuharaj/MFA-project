@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="header-row">
     <h2>Categories</h2>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="openAddCategoryModal()">
       <mat-icon>add</mat-icon> Add Category
     </button>
   </div>
@@ -21,7 +21,6 @@
   <!-- Category Cards -->
   <div class="category-list">
     <div *ngFor="let category of categories" class="category-card">
-
       <!-- Category Info -->
       <div class="category-info">
         <h3>{{ category.name }}</h3>
@@ -31,7 +30,6 @@
 
       <!-- Status Badge -->
       <div>
-
         <span class="status-badge" [class.active]="category.status === 'Active'"
           [class.inactive]="category.status === 'Inactive'">
           {{ category.status }}
@@ -48,6 +46,39 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- Add Category Modal -->
+  <div *ngIf="showAddCategoryModal" class="add-category-modal">
+    <div class="modal-content">
+      <h4>Add New Category</h4>
+      <form (ngSubmit)="createCategory()">
+        <!-- Category Name -->
+        <div class="form-field">
+          <label for="category-name">Category Name</label>
+          <input type="text" id="category-name" [(ngModel)]="newCategory.name" name="name"
+            placeholder="Enter category name" required />
+        </div>
+
+        <!-- Description -->
+        <div class="form-field">
+          <label for="description">Description</label>
+          <textarea id="description" [(ngModel)]="newCategory.description" name="description"
+            placeholder="Brief description" required></textarea>
+        </div>
+
+        <!-- Active Status -->
+        <div class="form-field status-toggle">
+          <label for="status">Active Status</label>
+          <mat-slide-toggle class='toggle-btn' [(ngModel)]="newCategory.status" id="status"
+            name="status"></mat-slide-toggle>
+        </div>
+
+        <div class="modal-buttons">
+          <button type="button" class="cancel-button" (click)="closeAddCategoryModal()">Cancel</button>
+          <button type="submit" class="submit-button">Create Category</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
