@@ -82,3 +82,16 @@
     </div>
   </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div *ngIf="showDeleteModal" class="delete-modal">
+  <div class="delete-content">
+    <h3>Delete Category</h3>
+    <p>Are you sure you want to delete <strong>{{ deletingCategory?.name }}</strong>?</p>
+
+    <div class="delete-buttons">
+      <button class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
+      <button class="delete-button" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>

@@ -50,14 +50,25 @@ export class MerchantCategories {
       status: 'Inactive',
     },
   ];
-
-  // Methods for managing categories
+  editingCategory: any = null;
+  isEditMode = false;
+  showDeleteModal = false;
+  deletingCategory: any = null;
   editCategory(category: any) {
-    console.log('Editing category:', category);
-  }
+    this.isEditMode = true;
+    this.editingCategory = category;
 
+    this.newCategory = {
+      name: category.name,
+      description: category.description,
+      status: category.status === 'Active'
+    };
+
+    this.showAddCategoryModal = true;
+  }
   deleteCategory(category: any) {
-    console.log('Deleting category:', category);
+    this.deletingCategory = category;
+    this.showDeleteModal = true;
   }
 
   // Modal Controls
@@ -68,20 +79,53 @@ export class MerchantCategories {
   closeAddCategoryModal() {
     this.showAddCategoryModal = false;
     this.resetModal();
+    this.isEditMode = false;
+    this.editingCategory = null;
   }
 
   createCategory() {
-    this.categories.push({
-      ...this.newCategory,
+    const newCat = {
+      name: this.newCategory.name,
+      description: this.newCategory.description,
       status: this.newCategory.status ? 'Active' : 'Inactive',
       merchantsCount: 0
-    });
+    };
 
-    console.log('New Category:', this.newCategory);
+    this.categories.unshift(newCat); // show at top immediately
+    this.closeAddCategoryModal();
+  }
+
+  saveCategory() {
+    if (this.isEditMode) {
+      this.editingCategory.name = this.newCategory.name;
+      this.editingCategory.description = this.newCategory.description;
+      this.editingCategory.status = this.newCategory.status ? 'Active' : 'Inactive';
+    } else {
+      const newCat = {
+        name: this.newCategory.name,
+        description: this.newCategory.description,
+        status: this.newCategory.status ? 'Active' : 'Inactive',
+        merchantsCount: 0
+      };
+
+      this.categories.unshift(newCat); // show on top
+    }
+
     this.closeAddCategoryModal();
   }
 
   resetModal() {
     this.newCategory = { name: '', description: '', status: true };
   }
+
+  confirmDelete() {
+    this.categories = this.categories.filter(c => c !== this.deletingCategory);
+    this.closeDeleteModal();
+  }
+
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.deletingCategory = null;
+  }
+
 }

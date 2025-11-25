@@ -289,3 +289,114 @@ textarea {
 .submit-button:hover {
   background: #45a049;
 }
+
+.options-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.options-menu {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  z-index: 50;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.options-menu .option {
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.options-menu .option:hover {
+  background: #f3f4f6;
+}
+
+
+/* Background overlay */
+.delete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal box */
+.delete-content {
+  background: #fff;
+  padding: 28px;
+  width: 380px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.2s ease-out;
+}
+
+.delete-content h3 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.delete-content p {
+  font-size: 15px;
+  color: #555;
+  margin: 15px 0 25px;
+}
+
+/* Buttons container */
+.delete-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.cancel-button,
+.delete-button {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.cancel-button {
+  background: #e0e0e0;
+  color: #444;
+}
+
+.delete-button {
+  background: #d32f2f;
+  /* Material red */
+  color: #fff;
+}
+
+/* Animation */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -21,7 +21,7 @@
   </div>
 
   <div class="merchant-list">
-    <div class="merchant-card" *ngFor="let m of merchants">
+    <div class="merchant-card" *ngFor="let m of merchants; let i = index">
 
       <!-- Logo -->
       <img [src]="m.logo" class="logo" />
@@ -47,9 +47,21 @@
       </span>
 
       <!-- Options -->
-      <button mat-icon-button class="more-btn">
+      <!-- <button mat-icon-button class="more-btn">
         <mat-icon>more_vert</mat-icon>
-      </button>
+      </button> -->
+      <!-- Options: simple dropdown -->
+      <div class="options-wrapper">
+        <button mat-icon-button class="more-btn" (click)="toggleOptions(i, $event)">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <div class="options-menu" *ngIf="activeOptionsIndex === i">
+          <button class="option" (click)="onEditMerchant(i)">Edit</button>
+          <button class="option" (click)="onDeleteMerchant(i)">Delete</button>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -107,5 +119,22 @@
         <button type="submit" class="submit-button">Create Merchant</button>
       </div>
     </form>
+  </div>
+</div>
+
+
+<div *ngIf="showDeleteModal" class="delete-modal">
+  <div class="delete-content">
+    <h3>Delete Merchant</h3>
+
+    <p>
+      Are you sure you want to delete
+      <strong>{{ deletingMerchant?.name }}</strong>?
+    </p>
+
+    <div class="delete-buttons">
+      <button class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
+      <button class="delete-button" (click)="confirmDelete()">Delete</button>
+    </div>
   </div>
 </div>

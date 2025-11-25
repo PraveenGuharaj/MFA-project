@@ -195,3 +195,40 @@ mat-slide-toggle {
 .toggle-btn {
   margin-left: 10px;
 }
+
+.delete-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-content {
+  background: #fff;
+  width: 380px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.delete-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.delete-button {
+  background: #d32f2f;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 4px;
+}
+
+.cancel-button {
+  background: #e0e0e0;
+  padding: 8px 20px;
+  border-radius: 4px;
+}

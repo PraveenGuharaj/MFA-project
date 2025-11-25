@@ -11,7 +11,7 @@
 
   <!-- Offer Cards -->
   <div class="offer-list">
-    <div class="offer-card" *ngFor="let offer of offers">
+    <div class="offer-card" *ngFor="let offer of offers;let i = index">
       <!-- Merchant Info -->
       <div class="merchant-info">
         <img [src]="offer.logo" class="merchant-logo" />
@@ -30,7 +30,7 @@
         <p>Discount: {{ offer.discount }} ({{ offer.discountType }})</p>
         <p>Category: {{ offer.category }}</p>
         <p>Valid: {{ offer.validPeriod }}</p>
-        <button mat-button class="view-details">View Details</button>
+        <button mat-button class="view-details" (click)="viewOffer(offer, i)">View Details</button>
       </div>
     </div>
   </div>
