@@ -8,7 +8,7 @@
 
   <!-- Right side: Login form -->
   <div class="right-side">
-    <mat-card-content>
+    <mat-card-content *ngIf="!isOtpScreen && !isQrScreen">
       <div>
         <img src="images/omnicor_logo.png" class="image_logo" alt="Logo" />
       </div>
@@ -32,21 +32,64 @@
         </mat-form-field>
 
         <!-- Forgot Password Link -->
-        <p class="forgot-password">
-          <!-- <a href="#">Forgot Password?</a> -->
-          Forgot Password?
-        </p>
+        <p class="forgot-password">Forgot Password?</p>
 
         <!-- Submit button -->
         <div class="login-header">
-
           <button mat-raised-button color="primary" class="login-btn" type="submit">Login</button>
         </div>
 
         <!-- QR Login -->
         <div class="qr-login">
           <p>or</p>
-          <button mat-button class="qr-code">Login with QR code</button>
+          <button mat-button class="qr-code" (click)="showQrCode()">Login with QR code</button>
+        </div>
+      </form>
+    </mat-card-content>
+
+    <!-- OTP Screen -->
+    <mat-card-content *ngIf="isOtpScreen && !isQrScreen">
+      <div>
+        <img src="images/omnicor_logo.png" class="image_logo" alt="Logo" />
+      </div>
+      <h3 class="login-heading">Enter the One-Time Password (OTP) sent to your email.</h3>
+
+      <form class="otp-form">
+        <div class="otp-input">
+          <input type="text" maxlength="1" [(ngModel)]="otp[0]" name="otp1" />
+          <input type="text" maxlength="1" [(ngModel)]="otp[1]" name="otp2" />
+          <input type="text" maxlength="1" [(ngModel)]="otp[2]" name="otp3" />
+          <input type="text" maxlength="1" [(ngModel)]="otp[3]" name="otp4" />
+          <input type="text" maxlength="1" [(ngModel)]="otp[4]" name="otp5" />
+        </div>
+        <p class="otp-timer">{{ otpTimer }} seconds</p>
+        <p class="resend-otp">Didn't receive the code? <a href="#" (click)="resendOtp()">Resend code</a></p>
+        <p class="invalid-otp">Invalid OTP. You have 1 attempt remaining.</p>
+        <div class="continue-btn">
+          <button mat-raised-button color="primary" class="login-btn" type="button" (click)="verifyOtp()">Continue</button>
+        </div>
+      </form>
+    </mat-card-content>
+
+    <!-- QR Code Screen -->
+    <mat-card-content *ngIf="isQrScreen">
+      <div class="image_logo_qr">
+        <img src="images/omnicor_logo.png" class="image_logo" alt="Logo" />
+      </div>
+        <!-- QR Code Image -->
+      <div class="qr-code-container">
+        <img src="images/qrcode.png" alt="QR Code" class="qr-image" />
+      </div>
+
+      <h3 class="login-heading">Scan the QR code to verify your phone number</h3>
+      <p>Please enter the 4- or 5-digit code below to complete your login.</p>
+
+    
+      <!-- OTP Input for QR Code -->
+      <form class="otp-form">
+    
+        <div class="continue-btn">
+          <button mat-raised-button color="primary" class="login-btn" type="button" (click)="verifyOtp()">Continue</button>
         </div>
       </form>
     </mat-card-content>

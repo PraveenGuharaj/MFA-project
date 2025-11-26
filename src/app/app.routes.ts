@@ -10,6 +10,7 @@ import { MerchantCategories } from './component/mechant/merchant-categories/merc
 import { MerchantOfferManagement } from './component/mechant/merchant-offer-management/merchant-offer-management';
 import { MerchantSetting } from './component/mechant/merchant-setting/merchant-setting';
 import { MerchantProduct } from './component/mechant/merchant-product/merchant-product';
+import { Dashboard } from './component/dashboard/dashboard/dashboard';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,8 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
+    { path: 'dashboard', component: Dashboard } ,
+
   {
     path: '',
     component: Layout,
