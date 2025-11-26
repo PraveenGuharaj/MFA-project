@@ -1,0 +1,149 @@
+.login-card {
+  display: -webkit-box;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.left-side {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-image {
+  width: 100%;
+  max-width: 600px;
+  object-fit: cover;
+  height: 100vh;
+}
+
+.right-side {
+  width: 40%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: #f0f0f0;
+}
+
+.login-heading {
+  text-align: start;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  line-height: 34px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.forgot-password {
+  text-align: end;
+  font-size: 14px;
+  color: #606060;
+  font-weight: 400;
+  margin: 0px;
+  line-height: 0;
+}
+
+.qr-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+  }
+
+  .left-side,
+  .right-side {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .graph-image {
+    max-width: 100%;
+  }
+}
+
+.image_logo {
+  width: 100px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #030303;
+}
+
+mat-form-field {
+  background-color: white !important;
+  border-radius: 4px;
+  /* Optional: adds rounded corners */
+  border: none !important
+}
+
+mat-form-field input {
+  background-color: white !important;
+}
+
+mat-form-field .mat-input-element {
+  border: none !important;
+  background-color: white !important;
+  color: black !important;
+}
+
+.login-btn {
+  background: #090217 !important;
+  padding: 20px !important;
+  color: white !important;
+  width: 454px !important;
+  height: 56px;
+  margin-top: 16px;
+}
+
+.login-header {
+  display: flex;
+  justify-content: center;
+}
+
+.qr-code {
+  background: #DEDEDE !important;
+  color: #090217 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  width: 454px !important;
+  height: 56px;
+}
+
+.mat-mdc-text-field-wrapper {
+  background: white;
+}
+
+::ng-deep .password-field .mdc-text-field--outlined .mdc-notched-outline {
+  display: none !important;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}

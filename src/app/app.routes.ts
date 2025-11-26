@@ -14,6 +14,11 @@ import { MerchantProduct } from './component/mechant/merchant-product/merchant-p
 export const routes: Routes = [
   {
     path: '',
+    loadChildren: () =>
+      import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
+  },
+  {
+    path: '',
     component: Layout,
     children: [
       {
