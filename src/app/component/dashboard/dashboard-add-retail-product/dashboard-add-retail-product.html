@@ -1,0 +1,109 @@
+<div class="overlay" (click)="closeForm()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Create New Product</h2>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+      <!-- First Row: Product Name -->
+      <div class="form-row full-width">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input id="productName" formControlName="productName" matInput placeholder="Enter product name" />
+        </div>
+      </div>
+
+      <!-- Second Row: Description -->
+      <div class="form-row full-width">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input id="description" formControlName="description" matInput placeholder="Enter product description">
+        </div>
+      </div>
+
+      <!-- Third Row: Image URL, Category ID, and Priority -->
+
+
+      <div class="form-row full-width">
+        <div class="form-group">
+          <label for="imageURL">Image URL</label>
+          <input id="imageURL" formControlName="imageURL" matInput placeholder="Enter image URL" />
+        </div>
+      </div>
+
+
+
+      <div class="form-row">
+
+
+        <div class="form-group">
+          <label for="categoryId">Category ID</label>
+          <input id="categoryId" formControlName="category" matInput placeholder="Enter category ID" />
+        </div>
+
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <input id="priority" type="number" formControlName="priority" matInput placeholder="Enter priority" />
+        </div>
+      </div>
+
+      <!-- Fourth Row: Eligibility and Screen Name -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="eligibility">Eligibility</label>
+          <input id="eligibility" formControlName="eligibility" matInput placeholder="Enter eligibility" />
+        </div>
+
+        <div class="form-group">
+          <label for="screenName">Screen Name</label>
+          <input id="screenName" formControlName="screenName" matInput placeholder="Enter screen name" />
+        </div>
+      </div>
+
+      <!-- Fifth Row: Fees and Segment Code -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fees">Fees</label>
+          <input id="fees" formControlName="fees" matInput placeholder="Enter fees" />
+        </div>
+
+        <div class="form-group">
+          <label for="segmentCode">Segment Code</label>
+          <input id="segmentCode" formControlName="segmentCode" matInput placeholder="Enter segment code" />
+        </div>
+      </div>
+
+      <!-- Sixth Row: Channel and Image Type -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="channel">Channel</label>
+          <input id="channel" formControlName="channel" matInput placeholder="Enter channel" />
+        </div>
+
+        <div class="form-group">
+          <label for="imageType">Image Type</label>
+          <input id="imageType" formControlName="imageType" matInput placeholder="Enter image type" />
+        </div>
+      </div>
+
+      <!-- Status Row: Toggle -->
+      <div class="form-row">
+        <div class="form-group">
+          Status
+          <mat-slide-toggle formControlName="status" color="primary">
+
+          </mat-slide-toggle>
+        </div>
+      </div>
+
+
+
+      <!-- Actions: Save and Cancel Buttons -->
+      <div class="form-actions">
+        <button type="submit" mat-raised-button color="primary" class="btn-cancel" [disabled]="productForm.invalid"
+          (click)="closeForm()">Cancel</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

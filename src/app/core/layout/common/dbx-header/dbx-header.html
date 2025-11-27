@@ -2,6 +2,8 @@
 <div class="header-top">
   <div class="dashboard-title">
     <p>Dashboard</p>
+    <mat-icon>chevron_right</mat-icon>
+    <span class="header-title" style="font-weight:700;">Product Hub</span>
   </div>
   <div class="header-icons">
     <!-- Search Bar -->
@@ -19,20 +21,19 @@
   </div>
 </div>
 
-<!-- Bottom Section -->
+
 <div class="header-bottom">
   <div class="tabs">
-    <button class="tab-button active">All</button>
-    <button class="tab-button ">Web</button>
-    <button class="tab-button">Mobile</button>
+    <button class="tab-sub-product " [ngClass]="{'tab-button active': !subProduct}" (click)="retailProduct(false)"><img
+        src="images/retail_product.png" class="pr-10">Retail Product</button>
+    <button class="tab-sub-product " [ngClass]="{'tab-button active': subProduct}" (click)="subProductModel(true)"><img
+        src="images/sub_product.png" class="pr-10">Sub Product</button>
   </div>
   <div class="actions">
-    <div class="calendar_today">
 
-      <mat-icon>calendar_today</mat-icon>
-      <button class="today-btn">Today</button>
-      <mat-icon>chevron_right</mat-icon>
-    </div>
-    <img src="images/refresh.png" class="refresh_icon">
+    <button class="retail_product " *ngIf="!subProduct" (click)="openModal()"> <img src="images/plus-mini.png">Add
+      Retail Product</button>
+    <button class="retail_product " *ngIf="subProduct" (click)="openSubModal()"> <img src="images/plus-mini.png">Add Sub
+      Product</button>
   </div>
 </div>

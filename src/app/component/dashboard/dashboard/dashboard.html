@@ -4,6 +4,8 @@
 
   <!-- Main Content -->
   <div class="main-content">
-    <app-dbx-header></app-dbx-header>
+    <app-dbx-header (productTypeChanged)="onProductTypeChanged($event)"></app-dbx-header>
+    <!-- <app-dashboard-user-overview></app-dashboard-user-overview> -->
+    <app-dashboard-product-hub [subProduct]="subProduct"></app-dashboard-product-hub>
   </div>
 </div>

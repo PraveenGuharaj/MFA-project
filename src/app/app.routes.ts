@@ -18,7 +18,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
-    { path: 'dashboard', component: Dashboard } ,
+  { path: 'dashboard', component: Dashboard },
 
   {
     path: '',
@@ -50,7 +50,7 @@ export const routes: Routes = [
       }
     ]
   },
-  { path: 'MfaDeals', component: MfaDeals },
+  // { path: 'MfaDeals', component: MfaDeals },
   // { path: 'merchant_layout', component: MerchantfLayout },
   {
     path: 'merchant',

@@ -19,6 +19,8 @@
     font-size: 20px;
     font-weight: 600;
     color: #202020;
+    display: flex;
+    align-items: center;
 
 }
 
@@ -83,8 +85,12 @@
 }
 
 .tab-button.active {
-    background-color: #5f5fc4;
+    // background-color: #5f5fc4;
     color: #fff;
+    background: linear-gradient(90deg, #6017EB, #EAE1FA);
+    display: flex;
+    align-items: center;
+
 }
 
 .tab-button:hover {
@@ -133,4 +139,30 @@
 
 .refresh_icon {
     margin-left: 10px;
+}
+
+.retail_product {
+    border-radius: 10px;
+    padding: 10px 16px;
+    background-color: #6017EB;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 15px;
+    border: none;
+    display: flex;
+    align-items: center;
+
+}
+
+.tab-sub-product {
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.pr-10 {
+    padding-right: 10px;
 }
