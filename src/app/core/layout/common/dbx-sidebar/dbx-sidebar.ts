@@ -6,14 +6,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { MatListItem, MatNavList } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dbx-sidebar',
   imports: [
-      MatCardModule,
+    MatCardModule,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -21,62 +21,73 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     CommonModule,
     MatSidenavModule,
-    MatNavList,
-    MatListItem,
-    MatToolbarModule
+    MatToolbarModule,
+    RouterModule
   ],
   templateUrl: './dbx-sidebar.html',
   styleUrl: './dbx-sidebar.scss',
 })
 export class DbxSidebar {
-  //  activeItem: string = ''; // To track the active menu item
-  // @ViewChild('sidenav') sidenav: MatSidenav | any;
-  // isExpanded = true;
-  // showSubmenu: boolean = false;
-  // isShowing = false;
-  // showSubSubMenu: boolean = false;
 
-  // // Set the active menu item
-  // setActive(item: string) {
-  //   this.activeItem = item;
-  // }
-
-  // mouseenter() {
-  //   if (!this.isExpanded) {
-  //     this.isShowing = true;
-  //   }
-  // }
-
-  // mouseleave() {
-  //   if (!this.isExpanded) {
-  //     this.isShowing = false;
-  //   }
-  // }
-
-  // // Toggle expandable menu (submenu)
-  // toggleMenu(menu: string) {
-  //   if (this.activeItem === menu) {
-  //     this.activeItem = '';  // Collapse the menu if it's already active
-  //   } else {
-  //     this.activeItem = menu;  // Expand the menu
-  //   }
-  // }
-  
-@ViewChild('sidenav') sidenav: MatSidenav | any;
-  isExpanded = true;
-  showSubmenu: boolean = false;
-  isShowing = false;
-  showSubSubMenu: boolean = false;
-
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
+  menuItems = [
+    {
+      name: 'Dashboard',
+      subMenu: [
+        { name: 'User Overview', link: '/user-overview' },
+        { name: 'Login Activity', link: '/login-activity' },
+        { name: 'MFA & OTP Activity', link: '/login-activity' },
+        { name: 'Security Alerts & Account', link: '/login-activity' },
+        { name: 'Session Metrics', link: '/login-activity' },
+        { name: 'Geographic Metrics', link: '/login-activity' },
+        { name: 'Service Request', link: '/login-activity' },
+        { name: 'Transaction Performance', link: '/login-activity' },
+        { name: 'Digital Onboarding Journey', link: '/login-activity' },
+      ],
+      expanded: false
+    },
+    {
+      name: 'Product Hub',
+      subMenu: [
+        { name: 'Service Requests', link: '/service-requests' },
+        { name: 'Transaction Mix', link: '/transaction-mix' }
+      ],
+      expanded: false
+    },
+    {
+      name: 'Admin Center',
+      subMenu: [
+        { name: 'Service Requests', link: '/service-requests' },
+        { name: 'Transaction Mix', link: '/transaction-mix' }
+      ],
+      expanded: false
+    },
+    {
+      name: 'Offer & Discount',
+      subMenu: [
+        { name: 'Service Requests', link: '/service-requests' },
+        { name: 'Transaction Mix', link: '/transaction-mix' }
+      ],
+      expanded: false
+    },
+    {
+      name: 'Partner Onboarding',
+      subMenu: [
+        { name: 'Service Requests', link: '/service-requests' },
+        { name: 'Transaction Mix', link: '/transaction-mix' }
+      ],
+      expanded: false
+    },
+    {
+      name: 'Operation ',
+      subMenu: [
+        { name: 'Service Requests', link: '/service-requests' },
+        { name: 'Transaction Mix', link: '/transaction-mix' }
+      ],
+      expanded: false
     }
-  }
+  ];
 
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
+  toggleSubMenu(item: any) {
+    item.expanded = !item.expanded;
   }
 }

@@ -1,166 +1,67 @@
-// .sidebar {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   height: 100vh;
-//   width: 260px;
-//   background-color: white; /* Set the sidebar background to white */
-//   color: black; /* Set text color to black for all sidebar content */
-//   display: flex;
-//   flex-direction: column;
-//   padding-top: 20px;
-//   padding-left: 15px;
-//   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-// }
-
-// .sidebar-logo {
-//   width: 120px;
-//   margin-bottom: 30px;
-//   display: block;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-
-// .sidebar-menu {
-//   flex-grow: 1;
-//   padding-top: 20px;
-// }
-
-// .sidebar-menu ul {
-//   list-style-type: none;
-//   padding: 0;
-//   margin: 0;
-// }
-
-// .menu-item {
-//   padding: 15px;
-//   font-size: 16px;
-//   font-weight: 500;
-//   color: black; /* Set text color to black for menu items */
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   transition: background-color 0.2s ease;
-//   border-bottom: 1px solid #ddd; /* Lighter border for a white background */
-//   position: relative;
-// }
-
-// .menu-item a {
-//   text-decoration: none;
-//   color: black; /* Set link color to black */
-//   display: flex;
-//   align-items: center;
-// }
-
-// .menu-item:hover {
-//   background-color: #f2f2f2; /* Light gray background on hover */
-// }
-
-// .menu-item.active {
-//   background-color: #221340;  /* Highlighted color for active item */
-//   color: white; /* Change text color to white when active */
-// }
-
-// .menu-item.active a {
-//   color: white; /* Make the link white when the menu item is active */
-// }
-
-// /* Expandable Submenu (appears directly below the parent item) */
-// .submenu {
-//   list-style-type: none;
-//   padding-left: 20px;
-//   margin-top: 5px; /* Space between parent and submenu */
-//   display: none; /* Hide submenu by default */
-//   position: absolute; /* Position submenu relative to parent */
-//   top: 100%; /* Position it right below the parent item */
-//   left: 0;
-//   width: 100%; /* Ensure submenu spans the full width of the parent */
-//   background-color: white; /* Set background color of submenu to white */
-//   color: black; /* Set text color of submenu items to black */
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
-//   padding: 10px 0; /* Padding for submenu items */
-//   z-index: 10; /* Ensure the submenu is above other elements */
-// }
-
-// /* Show submenu when the parent item is active */
-// .menu-item.active .submenu {
-//   display: block; /* Show submenu when the parent is active */
-// }
-
-// .submenu li {
-//   padding: 10px;
-//   font-size: 14px;
-// }
-
-// .submenu li a {
-//   color: black; /* Ensure submenu links are black */
-//   text-decoration: none;
-// }
-
-// .submenu li a:hover {
-//   background-color: #8e44ad; /* Highlight submenu items on hover */
-//   color: white; /* Change link color to white when hovered */
-// }
-
-// /* Dropdown icon */
-// .dropdown-icon {
-//   margin-left: auto;
-//   font-size: 16px;
-// }
-
-// /* Responsive for smaller screens */
-// @media (max-width: 768px) {
-//   .sidebar {
-//     width: 60px;
-//   }
-
-//   .sidebar-menu .menu-item {
-//     padding: 10px;
-//     font-size: 14px;
-//     text-align: center;
-//   }
-
-//   .sidebar-logo {
-//     width: 50px;
-//   }
-
-//   .submenu {
-//     padding-left: 0;
-//   }
-// }
-
-
-.example-container {
-  height: 500px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
-.example-sidenav-content {
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
   display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-.example-sidenav {
-   user-select: none;
-}
-.full-width {
-  width: 100%;
-}
-.menu-button {
-  transition: 300ms ease-in-out;
-  transform: rotate(0deg);
-}
-.menu-button.rotated {
-  transform: rotate(180deg);
-}
-.submenu {
-  overflow-y: hidden;
-  transition: transform 300ms ease;
-  transform: scaleY(0);
-  transform-origin: top;
-  padding-left: 30px;
-}
-.submenu.expanded {
-  transform: scaleY(1);
-}
+  flex-direction: column;
 
+  .sidebar-header {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .sidebar-logo {
+    max-width: 80%;
+    max-height: 100px;
+    object-fit: contain;
+  }
+
+  .menu-item {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .menu-item:hover {
+    background-color: #221340;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 12px;
+    padding: 8px 12px;
+  }
+
+  .arrow {
+    transition: transform 0.3s;
+  }
+
+  .arrow.open {
+    transform: rotate(90deg);
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 20px;
+    background-color: #ffffff;
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  li {
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  li:hover {
+    background-color: white;
+  }
+}

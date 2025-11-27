@@ -3,80 +3,21 @@
     <img src="images/omnicor_logo.png" alt="Logo" class="sidebar-logo" />
   </div>
 
-  <div class="sidebar-menu">
-    <!-- <ul>
-      <li class="menu-item" [class.active]="activeItem === 'dashboard'" (click)="toggleMenu('dashboard')">
-        <i class="material-icons icon">dashboard</i>
-        <a href="#">Dashboard</a>
-        <i class="material-icons dropdown-icon" *ngIf="activeItem === 'dashboard'">expand_less</i>
-        <i class="material-icons dropdown-icon" *ngIf="activeItem !== 'dashboard'">expand_more</i>
+  <ul>
+    <li *ngFor="let item of menuItems" (click)="toggleSubMenu(item)">
+      <div class="menu-item">
+        <span>{{ item.name }}</span>
 
-        <ul class="submenu" *ngIf="activeItem === 'dashboard'">
-          <li><a href="#">User Overview</a></li>
-          <li><a href="#">Login Activity</a></li>
-          <li><a href="#">MFA & OTP Activity</a></li>
-          <li><a href="#">Security Alerts & Account</a></li>
-        </ul>
-      </li>
+        <mat-icon *ngIf="item.subMenu" [ngClass]="{ 'open': item.expanded }">
+          {{ item.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
+        </mat-icon>
+      </div>
 
-      <li class="menu-item" [class.active]="activeItem === 'login-activity'" (click)="setActive('login-activity')">
-        <i class="material-icons icon">security</i>
-        <a href="#">Login Activity</a>
-      </li>
-
-      <li class="menu-item" [class.active]="activeItem === 'service-requests'" (click)="setActive('service-requests')">
-        <i class="material-icons icon">support</i>
-        <a href="#">Service Requests</a>
-      </li>
-
-      <li class="menu-item" [class.active]="activeItem === 'product-hub'" (click)="setActive('product-hub')">
-        <i class="material-icons icon">store</i>
-        <a href="#">Product Hub</a>
-      </li>
-
-      <li class="menu-item" [class.active]="activeItem === 'admin-center'" (click)="setActive('admin-center')">
-        <i class="material-icons icon">settings</i>
-        <a href="#">Admin Center</a>
-      </li>
-
-      <li class="menu-item" [class.active]="activeItem === 'offers-discounts'" (click)="setActive('offers-discounts')">
-        <i class="material-icons icon">tag</i>
-        <a href="#">Offers & Discounts</a>
-      </li>
-    </ul> -->
-
-
-    <mat-sidenav-container class="example-container" autosize>
-      <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
-        (mouseleave)="mouseleave()">
-        <mat-nav-list>
-          <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
-            <span class="full-width" *ngIf="isExpanded || isShowing">Parent Menu</span>
-            <mat-icon mat-list-icon>home</mat-icon>
-            <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}"
-              *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-          </mat-list-item>
-          <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-            <a mat-list-item href="...">Submenu Item 1</a>
-            <a mat-list-item href="...">Submenu Item 2</a>
-            <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
-              <span class="full-width" *ngIf="isExpanded || isShowing">Nested Menu</span>
-              <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}"
-                *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-            </mat-list-item>
-            <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
-              <mat-list-item>SubSubmenu Item 1</mat-list-item>
-              <mat-list-item>SubSubmenu Item 2</mat-list-item>
-            </div>
-          </div>
-        </mat-nav-list>
-        <mat-nav-list>
-        </mat-nav-list>
-      </mat-sidenav>
-
-
-
-    </mat-sidenav-container>
-
-  </div>
+      <ul *ngIf="item.expanded">
+        <li *ngFor="let subItem of item.subMenu">
+          <a [routerLink]="subItem.link">{{ subItem.name }}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>
