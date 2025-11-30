@@ -1,1 +1,39 @@
-<p>dashboard-user-overview works!</p>
+<mat-card class="chart-card">
+  <mat-card-header>
+    <mat-card-title>User Growth Trend</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <canvas baseChart [datasets]="lineChartData.datasets" [labels]="lineChartData.labels" [options]="lineChartOptions"
+      [type]="'line'" width="1100" height="300">
+    </canvas>
+  </mat-card-content>
+</mat-card>
+
+<div class="chart-container-wrapper">
+  <mat-card class="chart-card">
+    <mat-card-header>
+      <mat-card-title>Users Over Time</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <canvas baseChart [datasets]="barChartData.datasets" [labels]="barChartData.labels" [options]="barChartOptions"
+        [type]="'bar'">
+      </canvas>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="chart-card">
+    <mat-card-header>
+      <mat-card-title>User Distribution</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="position: relative; width: 100%; height: 100%; max-width: 400px; margin: auto;">
+        <canvas id="myDoughnutChart" baseChart [datasets]="doughnutChartData.datasets"
+          [labels]="doughnutChartData.labels" [options]="doughnutChartOptions" [type]="'doughnut'">
+        </canvas>
+        <div class="center-text">8,943
+          <p class="active_users">Active Users</p>
+        </div>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
