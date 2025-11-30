@@ -1,0 +1,310 @@
+.chart-card {
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.chart-container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.chart-container-wrapper mat-card {
+    flex: 1;
+    padding: 10px;
+    margin: 0 10px;
+    max-width: 50%;
+}
+
+mat-card-header {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+mat-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+mat-card-content {
+    padding: 20px 0;
+}
+
+h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    /* Adjust height as needed */
+    max-width: 100%;
+    margin: auto;
+}
+
+.center-text {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.active_users {
+    font-size: 14px;
+    font-weight: 400;
+    color: #687380;
+
+}
+
+.user-overview {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f5f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+
+    h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    .stats-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .stat-card-newusers {
+        background: linear-gradient(90deg, #ffffff, #FAF2D4);
+        /* Left to right gradient */
+        border-radius: 24px;
+        padding: 24px;
+
+        // padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        max-width: 250px;
+        text-align: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-title {
+
+
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #687380;
+            line-height: 20px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #221340;
+            margin-top: 24px;
+            text-align: start;
+
+        }
+
+        .stat-change {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+            border: 1px solid #ACE5BE;
+            border-radius: 20px;
+            background: white;
+            padding: 6px 10px;
+
+            mat-icon {
+                color: green; // default color
+                margin-right: 5px;
+            }
+
+            span {
+                font-weight: bold;
+            }
+
+            &.negative mat-icon {
+                color: red;
+            }
+        }
+    }
+
+    .stat-card {
+        background: linear-gradient(90deg, #ffffff, #e0d4fa);
+        /* Left to right gradient */
+        border-radius: 24px;
+        padding: 24px;
+
+        // padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        max-width: 250px;
+        text-align: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-title {
+
+
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #687380;
+            line-height: 20px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #221340;
+            margin-top: 24px;
+            text-align: start;
+
+        }
+
+        .stat-change {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+            border: 1px solid #ACE5BE;
+            border-radius: 20px;
+            background: white;
+            padding: 6px 10px;
+
+            mat-icon {
+                color: green; // default color
+                margin-right: 5px;
+            }
+
+            span {
+                font-weight: bold;
+            }
+
+            &.negative mat-icon {
+                color: red;
+            }
+        }
+    }
+
+    .stat-card-activeusers {
+        background: linear-gradient(90deg, #ffffff, #CEF2D9);
+        /* Left to right gradient */
+        border-radius: 24px;
+        padding: 24px;
+
+        // padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        max-width: 250px;
+        text-align: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-title {
+
+
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #687380;
+            line-height: 20px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #221340;
+            margin-top: 24px;
+            text-align: start;
+
+        }
+
+        .stat-change {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+            border: 1px solid #ACE5BE;
+            border-radius: 20px;
+            background: white;
+            padding: 6px 10px;
+
+            mat-icon {
+                color: green; // default color
+                margin-right: 5px;
+            }
+
+            span {
+                font-weight: bold;
+            }
+
+            &.negative mat-icon {
+                color: red;
+            }
+        }
+    }
+}
+
+.bottom-img {
+    display: flex;
+    text-align: start;
+    margin-top: 15px;
+
+    img {
+        padding-right: 10px
+    }
+
+    span {
+        padding-right: 10px;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}

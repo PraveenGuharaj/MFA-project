@@ -96,7 +96,7 @@ export class DbxSidebar {
       subMenu: [
         { name: 'User Overview', link: '/dashboard/user-overview' },
         { name: 'Login Activity', link: '/dashboard/login-activity' },
-        { name: 'MFA & OTP Activity', link: '/login-activity' },
+        { name: 'MFA & OTP Activity', link: '/dashboard/mfa-otp-activity' },
         { name: 'Security Alerts & Account', link: '/login-activity' },
         { name: 'Session Metrics', link: '/login-activity' },
         { name: 'Geographic Metrics', link: '/login-activity' },
