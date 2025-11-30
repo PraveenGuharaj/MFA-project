@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';  // Importing BaseChartDirective for standalone components
 import { Chart as ChartJS } from 'chart.js';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 // Register necessary components
 ChartJS.register(
@@ -27,7 +28,8 @@ ChartJS.register(
   imports: [
     CommonModule,
     BaseChartDirective,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   templateUrl: './dashboard-user-overview.html',
   styleUrls: ['./dashboard-user-overview.scss'],

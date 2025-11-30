@@ -6,16 +6,23 @@
   <ul>
     <li *ngFor="let item of menuItems" (click)="toggleSubMenu(item)">
       <div class="menu-item">
-        <span>{{ item.name }}</span>
+        <!-- Use click for main menu items -->
+        <span (click)="selectMenu(item.name, 'main', item.link)">
+          {{ item.name }}
+        </span>
 
+        <!-- Show submenu icon if the item has a submenu -->
         <mat-icon *ngIf="item.subMenu" [ngClass]="{ 'open': item.expanded }">
           {{ item.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
         </mat-icon>
       </div>
 
-      <ul *ngIf="item.expanded">
+      <!-- Show submenu only if the item has one and is expanded -->
+      <ul *ngIf="item.subMenu && item.expanded">
         <li *ngFor="let subItem of item.subMenu">
-          <a [routerLink]="subItem.link">{{ subItem.name }}</a>
+          <a (click)="selectMenu(subItem.name, 'submenu', subItem.link)">
+            {{ subItem.name }}
+          </a>
         </li>
       </ul>
     </li>

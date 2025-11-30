@@ -1,9 +1,11 @@
 <!-- Top Section -->
 <div class="header-top">
   <div class="dashboard-title">
-    <p>Dashboard</p>
-    <mat-icon>chevron_right</mat-icon>
-    <span class="header-title" style="font-weight:700;">Product Hub</span>
+    <p>Dashboard</p> <!-- This title will dynamically change -->
+    <mat-icon *ngIf="isProductHub">chevron_right</mat-icon>
+    <span class="header-title" style="font-weight:700;" *ngIf="isProductHub">
+      Product Hub
+    </span>
   </div>
   <div class="header-icons">
     <!-- Search Bar -->
@@ -13,24 +15,46 @@
     </div>
     <!-- Notification Icon -->
     <div class="user_profile">
-
-
       <img src="images/notification.png" class="notification_icon">
       <img src="images/user_profile.png">
     </div>
   </div>
 </div>
 
-
+<!-- Bottom Section -->
+<!-- Bottom Section -->
 <div class="header-bottom">
   <div class="tabs">
-    <button class="tab-sub-product " [ngClass]="{'tab-button active': !subProduct}" (click)="retailProduct(false)"><img
-        src="images/retail_product.png" class="pr-10">Retail Product</button>
-    <button class="tab-sub-product " [ngClass]="{'tab-button active': subProduct}" (click)="subProductModel(true)"><img
-        src="images/sub_product.png" class="pr-10">Sub Product</button>
-  </div>
-  <div class="actions">
+    <!-- User Overview Tabs -->
+    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
+      (click)="setActiveTab('all')">
+      <img src="images/retail_product.png" class="pr-10">ALL
+    </button>
 
+    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'web'}" *ngIf="!isProductHub"
+      (click)="setActiveTab('web')">
+      <img src="images/sub_product.png" class="pr-10">Web
+    </button>
+
+    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'mobile'}" *ngIf="!isProductHub"
+      (click)="setActiveTab('mobile')">
+      <img src="images/sub_product.png" class="pr-10">Mobile
+    </button>
+
+    <!-- Product Hub Tabs -->
+    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retail'}" *ngIf="isProductHub"
+      (click)="setActiveTab('retail')" (click)="retailProduct(false)">
+      <img src="images/retail_product.png" class="pr-10">Retail Product
+    </button>
+
+    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}" *ngIf="isProductHub"
+      (click)="setActiveTab('sub')" (click)="subProductModel(true)">
+      <img src="images/sub_product.png" class="pr-10">Sub Product
+    </button>
+  </div>
+
+
+  <div class="actions" *ngIf="isProductHub">
     <button class="retail_product " *ngIf="!subProduct" (click)="openModal()"> <img src="images/plus-mini.png">Add
       Retail Product</button>
     <button class="retail_product " *ngIf="subProduct" (click)="openSubModal()"> <img src="images/plus-mini.png">Add Sub

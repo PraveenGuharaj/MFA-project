@@ -11,6 +11,9 @@ import { MerchantOfferManagement } from './component/mechant/merchant-offer-mana
 import { MerchantSetting } from './component/mechant/merchant-setting/merchant-setting';
 import { MerchantProduct } from './component/mechant/merchant-product/merchant-product';
 import { Dashboard } from './component/dashboard/dashboard/dashboard';
+import { DashboardUserOverview } from './component/dashboard/dashboard-user-overview/dashboard-user-overview';
+import { DashboardProductHub } from './component/dashboard/dashboard-product-hub/dashboard-product-hub';
+import { DashboardLoginActivity } from './component/dashboard/dashboard-login-activity/dashboard-login-activity';
 
 export const routes: Routes = [
   {
@@ -18,7 +21,18 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
-  { path: 'dashboard', component: Dashboard },
+  {
+    path: 'dashboard',
+    component: Dashboard,
+    children: [
+      { path: 'user-overview', component: DashboardUserOverview },
+      { path: 'product-hub', component: DashboardProductHub },
+      { path: 'login-activity', component: DashboardLoginActivity },
+      { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
+    ]
+  },
+  // { path: '**', redirectTo: '' },
+
 
   {
     path: '',
@@ -64,7 +78,5 @@ export const routes: Routes = [
 
       { path: '', redirectTo: 'merchants', pathMatch: 'full' }
     ]
-  }
-
-
+  },
 ];

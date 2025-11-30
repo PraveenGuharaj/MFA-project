@@ -1,11 +1,13 @@
+<!-- dashboard.html -->
 <div class="dashboard-container">
-  <!-- Sidebar -->
-  <app-dbx-sidebar></app-dbx-sidebar>
+  <app-dbx-sidebar (menuChanged)="onMenuChanged($event)"></app-dbx-sidebar>
 
-  <!-- Main Content -->
   <div class="main-content">
-    <app-dbx-header (productTypeChanged)="onProductTypeChanged($event)"></app-dbx-header>
-    <app-dashboard-user-overview></app-dashboard-user-overview>
-    <!-- <app-dashboard-product-hub [subProduct]="subProduct"></app-dashboard-product-hub> -->
+    <app-dbx-header [pageTitle]="headerTitle" [headerTabs]="headerTabs" [activeTab]="activeTab"
+      [isProductHub]="isProductHub" (productTypeChanged)="onProductTypeChanged($event)">
+    </app-dbx-header>
+
+
+    <router-outlet></router-outlet>
   </div>
 </div>
