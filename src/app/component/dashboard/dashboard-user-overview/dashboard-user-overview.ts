@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartData, ChartOptions, CategoryScale, LinearScale, BarController, BarElement, DoughnutController, ArcElement, LineController, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { ChartData, ChartOptions, CategoryScale, LinearScale, BarController, BarElement, DoughnutController, ArcElement, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import { CommonModule } from '@angular/common';
-import { BaseChartDirective } from 'ng2-charts';  // Importing BaseChartDirective for standalone components
+import { BaseChartDirective } from 'ng2-charts';
 import { Chart as ChartJS } from 'chart.js';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +19,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 @Component({
@@ -35,29 +36,6 @@ ChartJS.register(
   styleUrls: ['./dashboard-user-overview.scss'],
 })
 export class DashboardUserOverview implements OnInit {
-  public lineChartData: ChartData<'line'> = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    datasets: [
-      {
-        data: [5000, 6000, 7000, 8000, 8500, 9000, 10000],
-        label: 'Mobile',
-        fill: 'origin',
-        borderColor: 'green',
-        backgroundColor: 'rgba(0, 128, 0, 0.2)',
-        tension: 0.3,
-      },
-      {
-        data: [4000, 5000, 6000, 7000, 7500, 8000, 9000],
-        label: 'Web',
-        fill: 'origin',
-        borderColor: 'purple',
-        backgroundColor: 'rgba(128, 0, 128, 0.2)',
-        tension: 0.3,
-      }
-    ]
-  };
-
-  // User Distribution Doughnut Chart
   public doughnutChartData: ChartData<'doughnut'> = {
     labels: ['Mobile', 'Web'],
     datasets: [
@@ -127,26 +105,16 @@ export class DashboardUserOverview implements OnInit {
 
 
   // Bar and Line Chart Options
-  public lineChartOptions: ChartOptions | any = {
-    responsive: true,
-    scales: {
-      x: { type: 'category', beginAtZero: true },
-      y: { type: 'linear', beginAtZero: true }
-    },
-    plugins: {
-      tooltip: { enabled: true, mode: 'nearest', intersect: false }
-    }
-  };
 
   // Bar Chart Options
   public barChartOptions: ChartOptions | any = {
     responsive: true,
     scales: {
       x: {
-        beginAtZero: true, // Ensure the x-axis starts at zero
+        beginAtZero: true,
         ticks: {
           font: {
-            size: 14 // Font size for x-axis labels
+            size: 14
           }
         }
       },
@@ -174,6 +142,82 @@ export class DashboardUserOverview implements OnInit {
         enabled: true,
         mode: 'nearest',
         intersect: false
+      }
+    }
+  };
+
+  public growthTrendData: ChartData<'line'> = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [
+      {
+        data: [2000, 3000, 2500, 4000, 3500, 5000, 6000],
+        label: 'Mobile',
+        borderColor: '#14CC4C',
+        backgroundColor: 'rgba(20, 204, 76, 0.2)',
+        fill: 'origin',
+        tension: 0.4,
+        pointBackgroundColor: '#14CC4C',
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        borderWidth: 2,
+      },
+      {
+        data: [9000, 9500, 8000, 9800, 9200, 11000, 12000],
+        label: 'Web',
+        borderColor: '#6017EB',
+        backgroundColor: 'rgba(96, 23, 235, 0.2)',
+        fill: 'origin',
+        tension: 0.4,
+        pointBackgroundColor: '#6017EB',
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        borderWidth: 2,
+      }
+    ]
+  };
+
+  // Chart Options for User Growth Trend
+  public growthTrendOptions: ChartOptions | any = {
+    responsive: true,
+    scales: {
+      x: {
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 14
+          }
+        }
+      },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 14
+          },
+          stepSize: 3000,
+          max: 12000,
+          min: 0
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 14
+          }
+        }
+      },
+      tooltip: {
+        enabled: true,
+        mode: 'nearest',
+        intersect: false,
+        callbacks: {
+          label: function (tooltipItem: any) {
+            return tooltipItem.raw;
+          }
+        }
       }
     }
   };

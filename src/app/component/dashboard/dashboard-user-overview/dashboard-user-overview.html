@@ -46,8 +46,8 @@
     <mat-card-title>User Growth Trend</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <canvas baseChart [datasets]="lineChartData.datasets" [labels]="lineChartData.labels" [options]="lineChartOptions"
-      [type]="'line'" width="1100" height="300">
+    <canvas baseChart [datasets]="growthTrendData.datasets" [labels]="growthTrendData.labels"
+      [options]="growthTrendOptions" [type]="'line'" height="100">
     </canvas>
   </mat-card-content>
 </mat-card>

@@ -35,130 +35,6 @@ ChartJS.register(
 })
 export class DashboardLoginActivity {
 
-  public barChartData: ChartData<'bar'> = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // Y-Axis: Days of the week
-    datasets: [
-      {
-        label: 'Users Over Time',
-        data: [6500, 8000, 5500, 6000, 7000, 3000, 6000],  // Data for each day
-        backgroundColor: (ctx: any) => {
-          const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 400);
-          gradient.addColorStop(0, '#E0D4FA');
-          gradient.addColorStop(1, '#9A6DFF');
-          return gradient;  // Gradient for each bar
-        },
-        borderColor: '#9A6DFF',
-        borderWidth: 1,
-        barThickness: 20,  // Adjust bar thickness
-        borderRadius: 10,  // Smooth edges
-      }
-    ]
-  };
-
-  // Bar Chart Options for Horizontal Bar Chart
-  public barChartOptions: ChartOptions | any = {
-    responsive: true,
-    indexAxis: 'y',  // Horizontal bars (y-axis for labels)
-    scales: {
-      x: {
-        beginAtZero: true,  // Ensure the x-axis starts at zero
-        ticks: {
-          font: {
-            size: 14  // Font size for x-axis labels
-          },
-          stepSize: 3000,  // Set step size to match 0, 3000, 6000, 9000, 12000
-          max: 12000,  // Maximum value for x-axis
-        }
-      },
-      y: {
-        beginAtZero: true,  // Ensure the y-axis starts at zero
-        ticks: {
-          font: {
-            size: 14  // Font size for y-axis labels
-          }
-        }
-      }
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 14  // Font size for the legend
-          }
-        }
-      },
-      tooltip: {
-        enabled: true,
-        mode: 'nearest',
-        intersect: false
-      }
-    }
-  };
-
-  public lineChartData: ChartData<'line'> = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // X-Axis: Days of the week
-    datasets: [
-      {
-        data: [1200, 1500, 1000, 2000, 1300, 900, 1000],  // Daily login counts
-        label: 'Logins',
-        borderColor: '#6B52D4',  // Purple color for the line
-        backgroundColor: 'rgba(107, 82, 212, 0.2)', // Light purple gradient for the line fill
-        fill: 'origin',  // Fill under the line
-        tension: 0.4,  // Smooth curve for the line
-        pointBackgroundColor: '#6B52D4',  // Purple color for the points
-        pointRadius: 6,  // Larger points
-        pointHoverRadius: 8,  // Larger on hover
-      }
-    ]
-  };
-
-  // Line Chart Options for Daily Login Trend
-  public lineChartOptions: ChartOptions | any = {
-    responsive: true,
-    scales: {
-      x: {
-        beginAtZero: true,
-        ticks: {
-          font: {
-            size: 14
-          }
-        }
-      },
-      y: {
-        beginAtZero: true,
-        ticks: {
-          font: {
-            size: 14
-          },
-          stepSize: 3000,  // Step size for y-axis labels (0, 3000, 6000, 9000, 12000)
-          max: 12000,      // Ensure that the maximum value is 12000
-          min: 0,          // Start from 0
-        }
-      }
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 14
-          }
-        }
-      },
-      tooltip: {
-        enabled: true,
-        mode: 'nearest',
-        intersect: false,
-        callbacks: {
-          label: function (tooltipItem: any) {
-            return tooltipItem.raw; // Show the actual value as tooltip label
-          }
-        }
-      }
-    }
-  };
-
   public doughnutChartData: ChartData<'doughnut'> = {
     labels: ['Successful', 'Failed'],
     datasets: [
@@ -203,11 +79,148 @@ export class DashboardLoginActivity {
     }
   };
 
+  public mfaChartData: ChartData<'line'> = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // X-Axis: Days of the week
+    datasets: [
+      {
+        data: [2000, 3000, 2500, 4000, 3500, 5000, 6000],  // Mobile usage data
+        label: 'Mobile',
+        borderColor: '#14CC4C',  // Green color for the mobile line
+        backgroundColor: 'rgba(20, 204, 76, 0.2)',  // Light green background
+        fill: 'origin',
+        tension: 0.4,
+        pointBackgroundColor: '#14CC4C',  // Green points
+        pointRadius: 6,
+        pointHoverRadius: 8
+      },
+      {
+        data: [9000, 9500, 8000, 9800, 9200, 11000, 12000],  // Web usage data
+        label: 'Web',
+        borderColor: '#9A6DFF',  // Purple color for the web line
+        backgroundColor: 'rgba(154, 109, 255, 0.2)',  // Light purple background
+        fill: 'origin',
+        tension: 0.4,
+        pointBackgroundColor: '#9A6DFF',  // Purple points
+        pointRadius: 6,
+        pointHoverRadius: 8
+      }
+    ]
+  };
+
+  public mfaChartOptions: ChartOptions | any = {
+    responsive: true,
+    scales: {
+      x: {
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 14
+          }
+        }
+      },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 14
+          },
+          stepSize: 3000,  // Step size for y-axis labels (0, 3000, 6000, 9000, 12000)
+          max: 12000,      // Ensure that the maximum value is 12000
+          min: 0           // Start from 0
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 14
+          }
+        }
+      },
+      tooltip: {
+        enabled: true,
+        mode: 'nearest',
+        intersect: false,
+        callbacks: {
+          label: function (tooltipItem: any) {
+            return tooltipItem.raw; // Show the actual value as tooltip label
+          }
+        }
+      }
+    }
+  };
 
 
 
+  public barChartData: ChartData<'bar'> = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [
+      {
+        label: 'Web',
+        data: [3000, 6000, 5500, 7000, 9200, 6500, 3000],
+        backgroundColor: this.createGradient('#6017EB', '#AD8DEB'),
+        borderWidth: 0
+      },
+      {
+        label: 'Mobile',
+        data: [2000, 3000, 2500, 4000, 3500, 5000, 6000],
+        backgroundColor: this.createGradient('#14CC4C', '#8DEBA9'),
+        borderWidth: 0
+      }
+    ]
+  };
+
+  public barChartOptions: ChartOptions<'bar'> = {
+    responsive: true,
+    indexAxis: 'y',
+    scales: {
+      x: {
+        stacked: true,
+        beginAtZero: true,
+        max: 12000,
+        ticks: {
+          stepSize: 3000,
+          font: { size: 14 }
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        stacked: true,
+        ticks: {
+          font: { size: 14 }
+        },
+        grid: {
+          display: false
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: { font: { size: 14 } }
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: (tooltipItem) => `${tooltipItem.dataset.label}: ${tooltipItem.raw}`
+        }
+      }
+    }
+  };
 
 
+  // Gradient helper
+  createGradient(startColor: string, endColor: string): CanvasGradient {
+    const ctx = document.createElement('canvas').getContext('2d');
+    const gradient = ctx?.createLinearGradient(0, 0, 400, 0);
+    gradient?.addColorStop(0, startColor);
+    gradient?.addColorStop(1, endColor);
+    return gradient!;
+  }
 
   constructor() { }
 
@@ -227,4 +240,5 @@ export class DashboardLoginActivity {
     // Set the gradients to the chart data
     this.doughnutChartData.datasets[0].backgroundColor = [gradientSuccess, gradientFailure];
   }
+
 }
