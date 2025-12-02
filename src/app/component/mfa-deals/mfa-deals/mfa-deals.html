@@ -1,22 +1,21 @@
-<mat-toolbar color="primary" class="mfa-header">
+<!-- <mat-toolbar color="primary" class="mfa-header">
    <span>Deals</span>
 
    <button mat-raised-button color="accent" class="add-deals">
       <mat-icon>add</mat-icon>
       Add deals
    </button>
-</mat-toolbar>
+</mat-toolbar> -->
 
-<div>
+<!-- <div>
    <button matButton="elevated" (click)="pipelineButton('Pipeline')"
       [ngClass]=" {pipelineActive: headerName ==='Pipeline'} ">Pipeline</button>
    <button matButton="elevated" class="executed-title" (click)="pipelineButton('Executed')"
       [ngClass]=" {pipelineActive: headerName ==='Executed'}">Executed</button>
-</div>
+</div> -->
 
-<div class="dashboard-grid">
+<!-- <div class="dashboard-grid">
 
-   <!-- SUMMARY CARD -->
    <div class="card summary-card">
       <div class="card-title">Summary</div>
 
@@ -32,7 +31,6 @@
       </div>
    </div>
 
-   <!-- SCORE -->
    <div class="card chart-card">
       <div class="card-title">Score</div>
 
@@ -50,13 +48,11 @@
             <div class="legend">
                <div *ngFor="let item of scoreChartData" class="score-legend-row">
 
-                  <!-- LINE 1 -->
                   <div class="score-legend-line1">
                      <span class="score-legend-dot" [style.background]="item.color"></span>
                      <span class="score-legend-label">{{ item.name }}</span>
                   </div>
 
-                  <!-- LINE 2 -->
                   <div class="score-legend-line2">
                      <span class="score-legend-value">{{ item.value }}</span>
                   </div>
@@ -69,7 +65,6 @@
       </div>
    </div>
 
-   <!-- STAGES -->
    <div class="card chart-card">
       <div class="card-title">Stages</div>
 
@@ -90,7 +85,6 @@
       </div>
    </div>
 
-   <!-- PRIORITY -->
    <div class="card chart-card">
       <div class="card-title">Priority</div>
 
@@ -111,14 +105,14 @@
       </div>
    </div>
 
-</div>
+</div> -->
 
-<div class="view-switch">
+<!-- <div class="view-switch">
    <button mat-button (click)="activeView = 'table'" [class.active]="activeView === 'table'">Table</button>
 
    <button mat-button (click)="activeView = 'board'" [class.active]="activeView === 'board'">Board</button>
-</div>
-<div class="top-bar">
+</div> -->
+<!-- <div class="top-bar">
    <mat-tab-group>
       <mat-tab label="My directs"></mat-tab>
       <mat-tab label="All directs"></mat-tab>
@@ -195,11 +189,10 @@
 
 
    </div>
-</div>
+</div> -->
 
-<table mat-table [dataSource]="dataSource" matSort class="main-table">
+<!-- <table mat-table [dataSource]="dataSource" matSort class="main-table">
 
-   <!-- Checkbox -->
    <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
          <mat-checkbox [(ngModel)]="allSelected" (change)="toggleAllRows()"></mat-checkbox>
@@ -209,7 +202,6 @@
       </td>
    </ng-container>
 
-   <!-- Name -->
    <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef class="name-title" mat-sort-header="name">
          <div class="header-cell">Name <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -217,7 +209,6 @@
       <td mat-cell *matCellDef="let row">{{ row.name }}</td>
    </ng-container>
 
-   <!-- Created By -->
    <ng-container matColumnDef="createdBy">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="createdBy">
          <div class="header-cell">Created by <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -230,7 +221,6 @@
       </td>
    </ng-container>
 
-   <!-- Created Date -->
    <ng-container matColumnDef="createdDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate">
          <div class="header-cell">Created date <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -238,7 +228,6 @@
       <td mat-cell *matCellDef="let row">{{ row.createdDate }}</td>
    </ng-container>
 
-   <!-- Size -->
    <ng-container matColumnDef="size">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="size">
          <div class="header-cell">Size <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -246,7 +235,6 @@
       <td mat-cell *matCellDef="let row">{{ row.size }}</td>
    </ng-container>
 
-   <!-- Assigned To -->
    <ng-container matColumnDef="assignedTo">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="assignedTo">
          <div class="header-cell">Assigned to <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -259,7 +247,6 @@
       </td>
    </ng-container>
 
-   <!-- Stage -->
    <ng-container matColumnDef="stage">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="stage">
          <div class="header-cell">Stage <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -271,7 +258,6 @@
       </td>
    </ng-container>
 
-   <!-- Priority -->
    <ng-container matColumnDef="priority">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="priority">
          <div class="header-cell">Priority <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -281,7 +267,6 @@
       </td>
    </ng-container>
 
-   <!-- Next call -->
    <ng-container matColumnDef="nextCall">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="nextCall">
          <div class="header-cell">Next call date <mat-icon class="filter-icon">arrow_drop_up</mat-icon></div>
@@ -292,9 +277,9 @@
    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-</table>
+</table> -->
 
-<div class="custom-paginator-wrapper">
+<!-- <div class="custom-paginator-wrapper">
    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25" showFirstLastButtons>
    </mat-paginator>
-</div>
+</div> -->

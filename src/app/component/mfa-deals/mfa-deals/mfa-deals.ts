@@ -3,7 +3,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+// import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
@@ -26,14 +26,14 @@ import { MatTableDataSource } from '@angular/material/table';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    NgxChartsModule,
+    // NgxChartsModule,
     MatPaginatorModule,
     MatCheckboxModule,
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
     MatTabsModule,
-    NgClass,
+    // NgClass,
     MatSelectModule,
     MatMenuModule,
     MatSortModule
