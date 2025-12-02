@@ -43,12 +43,30 @@
 <div class="chart-container-wrapper">
   <mat-card class="chart-card">
     <mat-card-header>
-      <mat-card-title>Users Over Time</mat-card-title>
+      <div class="mat-header">
+        <mat-card-title>
+          Users Over Time</mat-card-title>
+
+        <mat-card-title>
+          <div class="right-side-img">
+            <img src="images/dashboar_mobile.png" class="notification_icon">
+            <span class="header_title">Mobile</span>
+
+            <img src="images/dashboard_web.png" class="notification_icon">
+            <span class="header_title">Web</span>
+          </div>
+        </mat-card-title>
+      </div>
+
     </mat-card-header>
     <mat-card-content>
-      <canvas baseChart [datasets]="barChartData.datasets" [labels]="barChartData.labels" [options]="barChartOptions"
+      <!-- <canvas baseChart [datasets]="barChartData.datasets" [labels]="barChartData.labels" [options]="barChartOptions"
         [type]="'bar'">
+      </canvas> -->
+      <!-- <canvas #myChart></canvas> -->
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" chartType="bar">
       </canvas>
+
     </mat-card-content>
   </mat-card>
   <mat-card class="chart-card">
@@ -56,10 +74,13 @@
       <mat-card-title>Daily Logins Trend</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <canvas baseChart [datasets]="mfaChartData.datasets" [labels]="mfaChartData.labels" [options]="mfaChartOptions"
+      <!-- <canvas baseChart [datasets]="mfaChartData.datasets" [labels]="mfaChartData.labels" [options]="mfaChartOptions"
         [type]="'line'">
-      </canvas>
+      </canvas> -->
+
+
     </mat-card-content>
+
   </mat-card>
 </div>
 
@@ -69,12 +90,24 @@
   </mat-card-header>
   <mat-card-content>
     <div class="chart-wrapper" style="position: relative; width: 100%; height: 100%; max-width: 400px; margin: auto;">
-      <canvas baseChart [datasets]="doughnutChartData.datasets" [labels]="doughnutChartData.labels"
+      <!-- <canvas baseChart [datasets]="doughnutChartData.datasets" [labels]="doughnutChartData.labels"
         [options]="doughnutChartOptions" [type]="'doughnut'">
-      </canvas>
+      </canvas> -->
+
+      <canvas #myDonutChart></canvas>
+
+
+
       <div class="center-text">18324
         <p class="active_users">Successfull</p>
       </div>
+    </div>
+    <div class="left-side-img">
+      <img src="images/green_success.png" class="notification_icon">
+      <span class="header_title">Success</span>
+
+      <img src="images/red_failure.png" class="notification_icon">
+      <span class="header_title">Failure</span>
     </div>
   </mat-card-content>
 </mat-card>

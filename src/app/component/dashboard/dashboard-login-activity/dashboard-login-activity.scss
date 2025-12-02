@@ -292,3 +292,25 @@ h3 {
     }
   }
 }
+
+.mat-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header_title {
+  font-size: 14px;
+  font-weight: 400;
+  color: #221340;
+  padding: 0 8px;
+}
+
+.right-side-img {
+  display: flex;
+  align-items: center;
+}
+
+.left-side-img {
+  display: flex;
+}
