@@ -354,7 +354,7 @@ initializeLineChart() {
             borderWidth: 2, // To make the line more visible
           },
           {
-            data: [6000, 5000, 4000, 6000, 9000], // Updated web data
+            data: [9000, 5000, 8000, 3500, 9000], // Updated web data
             borderColor: '#29CC5A99', // Web line color
             backgroundColor: webGradient, // Web gradient fill
             fill: true, // Enables the gradient fill
