@@ -227,7 +227,6 @@ export class DashboardUserOverview implements OnInit {
     }
   };
 
-  // bar chart
 
   constructor() { }
 
@@ -286,10 +285,11 @@ export class DashboardUserOverview implements OnInit {
     const patternGreen = createSingleDiagonalPattern();
     const patternPurple = createSingleDiagonalPattern();
 
+    // Custom plugin to draw the pattern on the bars and donut chart segments
     const patternPlugin = {
       id: 'patternPlugin',
       beforeDraw: (chart: any) => {
-        const ctx = chart.ctx;
+        const ctx = chart.ctx; // Correctly accessing ctx from the chart instance
 
         // Draw on the bar chart
         chart.data.datasets.forEach((dataset: any, i: number) => {
@@ -301,8 +301,8 @@ export class DashboardUserOverview implements OnInit {
             ctx.fillRect(bar.x - bar.width / 2, bar.y, bar.width, bar.height);
 
             // Draw the pattern overlay on top of the gradient
-            ctx.globalCompositeOperation = 'source-over';
-            ctx.fillStyle = i === 0 ? patternPurple : patternGreen;
+            ctx.globalCompositeOperation = 'source-over'; // Apply pattern on top of gradient
+            ctx.fillStyle = i === 0 ? patternPurple : patternGreen;  // Swap order here
             ctx.fillRect(bar.x - bar.width / 2, bar.y, bar.width, bar.height);
             ctx.restore();
           });
@@ -317,7 +317,7 @@ export class DashboardUserOverview implements OnInit {
             const { x, y, startAngle, endAngle, outerRadius, innerRadius } = segment;
 
             // Create a pattern for each segment
-            const pattern = i === 0 ? patternPurple : patternGreen;
+            const pattern = i === 0 ? patternPurple : patternGreen; // Select pattern for each section
 
             ctx.save();
             ctx.fillStyle = pattern;
@@ -348,11 +348,11 @@ export class DashboardUserOverview implements OnInit {
             barPercentage: 0.8,  // Adjust bar width
           },
           {
-            label: 'Mobile',
+            label: 'Mobile',  // Now second
             data: [8000, 11000, 9000, 7000, 9500, 7500, 8000],
-            backgroundColor: gradientGreen,
+            backgroundColor: gradientGreen,  // Use gradient as the base color
             borderWidth: 0,
-            borderRadius: [4, 4, 0, 0],
+            borderRadius: [4, 4, 0, 0],  // Top-left and top-right border radius
             barPercentage: 0.8,
           },
         ],
@@ -393,26 +393,26 @@ export class DashboardUserOverview implements OnInit {
       data: {
         labels: ['Mobile', 'Web'],
         datasets: [{
-          data: [50, 50],
-          backgroundColor: [gradientdognutGreen, gradientdognuPurple],
-          borderWidth: 2,
-          borderColor: ['white', 'white'],
+          data: [50, 50],  // Both Mobile and Web are set to 50 each
+          backgroundColor: [gradientdognutGreen, gradientdognuPurple],  // Gradient colors for each section
+          borderWidth: 2,  // Create a gap between segments by adding a border
+          borderColor: ['white', 'white'],  // Set white color between Mobile and Web
         }]
       },
       options: {
         responsive: true,
-        cutout: '60%',
-        rotation: 90,
+        cutout: '60%',  // This creates the "hole" in the middle for the donut chart
+        rotation: 90, // Rotate the donut chart by 180 degrees (half circle)
         plugins: {
           legend: {
-            position: 'top',
+            position: 'top',  // Position of the legend
           },
           tooltip: {
-            enabled: true,
+            enabled: true,  // Show tooltips when hovering over each section
           }
         },
       },
-      plugins: [patternPlugin],
+      plugins: [patternPlugin], // Register the same plugin to apply pattern
     });
 
   }
