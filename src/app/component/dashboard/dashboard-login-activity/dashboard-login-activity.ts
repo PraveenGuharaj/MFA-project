@@ -190,7 +190,7 @@ export class DashboardLoginActivity {
 
 
 
- 
+
   createGradient(startColor: string, endColor: string): CanvasGradient {
     const ctx = document.createElement('canvas').getContext('2d');
     const gradient = ctx?.createLinearGradient(0, 0, 400, 0);
@@ -324,129 +324,126 @@ export class DashboardLoginActivity {
     });
   }
 
-initializeLineChart() {
-  if (this.myLineChartElement && this.myLineChartElement.nativeElement) {
-    const ctxLineChart = this.myLineChartElement.nativeElement.getContext('2d');
-    Chart.register(...registerables);
+  initializeLineChart() {
+    if (this.myLineChartElement && this.myLineChartElement.nativeElement) {
+      const ctxLineChart = this.myLineChartElement.nativeElement.getContext('2d');
+      Chart.register(...registerables);
 
-    // Gradient fill for the mobile and web lines
-    const mobileGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
-    mobileGradient.addColorStop(0, '#6017EB99');
-    mobileGradient.addColorStop(1, '#FFFFFF00');
+      // Gradient fill for the mobile and web lines
+      const mobileGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
+      mobileGradient.addColorStop(0, '#6017EB99');
+      mobileGradient.addColorStop(1, '#FFFFFF00');
 
-    const webGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
-    webGradient.addColorStop(0, '#29CC5A99');
-    webGradient.addColorStop(1, '#FFFFFF00');
+      const webGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
+      webGradient.addColorStop(0, '#29CC5A99');
+      webGradient.addColorStop(1, '#FFFFFF00');
 
-    // Create the line chart
-    const lineChart: any = new Chart(ctxLineChart, {
-      type: 'line',
-      data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],  // Adjusted the labels based on your data size
-        datasets: [
-          {
-            data: [5500, 1500, 3500, 2000, 4000], // Updated mobile data
-            borderColor: '#6017EB99', // Mobile line color
-            backgroundColor: mobileGradient, // Mobile gradient fill
-            fill: true, // Enables the gradient fill
-            tension: 0.4,
-            pointRadius: 0, // Set pointRadius to 0 to remove dots
-            borderWidth: 2, // To make the line more visible
+      // Create the line chart
+      const lineChart: any = new Chart(ctxLineChart, {
+        type: 'line',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],  // Adjusted the labels based on your data size
+          datasets: [
+            {
+              data: [5500, 1500, 3500, 2000, 4000], // Updated mobile data
+              borderColor: '#6017EB99', // Mobile line color
+              backgroundColor: mobileGradient, // Mobile gradient fill
+              fill: true, // Enables the gradient fill
+              tension: 0.4,
+              pointRadius: 0, // Set pointRadius to 0 to remove dots
+              borderWidth: 2, // To make the line more visible
+            },
+            {
+              data: [9000, 5000, 8000, 3500, 9000], // Updated web data
+              borderColor: '#29CC5A99', // Web line color
+              backgroundColor: webGradient, // Web gradient fill
+              fill: true, // Enables the gradient fill
+              tension: 0.4,
+              pointRadius: 0, // Set pointRadius to 0 to remove dots
+              borderWidth: 2, // To make the line more visible
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            tooltip: {
+              enabled: true,  // Keep tooltip enabled
+              callbacks: {
+                // Override the default tooltip title (dataset label) and hide it
+                title: function (tooltipItems) {
+                  return '';  // This removes the dataset label from the tooltip
+                },
+                // Custom label to show only the value
+                label: function (tooltipItem) {
+                  return `${tooltipItem.raw}`;  // Show only the data value
+                }
+              }
+            },
+            legend: {
+              display: false,  // Hides the legend completely (Mobile, Web)
+            }
           },
-          {
-            data: [9000, 5000, 8000, 3500, 9000], // Updated web data
-            borderColor: '#29CC5A99', // Web line color
-            backgroundColor: webGradient, // Web gradient fill
-            fill: true, // Enables the gradient fill
-            tension: 0.4,
-            pointRadius: 0, // Set pointRadius to 0 to remove dots
-            borderWidth: 2, // To make the line more visible
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            enabled: true,  // Keep tooltip enabled
-            callbacks: {
-              // Override the default tooltip title (dataset label) and hide it
-              title: function(tooltipItems) {
-                return '';  // This removes the dataset label from the tooltip
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 14,    // Set the font size for the X-axis
+                  weight: 'normal', // Set the font weight for the X-axis (use 'normal' instead of 400)
+                  family: 'Arial',  // You can customize the font family if needed
+                },
+                color: '#A2A3A5',  // Set the color for the X-axis labels
               },
-              // Custom label to show only the value
-              label: function(tooltipItem) {
-                return `${tooltipItem.raw}`;  // Show only the data value
+              grid: {
+                color: '#E6E6E6',
+              }
+            },
+            y: {
+              ticks: {
+                font: {
+                  size: 14,    // Set the font size for the Y-axis
+                  weight: 'normal', // Set the font weight for the Y-axis (use 'normal' instead of 400)
+                  family: 'Arial',  // You can customize the font family if needed
+                },
+                color: '#A2A3A5',  // Set the color for the Y-axis labels
+                stepSize: 3000,
+                callback: function (value) {
+                  return value; // This ensures the tick values are displayed correctly
+                }
+              },
+              grid: {
+                color: '#E6E6E6',
               }
             }
           },
-          legend: {
-            display: false,  // Hides the legend completely (Mobile, Web)
-          }
-        },
-        scales: {
-          x: {
-            ticks: {
-              font: {
-                size: 14,    // Set the font size for the X-axis
-                weight: 'normal', // Set the font weight for the X-axis (use 'normal' instead of 400)
-                family: 'Arial',  // You can customize the font family if needed
-              },
-              color: '#A2A3A5',  // Set the color for the X-axis labels
-            },
-            grid: {
-              color: '#E6E6E6',
+          onClick: (event: any) => {
+            // Only show dotted line on click
+            const activePoints = lineChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+            if (activePoints.length > 0) {
+              const firstPoint = activePoints[0];
+              this.showDottedLine(firstPoint, event);
             }
-          },
-          y: {
-            ticks: {
-              font: {
-                size: 14,    // Set the font size for the Y-axis
-                weight: 'normal', // Set the font weight for the Y-axis (use 'normal' instead of 400)
-                family: 'Arial',  // You can customize the font family if needed
-              },
-              color: '#A2A3A5',  // Set the color for the Y-axis labels
-              stepSize: 3000,
-              callback: function(value) {
-                return value; // This ensures the tick values are displayed correctly
-              }
-            },
-            grid: {
-              color: '#E6E6E6',
-            }
-          }
-        },
-        onClick: (event: any) => {
-          // Only show dotted line on click
-          const activePoints = lineChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
-          if (activePoints.length > 0) {
-            const firstPoint = activePoints[0];
-            this.showDottedLine(firstPoint, event);
           }
         }
-      }
-    });
+      });
+    }
   }
-}
 
+  showDottedLine(firstPoint: any, event: any) {
+    const ctx = this.myLineChartElement.nativeElement.getContext('2d');
+    const x = event.offsetX;
+    const y = event.offsetY;
 
+    ctx.clearRect(0, 0, this.myLineChartElement.nativeElement.width, this.myLineChartElement.nativeElement.height); // Clear previous dotted lines
 
-showDottedLine(firstPoint: any, event: any) {
-  const ctx = this.myLineChartElement.nativeElement.getContext('2d');
-  const x = event.offsetX;
-  const y = event.offsetY;
-
-  ctx.clearRect(0, 0, this.myLineChartElement.nativeElement.width, this.myLineChartElement.nativeElement.height); // Clear previous dotted lines
-
-  ctx.beginPath();
-  ctx.setLineDash([5, 5]); // Dotted line
-  ctx.moveTo(x, 0);
-  ctx.lineTo(x, this.myLineChartElement.nativeElement.height);
-  ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-  ctx.stroke();
-  ctx.setLineDash([]); // Reset line style
-}
-
+    ctx.beginPath();
+    ctx.setLineDash([5, 5]); // Dotted line
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, this.myLineChartElement.nativeElement.height);
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.stroke();
+    ctx.setLineDash([]); // Reset line style
+  }
 
   createPatternWithBackground(bgColor: string, stripeColor: string) {
     console.log('bgColor', bgColor);
@@ -474,8 +471,6 @@ showDottedLine(firstPoint: any, event: any) {
     return ctx.createPattern(canvas, 'repeat');
   }
 
-
-
   createPattern(color: string) {
     const canvas = document.createElement('canvas');
     canvas.width = 12;
@@ -492,8 +487,6 @@ showDottedLine(firstPoint: any, event: any) {
 
     return ctx.createPattern(canvas, 'repeat');
   }
-
-
 
   initChart() {
     this.barChartData = {
@@ -591,11 +584,6 @@ showDottedLine(firstPoint: any, event: any) {
     // --- 3) Create Pattern ---
     return ctx.createPattern(canvas, 'repeat')!;
   }
-
-
-
-
-
 
   constructor() { }
 
