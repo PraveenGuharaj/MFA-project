@@ -40,7 +40,7 @@ export class DbxSidebar {
         { name: 'Login Activity', link: '/dashboard/login-activity' },
         { name: 'MFA & OTP Activity', link: '/dashboard/mfa-otp-activity' },
         { name: 'Security Alerts & Account', link: '/dashboard/security-account-status' },
-        { name: 'Session Metrics', link: '/login-activity' },
+        { name: 'Session Metrics', link: '/dashboard/session-metrics' },
         { name: 'Geographic Metrics', link: '/login-activity' },
         { name: 'Service Request', link: '/login-activity' },
         { name: 'Transaction Performance', link: '/login-activity' },

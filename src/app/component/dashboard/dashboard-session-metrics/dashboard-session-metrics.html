@@ -1,0 +1,153 @@
+<div class="user-overview">
+    <h2>Session Metrics</h2>
+    <p>Track active sessions, expirations, and linked devices.</p>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-title">
+                <span class="card-title">Currently Logged-in Users</span>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+            <div class="stat-value">342</div>
+            <div class="bottom-img">
+                <img src="images/mobile.png">
+                <span>120</span>
+                <img src="images/global.png">
+                <span>150</span>
+            </div>
+
+        </div>
+
+        <div class="stat-card-newusers">
+            <div class="stat-title">
+                <span class="card-title">Expired Sessions</span>
+                <div class="stat-change">
+                    <img src="images/arrow-down.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+            <div class="stat-value">89</div>
+            <div class="bottom-img">
+                <img src="images/mobile.png">
+                <span>30</span>
+                <img src="images/global.png">
+                <span>40</span>
+            </div>
+
+        </div>
+
+        <div class="stat-card-activeusers">
+            <div class="stat-title">
+                <span class="card-title">Active Devices Linked (MFA)</span>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>0.5%</span>
+                </div>
+            </div>
+            <div class="stat-value">176</div>
+            <div class="bottom-img">
+                <img src="images/mobile.png">
+                <span>50</span>
+                <img src="images/global.png">
+                <span>90</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="chart-container-wrapper">
+    <mat-card class="chart-card">
+        <mat-card-header>
+            <div class="mat-header">
+                <mat-card-title>
+                    Active Sessions</mat-card-title>
+
+                <mat-card-title>
+                    <div class="right-side-img">
+                        <img src="images/dashboar_mobile.png" class="notification_icon">
+                        <span class="header_title">Mobile</span>
+
+                        <img src="images/dashboard_web.png" class="notification_icon">
+                        <span class="header_title">Web</span>
+                    </div>
+                </mat-card-title>
+            </div>
+
+        </mat-card-header>
+        <mat-card-content>
+            <!-- <canvas #myLineChart></canvas> -->
+            <canvas #myBarChart></canvas>
+
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card">
+        <mat-card-header>
+            <div class="mat-header">
+                <mat-card-title>Expired Session</mat-card-title>
+                <div class="right-side-img">
+                    <img src="images/mobile_red.png" class="notification_icon">
+                    <span class="header_title">Mobile</span>
+
+                    <img src="images/globe_yellow.png" class="notification_icon">
+                    <span class="header_title">Web</span>
+                </div>
+            </div>
+
+        </mat-card-header>
+        <mat-card-content>
+            <canvas baseChart [data]="barChartData" [options]="barChartOptions" chartType="bar">
+            </canvas>
+
+        </mat-card-content>
+    </mat-card>
+
+</div>
+<div class="chart-container-wrapper">
+    <mat-card class="chart-card card-size-first">
+        <mat-card-header>
+            <div class="header-cardtitle">
+                <mat-card-title>Sessions Per Day</mat-card-title>
+                <div class="right-side-img">
+                    <img src="images/dashboar_mobile.png" class="notification_icon">
+                    <span class="header_title">Mobile</span>
+
+                    <img src="images/dashboard_web.png" class="notification_icon">
+                    <span class="header_title">Web</span>
+                </div>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas #myLineChart></canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card card-size-second">
+        <mat-card-header>
+            <mat-card-title>Session States Distribution</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas #myDonutChart></canvas>
+
+        </mat-card-content>
+        <div class="left-side-img">
+            <div class="right-side-img ">
+                <img src="images/green_success.png" class="notification_icon">
+                <span class="header_title">Active</span>
+            </div>
+
+            <div class="right-side-img ">
+                <img src="images/completed.png" class="notification_icon">
+                <span class="header_title">Expired</span>
+            </div>
+
+            <div class="right-side-img ">
+                <img src="images/red_failure.png" class="notification_icon">
+                <span class="header_title">Terminated</span>
+            </div>
+        </div>
+    </mat-card>
+</div>

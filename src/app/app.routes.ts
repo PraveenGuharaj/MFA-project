@@ -16,6 +16,7 @@ import { DashboardProductHub } from './component/dashboard/dashboard-product-hub
 import { DashboardLoginActivity } from './component/dashboard/dashboard-login-activity/dashboard-login-activity';
 import { DashboardMfaOtpActivity } from './component/dashboard/dashboard-mfa-otp-activity/dashboard-mfa-otp-activity';
 import { DashboardSercurityAccountStatus } from './component/dashboard/dashboard-sercurity-account-status/dashboard-sercurity-account-status';
+import { DashboardSessionMetrics } from './component/dashboard/dashboard-session-metrics/dashboard-session-metrics';
 
 export const routes: Routes = [
   {
@@ -30,8 +31,9 @@ export const routes: Routes = [
       { path: 'user-overview', component: DashboardUserOverview },
       { path: 'product-hub', component: DashboardProductHub },
       { path: 'login-activity', component: DashboardLoginActivity },
-        { path: 'mfa-otp-activity', component: DashboardMfaOtpActivity },
-        {path:'security-account-status',component:DashboardSercurityAccountStatus},
+      { path: 'mfa-otp-activity', component: DashboardMfaOtpActivity },
+      { path: 'security-account-status', component: DashboardSercurityAccountStatus },
+      { path: 'session-metrics', component: DashboardSessionMetrics },
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },
