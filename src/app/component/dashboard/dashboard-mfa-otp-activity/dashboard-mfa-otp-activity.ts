@@ -28,7 +28,7 @@ ChartJS.register(
   imports: [CommonModule,
     CommonModule,
     MatCardModule,
-    // BaseChartDirective,
+    BaseChartDirective,
     MatIconModule
   ],
   templateUrl: './dashboard-mfa-otp-activity.html',
@@ -36,55 +36,63 @@ ChartJS.register(
 })
 export class DashboardMfaOtpActivity {
   @ViewChild('myLineChart', { static: false }) myLineChartElement!: ElementRef;
+  @ViewChild('myChart', { static: false }) myChartElement!: ElementRef;
+
   public barChartOptions: any = {
-    indexAxis: 'x', // Keep the horizontal bar chart orientation
     responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'x',    // <-- VERTICAL BARS like screenshot
     scales: {
       x: {
         stacked: true,
-        // Set the x-axis to have labels: Mon, Tue, Wed, Thu, Fri, SabarChartOptionst, Sun
+        grid: {
+          display: false               // screenshot has NO vertical grid lines
+        },
         ticks: {
-          // Optional: format the ticks if needed
-          callback: function (value: any) {
-            const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-            return labels[value];
-          }
+          font: { size: 14 },
+          color: "#444"                // same color style
         }
       },
+
       y: {
         stacked: true,
-        // Set the y-axis to show ticks as: 0, 3000, 6000, 9000, 12000
+        min: 0,
+        max: 12000,
         ticks: {
-          // Optional: set the step size for the ticks (to control interval between ticks)
-          stepSize: 3000,
-          max: 12000,
-          min: 0,
-          callback: function (value: any) {
-            return value; // Directly display the value on the y-axis
-          }
+          stepSize: 3000,              // 0, 3000, 6000, 9000, 12000
+          font: { size: 14 },
+          color: "#777"
+        },
+        grid: {
+          color: "#e5e5e5",            // light gray gridlines like screenshot
+          drawBorder: false
         }
+      }
+    },
+
+    plugins: {
+      legend: {
+        display: false                 // screenshot shows no legend
       }
     }
   };
 
   public barChartData: any = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // X-axis labels
     datasets: [
       {
         label: 'Mobile',
-        data: [3000, 6000, 7000, 6500, 2000, 7500, 7200],
-        backgroundColor: (ctx: any) => {
-          return this.createPattern('rgba(118, 0, 255, 0.5)'); // purple stripes
-        },
-        borderRadius: 10,
+        data: [7200, 1500, 4500, 5600, 2300, 4700, 1400],       // purple bottom
+        backgroundColor: () =>
+          this.createStripedGradient('rgba(118,0,255,0.75)', 'rgba(118,0,255,0.75)'),
+        borderRadius: 12
       },
       {
         label: 'Web',
-        data: [2000, 3500, 3000, 3200, 1500, 3800, 3600],
-        backgroundColor: (ctx: any) => {
-          return this.createPattern('rgba(0, 200, 83, 0.5)'); // green stripes
-        },
-        borderRadius: 10,
+        data: [2500, 3000, 3800, 3100, 7000, 3500, 2200],       // green top
+        backgroundColor: () =>
+          this.createStripedGradient('rgba(0,200,83,0.75)', 'rgba(0,200,83,0.75)'),
+        borderRadius: 12
       }
     ]
   };
@@ -230,7 +238,7 @@ export class DashboardMfaOtpActivity {
       datasets: [
         {
           label: 'Mobile',
-          data: [3000, 6000, 7000, 6500, 2000, 7500, 7200],
+          data: [8000, 1500, 4000, 5500, 2000, 4500, 2000],
           backgroundColor: this.createStripedGradient(
             'rgba(173, 141, 235, 1)',
             'rgba(96, 23, 235, 1)'
@@ -239,7 +247,7 @@ export class DashboardMfaOtpActivity {
         },
         {
           label: 'Web',
-          data: [2000, 3500, 3000, 3200, 1500, 3800, 3600],
+          data: [3000, 5500, 6000, 5700, 9000, 3800, 3600],
           backgroundColor: this.createStripedGradient(
             'rgba(141, 235, 169, 1)',
             'rgba(20, 204, 76, 1)'
@@ -250,7 +258,7 @@ export class DashboardMfaOtpActivity {
     };
 
     this.barChartOptions = {
-      indexAxis: 'y',
+      indexAxis: 'x',   // <--- IMPORTANT! This makes the bars vertical
       responsive: true,
       plugins: {
         legend: { display: false }
@@ -259,11 +267,11 @@ export class DashboardMfaOtpActivity {
         x: {
           stacked: true,
           grid: {
-            display: true,
+            display: false,   // screenshot has NO vertical grid lines
             drawBorder: false
           },
           ticks: {
-            color: '#A2A3A5',       // text color
+            color: '#A2A3A5',
             font: {
               size: 14,
               weight: '400'
@@ -273,22 +281,25 @@ export class DashboardMfaOtpActivity {
         },
         y: {
           stacked: true,
-          grid: {
-            display: false,
-            drawBorder: false
-          },
+          min: 0,
+          max: 12000,         // screenshot scale
           ticks: {
-            color: '#A2A3A5',       // text color
+            stepSize: 3000,   // 0, 3000, 6000, 9000, 12000
+            color: '#A2A3A5',
             font: {
-              size: 14,             // font size
-              weight: '400'         // font weight (400, 500, 600, bold)
+              size: 14,
+              weight: '400'
             },
-            padding: 8              // optional: spacing between labels & axis
+            padding: 8
+          },
+          grid: {
+            display: true,     // screenshot has horizontal grid
+            color: '#E5E5E5',
+            drawBorder: false
           }
         }
       }
     };
-
   }
 
   createStripedGradient(baseColor1: string, baseColor2: string) {
@@ -298,7 +309,7 @@ export class DashboardMfaOtpActivity {
 
     const ctx = canvas.getContext('2d')!;
 
-    // --- 1) Create Gradient Background ---
+    // --- Create Gradient Background ---
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
     // gradient.addColorStop(0, baseColor1);
     gradient.addColorStop(1, baseColor2);
@@ -306,7 +317,7 @@ export class DashboardMfaOtpActivity {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // --- 2) Draw White Diagonal Stripes ---
+    // --- Draw White Diagonal Stripes ---
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.30)';
     ctx.lineWidth = 2;
 
@@ -317,16 +328,14 @@ export class DashboardMfaOtpActivity {
       ctx.stroke();
     }
 
-    // --- 3) Create Pattern ---
+    // ---Create Pattern ---
     return ctx.createPattern(canvas, 'repeat')!;
   }
   showDottedLine(firstPoint: any, event: any) {
     const ctx = this.myLineChartElement.nativeElement.getContext('2d');
     const x = event.offsetX;
     const y = event.offsetY;
-
     ctx.clearRect(0, 0, this.myLineChartElement.nativeElement.width, this.myLineChartElement.nativeElement.height); // Clear previous dotted lines
-
     ctx.beginPath();
     ctx.setLineDash([5, 5]); // Dotted line
     ctx.moveTo(x, 0);
@@ -335,6 +344,4 @@ export class DashboardMfaOtpActivity {
     ctx.stroke();
     ctx.setLineDash([]); // Reset line style
   }
-
-
 }
