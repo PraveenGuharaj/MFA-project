@@ -37,6 +37,7 @@ ChartJS.register(
 export class DashboardMfaOtpActivity {
   @ViewChild('myLineChart', { static: false }) myLineChartElement!: ElementRef;
   @ViewChild('myChart', { static: false }) myChartElement!: ElementRef;
+  @ViewChild('myDonutChart', { static: false }) myDonutChartElement!: ElementRef;
 
   public barChartOptions: any = {
     responsive: true,
@@ -124,6 +125,8 @@ export class DashboardMfaOtpActivity {
   ngAfterViewInit() {
     this.initChart();
     this.initializeLineChart();
+    this.initPieChart();
+
   }
 
 
@@ -145,82 +148,73 @@ export class DashboardMfaOtpActivity {
       const lineChart: any = new Chart(ctxLineChart, {
         type: 'line',
         data: {
-          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],  // Adjusted the labels based on your data size
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           datasets: [
             {
-              data: [5500, 1500, 3500, 2000, 4000], // Updated mobile data
-              borderColor: '#6017EB99', // Mobile line color
-              backgroundColor: mobileGradient, // Mobile gradient fill
-              fill: true, // Enables the gradient fill
+              data: [5500, 1500, 3500, 2000, 4000, 3000, 4500],  // 7 values for Mobile
+              borderColor: '#6017EB99',
+              backgroundColor: mobileGradient,
+              fill: true,
               tension: 0.4,
-              pointRadius: 0, // Set pointRadius to 0 to remove dots
-              borderWidth: 2, // To make the line more visible
+              pointRadius: 0,
+              borderWidth: 2,
             },
             {
-              data: [9000, 5000, 8000, 3500, 9000], // Updated web data
-              borderColor: '#29CC5A99', // Web line color
-              backgroundColor: webGradient, // Web gradient fill
-              fill: true, // Enables the gradient fill
+              data: [9000, 5000, 8000, 3500, 9000, 7000, 8500],  // 7 values for Web
+              borderColor: '#29CC5A99',
+              backgroundColor: webGradient,
+              fill: true,
               tension: 0.4,
-              pointRadius: 0, // Set pointRadius to 0 to remove dots
-              borderWidth: 2, // To make the line more visible
+              pointRadius: 0,
+              borderWidth: 2,
             }
           ]
         },
+
         options: {
           responsive: true,
           plugins: {
             tooltip: {
-              enabled: true,  // Keep tooltip enabled
+              enabled: true,
               callbacks: {
-                // Override the default tooltip title (dataset label) and hide it
-                title: function (tooltipItems) {
-                  return '';  // This removes the dataset label from the tooltip
-                },
-                // Custom label to show only the value
-                label: function (tooltipItem) {
-                  return `${tooltipItem.raw}`;  // Show only the data value
-                }
+                title: function () { return ''; },
+                label: function (tooltipItem) { return `${tooltipItem.raw}`; }
               }
             },
-            legend: {
-              display: false,  // Hides the legend completely (Mobile, Web)
-            }
+            legend: { display: false }
           },
+
           scales: {
             x: {
               ticks: {
                 font: {
-                  size: 14,    // Set the font size for the X-axis
-                  weight: 'normal', // Set the font weight for the X-axis (use 'normal' instead of 400)
-                  family: 'Arial',  // You can customize the font family if needed
+                  size: 12,
+                  weight: 'normal',
+                  family: 'Arial',
                 },
-                color: '#A2A3A5',  // Set the color for the X-axis labels
+                color: '#A2A3A5',
               },
-              grid: {
-                color: '#E6E6E6',
-              }
+              grid: { color: '#E6E6E6' }
             },
+
             y: {
+              min: 0,
+              max: 12000,     // Ensures 12000 is shown
               ticks: {
+                stepSize: 3000,   // 0, 3000, 6000, 9000, 12000
                 font: {
-                  size: 14,    // Set the font size for the Y-axis
-                  weight: 'normal', // Set the font weight for the Y-axis (use 'normal' instead of 400)
-                  family: 'Arial',  // You can customize the font family if needed
+                  size: 12,
+                  weight: 'normal',
+                  family: 'Arial',
                 },
-                color: '#A2A3A5',  // Set the color for the Y-axis labels
-                stepSize: 3000,
-                callback: function (value) {
-                  return value; // This ensures the tick values are displayed correctly
-                }
+                color: '#A2A3A5',
+                callback: function (value) { return value; }
               },
-              grid: {
-                color: '#E6E6E6',
-              }
+              grid: { color: '#E6E6E6' }
             }
           },
+
           onClick: (event: any) => {
-            // Only show dotted line on click
             const activePoints = lineChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
             if (activePoints.length > 0) {
               const firstPoint = activePoints[0];
@@ -230,6 +224,123 @@ export class DashboardMfaOtpActivity {
         }
       });
     }
+  }
+
+
+
+  initPieChart() {
+    const ctx = this.myDonutChartElement.nativeElement.getContext('2d');
+
+    // ===== GRADIENT COLORS =====
+    const greenGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    greenGradient.addColorStop(0, '#14CC4C');
+    greenGradient.addColorStop(1, '#8DEBA9');
+
+    const purpleGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    purpleGradient.addColorStop(0, '#5B21B6');
+    purpleGradient.addColorStop(1, '#A78BFA');
+
+    const redGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    redGradient.addColorStop(0, '#EF4444');
+    redGradient.addColorStop(1, '#EB8D8F');
+
+    // ===== WHITE DIAGONAL PATTERN =====
+    function createDiagonalPattern() {
+      const patternCanvas = document.createElement('canvas');
+      patternCanvas.width = 12;
+      patternCanvas.height = 12;
+
+      const pctx = patternCanvas.getContext('2d')!;
+      pctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      pctx.lineWidth = 2;
+      pctx.beginPath();
+      pctx.moveTo(0, 12);
+      pctx.lineTo(12, 0);
+      pctx.stroke();
+
+      return pctx.createPattern(patternCanvas, 'repeat')!;
+    }
+
+    const diagonalPattern = createDiagonalPattern();
+
+    // ===== PATTERN PLUGIN =====
+    const donutPatternPlugin = {
+      id: 'donutPatternPlugin',
+      afterDatasetDraw(chart: any) {
+        const { ctx } = chart;
+        const meta = chart.getDatasetMeta(0);
+
+        meta.data.forEach((segment: any) => {
+          ctx.save();
+
+          ctx.beginPath();
+          ctx.arc(segment.x, segment.y, segment.outerRadius, segment.startAngle, segment.endAngle);
+          ctx.arc(segment.x, segment.y, segment.innerRadius, segment.endAngle, segment.startAngle, true);
+          ctx.closePath();
+          ctx.clip();
+
+          ctx.fillStyle = diagonalPattern;
+          ctx.fillRect(
+            segment.x - segment.outerRadius,
+            segment.y - segment.outerRadius,
+            segment.outerRadius * 2,
+            segment.outerRadius * 2
+          );
+
+          ctx.restore();
+        });
+      }
+    };
+
+    // ===== CENTER TOTAL TEXT =====
+    const centerTextPlugin = {
+      id: 'centerText',
+      afterDraw(chart: any) {
+        const { ctx } = chart;
+        const width = chart.width;
+        const height = chart.height;
+
+        const total = 12342; // <-- you can change dynamically
+
+        ctx.save();
+        ctx.font = 'bold 42px Poppins';
+        ctx.fillStyle = '#16003A';
+        ctx.textAlign = 'center';
+        ctx.fillText(total.toString(), width / 2, height / 2 - 5);
+
+        ctx.font = '20px Poppins';
+        ctx.fillStyle = '#7A7A7A';
+        ctx.fillText('Requests', width / 2, height / 2 + 25);
+
+        ctx.restore();
+      }
+    };
+
+    // ===== FINAL DONUT CHART =====
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Requests', 'Completed', 'Failed'],
+        datasets: [
+          {
+            data: [45, 45, 5],  // <-- adjust values here
+            backgroundColor: [greenGradient, purpleGradient, redGradient],
+            borderWidth: 6,
+            borderColor: '#F7F9FB',
+            hoverBorderColor: '#F7F9FB'
+          }
+        ]
+      },
+      options: {
+        rotation: 120,
+        cutout: '70%',
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        }
+      },
+      plugins: [donutPatternPlugin, centerTextPlugin]
+    });
   }
 
   initChart() {

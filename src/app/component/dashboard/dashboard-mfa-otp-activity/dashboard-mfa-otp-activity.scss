@@ -244,6 +244,7 @@ h3 {
 
 .left-side-img {
     display: flex;
+    justify-content: space-between;
 }
 
 .chart-container-wrapper {
@@ -294,4 +295,8 @@ canvas {
         font-size: 14px;
         font-weight: 400;
     }
+}
+
+.align-center {
+    align-items: center;
 }
