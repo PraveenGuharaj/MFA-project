@@ -300,3 +300,17 @@ canvas {
 .align-center {
     align-items: center;
 }
+
+.header-cardtitle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card-size-first {
+    max-width: 70% !important;
+}
+
+.card-size-second {
+    max-width: 30% !important;
+}

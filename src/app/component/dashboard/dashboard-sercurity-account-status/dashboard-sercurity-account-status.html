@@ -105,7 +105,27 @@
         </mat-card-content>
     </mat-card>
 
-    <!-- <mat-card class="chart-card">
+</div>
+<div class="chart-container-wrapper">
+    <mat-card class="chart-card card-size-first">
+        <mat-card-header>
+            <div class="header-cardtitle">
+                <mat-card-title>Alerts Over Time</mat-card-title>
+                <div class="right-side-img">
+                    <img src="images/dashboar_mobile.png" class="notification_icon">
+                    <span class="header_title">Mobile</span>
+
+                    <img src="images/dashboard_web.png" class="notification_icon">
+                    <span class="header_title">Web</span>
+                </div>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas #myLineChart></canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card card-size-second">
         <mat-card-header>
             <mat-card-title>Request vs Completion vs Failed</mat-card-title>
         </mat-card-header>
@@ -116,19 +136,18 @@
         <div class="left-side-img">
             <div class="right-side-img ">
                 <img src="images/green_success.png" class="notification_icon">
-                <span class="header_title">Request</span>
+                <span class="header_title">Active</span>
             </div>
 
             <div class="right-side-img ">
                 <img src="images/completed.png" class="notification_icon">
-                <span class="header_title">Completed</span>
+                <span class="header_title">Blocked</span>
             </div>
 
             <div class="right-side-img ">
                 <img src="images/red_failure.png" class="notification_icon">
-                <span class="header_title">Failure</span>
+                <span class="header_title">Locked</span>
             </div>
         </div>
-    </mat-card> -->
-
+    </mat-card>
 </div>

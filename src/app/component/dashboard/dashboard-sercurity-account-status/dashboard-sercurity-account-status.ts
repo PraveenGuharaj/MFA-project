@@ -100,9 +100,8 @@ export class DashboardSercurityAccountStatus {
   };
 
   ngAfterViewInit() {
-    // this.initChart();
-    // this.initializeLineChart();
-    // this.initPieChart();
+    this.initializeLineChart();
+    this.initPieChart();
     this.initAccountBarChart();
 
   }
@@ -274,7 +273,7 @@ export class DashboardSercurityAccountStatus {
           labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           datasets: [
             {
-              data: [5500, 1500, 3500, 2000, 4000, 3000, 4500],  // 7 values for Mobile
+              data: [1500, 5900, 2000, 6000, 10000, 8000, 6000],  // 7 values for Mobile
               borderColor: '#6017EB99',
               backgroundColor: mobileGradient,
               fill: true,
@@ -283,7 +282,7 @@ export class DashboardSercurityAccountStatus {
               borderWidth: 2,
             },
             {
-              data: [9000, 5000, 8000, 3500, 9000, 7000, 8500],  // 7 values for Web
+              data: [6000, 4000, 9000, 6000, 2000, 7000, 2000],  // 7 values for Web
               borderColor: '#29CC5A99',
               backgroundColor: webGradient,
               fill: true,
@@ -311,7 +310,7 @@ export class DashboardSercurityAccountStatus {
             x: {
               ticks: {
                 font: {
-                  size: 12,
+                  size: 14,
                   weight: 'normal',
                   family: 'Arial',
                 },
@@ -326,7 +325,7 @@ export class DashboardSercurityAccountStatus {
               ticks: {
                 stepSize: 3000,   // 0, 3000, 6000, 9000, 12000
                 font: {
-                  size: 12,
+                  size: 14,
                   weight: 'normal',
                   family: 'Arial',
                 },
@@ -363,26 +362,26 @@ export class DashboardSercurityAccountStatus {
 
     // === FORCE CANVAS SIZE (important!) ===
     // set DOM attributes (pixel size used by Chart.js)
-    canvas.width = 250;
-    canvas.height = 250;
+    canvas.width = 550;
+    canvas.height = 550;
 
     // set inline style with !important to override global CSS rules
-    canvas.setAttribute('style', 'width: 250px !important; height: 250px !important;');
+    canvas.setAttribute('style', 'width: 350px !important; height: 350px !important;');
 
     const ctx: any = canvas.getContext('2d');
 
     // ===== GRADIENT COLORS =====
     const greenGradient = ctx.createLinearGradient(0, 0, 0, 300);
-    greenGradient.addColorStop(0, '#14CC4C');
-    greenGradient.addColorStop(1, '#8DEBA9');
+    greenGradient.addColorStop(0, 'rgba(235, 141, 143, 1)');
+    greenGradient.addColorStop(1, 'rgba(239, 68, 68, 1)');
 
     const purpleGradient = ctx.createLinearGradient(0, 0, 0, 300);
-    purpleGradient.addColorStop(0, '#5B21B6');
-    purpleGradient.addColorStop(1, '#A78BFA');
+    purpleGradient.addColorStop(0, 'rgba(20, 204, 76, 1)');
+    purpleGradient.addColorStop(1, 'rgba(141, 235, 169, 1)');
 
     const redGradient = ctx.createLinearGradient(0, 0, 0, 300);
-    redGradient.addColorStop(0, '#EF4444');
-    redGradient.addColorStop(1, '#EB8D8F');
+    redGradient.addColorStop(0, 'rgba(240, 219, 144, 1)');
+    redGradient.addColorStop(1, 'rgba(240, 203, 67, 1)');
 
     // ===== WHITE DIAGONAL PATTERN =====
     function createDiagonalPattern() {
