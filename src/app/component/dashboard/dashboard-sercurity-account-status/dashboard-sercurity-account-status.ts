@@ -1,43 +1,44 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { ChartData, ChartOptions, CategoryScale, LinearScale, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, BarController, BarElement, DoughnutController, ArcElement, registerables, Chart } from 'chart.js';
+import { ChartData, ChartOptions, CategoryScale, LinearScale, BarController, BarElement, DoughnutController, ArcElement, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, Chart, ScriptableContext, registerables } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';  // Importing BaseChartDirective for standalone components
 import { Chart as ChartJS } from 'chart.js';
+import { MatIconModule } from '@angular/material/icon';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  LineController,
-  PointElement,
-  LineElement,
   BarController,
   BarElement,
   DoughnutController,
   ArcElement,
+  LineController,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
   Filler
 );
 
-
 @Component({
-  selector: 'app-dashboard-mfa-otp-activity',
-  imports: [CommonModule,
+  selector: 'app-dashboard-sercurity-account-status',
+  imports: [
     CommonModule,
     MatCardModule,
     BaseChartDirective,
     MatIconModule
   ],
-  templateUrl: './dashboard-mfa-otp-activity.html',
-  styleUrl: './dashboard-mfa-otp-activity.scss',
+  templateUrl: './dashboard-sercurity-account-status.html',
+  styleUrl: './dashboard-sercurity-account-status.scss',
 })
-export class DashboardMfaOtpActivity {
+export class DashboardSercurityAccountStatus {
   @ViewChild('myLineChart', { static: false }) myLineChartElement!: ElementRef;
   @ViewChild('myChart', { static: false }) myChartElement!: ElementRef;
   @ViewChild('myDonutChart', { static: false }) myDonutChartElement!: ElementRef;
+  @ViewChild('myBarChart', { static: false }) myBarChartElement!: ElementRef;
+
 
   public barChartOptions: any = {
     responsive: true,
@@ -85,48 +86,170 @@ export class DashboardMfaOtpActivity {
         label: 'Mobile',
         data: [7200, 1500, 4500, 5600, 2300, 4700, 1400],       // purple bottom
         backgroundColor: () =>
-          this.createStripedGradient('rgba(118,0,255,0.75)', 'rgba(118,0,255,0.75)'),
-        borderRadius: 12
+          this.createStripedGradient('rgba(240, 219, 144, 1)', 'rgba(240, 203, 67, 1)'),
+        borderRadius: 4
       },
       {
         label: 'Web',
         data: [2500, 3000, 3800, 3100, 7000, 3500, 2200],       // green top
         backgroundColor: () =>
-          this.createStripedGradient('rgba(0,200,83,0.75)', 'rgba(0,200,83,0.75)'),
-        borderRadius: 12
+          this.createStripedGradient('rgba(235, 141, 143, 1)', 'rgba(239, 68, 68, 1)'),
+        borderRadius: 4
       }
     ]
   };
 
-  constructor() { }
+  ngAfterViewInit() {
+    // this.initChart();
+    // this.initializeLineChart();
+    // this.initPieChart();
+    this.initAccountBarChart();
 
-  ngOnInit(): void { }
-
-
-
-  createPattern(color: string) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 12;
-    canvas.height = 12;
-
-    const ctx = canvas.getContext('2d')!;
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-
-    ctx.beginPath();
-    ctx.moveTo(0, 12);
-    ctx.lineTo(12, 0);
-    ctx.stroke();
-
-    return ctx.createPattern(canvas, 'repeat');
   }
 
+  initAccountBarChart() {
+    const canvas = this.myBarChartElement.nativeElement;
+    const ctx = canvas.getContext('2d');
 
-  ngAfterViewInit() {
-    this.initChart();
-    this.initializeLineChart();
-    this.initPieChart();
+    Chart.register(...registerables);
 
+    // -------- GRADIENT FILLS --------
+    const purpleGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    purpleGradient.addColorStop(0, '#6D28D9');
+    purpleGradient.addColorStop(1, '#A78BFA');
+
+    const greenGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    greenGradient.addColorStop(0, '#22C55E');
+    greenGradient.addColorStop(1, '#86EFAC');
+
+    // -------- DIAGONAL WHITE PATTERN --------
+    function makePattern() {
+      const pc = document.createElement('canvas');
+      pc.width = 14;
+      pc.height = 14;
+      const pctx: any = pc.getContext('2d');
+
+      pctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      pctx.lineWidth = 2;
+
+      pctx.beginPath();
+      pctx.moveTo(0, 14);
+      pctx.lineTo(14, 0);
+      pctx.stroke();
+
+      return pctx.createPattern(pc, 'repeat');
+    }
+
+    const stripePattern = makePattern();
+
+    // -------- APPLY PATTERN TO BARS --------
+    const patternPlugin = {
+      id: "patternPlugin",
+      afterDatasetsDraw(chart: any, args: any, options: any) {
+        const { ctx } = chart;
+
+        chart.data.datasets.forEach((dataset: any, datasetIndex: any) => {
+          const meta = chart.getDatasetMeta(datasetIndex);
+
+          meta.data.forEach((bar: any) => {
+            const x = bar.x - 14;  // width = 28px → 28/2
+            const y = bar.y;
+            const width = 48;
+            const height = bar.base - bar.y;
+
+            ctx.save();
+
+            // Rounded rect (top-left & top-right only)
+            const tl = 4;  // top-left radius
+            const tr = 4;  // top-right radius
+            const br = 0;  // bottom-right
+            const bl = 0;  // bottom-left
+
+            ctx.beginPath();
+            ctx.moveTo(x + tl, y);
+
+            ctx.lineTo(x + width - tr, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + tr);
+
+            ctx.lineTo(x + width, y + height - br);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - br, y + height);
+
+            ctx.lineTo(x + bl, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - bl);
+
+            ctx.lineTo(x, y + tl);
+            ctx.quadraticCurveTo(x, y, x + tl, y);
+
+            ctx.closePath();
+            ctx.clip();
+
+            ctx.fillStyle = stripePattern;
+            ctx.fillRect(x, y, width, height);
+
+            ctx.restore();
+          });
+        });
+      }
+    };
+
+
+    // -------- FINAL CHART --------
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [
+          {
+            label: 'Mobile',
+            data: [6500, 6600, 6700, 6800, 6900, 7000, 7100],
+            backgroundColor: purpleGradient,
+            borderRadius: 4,
+            maxBarThickness: 30
+          },
+          {
+            label: 'Web',
+            data: [9300, 9400, 9500, 9600, 9700, 9800, 9900],
+            backgroundColor: greenGradient,
+            borderRadius: 4,
+            maxBarThickness: 30
+          }
+        ]
+      },
+
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        },
+
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: '#8E8E8E',
+              font: { size: 14 }
+            }
+          },
+          y: {
+            min: 0,
+            max: 12000,
+            ticks: {
+              stepSize: 3000,
+              color: '#8E8E8E',
+              font: { size: 13 }
+            },
+            grid: {
+              color: '#E5E7EB'
+            }
+          }
+        }
+      },
+
+      plugins: [patternPlugin]
+    });
   }
 
 
@@ -226,8 +349,6 @@ export class DashboardMfaOtpActivity {
     }
   }
 
-  // add a property at component level:
-  // private donutChart: any;
 
   initPieChart() {
     // make sure canvas element exists
@@ -371,8 +492,8 @@ export class DashboardMfaOtpActivity {
           label: 'Mobile',
           data: [8000, 1500, 4000, 5500, 2000, 4500, 2000],
           backgroundColor: this.createStripedGradient(
-            'rgba(173, 141, 235, 1)',
-            'rgba(96, 23, 235, 1)'
+            'rgba(240, 219, 144, 1)',
+            'rgba(240, 203, 67, 1)'
           ),
           borderRadius: 4
         },
@@ -380,8 +501,8 @@ export class DashboardMfaOtpActivity {
           label: 'Web',
           data: [3000, 5500, 6000, 5700, 9000, 3800, 3600],
           backgroundColor: this.createStripedGradient(
-            'rgba(141, 235, 169, 1)',
-            'rgba(20, 204, 76, 1)'
+            'rgba(235, 141, 143, 1)',
+            'rgba(239, 68, 68, 1)'
           ),
           borderRadius: 4
         }

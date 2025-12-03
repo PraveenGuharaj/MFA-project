@@ -32,64 +32,6 @@ export class DbxSidebar {
 
   @Output() menuChanged = new EventEmitter<any>(); // Emit selected menu
 
-  // menuItems = [
-  //   {
-  //     name: 'Dashboard',
-  //     subMenu: [
-  //       { name: 'User Overview', link: '/user-overview' },
-  //       { name: 'Login Activity', link: '/login-activity' },
-  //       { name: 'MFA & OTP Activity', link: '/login-activity' },
-  //       { name: 'Security Alerts & Account', link: '/login-activity' },
-  //       { name: 'Session Metrics', link: '/login-activity' },
-  //       { name: 'Geographic Metrics', link: '/login-activity' },
-  //       { name: 'Service Request', link: '/login-activity' },
-  //       { name: 'Transaction Performance', link: '/login-activity' },
-  //       { name: 'Digital Onboarding Journey', link: '/login-activity' },
-  //     ],
-  //     expanded: false
-  //   },
-  //   {
-  //     name: 'Product Hub',
-  //     subMenu: [
-  //       { name: 'Service Requests', link: '/service-requests' },
-  //       { name: 'Transaction Mix', link: '/transaction-mix' }
-  //     ],
-  //     expanded: false
-  //   },
-  //   {
-  //     name: 'Admin Center',
-  //     subMenu: [
-  //       { name: 'Service Requests', link: '/service-requests' },
-  //       { name: 'Transaction Mix', link: '/transaction-mix' }
-  //     ],
-  //     expanded: false
-  //   },
-  //   {
-  //     name: 'Offer & Discount',
-  //     subMenu: [
-  //       { name: 'Service Requests', link: '/service-requests' },
-  //       { name: 'Transaction Mix', link: '/transaction-mix' }
-  //     ],
-  //     expanded: false
-  //   },
-  //   {
-  //     name: 'Partner Onboarding',
-  //     subMenu: [
-  //       { name: 'Service Requests', link: '/service-requests' },
-  //       { name: 'Transaction Mix', link: '/transaction-mix' }
-  //     ],
-  //     expanded: false
-  //   },
-  //   {
-  //     name: 'Operation ',
-  //     subMenu: [
-  //       { name: 'Service Requests', link: '/service-requests' },
-  //       { name: 'Transaction Mix', link: '/transaction-mix' }
-  //     ],
-  //     expanded: false
-  //   }
-  // ];
-
   menuItems = [
     {
       name: 'Dashboard',
@@ -97,7 +39,7 @@ export class DbxSidebar {
         { name: 'User Overview', link: '/dashboard/user-overview' },
         { name: 'Login Activity', link: '/dashboard/login-activity' },
         { name: 'MFA & OTP Activity', link: '/dashboard/mfa-otp-activity' },
-        { name: 'Security Alerts & Account', link: '/login-activity' },
+        { name: 'Security Alerts & Account', link: '/dashboard/security-account-status' },
         { name: 'Session Metrics', link: '/login-activity' },
         { name: 'Geographic Metrics', link: '/login-activity' },
         { name: 'Service Request', link: '/login-activity' },
