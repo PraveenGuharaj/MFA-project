@@ -17,6 +17,8 @@ import { DashboardLoginActivity } from './component/dashboard/dashboard-login-ac
 import { DashboardMfaOtpActivity } from './component/dashboard/dashboard-mfa-otp-activity/dashboard-mfa-otp-activity';
 import { DashboardSercurityAccountStatus } from './component/dashboard/dashboard-sercurity-account-status/dashboard-sercurity-account-status';
 import { DashboardSessionMetrics } from './component/dashboard/dashboard-session-metrics/dashboard-session-metrics';
+import { DashboardGeographicMetrics } from './component/dashboard/dashboard-geographic-metrics/dashboard-geographic-metrics';
+import { DashboardServiceRequest } from './component/dashboard/dashboard-service-request/dashboard-service-request';
 
 export const routes: Routes = [
   {
@@ -33,7 +35,9 @@ export const routes: Routes = [
       { path: 'login-activity', component: DashboardLoginActivity },
       { path: 'mfa-otp-activity', component: DashboardMfaOtpActivity },
       { path: 'security-account-status', component: DashboardSercurityAccountStatus },
+      { path: 'geographic-metrics',component: DashboardGeographicMetrics},
       { path: 'session-metrics', component: DashboardSessionMetrics },
+      { path: 'service-request', component: DashboardServiceRequest},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },
