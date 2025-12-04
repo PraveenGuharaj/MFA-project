@@ -19,6 +19,7 @@ import { DashboardSercurityAccountStatus } from './component/dashboard/dashboard
 import { DashboardSessionMetrics } from './component/dashboard/dashboard-session-metrics/dashboard-session-metrics';
 import { DashboardGeographicMetrics } from './component/dashboard/dashboard-geographic-metrics/dashboard-geographic-metrics';
 import { DashboardServiceRequest } from './component/dashboard/dashboard-service-request/dashboard-service-request';
+import { DashboardTransactionPerformace } from './component/dashboard/dashboard-transaction-performace/dashboard-transaction-performace';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,7 @@ export const routes: Routes = [
       { path: 'geographic-metrics',component: DashboardGeographicMetrics},
       { path: 'session-metrics', component: DashboardSessionMetrics },
       { path: 'service-request', component: DashboardServiceRequest},
+      {path: 'transaction-performance', component:DashboardTransactionPerformace},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

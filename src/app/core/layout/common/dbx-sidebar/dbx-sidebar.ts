@@ -43,7 +43,7 @@ export class DbxSidebar {
         { name: 'Session Metrics', link: '/dashboard/session-metrics' },
         { name: 'Geographic Metrics', link: '/dashboard/geographic-metrics' },
         { name: 'Service Request', link: '/dashboard/service-request' },
-        { name: 'Transaction Performance', link: '/login-activity' },
+        { name: 'Transaction Performance', link: '/dashboard/transaction-performance' },
         { name: 'Digital Onboarding Journey', link: '/login-activity' },
       ],
       expanded: false
