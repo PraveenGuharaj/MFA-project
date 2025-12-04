@@ -319,6 +319,8 @@ canvas {
 
 
 .donut-wrapper {
+    // width: 365px;
+    // height: 365px;
     width: 365px;
     height: 365px;
     position: relative;
@@ -348,3 +350,100 @@ canvas {
 .pl-10 {
     padding-left: 10px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.segment-container {
+  display: flex;
+  background: #F2F2F2 !important;
+}
+
+.segment-btn {
+//   background-color: #f7f7f7;
+//   border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.segment-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.segment-btn.active {
+  background-color: #4d2df0;
+//   color: white;
+  border-color: #4d2df0;
+}
+
+.filters-container {
+  display: flex;
+  align-items: center;
+}
+
+.filter {
+  margin-right: 20px;
+}
+
+.filter label {
+  margin-right: 10px;
+}
+
+select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #f7f7f7;
+}
+
+.export-btn {
+background-color: #221340;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+
+    img {
+        position: relative;
+        right: 10px;
+    }
+}
+
+.export-btn:hover {
+  background-color: #3c22b1;
+}
+
+.export-btn span {
+  font-weight: bold;
+}
+
+
+.active {
+    background-color:#FFFFFF !important;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color:#221340;
+}
+

@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CategoryScale, LinearScale, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, BarController, BarElement, DoughnutController, ArcElement, Chart } from 'chart.js';
 import { Chart as ChartJS } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import 'chartjs-plugin-datalabels';
 
 ChartJS.register(
   CategoryScale,
@@ -26,7 +28,7 @@ ChartJS.register(
     CommonModule,
     CommonModule,
     MatCardModule,
-    // BaseChartDirective,
+    BaseChartDirective,
     MatIconModule
   ],
   templateUrl: './dashboard-transaction-performace.html',
@@ -34,8 +36,154 @@ ChartJS.register(
 })
 export class DashboardTransactionPerformace {
   @ViewChild('myDonutChart', { static: false }) myDonutChartElement!: ElementRef;
+   public barChartData: any;
+  public barChartOptions: any;
+  selectedText: any;
+    constructor(private cdr: ChangeDetectorRef) { }
+
   ngAfterViewInit() {
+    this.initChart();
     this.initPieChart();
+    this.cdr.detectChanges(); 
+  }
+  
+  createPattern(color: string) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 12;
+    canvas.height = 12;
+
+    const ctx = canvas.getContext('2d')!;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+
+    ctx.beginPath();
+    ctx.moveTo(0, 12);
+    ctx.lineTo(12, 0);
+    ctx.stroke();
+
+    return ctx.createPattern(canvas, 'repeat');
+  }
+
+  initChart() {
+    this.barChartData = {
+      labels: ['Ooredoo', 'Debit Payment', 'To Another DB', 'Credit Card', 'To Own A/C'],
+      datasets: [
+        {
+          label: 'Ooredoo',
+          data: [22, 0, 0, 0, 0], // Ooredoo data
+          backgroundColor: this.createStripedGradient('#14CC4C', '#8DEBA9'),
+          borderRadius: 10
+        },
+        {
+          label: 'Debit Payment',
+          data: [0, 15, 0, 0, 0], // Debit Payment data
+          backgroundColor: this.createStripedGradient('#F0CB43', '#F0D77A'),
+          borderRadius: 10
+        },
+        {
+          label: 'To Another DB',
+          data: [0, 0, 12, 0, 0], // To Another DB data
+          backgroundColor: this.createStripedGradient('#EE595A', '#EB8C8E'),
+          borderRadius: 10
+        },
+        {
+          label: 'Credit Card',
+          data: [0, 0, 0, 17, 0], // Credit Card data
+          backgroundColor: this.createStripedGradient('#6017EB', '#AD8DEB'),
+          borderRadius: 10
+        },
+        {
+          label: 'To Own A/C',
+          data: [0, 0, 0, 0, 7], // To Own A/C data
+          backgroundColor: this.createStripedGradient('#F043D3', '#EB8DDB'),
+          borderRadius: 10
+        }
+      ]
+    };
+
+    this.barChartOptions = {
+      indexAxis: 'y', // Horizontal bar chart
+      responsive: true,
+      plugins: {
+        legend: { display: false }, // Hide the legend
+        datalabels: {
+          anchor: 'center',  // Position the label in the center of the bar
+          align: 'center',   // Align the label in the center of the bar
+          color: '#fff',     // White color for the label text
+          font: {
+            size: 14,         // Font size of the label text
+            weight: 'bold'    // Make the text bold
+          },
+          formatter: (value: number) => {
+            console.log('formatter called, value:', value);  // Debug line to ensure it's called
+            return `${value}%`; // Display the percentage inside the bar
+          },
+          // Ensuring the labels are above the bars
+          z: 10
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+          grid: {
+            display: false, // Hide grid lines on X-axis
+            drawBorder: false
+          },
+          ticks: {
+            display: false, // Hide the ticks on the X-axis
+          }
+        },
+        y: {
+          stacked: true,
+          grid: {
+            display: false, // Hide grid lines on Y-axis
+            drawBorder: false
+          },
+          ticks: {
+            color: '#A2A3A5', // Y-axis label color
+            font: {
+              size: 14, // Font size
+              weight: '400'
+            },
+            padding: 8 // Padding for Y-axis labels
+          }
+        }
+      }
+    };
+  }
+
+
+   
+
+  
+  createStripedGradient(baseColor1: string, baseColor2: string) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 200;
+    canvas.height = 40;
+
+    const ctx = canvas.getContext('2d')!;
+
+    // --- 1) Create Gradient Background ---
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    // gradient.addColorStop(0, baseColor1);
+    gradient.addColorStop(1, baseColor2);
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // --- 2) Draw White Diagonal Stripes ---
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.30)';
+    ctx.lineWidth = 2;
+
+    for (let i = -40; i < canvas.width; i += 20) {
+      ctx.beginPath();
+      ctx.moveTo(i, 40);
+      ctx.lineTo(i + 40, 0);
+      ctx.stroke();
+    }
+
+    // --- 3) Create Pattern ---
+    return ctx.createPattern(canvas, 'repeat')!;
   }
 
   initPieChart() {
@@ -193,6 +341,11 @@ export class DashboardTransactionPerformace {
       },
       plugins: [donutPatternPlugin, centerTextPlugin]
     });
+  }
+
+
+  segmentSelection(event:string) {
+    this.selectedText = event;
   }
 
 }
