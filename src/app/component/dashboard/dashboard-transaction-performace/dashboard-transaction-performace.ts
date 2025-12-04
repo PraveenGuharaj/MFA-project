@@ -152,10 +152,6 @@ export class DashboardTransactionPerformace {
     };
   }
 
-
-   
-
-  
   createStripedGradient(baseColor1: string, baseColor2: string) {
     const canvas = document.createElement('canvas');
     canvas.width = 200;
