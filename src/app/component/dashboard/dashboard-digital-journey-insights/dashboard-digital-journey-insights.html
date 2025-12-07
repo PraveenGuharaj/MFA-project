@@ -75,28 +75,48 @@
     </mat-card>
 
     <mat-card class="chart-card card-size-second">
-        <mat-card-header>
-            <mat-card-title>Request vs Completion vs Failed</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <!-- <canvas #myDonutChart></canvas> -->
-            <canvas #myLineChart></canvas>
-        </mat-card-content>
-        <div class="left-side-img">
-            <div class="right-side-img ">
-                <img src="images/green_success.png" class="notification_icon">
-                <span class="header_title">Active</span>
+        <div class="mat-header">
+            <mat-card-header>
+                <mat-card-title>Journey Trends Over Time</mat-card-title>
+            </mat-card-header>
+
+
+            <mat-card-title class="w-60">
+                <div class="right-side-img">
+                    <div class="d-flex">
+                        <img src="images/red_failure.png" class="notification_icon">
+                        <span class="header_title">Broken</span>
+                    </div>
+
+                    <div class="d-flex">
+                        <img src="images/green_success.png" class="notification_icon">
+                        <span class="header_title">Completed</span>
+                    </div>
+
+                    <div class="d-flex">
+                        <img src="images/completed.png" class="notification_icon">
+                        <span class="header_title">Started</span>
+                    </div>
+                </div>
+            </mat-card-title>
+
+            <div class="filter">
+
+                <!-- <label for="date">Today</label> -->
+                <select id="date" name="date">
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="last-week">Last Week</option>
+                </select>
             </div>
 
-            <div class="right-side-img ">
-                <img src="images/completed.png" class="notification_icon">
-                <span class="header_title">Blocked</span>
-            </div>
+            <div>
 
-            <div class="right-side-img ">
-                <img src="images/red_failure.png" class="notification_icon">
-                <span class="header_title">Locked</span>
             </div>
         </div>
+        <mat-card-content>
+            <canvas #journeyChart></canvas>
+
+        </mat-card-content>
     </mat-card>
 </div>

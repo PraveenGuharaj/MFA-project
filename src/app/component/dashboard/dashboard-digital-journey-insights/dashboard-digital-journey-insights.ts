@@ -36,12 +36,114 @@ ChartJS.register(
 })
 export class DashboardDigitalJourneyInsights {
   @ViewChild('funnelChart') funnelChart!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('journeyChart') journeyChart!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('myLineChart', { static: false }) myLineChartElement!: ElementRef;
 
+  chart!: Chart;
 
   ngAfterViewInit() {
     this.renderChart();
+    this.renderLineChart();
   }
 
+  renderLineChart() {
+    const ctx = this.journeyChart.nativeElement.getContext('2d')!;
+
+    const labels = ['Nov 11', 'Nov 12', 'Nov 13', 'Nov 14', 'Nov 15', 'Nov 16', 'Nov 17'];
+    const started = [620, 600, 600, 680, 620, 640, 650];
+    const completed = [320, 340, 360, 452, 430, 410, 425];
+    const broken = [180, 160, 190, 152, 170, 165, 172];
+
+    const gradientPurple = this.createGradient(ctx, '#6017EB', '#FFFFFF');
+    const gradientGreen = this.createGradient(ctx, '#29CC5A', '#FFFFFF');
+    const gradientRed = this.createGradient(ctx, '#EF4444', '#FFFFFF');
+
+    this.chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Started',
+            data: started,
+            backgroundColor: gradientPurple,
+            borderColor: '#6017EB',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 0,
+            pointHoverRadius: 8,
+            pointBackgroundColor: 'transparent',
+            pointHoverBackgroundColor: '#6017EB',
+          },
+          {
+            label: 'Completed',
+            data: completed,
+            backgroundColor: gradientGreen,
+            borderColor: '#14CC4C',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 0,
+            pointHoverRadius: 8,
+            pointBackgroundColor: 'transparent',
+            pointHoverBackgroundColor: '#14CC4C',
+          },
+          {
+            label: 'Broken',
+            data: broken,
+            backgroundColor: gradientRed,
+            borderColor: '#EE595A',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 0,
+            pointHoverRadius: 8,
+            pointBackgroundColor: 'transparent',
+            pointHoverBackgroundColor: '#EE595A',
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: false,
+        },
+        plugins: {
+          legend: { display: false },
+
+          tooltip: {
+            enabled: true,
+            backgroundColor: '#FFFFFF',
+            bodyColor: '#1C174A',
+            borderColor: '#E0E0E0',
+            borderWidth: 1,
+            displayColors: false,
+            padding: 12,
+            titleFont: { weight: 'bold', size: 14 },
+            bodyFont: { size: 13 },
+          },
+        },
+        scales: {
+          x: {
+            ticks: { color: '#8D8D8D', font: { size: 13 } },
+            grid: { display: false },
+          },
+          y: {
+            ticks: { color: '#A2A3A5', font: { size: 12 } },
+            grid: { color: '#E6E6E6' },
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+
+  createGradient(ctx: CanvasRenderingContext2D, topColor: string, bottomColor: string) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, topColor + '66');
+    gradient.addColorStop(1, bottomColor + '00');
+    return gradient;
+  }
   // renderChart() {
   //   const ctx = this.funnelChart.nativeElement.getContext('2d')!;
 

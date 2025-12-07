@@ -370,3 +370,13 @@ select {
 .notification_icon-failure {
     padding-left: 20px;
 }
+
+.mat-header {
+    display: flex;
+    align-items: baseline;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
