@@ -23,7 +23,7 @@ ChartJS.register(
   Filler
 );
 @Component({
-  selector: 'app-dashboard-transaction-performace',
+  selector: 'app-dashboard-transaction-mix',
   imports: [
     CommonModule,
     CommonModule,
@@ -31,22 +31,22 @@ ChartJS.register(
     BaseChartDirective,
     MatIconModule
   ],
-  templateUrl: './dashboard-transaction-performace.html',
-  styleUrl: './dashboard-transaction-performace.scss',
+  templateUrl: './dashboard-transaction-mix.html',
+  styleUrl: './dashboard-transaction-mix.scss',
 })
-export class DashboardTransactionPerformace {
+export class DashboardTransactionMix {
   @ViewChild('myDonutChart', { static: false }) myDonutChartElement!: ElementRef;
-   public barChartData: any;
+  public barChartData: any;
   public barChartOptions: any;
   selectedText: any;
-    constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngAfterViewInit() {
     this.initChart();
     this.initPieChart();
-    this.cdr.detectChanges(); 
+    this.cdr.detectChanges();
   }
-  
+
   createPattern(color: string) {
     const canvas = document.createElement('canvas');
     canvas.width = 12;
@@ -340,7 +340,7 @@ export class DashboardTransactionPerformace {
   }
 
 
-  segmentSelection(event:string) {
+  segmentSelection(event: string) {
     this.selectedText = event;
   }
 

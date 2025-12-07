@@ -1,0 +1,101 @@
+<div class="user-overview">
+    <h2>Transaction Performance Trendline</h2>
+    <p>Understand how specific transaction types perform over time, identify failure patterns, and analyze success vs
+        failure trends across channels.</p>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-title">
+                <span class="card-title">Total Success</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">6419</div>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card-newusers">
+            <div class="stat-title">
+                <span class="card-title">Total Failures</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">149</div>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stat-card-activeusers">
+            <div class="stat-title">
+                <span class="card-title">Success Rate</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">97.7%</div>
+            </div>
+
+        </div>
+
+        <div class="stat-card-activeusers">
+            <div class="stat-title">
+                <span class="card-title">Peak Failure Day</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">Nov 26</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="chart-container-wrapper">
+    <mat-card class="chart-card card-size-first">
+        <mat-card-header>
+            <div class="header-cardtitle">
+                <mat-card-title>Success vs Failure Trend</mat-card-title>
+                <div class="right-side-img">
+
+
+                    <img src="images/green_success.png" class="notification_icon">
+                    <span class="header_title">Success</span>
+
+
+                    <img src="images/red_failure.png" class="notification_icon-failure">
+                    <span class="header_title">Failure</span>
+                </div>
+
+
+                <div class="container">
+                    <div class="filters-container">
+                        <div class="filter">
+                            <label for="segment">Transaction Type:</label>
+                            <select id="segment" name="segment">
+                                <option value="all">Ooredoo</option>
+                                <option value="web">Web</option>
+                                <option value="mobile">Mobile</option>
+                            </select>
+                        </div>
+                        <div class="filter">
+
+                            <!-- <label for="date">Today</label> -->
+                            <select id="date" name="date">
+                                <option value="today">Today</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="last-week">Last Week</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas #myLineChart></canvas>
+        </mat-card-content>
+    </mat-card>
+</div>

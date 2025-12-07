@@ -19,8 +19,9 @@ import { DashboardSercurityAccountStatus } from './component/dashboard/dashboard
 import { DashboardSessionMetrics } from './component/dashboard/dashboard-session-metrics/dashboard-session-metrics';
 import { DashboardGeographicMetrics } from './component/dashboard/dashboard-geographic-metrics/dashboard-geographic-metrics';
 import { DashboardServiceRequest } from './component/dashboard/dashboard-service-request/dashboard-service-request';
-import { DashboardTransactionPerformace } from './component/dashboard/dashboard-transaction-performace/dashboard-transaction-performace';
+import { DashboardTransactionMix } from './component/dashboard/dashboard-transaction-mix/dashboard-transaction-mix';
 import { DashboardDigitatlOnboarding } from './component/dashboard/dashboard-digitatl-onboarding/dashboard-digitatl-onboarding';
+import { DashboardTransactionPerformance } from './component/dashboard/dashboard-transaction-performance/dashboard-transaction-performance';
 
 export const routes: Routes = [
   {
@@ -40,8 +41,9 @@ export const routes: Routes = [
       { path: 'geographic-metrics',component: DashboardGeographicMetrics},
       { path: 'session-metrics', component: DashboardSessionMetrics },
       { path: 'service-request', component: DashboardServiceRequest},
-      {path: 'transaction-performance', component:DashboardTransactionPerformace},
+      {path: 'transaction-mix', component:DashboardTransactionMix},
       {path: 'digital-onboarding', component:DashboardDigitatlOnboarding},
+      { path: 'transaction-perfomance',component: DashboardTransactionPerformance},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

@@ -1,0 +1,368 @@
+.chart-card {
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.chart-container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.chart-container-wrapper mat-card {
+    flex: 1;
+    padding: 10px;
+    margin: 0 10px;
+    max-width: 50%;
+}
+
+mat-card-header {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+mat-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+mat-card-content {
+    padding: 20px 0;
+}
+
+h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    /* Adjust height as needed */
+    max-width: 100%;
+    margin: auto;
+}
+
+.center-text {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.active_users {
+    font-size: 14px;
+    font-weight: 400;
+    color: #687380;
+}
+
+.user-overview {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f5f7;
+    // padding: 20px; 
+    border-radius: 8px;
+    // margin: 20px; 
+}
+
+.user-overview h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.user-overview p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px
+}
+
+// .stat-card-newusers { 
+//     background: linear-gradient(90deg, #ffffff, #FAF2D4); /* Left to right gradient */ 
+//     border-radius: 24px; 
+//     padding: 24px; 
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+//     flex: 1; 
+//     max-width: 250px; 
+//     text-align: center; 
+//     transition: all 0.3s ease; 
+// } 
+
+.stat-card-newusers {
+    background: linear-gradient(90deg, #ffffff, #FAF2D4);
+    /* Left to right gradient */
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    /* Set the width to match "Daily Logins Trend" */
+    max-width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+
+.stat-card-newusers:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.stat-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: #687380;
+    line-height: 20px;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 600;
+    color: #221340;
+    margin-top: 24px;
+    text-align: start;
+}
+
+.stat-change {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 14px;
+    border: 1px solid #ACE5BE;
+    border-radius: 20px;
+    background: white;
+    padding: 6px 10px;
+}
+
+.stat-change mat-icon {
+    color: green;
+    /* default color */
+    margin-right: 5px;
+}
+
+.stat-change span {
+    font-weight: bold;
+}
+
+.stat-change.negative mat-icon {
+    color: red;
+}
+
+// .stat-card { 
+//     background: linear-gradient(90deg, #ffffff, #e0d4fa); /* Left to right gradient */ 
+//     border-radius: 24px; 
+//     padding: 24px; 
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+//     flex: 1; 
+//     max-width: 250px; 
+//     text-align: center; 
+//     transition: all 0.3s ease; 
+// } 
+
+.stat-card {
+    background: linear-gradient(90deg, #ffffff, #e0d4fa);
+    /* Left to right gradient */
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    /* Set the width to match "Users Over Time" */
+    max-width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+// .stat-card-activeusers { 
+//     background: linear-gradient(90deg, #ffffff, #CEF2D9); /* Left to right gradient */ 
+//     border-radius: 24px; 
+//     padding: 24px; 
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+//     flex: 1; 
+//     max-width: 250px; 
+//     text-align: center; 
+//     transition: all 0.3s ease; 
+// } 
+
+.stat-card-activeusers {
+    background: linear-gradient(90deg, #ffffff, #CEF2D9);
+    /* Left to right gradient */
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    /* Set the width to match "Login Success vs Failed" */
+    max-width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card-activeusers:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.mat-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header_title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #221340;
+    padding: 0 8px;
+}
+
+.right-side-img {
+    display: flex;
+    align-items: center;
+}
+
+.left-side-img {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    /* Distribute cards evenly */
+    align-items: stretch;
+    /* Ensure all cards stretch to the same height */
+    // gap: 20px;
+    /* Optional: add some spacing between the cards */
+}
+
+.chart-card {
+    flex-grow: 1;
+    /* Cards will grow to take equal space */
+    display: flex;
+    flex-direction: column;
+}
+
+mat-card-content {
+    flex-grow: 1;
+    /* Makes the content section grow and fill remaining space */
+    display: flex;
+    justify-content: center;
+    /* Centers the chart horizontally */
+    align-items: center;
+    /* Centers the chart vertically */
+}
+
+canvas {
+    width: 100% !important;
+    /* Ensure the canvas fills the width */
+    height: 100% !important;
+    /* Ensure the canvas fills the height */
+}
+
+.bottom-img {
+    display: flex;
+    text-align: start;
+    margin-top: 15px;
+
+    img {
+        padding-right: 10px
+    }
+
+    span {
+        padding-right: 10px;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+
+.align-center {
+    align-items: center;
+}
+
+.header-cardtitle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card-size-first {
+    max-width: 100% !important;
+}
+
+// .card-size-second {
+//     max-width: 30% !important;
+// }
+
+.segment-container {
+    display: flex;
+    background: #F2F2F2 !important;
+}
+
+.segment-btn {
+    //   background-color: #f7f7f7;
+    //   border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.segment-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.segment-btn.active {
+    background-color: #4d2df0;
+    //   color: white;
+    border-color: #4d2df0;
+}
+
+.filters-container {
+    display: flex;
+    align-items: center;
+}
+
+.filter {
+    margin-right: 20px;
+}
+
+.filter label {
+    margin-right: 10px;
+}
+
+select {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #f7f7f7;
+}
+
+.notification_icon-failure {
+    padding-left: 20px;
+}
