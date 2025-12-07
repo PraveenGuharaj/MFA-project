@@ -22,6 +22,7 @@ import { DashboardServiceRequest } from './component/dashboard/dashboard-service
 import { DashboardTransactionMix } from './component/dashboard/dashboard-transaction-mix/dashboard-transaction-mix';
 import { DashboardDigitatlOnboarding } from './component/dashboard/dashboard-digitatl-onboarding/dashboard-digitatl-onboarding';
 import { DashboardTransactionPerformance } from './component/dashboard/dashboard-transaction-performance/dashboard-transaction-performance';
+import { DashboardDigitalJourneyInsights } from './component/dashboard/dashboard-digital-journey-insights/dashboard-digital-journey-insights';
 
 export const routes: Routes = [
   {
@@ -41,9 +42,10 @@ export const routes: Routes = [
       { path: 'geographic-metrics',component: DashboardGeographicMetrics},
       { path: 'session-metrics', component: DashboardSessionMetrics },
       { path: 'service-request', component: DashboardServiceRequest},
-      {path: 'transaction-mix', component:DashboardTransactionMix},
-      {path: 'digital-onboarding', component:DashboardDigitatlOnboarding},
+      { path: 'transaction-mix', component:DashboardTransactionMix},
+      { path: 'digital-onboarding', component:DashboardDigitatlOnboarding},
       { path: 'transaction-perfomance',component: DashboardTransactionPerformance},
+      {path: 'digital-onboarding-journey-insights',component: DashboardDigitalJourneyInsights},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

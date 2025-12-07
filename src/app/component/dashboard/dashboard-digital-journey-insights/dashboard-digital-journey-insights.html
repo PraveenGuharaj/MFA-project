@@ -1,0 +1,102 @@
+<div class="user-overview">
+    <h2>Digital Onboarding Journey Insights</h2>
+    <p>Track customer onboarding paths, identify drop-off points, and measure conversion rates to improve the digital
+        onboarding experience.</p>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-title">
+                <span class="card-title">Users Started Onboarding</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">8,456</div>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card-newusers">
+            <div class="stat-title">
+                <span class="card-title">Broken Journeys</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">2134</div>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stat-card-activeusers">
+            <div class="stat-title">
+                <span class="card-title">Completed Onboarding</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">2134</div>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stat-card-activeusers">
+            <div class="stat-title">
+                <span class="card-title">Conversion Rate</span>
+            </div>
+            <div class="stat-title">
+                <div class="stat-value">78.8%</div>
+                <div class="stat-change">
+                    <img src="images/arrow-growth.png" class="notification_icon">
+                    <span>12%</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="chart-container-wrapper">
+    <mat-card class="chart-card card-size-first">
+        <mat-card-header>
+            <div class="header-cardtitle">
+                <mat-card-title>Onboarding Funnel</mat-card-title>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas #funnelChart></canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card card-size-second">
+        <mat-card-header>
+            <mat-card-title>Request vs Completion vs Failed</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- <canvas #myDonutChart></canvas> -->
+            <canvas #myLineChart></canvas>
+        </mat-card-content>
+        <div class="left-side-img">
+            <div class="right-side-img ">
+                <img src="images/green_success.png" class="notification_icon">
+                <span class="header_title">Active</span>
+            </div>
+
+            <div class="right-side-img ">
+                <img src="images/completed.png" class="notification_icon">
+                <span class="header_title">Blocked</span>
+            </div>
+
+            <div class="right-side-img ">
+                <img src="images/red_failure.png" class="notification_icon">
+                <span class="header_title">Locked</span>
+            </div>
+        </div>
+    </mat-card>
+</div>

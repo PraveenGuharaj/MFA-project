@@ -45,7 +45,8 @@ export class DbxSidebar {
         { name: 'Service Request', link: '/dashboard/service-request' },
         { name: 'Transaction Mix', link: '/dashboard/transaction-mix' },
         { name: 'Digital Onboarding Journey', link: '/dashboard/digital-onboarding' },
-        { name: 'Transaction Performance', link: '/dashboard/transaction-perfomance' }
+        { name: 'Transaction Performance', link: '/dashboard/transaction-perfomance' },
+        { name: 'Digital Onboarding Journey Insights', link: '/dashboard/digital-onboarding-journey-insights' }
       ],
       expanded: false
     },
