@@ -23,6 +23,8 @@ import { DashboardTransactionMix } from './component/dashboard/dashboard-transac
 import { DashboardDigitatlOnboarding } from './component/dashboard/dashboard-digitatl-onboarding/dashboard-digitatl-onboarding';
 import { DashboardTransactionPerformance } from './component/dashboard/dashboard-transaction-performance/dashboard-transaction-performance';
 import { DashboardDigitalJourneyInsights } from './component/dashboard/dashboard-digital-journey-insights/dashboard-digital-journey-insights';
+import { DashboardUserOverviewMobile } from './component/dashboard/dashboard-user-overview-mobile/dashboard-user-overview-mobile';
+import { DashboarUserOverviewWeb } from './component/dashboard/dashboard-user-overview-web/dashboard-user-overview-web';
 
 export const routes: Routes = [
   {
@@ -43,9 +45,11 @@ export const routes: Routes = [
       { path: 'session-metrics', component: DashboardSessionMetrics },
       { path: 'service-request', component: DashboardServiceRequest},
       { path: 'transaction-mix', component:DashboardTransactionMix},
-      { path: 'digital-onboarding', component:DashboardDigitatlOnboarding},
+      { path: 'digital-onboarding-journey', component:DashboardDigitatlOnboarding},
       { path: 'transaction-perfomance',component: DashboardTransactionPerformance},
-      {path: 'digital-onboarding-journey-insights',component: DashboardDigitalJourneyInsights},
+      {path: 'digital-onboarding-insights',component: DashboardDigitalJourneyInsights},
+      {path: 'user-overview-mobile',component: DashboardUserOverviewMobile},
+      { path: 'user-overview-web',component: DashboarUserOverviewWeb},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

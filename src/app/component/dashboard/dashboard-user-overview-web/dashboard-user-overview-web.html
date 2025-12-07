@@ -1,0 +1,122 @@
+<div class="user-overview">
+  <h2>User Overview</h2>
+  <p>Track registrations, active users, and engagement across channels.</p>
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-title">
+        <span class="card-title">Total Registered Users</span>
+        <div class="stat-change">
+          <img src="images/arrow-growth.png" class="notification_icon">
+          <span>12%</span>
+        </div>
+      </div>
+      <div class="stat-value">245,890</div>
+
+    </div>
+
+    <div class="stat-card-newusers">
+      <div class="stat-title">
+        <span class="card-title">New Users</span>
+        <div class="stat-change">
+          <img src="images/arrow-down.png" class="notification_icon">
+          <span>12%</span>
+        </div>
+      </div>
+      <div class="stat-value">1240</div>
+
+    </div>
+
+    <div class="stat-card-activeusers">
+      <div class="stat-title">
+        <span class="card-title">Active Users</span>
+        <div class="stat-change">
+          <img src="images/arrow-growth.png" class="notification_icon">
+          <span>12%</span>
+        </div>
+      </div>
+      <div class="stat-value">8943</div>
+
+    </div>
+  </div>
+</div>
+
+<mat-card class="chart-card card-size">
+  <mat-card-header>
+    <div class="header-cardtitle">
+      <mat-card-title>User Growth Trend</mat-card-title>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <canvas #myLineChart></canvas>
+  </mat-card-content>
+</mat-card>
+
+
+<!-- <div class="chart-container-wrapper">
+  
+      <mat-card class="chart-card">
+    <mat-card-header>
+      <mat-card-title>Users Over Time</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <canvas #myBarChart></canvas>
+    </mat-card-content>
+  </mat-card>
+
+    <mat-card class="android-card">
+      <div class="d-flex pb-40" >
+        <img src="images/dashboard-android.png" class="notification_icon">
+        <span class="content-text">User count on Android version</span>
+      </div>
+
+      <span class="fs-32">24</span>
+    </mat-card>
+
+    
+      <mat-card class="apple-card pb-40">
+      <div class="d-flex pb-40">
+        <img src="images/dashboard-apple.png" class="notification_icon">
+        <span class="content-text">User count on Android version</span>
+      </div>
+
+      <span class="fs-32">24</span>
+    </mat-card>
+
+</div> -->
+
+
+<div class="chart-container-wrapper-web">
+
+  <!-- LEFT SIDE — Chart Card -->
+  <mat-card class="chart-card-web">
+    <mat-card-header>
+      <mat-card-title>Users Over Time</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <canvas #myBarChart></canvas>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- RIGHT SIDE — Stats Cards -->
+  <div class="right-cards-container-web">
+
+    <mat-card class="stats-card-web android-card">
+      <div class="icon-row">
+        <img src="images/dashboard-android.png" class="notification_icon">
+        <span class="content-text">User count on Android version</span>
+      </div>
+      <span class="fs-32">24</span>
+    </mat-card>
+
+    <mat-card class="stats-card-web android-card">
+      <div class="icon-row">
+        <img src="images/dashboard-apple.png" class="notification_icon">
+        <span class="content-text">User count on ios version</span>
+      </div>
+      <span class="fs-32">58</span>
+    </mat-card>
+
+  </div>
+
+</div>

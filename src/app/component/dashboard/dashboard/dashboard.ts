@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DbxSidebar } from '../../../core/layout/common/dbx-sidebar/dbx-sidebar';
 import { DbxHeader } from '../../../core/layout/common/dbx-header/dbx-header';
-import { RouterModule } from '@angular/router'; // Import RouterModule
+import { NavigationEnd, Router, RouterModule } from '@angular/router'; // Import RouterModule
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,10 +20,50 @@ export class Dashboard {
   headerTitle: string = 'Dashboard';
   headerTabs: any[] = [];
   activeTab: string = '';
-  currentPage: string = 'userOverview';
+  currentPage: string = '';
   subProduct: boolean = false;
   isProductHub: boolean = false; // Track if we are in 'Product Hub'
 
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    console.log('activeTab', this.activeTab)
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const url = this.router.url;
+        console.log('url', url)
+
+        if (url.includes('user-overview')) {
+          this.currentPage = 'user-overview';
+        } else if (url.includes('login-activity')) {
+          this.currentPage = 'login-activity';
+        } else if (url.includes('mfa-otp-activity')) {
+          this.currentPage = 'mfa-otp-activity';
+        } else if (url.includes('security-account-status')) {
+          this.currentPage = 'security-account-status';
+        } else if (url.includes('geographic-metrics')) {
+          this.currentPage = 'geographic-metrics';
+        } else if (url.includes('session-metrics')) {
+          this.currentPage = 'session-metrics';
+        } else if (url.includes('service-request')) {
+          this.currentPage = 'service-request';
+        } else if (url.includes('transaction-mix')) {
+          this.currentPage = 'transaction-mix';
+        } else if (url.includes('digital-onboarding-journey')) {
+          this.currentPage = 'digital-onboarding-journey';
+        } else if (url.includes('transaction-perfomance')) {
+          this.currentPage = 'transaction-perfomance';
+        } else if (url.includes('digital-onboarding-journey-insights')) {
+          this.currentPage = 'digital-onboarding-insights';
+        }
+        else {
+          this.currentPage = 'user-overview';
+        }
+
+        console.log("Current Active Page:", this.currentPage);
+      });
+  }
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
   }
@@ -58,4 +99,36 @@ export class Dashboard {
   toggleSubProduct(value: boolean) {
     this.activeTab = value ? 'sub' : 'retail';
   }
+
+  onTabChanged(tab: string) {
+    this.activeTab = tab;
+    this.navigateBasedOnTab();
+  }
+
+  navigateBasedOnTab() {
+    console.log('zzzz', this.currentPage)
+    if (this.currentPage === 'user-overview') {
+
+      if (this.activeTab === 'all') {
+        this.router.navigate(['/dashboard/user-overview']);
+      } else if (this.activeTab === 'mobile') {
+        this.router.navigate(['/dashboard/user-overview-mobile']);
+      } else if (this.activeTab === 'web') {
+        this.router.navigate(['/dashboard/user-overview-web']);
+      }
+
+    }
+    if (this.currentPage === 'transaction-perfomance') {
+
+      if (this.activeTab === 'all') {
+        this.router.navigate(['/dashboard/transaction-perfomance']);
+      } else if (this.activeTab === 'mobile') {
+        this.router.navigate(['/dashboard/transaction-perfomance-mobile']);
+      } else if (this.activeTab === 'web') {
+        this.router.navigate(['/dashboard/transaction-perfomance-web']);
+      }
+
+    }
+  }
+
 }

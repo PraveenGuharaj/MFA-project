@@ -16,6 +16,7 @@ import { DashboardSubProduct } from '../../../../component/dashboard/dashboard-s
 })
 export class DbxHeader {
   @Output() productTypeChanged = new EventEmitter<boolean>();
+  @Output() tabChanged = new EventEmitter<string>();
   @Input() pageTitle: string = 'Dashboard'; // Title passed from the parent
   @Input() headerTabs: any[] = [];  // Dynamic tabs
   @Input() isProductHub: boolean = false; // Property to check if we are in Product Hub
@@ -59,5 +60,6 @@ export class DbxHeader {
   // Method to change active tab for User Overview
   setActiveTab(tab: string) {
     this.activeTab = tab;
+    this.tabChanged.emit(tab);
   }
 }

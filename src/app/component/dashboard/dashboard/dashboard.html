@@ -4,7 +4,8 @@
 
   <div class="main-content">
     <app-dbx-header [pageTitle]="headerTitle" [headerTabs]="headerTabs" [activeTab]="activeTab"
-      [isProductHub]="isProductHub" (productTypeChanged)="onProductTypeChanged($event)">
+      [isProductHub]="isProductHub" (productTypeChanged)="onProductTypeChanged($event)"
+      (tabChanged)="onTabChanged($event)">
     </app-dbx-header>
 
 
