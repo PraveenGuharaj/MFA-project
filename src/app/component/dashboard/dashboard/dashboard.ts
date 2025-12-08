@@ -131,6 +131,14 @@ export class Dashboard {
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/mfa-otp-activity-web']);
       }
+    } else if( this.currentPage == 'security-account-status') {
+       if (this.activeTab === 'all') {
+        this.router.navigate(['/dashboard/security-account-status']);
+      } else if (this.activeTab === 'mobile') {
+        this.router.navigate(['/dashboard/security-account-status-mobile']);
+      } else if (this.activeTab === 'web') {
+        this.router.navigate(['/dashboard/security-account-status-web']);
+      }
     }
     if (this.currentPage === 'transaction-perfomance') {
 

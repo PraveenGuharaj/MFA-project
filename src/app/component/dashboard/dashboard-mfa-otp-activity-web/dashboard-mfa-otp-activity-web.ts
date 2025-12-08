@@ -39,7 +39,7 @@ export class DashboardMfaOtpActivityWeb {
   @ViewChild('myChart', { static: false }) myChartElement!: ElementRef;
   @ViewChild('myDonutChart', { static: false }) myDonutChartElement!: ElementRef;
 
-   public barChartOptions: any = {
+  public barChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
     indexAxis: 'x',    // <-- VERTICAL BARS like screenshot
@@ -82,23 +82,16 @@ export class DashboardMfaOtpActivityWeb {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // X-axis labels
     datasets: [
       {
-        label: 'Mobile',
-        data: [7200, 1500, 4500, 5600, 2300, 4700, 1400],       // purple bottom
-        backgroundColor: () =>
-          this.createStripedGradient('rgba(118,0,255,0.75)', 'rgba(118,0,255,0.75)'),
-        borderRadius: 12
-      },
-      {
         label: 'Web',
         data: [2500, 3000, 3800, 3100, 7000, 3500, 2200],       // green top
         backgroundColor: () =>
           this.createStripedGradient('rgba(0,200,83,0.75)', 'rgba(0,200,83,0.75)'),
-        borderRadius: 12
+        borderRadius: 4
       }
     ]
   };
 
-  
+
   createPattern(color: string) {
     const canvas = document.createElement('canvas');
     canvas.width = 12;
@@ -470,6 +463,4 @@ export class DashboardMfaOtpActivityWeb {
     ctx.stroke();
     ctx.setLineDash([]); // Reset line style
   }
-
-
 }

@@ -29,6 +29,8 @@ import { DashboardLoginActivityWeb } from './component/dashboard/dashboard-login
 import { DashboardLoginActivityMobile } from './component/dashboard/dashboard-login-activity-mobile/dashboard-login-activity-mobile';
 import { DashboardMfaOtpActivityWeb } from './component/dashboard/dashboard-mfa-otp-activity-web/dashboard-mfa-otp-activity-web';
 import { DashboardMfaOtpActivityMobile } from './component/dashboard/dashboard-mfa-otp-activity-mobile/dashboard-mfa-otp-activity-mobile';
+import { DashboardSecurityAccountStatusMobile } from './component/dashboard/dashboard-security-account-status-mobile/dashboard-security-account-status-mobile';
+import { DashboardSecurityAccountStatusWeb } from './component/dashboard/dashboard-security-account-status-web/dashboard-security-account-status-web';
 
 export const routes: Routes = [
   {
@@ -49,6 +51,8 @@ export const routes: Routes = [
       { path: 'mfa-otp-activity-web', component: DashboardMfaOtpActivityWeb },
       { path: 'mfa-otp-activity-mobile', component: DashboardMfaOtpActivityMobile },
       { path: 'security-account-status', component: DashboardSercurityAccountStatus },
+      { path: 'security-account-status-web', component: DashboardSecurityAccountStatusWeb },
+      { path: 'security-account-status-mobile', component: DashboardSecurityAccountStatusMobile },
       { path: 'geographic-metrics',component: DashboardGeographicMetrics},
       { path: 'session-metrics', component: DashboardSessionMetrics },
       { path: 'service-request', component: DashboardServiceRequest},

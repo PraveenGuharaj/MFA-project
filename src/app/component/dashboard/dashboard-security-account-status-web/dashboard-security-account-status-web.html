@@ -1,58 +1,58 @@
 <div class="user-overview">
-    <h2>MFA & OTP Activity</h2>
-    <p>Track multi-factor authentication and OTP usage trends.</p>
+    <h2>Security Alerts & Account Status</h2>
+    <p>Monitor account lockouts, blocked users, and login locations.</p>
 
     <div class="stats-container">
         <div class="stat-card">
             <div class="stat-title">
-                <span class="card-title">MFA Authentications</span>
+                <span class="card-title">Account Lockouts</span>
                 <div class="stat-change">
                     <img src="images/arrow-growth.png" class="notification_icon">
                     <span>12%</span>
                 </div>
             </div>
-            <div class="stat-value">9876</div>
+            <div class="stat-value">24</div>
             <div class="bottom-img">
                 <img src="images/mobile.png">
-                <span>5000</span>
+                <span>10</span>
                 <img src="images/global.png">
-                <span>300</span>
+                <span>8</span>
             </div>
 
         </div>
 
         <div class="stat-card-newusers">
             <div class="stat-title">
-                <span class="card-title">OTP Requests</span>
+                <span class="card-title">Blocked Users</span>
                 <div class="stat-change">
                     <img src="images/arrow-down.png" class="notification_icon">
                     <span>12%</span>
                 </div>
             </div>
-            <div class="stat-value">12342</div>
+            <div class="stat-value">12</div>
             <div class="bottom-img">
                 <img src="images/mobile.png">
-                <span>5000</span>
+                <span>5</span>
                 <img src="images/global.png">
-                <span>300</span>
+                <span>3</span>
             </div>
 
         </div>
 
         <div class="stat-card-activeusers">
             <div class="stat-title">
-                <span class="card-title">OTP Resends</span>
+                <span class="card-title">Distinct Login Locations</span>
                 <div class="stat-change">
                     <img src="images/arrow-growth.png" class="notification_icon">
-                    <span>12%</span>
+                    <span>0.5%</span>
                 </div>
             </div>
-            <div class="stat-value">1102</div>
+            <div class="stat-value">58</div>
             <div class="bottom-img">
                 <img src="images/mobile.png">
-                <span>5000</span>
+                <span>15</span>
                 <img src="images/global.png">
-                <span>300</span>
+                <span>30</span>
             </div>
 
         </div>
@@ -63,19 +63,20 @@
         <mat-card-header>
             <div class="mat-header">
                 <mat-card-title>
-                    MFA Usage</mat-card-title>
+                    Account Lockouts</mat-card-title>
             </div>
-
         </mat-card-header>
         <mat-card-content>
-            <canvas #myLineChart></canvas>
+            <!-- <canvas #myLineChart></canvas> -->
+            <canvas #myBarChart></canvas>
+
         </mat-card-content>
     </mat-card>
 
     <mat-card class="chart-card">
         <mat-card-header>
             <div class="mat-header">
-                <mat-card-title>Daily OTP/MFA Activity</mat-card-title>
+                <mat-card-title>Blocked Users</mat-card-title>
             </div>
 
         </mat-card-header>
@@ -86,7 +87,20 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="chart-card">
+</div>
+<div class="chart-container-wrapper">
+    <mat-card class="chart-card card-size-first">
+        <mat-card-header>
+            <div class="header-cardtitle">
+                <mat-card-title>Alerts Over Time</mat-card-title>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <canvas #myLineChart></canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card card-size-second">
         <mat-card-header>
             <mat-card-title>Request vs Completion vs Failed</mat-card-title>
         </mat-card-header>
@@ -97,19 +111,18 @@
         <div class="left-side-img">
             <div class="right-side-img ">
                 <img src="images/green_success.png" class="notification_icon">
-                <span class="header_title">Request</span>
+                <span class="header_title">Active</span>
             </div>
 
             <div class="right-side-img ">
                 <img src="images/completed.png" class="notification_icon">
-                <span class="header_title">Completed</span>
+                <span class="header_title">Blocked</span>
             </div>
 
             <div class="right-side-img ">
                 <img src="images/red_failure.png" class="notification_icon">
-                <span class="header_title">Failure</span>
+                <span class="header_title">Locked</span>
             </div>
         </div>
     </mat-card>
-
 </div>
