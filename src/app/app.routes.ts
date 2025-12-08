@@ -33,6 +33,8 @@ import { DashboardSecurityAccountStatusMobile } from './component/dashboard/dash
 import { DashboardSecurityAccountStatusWeb } from './component/dashboard/dashboard-security-account-status-web/dashboard-security-account-status-web';
 import { DashboardSessionMetricsWeb } from './component/dashboard/dashboard-session-metrics-web/dashboard-session-metrics-web';
 import { DashboardSessionMetricsMobile } from './component/dashboard/dashboard-session-metrics-mobile/dashboard-session-metrics-mobile';
+import { DashboardServiceRequestWeb } from './component/dashboard/dashboard-service-request-web/dashboard-service-request-web';
+import { DashboardServiceRequestMobile } from './component/dashboard/dashboard-service-request-mobile/dashboard-service-request-mobile';
 
 export const routes: Routes = [
   {
@@ -60,6 +62,8 @@ export const routes: Routes = [
       { path: 'session-metrics-web', component: DashboardSessionMetricsWeb},
       { path: 'session-metrics-mobile', component: DashboardSessionMetricsMobile},
       { path: 'service-request', component: DashboardServiceRequest},
+      { path: 'service-request-web', component: DashboardServiceRequestWeb},
+      { path: 'service-request-mobile', component: DashboardServiceRequestMobile},
       { path: 'transaction-mix', component:DashboardTransactionMix},
       { path: 'digital-onboarding-journey', component:DashboardDigitatlOnboarding},
       { path: 'transaction-perfomance',component: DashboardTransactionPerformance},

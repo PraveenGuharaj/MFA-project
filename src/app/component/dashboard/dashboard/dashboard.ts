@@ -123,7 +123,7 @@ export class Dashboard {
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/login-activity-web']);
       }
-    }  else if (this.currentPage === 'mfa-otp-activity') {
+    } else if (this.currentPage === 'mfa-otp-activity') {
       if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/mfa-otp-activity']);
       } else if (this.activeTab === 'mobile') {
@@ -131,21 +131,29 @@ export class Dashboard {
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/mfa-otp-activity-web']);
       }
-    } else if( this.currentPage == 'security-account-status') {
-       if (this.activeTab === 'all') {
+    } else if (this.currentPage == 'security-account-status') {
+      if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/security-account-status']);
       } else if (this.activeTab === 'mobile') {
         this.router.navigate(['/dashboard/security-account-status-mobile']);
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/security-account-status-web']);
       }
-    } else if( this.currentPage == 'session-metrics') {
-       if (this.activeTab === 'all') {
+    } else if (this.currentPage == 'session-metrics') {
+      if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/session-metrics']);
       } else if (this.activeTab === 'mobile') {
         this.router.navigate(['/dashboard/session-metrics-mobile']);
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/session-metrics-web']);
+      }
+    } else if (this.currentPage == 'service-request') {
+      if (this.activeTab === 'all') {
+        this.router.navigate(['/dashboard/service-request']);
+      } else if (this.activeTab === 'mobile') {
+        this.router.navigate(['/dashboard/service-request-mobile']);
+      } else if (this.activeTab === 'web') {
+        this.router.navigate(['/dashboard/service-request-web']);
       }
     }
     if (this.currentPage === 'transaction-perfomance') {
