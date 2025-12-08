@@ -123,6 +123,14 @@ export class Dashboard {
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/login-activity-web']);
       }
+    }  else if (this.currentPage === 'mfa-otp-activity') {
+      if (this.activeTab === 'all') {
+        this.router.navigate(['/dashboard/mfa-otp-activity']);
+      } else if (this.activeTab === 'mobile') {
+        this.router.navigate(['/dashboard/mfa-otp-activity-mobile']);
+      } else if (this.activeTab === 'web') {
+        this.router.navigate(['/dashboard/mfa-otp-activity-web']);
+      }
     }
     if (this.currentPage === 'transaction-perfomance') {
 

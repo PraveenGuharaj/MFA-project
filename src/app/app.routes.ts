@@ -27,6 +27,8 @@ import { DashboardUserOverviewMobile } from './component/dashboard/dashboard-use
 import { DashboarUserOverviewWeb } from './component/dashboard/dashboard-user-overview-web/dashboard-user-overview-web';
 import { DashboardLoginActivityWeb } from './component/dashboard/dashboard-login-activity-web/dashboard-login-activity-web';
 import { DashboardLoginActivityMobile } from './component/dashboard/dashboard-login-activity-mobile/dashboard-login-activity-mobile';
+import { DashboardMfaOtpActivityWeb } from './component/dashboard/dashboard-mfa-otp-activity-web/dashboard-mfa-otp-activity-web';
+import { DashboardMfaOtpActivityMobile } from './component/dashboard/dashboard-mfa-otp-activity-mobile/dashboard-mfa-otp-activity-mobile';
 
 export const routes: Routes = [
   {
@@ -44,6 +46,8 @@ export const routes: Routes = [
       { path: 'login-activity-web', component: DashboardLoginActivityWeb },
       { path: 'login-activity-mobile', component: DashboardLoginActivityMobile },
       { path: 'mfa-otp-activity', component: DashboardMfaOtpActivity },
+      { path: 'mfa-otp-activity-web', component: DashboardMfaOtpActivityWeb },
+      { path: 'mfa-otp-activity-mobile', component: DashboardMfaOtpActivityMobile },
       { path: 'security-account-status', component: DashboardSercurityAccountStatus },
       { path: 'geographic-metrics',component: DashboardGeographicMetrics},
       { path: 'session-metrics', component: DashboardSessionMetrics },
