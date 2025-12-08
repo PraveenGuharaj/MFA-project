@@ -31,6 +31,8 @@ import { DashboardMfaOtpActivityWeb } from './component/dashboard/dashboard-mfa-
 import { DashboardMfaOtpActivityMobile } from './component/dashboard/dashboard-mfa-otp-activity-mobile/dashboard-mfa-otp-activity-mobile';
 import { DashboardSecurityAccountStatusMobile } from './component/dashboard/dashboard-security-account-status-mobile/dashboard-security-account-status-mobile';
 import { DashboardSecurityAccountStatusWeb } from './component/dashboard/dashboard-security-account-status-web/dashboard-security-account-status-web';
+import { DashboardSessionMetricsWeb } from './component/dashboard/dashboard-session-metrics-web/dashboard-session-metrics-web';
+import { DashboardSessionMetricsMobile } from './component/dashboard/dashboard-session-metrics-mobile/dashboard-session-metrics-mobile';
 
 export const routes: Routes = [
   {
@@ -55,6 +57,8 @@ export const routes: Routes = [
       { path: 'security-account-status-mobile', component: DashboardSecurityAccountStatusMobile },
       { path: 'geographic-metrics',component: DashboardGeographicMetrics},
       { path: 'session-metrics', component: DashboardSessionMetrics },
+      { path: 'session-metrics-web', component: DashboardSessionMetricsWeb},
+      { path: 'session-metrics-mobile', component: DashboardSessionMetricsMobile},
       { path: 'service-request', component: DashboardServiceRequest},
       { path: 'transaction-mix', component:DashboardTransactionMix},
       { path: 'digital-onboarding-journey', component:DashboardDigitatlOnboarding},

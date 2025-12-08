@@ -139,6 +139,14 @@ export class Dashboard {
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/security-account-status-web']);
       }
+    } else if( this.currentPage == 'session-metrics') {
+       if (this.activeTab === 'all') {
+        this.router.navigate(['/dashboard/session-metrics']);
+      } else if (this.activeTab === 'mobile') {
+        this.router.navigate(['/dashboard/session-metrics-mobile']);
+      } else if (this.activeTab === 'web') {
+        this.router.navigate(['/dashboard/session-metrics-web']);
+      }
     }
     if (this.currentPage === 'transaction-perfomance') {
 
