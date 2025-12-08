@@ -119,7 +119,7 @@ export class Dashboard {
       if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/login-activity']);
       } else if (this.activeTab === 'mobile') {
-        this.router.navigate(['/dashboard/user-overview-mobile']);
+        this.router.navigate(['/dashboard/login-activity-mobile']);
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/login-activity-web']);
       }
