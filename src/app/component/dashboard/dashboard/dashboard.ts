@@ -108,7 +108,6 @@ export class Dashboard {
   navigateBasedOnTab() {
     console.log('zzzz', this.currentPage)
     if (this.currentPage === 'user-overview') {
-
       if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/user-overview']);
       } else if (this.activeTab === 'mobile') {
@@ -116,7 +115,14 @@ export class Dashboard {
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/user-overview-web']);
       }
-
+    } else if (this.currentPage === 'login-activity') {
+      if (this.activeTab === 'all') {
+        this.router.navigate(['/dashboard/login-activity']);
+      } else if (this.activeTab === 'mobile') {
+        this.router.navigate(['/dashboard/user-overview-mobile']);
+      } else if (this.activeTab === 'web') {
+        this.router.navigate(['/dashboard/login-activity-web']);
+      }
     }
     if (this.currentPage === 'transaction-perfomance') {
 

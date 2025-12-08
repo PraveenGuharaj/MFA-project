@@ -25,6 +25,7 @@ import { DashboardTransactionPerformance } from './component/dashboard/dashboard
 import { DashboardDigitalJourneyInsights } from './component/dashboard/dashboard-digital-journey-insights/dashboard-digital-journey-insights';
 import { DashboardUserOverviewMobile } from './component/dashboard/dashboard-user-overview-mobile/dashboard-user-overview-mobile';
 import { DashboarUserOverviewWeb } from './component/dashboard/dashboard-user-overview-web/dashboard-user-overview-web';
+import { DashboardLoginActivityWeb } from './component/dashboard/dashboard-login-activity-web/dashboard-login-activity-web';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
       { path: 'user-overview', component: DashboardUserOverview },
       { path: 'product-hub', component: DashboardProductHub },
       { path: 'login-activity', component: DashboardLoginActivity },
+        { path: 'login-activity-web', component: DashboardLoginActivityWeb },
       { path: 'mfa-otp-activity', component: DashboardMfaOtpActivity },
       { path: 'security-account-status', component: DashboardSercurityAccountStatus },
       { path: 'geographic-metrics',component: DashboardGeographicMetrics},

@@ -109,8 +109,8 @@ export class DashboarUserOverviewWeb {
 
     // Create gradient for Web (Purple)
     const gradientPurple = ctx.createLinearGradient(0, 0, 0, 400);
-    gradientPurple.addColorStop(0, 'rgba(119, 0, 255, 0.7)');
-    gradientPurple.addColorStop(1, 'rgba(120, 0, 180, 0.4)');
+    gradientPurple.addColorStop(0, '#6017EB');
+    gradientPurple.addColorStop(1, '#AD8DEB');
 
     // Create gradient for Mobile (Green)
     const gradientGreen = ctx.createLinearGradient(0, 0, 0, 400);
