@@ -111,4 +111,5 @@ export class DbxSidebar {
     }
     this.menuChanged.emit({ menu, type, isSubmenu });
   }
+
 }

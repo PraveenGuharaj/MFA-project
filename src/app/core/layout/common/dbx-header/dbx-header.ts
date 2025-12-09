@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DashboardAddRetailProduct } from '../../../../component/dashboard/dashboard-add-retail-product/dashboard-add-retail-product';
@@ -30,10 +30,11 @@ export class DbxHeader {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log('xxx', this.pageTitle);
-
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('xxx', this.subMenuTitle);
+  }
   openModal() {
     this.dialog.open(DashboardAddRetailProduct, {
       width: '60%',  // Adjust width as needed

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { DbxSidebar } from '../../../core/layout/common/dbx-sidebar/dbx-sidebar';
 import { DbxHeader } from '../../../core/layout/common/dbx-header/dbx-header';
 import { NavigationEnd, Router, RouterModule } from '@angular/router'; // Import RouterModule
@@ -17,16 +17,16 @@ import { filter } from 'rxjs';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  headerTitle: string = 'Dashboard';
+  headerTitle!: string;
   headerTabs: any[] = [];
   activeTab: string = '';
   currentPage: string = '';
   subProduct: boolean = false;
   isProductHub: boolean = false; // Track if we are in 'Product Hub'
   subMenuTitle: any;
-  isSubmenu: boolean =true;
+  isSubmenu!: boolean;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     console.log('activeTab', this.activeTab)
@@ -71,28 +71,37 @@ export class Dashboard {
   }
 
 
-  onMenuChanged(event: { menu: string; type: string,isSubmenu:boolean }) {
+  onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean }) {
     console.log('event', event);
 
     if (event.menu === 'User Overview') {
-      this.isProductHub = false; 
+      this.isProductHub = false;
       this.headerTitle = 'Dashboard';
-      this.activeTab = 'all'; 
+      this.activeTab = 'all';
+      this.cdr.detectChanges();
     } else if (event.menu === 'Product Hub') {
-      this.isProductHub = true; 
-      this.headerTitle = 'Product Hub'; 
-      this.activeTab = 'retail'; 
+      this.isProductHub = true;
+      this.headerTitle = 'Product Hub';
+      this.activeTab = 'retail';
+      this.cdr.detectChanges();
     } else if (event.menu === 'Login Activity') {
-      this.isProductHub = false; 
-      this.headerTitle = 'Login Activity'; 
-      this.activeTab = 'retail'; 
+      this.isProductHub = false;
+      this.headerTitle = 'Login Activity';
+      this.activeTab = 'retail';
+      this.cdr.detectChanges();
     } else if (event.menu == 'Admin Center') {
-        this.headerTitle = 'Admin Center';
-        this.isProductHub = false
+      this.headerTitle = 'Admin Center';
+      this.isProductHub = false
+      this.cdr.detectChanges();
     } else if (event.menu == 'Manage OTP') {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'OTP Management'
       this.isSubmenu = event.isSubmenu;
+    } else if (event.menu == 'Manage Locators') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Manage Locators'
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.detectChanges();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

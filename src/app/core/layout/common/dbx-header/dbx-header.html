@@ -1,12 +1,14 @@
 <!-- Top Section -->
 <div class="header-top">
   <div class="dashboard-title">
-    <p>Admin Center</p> <!-- This title will dynamically change -->
+    <p>{{pageTitle}}</p> <!-- This title will dynamically change -->
 
-    <mat-icon>chevron_right</mat-icon>
-    <span class="header-title" style="font-weight:700;">
-      OTP Management
-    </span>
+    <div *ngIf="isSubMenu" class="d-flex">
+      <mat-icon>chevron_right</mat-icon>
+      <span class="header-title" style="font-weight:700;">
+        {{subMenuTitle}}
+      </span>
+    </div>
 
 
     <mat-icon *ngIf="isProductHub">chevron_right</mat-icon>
@@ -32,20 +34,37 @@
 <!-- Bottom Section -->
 <div class="header-bottom">
   <div class="tabs">
-    <!-- <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
-      (click)="setActiveTab('all')">
-      <img src="images/retail_product.png" class="pr-10">ALL
-    </button>
+    <div *ngIf="pageTitle =='Dashboard'" class="d-flex">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
+        (click)="setActiveTab('all')">
+        <img src="images/retail_product.png" class="pr-10">ALL
+      </button>
 
-    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'web'}" *ngIf="!isProductHub"
-      (click)="setActiveTab('web')">
-      <img src="images/sub_product.png" class="pr-10">Web
-    </button>
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'web'}" *ngIf="!isProductHub"
+        (click)="setActiveTab('web')">
+        <img src="images/sub_product.png" class="pr-10">Web
+      </button>
 
-    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'mobile'}" *ngIf="!isProductHub"
-      (click)="setActiveTab('mobile')">
-      <img src="images/sub_product.png" class="pr-10">Mobile
-    </button>
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'mobile'}" *ngIf="!isProductHub"
+        (click)="setActiveTab('mobile')">
+        <img src="images/sub_product.png" class="pr-10">Mobile
+      </button>
+    </div>
+
+
+    <!-- manage locators -->
+    <div *ngIf="subMenuTitle == 'Manage Locators'" class="d-flex">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'ATM Locator'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('ATM Locator')">
+        <img src="images/retail_product.png" class="pr-10">ATM Locator
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Branch Locator'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Branch Locator')">
+        <img src="images/sub_product.png" class="pr-10">Branch Locator
+      </button>
+    </div>
+
 
     <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retail'}" *ngIf="isProductHub"
       (click)="setActiveTab('retail')" (click)="retailProduct(false)">
@@ -55,9 +74,9 @@
     <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}" *ngIf="isProductHub"
       (click)="setActiveTab('sub')" (click)="subProductModel(true)">
       <img src="images/sub_product.png" class="pr-10">Sub Product
-    </button> -->
+    </button>
 
-    <span class="f-15">Configuration List</span>
+    <span class="f-15" *ngIf="subMenuTitle == 'OTP Management'">Configuration List</span>
   </div>
 
 
@@ -69,9 +88,14 @@
   </div>
 
 
-  <div class="actions">
-    <!-- <button class="retail_product "  (click)="openConfigurationModal()"> <img src="images/plus-mini.png">Add Configuration</button> -->
-    <button class="retail_product " (click)="openAtmModal()"> <img src="images/plus-mini.png">Add ATM</button>
+
+
+
+  <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators'">
+    <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
+        src="images/plus-mini.png">Add Configuration</button>
+    <button class="retail_product " (click)="openAtmModal()" *ngIf="subMenuTitle == 'Manage Locators'"> <img
+        src="images/plus-mini.png">Add ATM</button>
 
   </div>
 </div>
