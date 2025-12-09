@@ -1,0 +1,108 @@
+<div class="overlay" (click)="closeForm()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>Add Configuration</h2>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+      <!-- Product Name -->
+      <div class="form-row full-width">
+        <label>Domain</label>
+          <mat-select formControlName="domain" placeholder="Select Domain">
+            <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+          </mat-select>
+      </div>
+
+      <!-- Channel + Category Dropdown -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Channel</label>
+          <mat-select formControlName="channel" placeholder="Select Channel">
+            <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+          </mat-select>
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <mat-select formControlName="category" placeholder="Select Category">
+            <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <!-- OTP Details -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>OTP Length</label>
+          <input formControlName="otpLength" matInput placeholder="Enter the length" />
+        </div>
+
+        <div class="form-group">
+          <label>Max Invalid Attempts</label>
+          <input formControlName="maxAttempts" matInput placeholder="Enter max attempts" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>OTP Expiry</label>
+          <input formControlName="otpExpiry" matInput placeholder="Enter expiry time" />
+        </div>
+
+        <div class="form-group">
+          <label>Block Duration</label>
+          <mat-select formControlName="blockDuration" placeholder="Select duration">
+            <mat-option *ngFor="let b of blockDurations" [value]="b">{{ b }}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Max Resend Count </label>
+          <input formControlName="otpExpiry" matInput placeholder="Enter expiry time" />
+        </div>
+
+        <div class="form-group">
+          <label>Type</label>
+          <mat-select formControlName="blockDuration" placeholder="Select duration">
+            <mat-option *ngFor="let b of blockDurations" [value]="b">{{ b }}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Max Timer</label>
+          <input formControlName="otpExpiry" matInput placeholder="Enter expiry time" />
+        </div>
+
+        <div class="form-group">
+          <label>Delivery Modes</label>
+          <mat-select formControlName="blockDuration" placeholder="Select duration">
+            <mat-option *ngFor="let b of blockDurations" [value]="b">{{ b }}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="form-row">
+        <div class="form-group">
+          Status <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="form-actions">
+        <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

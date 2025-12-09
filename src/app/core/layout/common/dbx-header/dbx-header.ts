@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DashboardAddRetailProduct } from '../../../../component/dashboard/dashboard-add-retail-product/dashboard-add-retail-product';
 import { DashboardSubProduct } from '../../../../component/dashboard/dashboard-sub-product/dashboard-sub-product';
+import { AdminCenterAddConfiguration } from '../../../../component/admin-center/admin-center-add-configuration/admin-center-add-configuration';
 
 @Component({
   selector: 'app-dbx-header',
@@ -34,6 +35,16 @@ export class DbxHeader {
 
   openModal() {
     this.dialog.open(DashboardAddRetailProduct, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openConfigurationModal() {
+        this.dialog.open(AdminCenterAddConfiguration, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
