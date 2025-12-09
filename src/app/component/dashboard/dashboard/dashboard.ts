@@ -23,6 +23,8 @@ export class Dashboard {
   currentPage: string = '';
   subProduct: boolean = false;
   isProductHub: boolean = false; // Track if we are in 'Product Hub'
+  subMenuTitle: any;
+  isSubmenu: boolean =true;
 
   constructor(private router: Router) { }
 
@@ -69,24 +71,31 @@ export class Dashboard {
   }
 
 
-  onMenuChanged(event: { menu: string; type: string }) {
+  onMenuChanged(event: { menu: string; type: string,isSubmenu:boolean }) {
     console.log('event', event);
 
     if (event.menu === 'User Overview') {
-      this.isProductHub = false; // Switch to User Overview
-      this.headerTitle = 'Dashboard'; // Set header title to Dashboard
-      this.activeTab = 'all'; // Set default active tab for User Overview
+      this.isProductHub = false; 
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all'; 
     } else if (event.menu === 'Product Hub') {
-      this.isProductHub = true; // Switch to Product Hub
-      this.headerTitle = 'Product Hub'; // Set header title for Product Hub
-      this.activeTab = 'retail'; // Set default active tab for Product Hub
+      this.isProductHub = true; 
+      this.headerTitle = 'Product Hub'; 
+      this.activeTab = 'retail'; 
     } else if (event.menu === 'Login Activity') {
-      this.isProductHub = false; // Switch to Product Hub
-      this.headerTitle = 'Login Activity'; // Set header title for Product Hub
-      this.activeTab = 'retail'; // Set default active tab for Product Hub
+      this.isProductHub = false; 
+      this.headerTitle = 'Login Activity'; 
+      this.activeTab = 'retail'; 
+    } else if (event.menu == 'Admin Center') {
+        this.headerTitle = 'Admin Center';
+        this.isProductHub = false
+    } else if (event.menu == 'Manage OTP') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'OTP Management'
+      this.isSubmenu = event.isSubmenu;
     }
     else {
-      this.headerTitle = 'Dashboard'; // Fallback title
+      // this.headerTitle = 'Dashboard'; // Fallback title
       this.activeTab = 'all'; // Default tab if no specific menu is selected
     }
   }

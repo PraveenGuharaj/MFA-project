@@ -20,7 +20,7 @@
       <!-- Show submenu only if the item has one and is expanded -->
       <ul *ngIf="item.subMenu && item.expanded">
         <li *ngFor="let subItem of item.subMenu">
-          <a (click)="selectMenu(subItem.name, 'submenu', subItem.link)">
+          <a (click)="selectMenu(subItem.name, 'submenu', subItem.link,subItem?.isSubmenuTitle)">
             {{ subItem.name }}
           </a>
         </li>

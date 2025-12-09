@@ -35,18 +35,19 @@ export class DbxSidebar {
   menuItems = [
     {
       name: 'Dashboard',
+      isSubmenuTitle: false,
       subMenu: [
-        { name: 'User Overview', link: '/dashboard/user-overview' },
-        { name: 'Login Activity', link: '/dashboard/login-activity' },
-        { name: 'MFA & OTP Activity', link: '/dashboard/mfa-otp-activity' },
-        { name: 'Security Alerts & Account', link: '/dashboard/security-account-status' },
-        { name: 'Session Metrics', link: '/dashboard/session-metrics' },
-        { name: 'Geographic Metrics', link: '/dashboard/geographic-metrics' },
-        { name: 'Service Request', link: '/dashboard/service-request' },
-        { name: 'Transaction Mix', link: '/dashboard/transaction-mix' },
-        { name: 'Digital Onboarding Journey', link: '/dashboard/digital-onboarding-journey' },
-        { name: 'Transaction Performance', link: '/dashboard/transaction-perfomance' },
-        { name: 'Digital Onboarding Journey Insights', link: '/dashboard/digital-onboarding-insights' }
+        { name: 'User Overview', link: '/dashboard/user-overview',isSubmenuTitle: false  },
+        { name: 'Login Activity', link: '/dashboard/login-activity',isSubmenuTitle: false  },
+        { name: 'MFA & OTP Activity', link: '/dashboard/mfa-otp-activity',isSubmenuTitle: false  },
+        { name: 'Security Alerts & Account', link: '/dashboard/security-account-status',isSubmenuTitle: false },
+        { name: 'Session Metrics', link: '/dashboard/session-metrics',isSubmenuTitle: false  },
+        { name: 'Geographic Metrics', link: '/dashboard/geographic-metrics',isSubmenuTitle: false  },
+        { name: 'Service Request', link: '/dashboard/service-request' ,isSubmenuTitle: false },
+        { name: 'Transaction Mix', link: '/dashboard/transaction-mix',isSubmenuTitle: false },
+        { name: 'Digital Onboarding Journey', link: '/dashboard/digital-onboarding-journey',isSubmenuTitle: false  },
+        { name: 'Transaction Performance', link: '/dashboard/transaction-perfomance',isSubmenuTitle: false  },
+        { name: 'Digital Onboarding Journey Insights', link: '/dashboard/digital-onboarding-insights',isSubmenuTitle: false }
       ],
       expanded: false
     },
@@ -55,54 +56,59 @@ export class DbxSidebar {
       // No submenu for Product Hub
       subMenu: null,
       expanded: false,
-      link: '/dashboard/product-hub'
+      isSubmenuTitle: true, 
+      link: '/dashboard/product-hub',submenuTitle:'OTP Management'
     },
     {
       name: 'Admin Center',
+      isSubmenuTitle: true,
       subMenu: [
-        { name: 'Service Requests', link: '/service-requests' },
-        { name: 'Transaction Mix', link: '/transaction-mix' }
+        { name: 'Manage OTP', link: 'admin-center/manage-otp',submenuTitle:'OTP Management',isSubmenuTitle: true  },
+        { name: 'Service Requests', link: '/service-requests',submenuTitle:'OTP Management',isSubmenuTitle: true  },
+        { name: 'Transaction Mix', link: '/transaction-mix',submenuTitle:'OTP Management',isSubmenuTitle: true  }
       ],
       expanded: false
     },
-    {
-      name: 'Offer & Discount',
-      subMenu: [
-        { name: 'Service Requests', link: '/service-requests' },
-        { name: 'Transaction Mix', link: '/transaction-mix' }
-      ],
-      expanded: false
-    },
-    {
-      name: 'Partner Onboarding',
-      subMenu: [
-        { name: 'Service Requests', link: '/service-requests' },
-        { name: 'Transaction Mix', link: '/transaction-mix' }
-      ],
-      expanded: false
-    },
-    {
-      name: 'Operation',
-      subMenu: [
-        { name: 'Service Requests', link: '/service-requests' },
-        { name: 'Transaction Mix', link: '/transaction-mix' }
-      ],
-      expanded: false
-    }
+    // {
+    //   name: 'Offer & Discount',
+    //   subMenu: [
+    //     { name: 'Service Requests', link: '/service-requests' },
+    //     { name: 'Transaction Mix', link: '/transaction-mix' }
+    //   ],
+    //   expanded: false
+    // },
+    // {
+    //   name: 'Partner Onboarding',
+    //   subMenu: [
+    //     { name: 'Service Requests', link: '/service-requests' },
+    //     { name: 'Transaction Mix', link: '/transaction-mix' }
+    //   ],
+    //   expanded: false
+    // },
+    // {
+    //   name: 'Operation',
+    //   subMenu: [
+    //     { name: 'Service Requests', link: '/service-requests' },
+    //     { name: 'Transaction Mix', link: '/transaction-mix' }
+    //   ],
+    //   expanded: false
+    // }
   ]
 
   toggleSubMenu(item: any) {
     item.expanded = !item.expanded;
   }
 
-  selectMenu(menu: string, type: string, link?: string) {
+  selectMenu(menu: string, type: string, link?: string, isSubmenu?: boolean) {
     console.log('menu', menu);
     console.log('type', type);
     console.log('link', link);
+    console.log('isSUbmenu',isSubmenu);
+    
 
     if (link) {
       this.router.navigate([link]); // Navigate to the selected route
     }
-    this.menuChanged.emit({ menu, type });
+    this.menuChanged.emit({ menu, type, isSubmenu});
   }
 }

@@ -17,13 +17,20 @@ import { DashboardSubProduct } from '../../../../component/dashboard/dashboard-s
 export class DbxHeader {
   @Output() productTypeChanged = new EventEmitter<boolean>();
   @Output() tabChanged = new EventEmitter<string>();
-  @Input() pageTitle: string = 'Dashboard'; // Title passed from the parent
+  @Input() pageTitle?: string; // Title passed from the parent
+  @Input() subMenuTitle: string='';
+  @Input() isSubMenu?: boolean;
   @Input() headerTabs: any[] = [];  // Dynamic tabs
   @Input() isProductHub: boolean = false; // Property to check if we are in Product Hub
 
   @Input() activeTab: string = '';
   subProduct: boolean = false;
   constructor(public dialog: MatDialog) { }
+
+  ngOnInit() {
+    console.log('xxx',this.pageTitle);
+    
+  }
 
   openModal() {
     this.dialog.open(DashboardAddRetailProduct, {

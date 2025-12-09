@@ -35,6 +35,7 @@ import { DashboardSessionMetricsWeb } from './component/dashboard/dashboard-sess
 import { DashboardSessionMetricsMobile } from './component/dashboard/dashboard-session-metrics-mobile/dashboard-session-metrics-mobile';
 import { DashboardServiceRequestWeb } from './component/dashboard/dashboard-service-request-web/dashboard-service-request-web';
 import { DashboardServiceRequestMobile } from './component/dashboard/dashboard-service-request-mobile/dashboard-service-request-mobile';
+import { AdminCenterManageOtp } from './component/admin-center/admin-center-manage-otp/admin-center-manage-otp';
 
 export const routes: Routes = [
   {
@@ -67,14 +68,20 @@ export const routes: Routes = [
       { path: 'transaction-mix', component:DashboardTransactionMix},
       { path: 'digital-onboarding-journey', component:DashboardDigitatlOnboarding},
       { path: 'transaction-perfomance',component: DashboardTransactionPerformance},
-      {path: 'digital-onboarding-insights',component: DashboardDigitalJourneyInsights},
-      {path: 'user-overview-mobile',component: DashboardUserOverviewMobile},
+      { path: 'digital-onboarding-insights',component: DashboardDigitalJourneyInsights},
+      { path: 'user-overview-mobile',component: DashboardUserOverviewMobile},
       { path: 'user-overview-web',component: DashboarUserOverviewWeb},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },
-  // { path: '**', redirectTo: '' },
 
+  {
+    path: 'admin-center',
+    component:Dashboard,
+    children: [
+      { path: 'manage-otp', component: AdminCenterManageOtp}
+    ] 
+  },
 
   {
     path: '',

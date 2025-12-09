@@ -1,0 +1,161 @@
+.product-table-container {
+  background: #faf9ff;
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 20px;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+}
+
+.product-table thead {
+  background: #f5f3fc;
+}
+
+.product-table th {
+  text-align: left;
+  padding: 18px;
+  font-size: 12px;
+  color: #6E6D74;
+  font-weight: 500;
+}
+
+.product-table tr {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E7E7E8;
+}
+
+.product-table td {
+  padding: 43px 21px;
+  font-size: 14px;
+  color: #221340;
+  border-bottom: 1px solid #f1eef9;
+  vertical-align: top;
+  font-weight: 500;
+}
+
+.view-more {
+  color: #6017EB;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.status {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #E0FFEA;
+  color: #06802B;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.status.inactive {
+  background: #FFE0E1;
+  color: #800608;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 25px;
+}
+
+.actions mat-icon {
+  font-size: 19px;
+  cursor: pointer;
+  color: #3c345d;
+}
+
+.actions mat-icon:hover {
+  color: #6017EB;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.pagination button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ded8ee;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination .active-page {
+  background: #1a0738;
+  color: white;
+  border: none;
+}
+
+.pagination span {
+  color: #8b84a5;
+  font-size: 14px;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: end;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f4f4f4;
+    border-radius: 30px;
+    padding: 10px 16px;
+    width: 260px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.filter-btn {
+    background: #f4f4f4;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-btn img {
+    width: 18px;
+    height: 18px;
+}

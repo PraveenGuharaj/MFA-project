@@ -3,7 +3,7 @@
   <app-dbx-sidebar (menuChanged)="onMenuChanged($event)"></app-dbx-sidebar>
 
   <div class="main-content">
-    <app-dbx-header [pageTitle]="headerTitle" [headerTabs]="headerTabs" [activeTab]="activeTab"
+    <app-dbx-header [pageTitle]="headerTitle" [headerTabs]="headerTabs" [subMenuTitle]="subMenuTitle" [isSubMenu]="isSubmenu" [activeTab]="activeTab"
       [isProductHub]="isProductHub" (productTypeChanged)="onProductTypeChanged($event)"
       (tabChanged)="onTabChanged($event)">
     </app-dbx-header>
