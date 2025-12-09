@@ -36,6 +36,7 @@ import { DashboardSessionMetricsMobile } from './component/dashboard/dashboard-s
 import { DashboardServiceRequestWeb } from './component/dashboard/dashboard-service-request-web/dashboard-service-request-web';
 import { DashboardServiceRequestMobile } from './component/dashboard/dashboard-service-request-mobile/dashboard-service-request-mobile';
 import { AdminCenterManageOtp } from './component/admin-center/admin-center-manage-otp/admin-center-manage-otp';
+import { AdminCenterManageLocators } from './component/admin-center/admin-center-manage-locators/admin-center-manage-locators';
 
 export const routes: Routes = [
   {
@@ -79,7 +80,8 @@ export const routes: Routes = [
     path: 'admin-center',
     component:Dashboard,
     children: [
-      { path: 'manage-otp', component: AdminCenterManageOtp}
+      { path: 'manage-otp', component: AdminCenterManageOtp},
+      { path: 'manage-locators', component: AdminCenterManageLocators}
     ] 
   },
 

@@ -1,0 +1,138 @@
+<div class="overlay" (click)="closeForm()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>Add ATM</h2>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+      <!-- Text Inputs -->
+      <div class="full-width">
+        <label>ATM Code</label>
+        <input formControlName="atmCode" placeholder="Enter ATM code" />
+      </div>
+
+      <div class="p-10 full-width">
+        <label>ATM Name</label>
+        <input formControlName="atmName" placeholder="Enter ATM name" />
+      </div>
+
+      <div class="p-10 full-width">
+        <label>Full Address</label>
+        <input formControlName="fullAddress" placeholder="Enter full address" />
+      </div>
+
+      <div class="p-10 full-width">
+        <label>Short Address</label>
+        <input formControlName="shortAddress" placeholder="Enter short address" />
+      </div>
+
+      <!-- Dropdowns -->
+      <div class="p-10">
+        <div class="form-group">
+          <label>Country</label>
+          <mat-select formControlName="country" placeholder="Select Country">
+            <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+          </mat-select>
+        </div>
+
+        <div class="form-group p-10">
+          <label>City</label>
+          <mat-select formControlName="city" placeholder="Select City">
+            <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <!-- Coordinates -->
+      <div class="p-10">
+        <div class="form-group">
+          <label>Latitude</label>
+          <input formControlName="latitude" placeholder="Enter Latitude" />
+        </div>
+
+        <div class="form-group p-10">
+          <label>Longitude</label>
+          <input formControlName="longitude" placeholder="Enter Longitude" />
+        </div>
+      </div>
+
+      <!-- Working Hours -->
+      <div class="p-10">
+        <div class="form-group">
+          <label>Timing</label>
+          <input formControlName="timing" placeholder="Enter timing" />
+        </div>
+
+        <div class="form-group p-10">
+          <label>Working Hours</label>
+          <mat-select formControlName="workingHours" placeholder="Select Hours">
+            <mat-option value="24x7">24x7</mat-option>
+            <mat-option value="Day">Day</mat-option>
+            <mat-option value="Night">Night</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <!-- Checkbox Section -->
+      <h3>ATM Type</h3>
+      <div class="checkbox-group">
+        <mat-checkbox formControlName="cashDispenser"><span class="fs-16">Cash Dispenser</span></mat-checkbox>
+        <mat-checkbox formControlName="recycler"><span class="fs-16">Recycler</span></mat-checkbox>
+        <mat-checkbox formControlName="cdm"><span class="fs-16">CDM</span></mat-checkbox>
+        <mat-checkbox formControlName="chequeDM"><span class="fs-16">Cheque DM</span></mat-checkbox>
+      </div>
+
+      <h3>Facilities</h3>
+      <div class="checkbox-group">
+        <mat-checkbox formControlName="ramp"><span class="fs-16">Ramp Access</span></mat-checkbox>
+        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Wheelchair</span></mat-checkbox>
+      </div>
+
+      <h3>Currency Supported</h3>
+      <div class="checkbox-group">
+        <mat-checkbox formControlName="inr"><span class="fs-16">INR</span></mat-checkbox>
+        <mat-checkbox formControlName="qar"><span class="fs-16">QAR</span></mat-checkbox>
+        <mat-checkbox formControlName="aed"><span class="fs-16">AED</span></mat-checkbox>
+        <mat-checkbox formControlName="usd"><span class="fs-16">USD</span></mat-checkbox>
+      </div>
+
+      <h3>ATM Features</h3>
+      <div class="checkbox-group">
+        <mat-checkbox formControlName="feature1"><span class="fs-16">Feature 1</span></mat-checkbox>
+        <mat-checkbox formControlName="feature2"><span class="fs-16">Feature 2</span></mat-checkbox>
+        <mat-checkbox formControlName="feature3"><span class="fs-16">Feature 3</span></mat-checkbox>
+        <mat-checkbox formControlName="feature4"><span class="fs-16">Feature 4</span></mat-checkbox>
+      </div>
+
+      <div class="p-10 full-width">
+        <label>Contact Details</label>
+        <input formControlName="latitude" placeholder="Enter Latitude" />
+      </div>
+
+
+      <div class="p-10 full-width">
+        <label>Maintenance Vendor</label>
+        <input formControlName="latitude" placeholder="Enter Latitude" />
+      </div>
+
+
+      <div class="p-10 full-width">
+        <label>Installation Date</label>
+        <input formControlName="latitude" placeholder="Enter Latitude" />
+      </div>
+      <!-- Status -->
+      <!-- <div class="">
+        <label>Status</label>
+        <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+      </div> -->
+
+      <!-- Buttons -->
+      <div class="form-actions p-10">
+        <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

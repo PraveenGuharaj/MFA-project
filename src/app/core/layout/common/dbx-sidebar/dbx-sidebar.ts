@@ -37,17 +37,17 @@ export class DbxSidebar {
       name: 'Dashboard',
       isSubmenuTitle: false,
       subMenu: [
-        { name: 'User Overview', link: '/dashboard/user-overview',isSubmenuTitle: false  },
-        { name: 'Login Activity', link: '/dashboard/login-activity',isSubmenuTitle: false  },
-        { name: 'MFA & OTP Activity', link: '/dashboard/mfa-otp-activity',isSubmenuTitle: false  },
-        { name: 'Security Alerts & Account', link: '/dashboard/security-account-status',isSubmenuTitle: false },
-        { name: 'Session Metrics', link: '/dashboard/session-metrics',isSubmenuTitle: false  },
-        { name: 'Geographic Metrics', link: '/dashboard/geographic-metrics',isSubmenuTitle: false  },
-        { name: 'Service Request', link: '/dashboard/service-request' ,isSubmenuTitle: false },
-        { name: 'Transaction Mix', link: '/dashboard/transaction-mix',isSubmenuTitle: false },
-        { name: 'Digital Onboarding Journey', link: '/dashboard/digital-onboarding-journey',isSubmenuTitle: false  },
-        { name: 'Transaction Performance', link: '/dashboard/transaction-perfomance',isSubmenuTitle: false  },
-        { name: 'Digital Onboarding Journey Insights', link: '/dashboard/digital-onboarding-insights',isSubmenuTitle: false }
+        { name: 'User Overview', link: '/dashboard/user-overview', isSubmenuTitle: false },
+        { name: 'Login Activity', link: '/dashboard/login-activity', isSubmenuTitle: false },
+        { name: 'MFA & OTP Activity', link: '/dashboard/mfa-otp-activity', isSubmenuTitle: false },
+        { name: 'Security Alerts & Account', link: '/dashboard/security-account-status', isSubmenuTitle: false },
+        { name: 'Session Metrics', link: '/dashboard/session-metrics', isSubmenuTitle: false },
+        { name: 'Geographic Metrics', link: '/dashboard/geographic-metrics', isSubmenuTitle: false },
+        { name: 'Service Request', link: '/dashboard/service-request', isSubmenuTitle: false },
+        { name: 'Transaction Mix', link: '/dashboard/transaction-mix', isSubmenuTitle: false },
+        { name: 'Digital Onboarding Journey', link: '/dashboard/digital-onboarding-journey', isSubmenuTitle: false },
+        { name: 'Transaction Performance', link: '/dashboard/transaction-perfomance', isSubmenuTitle: false },
+        { name: 'Digital Onboarding Journey Insights', link: '/dashboard/digital-onboarding-insights', isSubmenuTitle: false }
       ],
       expanded: false
     },
@@ -56,16 +56,16 @@ export class DbxSidebar {
       // No submenu for Product Hub
       subMenu: null,
       expanded: false,
-      isSubmenuTitle: true, 
-      link: '/dashboard/product-hub',submenuTitle:'OTP Management'
+      isSubmenuTitle: true,
+      link: '/dashboard/product-hub', submenuTitle: 'OTP Management'
     },
     {
       name: 'Admin Center',
       isSubmenuTitle: true,
       subMenu: [
-        { name: 'Manage OTP', link: 'admin-center/manage-otp',submenuTitle:'OTP Management',isSubmenuTitle: true  },
-        { name: 'Service Requests', link: '/service-requests',submenuTitle:'OTP Management',isSubmenuTitle: true  },
-        { name: 'Transaction Mix', link: '/transaction-mix',submenuTitle:'OTP Management',isSubmenuTitle: true  }
+        { name: 'Manage OTP', link: 'admin-center/manage-otp', submenuTitle: 'OTP Management', isSubmenuTitle: true },
+        { name: 'Manage Locators', link: 'admin-center/manage-locators', submenuTitle: 'Manage Locators', isSubmenuTitle: true },
+        { name: 'Transaction Mix', link: '/transaction-mix', submenuTitle: 'OTP Management', isSubmenuTitle: true }
       ],
       expanded: false
     },
@@ -103,12 +103,12 @@ export class DbxSidebar {
     console.log('menu', menu);
     console.log('type', type);
     console.log('link', link);
-    console.log('isSUbmenu',isSubmenu);
-    
+    console.log('isSUbmenu', isSubmenu);
+
 
     if (link) {
       this.router.navigate([link]); // Navigate to the selected route
     }
-    this.menuChanged.emit({ menu, type, isSubmenu});
+    this.menuChanged.emit({ menu, type, isSubmenu });
   }
 }

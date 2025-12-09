@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DashboardAddRetailProduct } from '../../../../component/dashboard/dashboard-add-retail-product/dashboard-add-retail-product';
 import { DashboardSubProduct } from '../../../../component/dashboard/dashboard-sub-product/dashboard-sub-product';
 import { AdminCenterAddConfiguration } from '../../../../component/admin-center/admin-center-add-configuration/admin-center-add-configuration';
+import { AdminCenterAddAtm } from '../../../../component/admin-center/admin-center-add-atm/admin-center-add-atm';
 
 @Component({
   selector: 'app-dbx-header',
@@ -19,7 +20,7 @@ export class DbxHeader {
   @Output() productTypeChanged = new EventEmitter<boolean>();
   @Output() tabChanged = new EventEmitter<string>();
   @Input() pageTitle?: string; // Title passed from the parent
-  @Input() subMenuTitle: string='';
+  @Input() subMenuTitle: string = '';
   @Input() isSubMenu?: boolean;
   @Input() headerTabs: any[] = [];  // Dynamic tabs
   @Input() isProductHub: boolean = false; // Property to check if we are in Product Hub
@@ -29,8 +30,8 @@ export class DbxHeader {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log('xxx',this.pageTitle);
-    
+    console.log('xxx', this.pageTitle);
+
   }
 
   openModal() {
@@ -44,7 +45,17 @@ export class DbxHeader {
   }
 
   openConfigurationModal() {
-        this.dialog.open(AdminCenterAddConfiguration, {
+    this.dialog.open(AdminCenterAddConfiguration, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openAtmModal() {
+    this.dialog.open(AdminCenterAddAtm, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
