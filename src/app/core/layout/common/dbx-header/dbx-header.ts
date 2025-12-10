@@ -33,7 +33,14 @@ export class DbxHeader {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('xxx', this.subMenuTitle);
+    // Log to track changes in input properties
+    if (changes['pageTitle']) {
+      console.log('ngOnChanges - pageTitle changed:', changes['pageTitle'].currentValue);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.pageTitle = this.pageTitle;
   }
   openModal() {
     this.dialog.open(DashboardAddRetailProduct, {
@@ -53,6 +60,10 @@ export class DbxHeader {
         right: '0',  // Ensure it opens on the right
       },
     });
+  }
+
+  openLicenseModal() {
+
   }
 
   openAtmModal() {

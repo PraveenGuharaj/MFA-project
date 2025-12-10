@@ -65,34 +65,11 @@ export class DbxSidebar {
       subMenu: [
         { name: 'Manage OTP', link: 'admin-center/manage-otp', submenuTitle: 'OTP Management', isSubmenuTitle: true },
         { name: 'Manage Locators', link: 'admin-center/manage-locators', submenuTitle: 'Manage Locators', isSubmenuTitle: true },
-        { name: 'Transaction Mix', link: '/transaction-mix', submenuTitle: 'OTP Management', isSubmenuTitle: true }
+        { name: 'Manage License', link: 'admin-center/Manage License', submenuTitle: 'Manage License', isSubmenuTitle: true }
       ],
       expanded: false
     },
-    // {
-    //   name: 'Offer & Discount',
-    //   subMenu: [
-    //     { name: 'Service Requests', link: '/service-requests' },
-    //     { name: 'Transaction Mix', link: '/transaction-mix' }
-    //   ],
-    //   expanded: false
-    // },
-    // {
-    //   name: 'Partner Onboarding',
-    //   subMenu: [
-    //     { name: 'Service Requests', link: '/service-requests' },
-    //     { name: 'Transaction Mix', link: '/transaction-mix' }
-    //   ],
-    //   expanded: false
-    // },
-    // {
-    //   name: 'Operation',
-    //   subMenu: [
-    //     { name: 'Service Requests', link: '/service-requests' },
-    //     { name: 'Transaction Mix', link: '/transaction-mix' }
-    //   ],
-    //   expanded: false
-    // }
+    
   ]
 
   toggleSubMenu(item: any) {

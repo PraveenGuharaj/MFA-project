@@ -102,6 +102,11 @@ export class Dashboard {
       this.subMenuTitle = 'Manage Locators'
       this.isSubmenu = event.isSubmenu;
       this.cdr.detectChanges();
+    } else if (event.menu == 'Manage License') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Manage License'
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.detectChanges();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title
