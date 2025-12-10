@@ -1,0 +1,53 @@
+<div class="overlay" (click)="closeForm()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>Add MFA</h2>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+      <!-- Text Inputs -->
+      <div class="full-width">
+        <label>MFA Name</label>
+        <mat-select formControlName="country" placeholder="Enter Name">
+          <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+        </mat-select>
+      </div>
+
+      <h3>Type</h3>
+      <div class="checkbox-group">
+        <mat-checkbox formControlName="ramp"><span class="fs-16">SMS</span></mat-checkbox>
+        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">OTP</span></mat-checkbox>
+        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Biometric</span></mat-checkbox>
+        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Secure</span></mat-checkbox>
+      </div>
+
+      <div class="full-width mt-24">
+        <label>Fail Count</label>
+        <!-- <input formControlName="atmCode" placeholder="Enter a valid mobile number.." /> -->
+        <mat-select formControlName="country" placeholder="Enter Name">
+          <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+        </mat-select>
+      </div>
+
+      <div class="form-row mt-24">
+        <div class="form-group">
+          <label>Effective Period</label>
+          <input class="input-small" type="date">
+        </div>
+      </div>
+      <!-- Status -->
+      <div class="mrt24">
+        <label class="mr-10">Status</label>
+        <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+      </div>
+
+      <!-- Buttons -->
+      <div class="form-actions p-10 bottom-btn">
+        <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

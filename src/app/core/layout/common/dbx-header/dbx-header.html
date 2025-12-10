@@ -80,6 +80,9 @@
 
     <!-- manage License -->
     <span class="f-15" *ngIf="subMenuTitle == 'Manage License'">Manage License</span>
+
+    <!-- manage mfa -->
+    <span class="f-15" *ngIf="subMenuTitle == 'Manage MFA'">MFA List</span>
   </div>
 
 
@@ -95,11 +98,13 @@
 
   <!-- admin center otp adn atm -->
   <div class="actions"
-    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License'">
+    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ">
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
     <button class="retail_product " (click)="openAtmModal()" *ngIf="subMenuTitle == 'Manage Locators'"> <img
         src="images/plus-mini.png">Add ATM</button>
+    <button class="retail_product " (click)="openMfaModal()" *ngIf="subMenuTitle == 'Manage MFA'"> <img
+        src="images/plus-mini.png">Add MFA</button>
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
       <div class="search-box">
@@ -114,7 +119,5 @@
 
     <button class="retail_product " (click)="openLicenseModal()" *ngIf="subMenuTitle == 'Manage License'"> <img
         src="images/plus-mini.png">Add License</button>
-
-
   </div>
 </div>

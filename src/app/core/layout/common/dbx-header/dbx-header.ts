@@ -7,6 +7,7 @@ import { DashboardSubProduct } from '../../../../component/dashboard/dashboard-s
 import { AdminCenterAddConfiguration } from '../../../../component/admin-center/admin-center-add-configuration/admin-center-add-configuration';
 import { AdminCenterAddAtm } from '../../../../component/admin-center/admin-center-add-atm/admin-center-add-atm';
 import { AdminCenterAddLicense } from '../../../../component/admin-center/admin-center-add-license/admin-center-add-license';
+import { AdminCenterAddMfa } from '../../../../component/admin-center/admin-center-add-mfa/admin-center-add-mfa';
 
 @Component({
   selector: 'app-dbx-header',
@@ -75,6 +76,16 @@ export class DbxHeader {
 
   openAtmModal() {
     this.dialog.open(AdminCenterAddAtm, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openMfaModal() {
+    this.dialog.open(AdminCenterAddMfa, {
       width: '60%',
       height: 'auto',
       position: {

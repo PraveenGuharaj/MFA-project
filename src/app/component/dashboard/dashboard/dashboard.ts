@@ -107,6 +107,11 @@ export class Dashboard {
       this.subMenuTitle = 'Manage License'
       this.isSubmenu = event.isSubmenu;
       this.cdr.detectChanges();
+    } else if (event.menu == 'Manage MFA') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Manage MFA'
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.detectChanges();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

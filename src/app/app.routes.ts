@@ -38,6 +38,7 @@ import { DashboardServiceRequestMobile } from './component/dashboard/dashboard-s
 import { AdminCenterManageOtp } from './component/admin-center/admin-center-manage-otp/admin-center-manage-otp';
 import { AdminCenterManageLocators } from './component/admin-center/admin-center-manage-locators/admin-center-manage-locators';
 import { AdminCenterManageLicense } from './component/admin-center/admin-center-manage-license/admin-center-manage-license';
+import { AdminCenterManageMfa } from './component/admin-center/admin-center-manage-mfa/admin-center-manage-mfa';
 
 export const routes: Routes = [
   {
@@ -83,7 +84,8 @@ export const routes: Routes = [
     children: [
       { path: 'manage-otp', component: AdminCenterManageOtp},
       { path: 'manage-locators', component: AdminCenterManageLocators},
-      { path: 'Manage License', component: AdminCenterManageLicense}
+      { path: 'Manage License', component: AdminCenterManageLicense},
+      { path: 'Manage MFA', component: AdminCenterManageMfa}
     ] 
   },
 
