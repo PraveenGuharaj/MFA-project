@@ -58,6 +58,8 @@ export class Dashboard {
           this.currentPage = 'transaction-perfomance';
         } else if (url.includes('digital-onboarding-journey-insights')) {
           this.currentPage = 'digital-onboarding-insights';
+        } else if (url.includes('manage-locators')) {
+          this.currentPage = 'manage-locators';
         }
         else {
           this.currentPage = 'user-overview';
@@ -182,6 +184,12 @@ export class Dashboard {
         this.router.navigate(['/dashboard/service-request-mobile']);
       } else if (this.activeTab === 'web') {
         this.router.navigate(['/dashboard/service-request-web']);
+      }
+    } else if (this.currentPage == 'manage-locators') {
+      if (this.activeTab === 'ATM Locator') {
+        this.router.navigate(['/admin-center/manage-locators']);
+      } else if (this.activeTab === 'Branch Locator') {
+        this.router.navigate(['/admin-center/branch-locators']);
       }
     }
     if (this.currentPage === 'transaction-perfomance') {

@@ -39,6 +39,7 @@ import { AdminCenterManageOtp } from './component/admin-center/admin-center-mana
 import { AdminCenterManageLocators } from './component/admin-center/admin-center-manage-locators/admin-center-manage-locators';
 import { AdminCenterManageLicense } from './component/admin-center/admin-center-manage-license/admin-center-manage-license';
 import { AdminCenterManageMfa } from './component/admin-center/admin-center-manage-mfa/admin-center-manage-mfa';
+import { AdminCenterBranchLocator } from './component/admin-center/admin-center-branch-locator/admin-center-branch-locator';
 
 export const routes: Routes = [
   {
@@ -84,8 +85,9 @@ export const routes: Routes = [
     children: [
       { path: 'manage-otp', component: AdminCenterManageOtp},
       { path: 'manage-locators', component: AdminCenterManageLocators},
+      { path: 'branch-locators', component: AdminCenterBranchLocator},
       { path: 'Manage License', component: AdminCenterManageLicense},
-      { path: 'Manage MFA', component: AdminCenterManageMfa}
+      { path: 'manage-mfa', component: AdminCenterManageMfa}
     ] 
   },
 

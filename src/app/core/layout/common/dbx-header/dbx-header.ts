@@ -8,6 +8,7 @@ import { AdminCenterAddConfiguration } from '../../../../component/admin-center/
 import { AdminCenterAddAtm } from '../../../../component/admin-center/admin-center-add-atm/admin-center-add-atm';
 import { AdminCenterAddLicense } from '../../../../component/admin-center/admin-center-add-license/admin-center-add-license';
 import { AdminCenterAddMfa } from '../../../../component/admin-center/admin-center-add-mfa/admin-center-add-mfa';
+import { AdminCenterAddBranch } from '../../../../component/admin-center/admin-center-add-branch/admin-center-add-branch';
 
 @Component({
   selector: 'app-dbx-header',
@@ -29,6 +30,7 @@ export class DbxHeader {
 
   @Input() activeTab: string = '';
   subProduct: boolean = false;
+  atmLocators: boolean = false;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -84,6 +86,16 @@ export class DbxHeader {
     });
   }
 
+  openBranchModal() {
+    this.dialog.open(AdminCenterAddBranch, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
   openMfaModal() {
     this.dialog.open(AdminCenterAddMfa, {
       width: '60%',
@@ -103,7 +115,14 @@ export class DbxHeader {
   retailProduct(isSubProduct: boolean) {
     this.subProduct = false
     this.productTypeChanged.emit(isSubProduct);
+  }
 
+  atmLocator(event: boolean) {
+    this.atmLocators = false;
+  }
+
+  branchLocator(event: boolean) {
+    this.atmLocators = true;
   }
 
   openSubModal() {
@@ -118,6 +137,7 @@ export class DbxHeader {
 
   // Method to change active tab for User Overview
   setActiveTab(tab: string) {
+    console.log('tab', tab)
     this.activeTab = tab;
     this.tabChanged.emit(tab);
   }
