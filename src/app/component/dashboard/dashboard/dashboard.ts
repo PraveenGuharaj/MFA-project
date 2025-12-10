@@ -60,6 +60,18 @@ export class Dashboard {
           this.currentPage = 'digital-onboarding-insights';
         } else if (url.includes('manage-locators')) {
           this.currentPage = 'manage-locators';
+        } else if (url.includes('device-management')) {
+          this.currentPage = 'device-management';
+        } else if (url.includes('push-notification')) {
+          this.currentPage = 'device-management';
+        } else if (url.includes('message-campaign')) {
+          this.currentPage = 'device-management';
+        } else if (url.includes('customer-segments')) {
+          this.currentPage = 'device-management';
+        } else if (url.includes('template-creation')) {
+          this.currentPage = 'device-management';
+        } else if (url.includes('branch-locators')) {
+          this.currentPage = 'manage-locators';
         }
         else {
           this.currentPage = 'user-overview';
@@ -114,6 +126,11 @@ export class Dashboard {
       this.subMenuTitle = 'Manage MFA'
       this.isSubmenu = event.isSubmenu;
       this.cdr.detectChanges();
+    }else if (event.menu == 'Manage Notifications') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Manage Notification'
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.detectChanges();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title
@@ -136,7 +153,7 @@ export class Dashboard {
   }
 
   navigateBasedOnTab() {
-    console.log('zzzz', this.currentPage)
+    console.log('zzzz', this.activeTab)
     if (this.currentPage === 'user-overview') {
       if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/user-overview']);
@@ -190,6 +207,21 @@ export class Dashboard {
         this.router.navigate(['/admin-center/manage-locators']);
       } else if (this.activeTab === 'Branch Locator') {
         this.router.navigate(['/admin-center/branch-locators']);
+      }
+    } else if (this.currentPage == 'device-management') {
+      console.log('hh',this.activeTab);
+      
+      if (this.activeTab === 'Device Management') {
+        this.router.navigate(['/admin-center/device-management']);
+      } else if (this.activeTab === 'Push Notification') {
+        this.router.navigate(['/admin-center/push-notification']);
+      } 
+      else if (this.activeTab === 'Message Campaign') {
+        this.router.navigate(['/admin-center/message-campaign']);
+      }else if (this.activeTab === 'Customer Segments') {
+        this.router.navigate(['/admin-center/customer-segments']);
+      }else if (this.activeTab === 'Template Creation') {
+        this.router.navigate(['/admin-center/template-creation']);
       }
     }
     if (this.currentPage === 'transaction-perfomance') {

@@ -40,6 +40,11 @@ import { AdminCenterManageLocators } from './component/admin-center/admin-center
 import { AdminCenterManageLicense } from './component/admin-center/admin-center-manage-license/admin-center-manage-license';
 import { AdminCenterManageMfa } from './component/admin-center/admin-center-manage-mfa/admin-center-manage-mfa';
 import { AdminCenterBranchLocator } from './component/admin-center/admin-center-branch-locator/admin-center-branch-locator';
+import { AdminCenterDeviceManagement } from './component/admin-center/admin-center-device-management/admin-center-device-management';
+import { AdminCenterPushNotification } from './component/admin-center/admin-center-push-notification/admin-center-push-notification';
+import { AdminCenterMessageCampaign } from './component/admin-center/admin-center-message-campaign/admin-center-message-campaign';
+import { AdminCenterCustomerSegments } from './component/admin-center/admin-center-customer-segments/admin-center-customer-segments';
+import { AdminCenterTemplateCreation } from './component/admin-center/admin-center-template-creation/admin-center-template-creation';
 
 export const routes: Routes = [
   {
@@ -87,7 +92,12 @@ export const routes: Routes = [
       { path: 'manage-locators', component: AdminCenterManageLocators},
       { path: 'branch-locators', component: AdminCenterBranchLocator},
       { path: 'Manage License', component: AdminCenterManageLicense},
-      { path: 'manage-mfa', component: AdminCenterManageMfa}
+      { path: 'manage-mfa', component: AdminCenterManageMfa},
+      { path: 'device-management', component: AdminCenterDeviceManagement},
+      { path: 'push-notification', component: AdminCenterPushNotification},
+      { path: 'message-campaign', component: AdminCenterMessageCampaign},
+      { path: 'customer-segments', component: AdminCenterCustomerSegments},
+      { path: 'template-creation', component: AdminCenterTemplateCreation}
     ] 
   },
 

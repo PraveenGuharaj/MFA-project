@@ -1,26 +1,12 @@
 <div class="product-table-container">
-
-    <div class="search-wrapper">
-        <div class="search-box">
-            <input type="text" placeholder="Search" />
-            <img src="images/admin_search.png" class="notification_icon">
-        </div>
-
-        <button class="filter-btn">
-            <img src="images/admin_filter.png" class="notification_icon">
-        </button>
-    </div>
-
-
     <table class="product-table">
         <thead>
             <tr>
-                <th *ngIf="!subProduct">Name</th>
-                <th *ngIf="!subProduct">Branch Code</th>
-                <th *ngIf="!subProduct">City</th>
-                <th *ngIf="!subProduct">Country</th>
-                <th *ngIf="!subProduct">Branch Type</th>
-                <th *ngIf="!subProduct">Coordinates</th>
+                <th *ngIf="!subProduct">ID</th>
+                <th *ngIf="!subProduct">Application  Mode</th>
+                <th *ngIf="!subProduct">Bundle Identifier</th>
+                <th *ngIf="!subProduct">iPhone Cert Password</th>
+                <th *ngIf="!subProduct">iPad Cert Uploaded</th>
                 <th *ngIf="!subProduct">Status</th>
                 <th *ngIf="!subProduct">Actions</th>
 
@@ -35,19 +21,14 @@
                 <th *ngIf="subProduct">Actions</th>
             </tr>
         </thead>
-
-
-
         <tbody>
 
             <tr *ngFor="let p of products">
-                <td>{{ p.name }}</td>
-                <td>{{ p.atmCode}}</td>
-                <td>{{ p.city}}</td>
-                <td>{{ p.country}}</td>
-                <td>{{ p.atmType}}</td>
-                <td>{{ p.coordinates}}</td>
-                <!-- <td>{{ p.status}}</td> -->
+                <td>{{ p.id }}</td>
+                <td>{{ p.applicationMode}}</td>
+                <td>{{ p.bundleidentifier}}</td>
+                <td>{{ p.iPhoneCertPassword}}</td>
+                <td>{{ p.iPadCertUploaded}}</td>
                 <td>
                     <span class="status" [ngClass]="{
           'active': p.status === 'Active',

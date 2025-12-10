@@ -66,7 +66,8 @@ export class DbxSidebar {
         { name: 'Manage OTP', link: 'admin-center/manage-otp', submenuTitle: 'OTP Management', isSubmenuTitle: true },
         { name: 'Manage Locators', link: 'admin-center/manage-locators', submenuTitle: 'Manage Locators', isSubmenuTitle: true },
         { name: 'Manage License', link: 'admin-center/Manage License', submenuTitle: 'Manage License', isSubmenuTitle: true },
-        { name: 'Manage MFA', link: 'admin-center/manage-mfa', submenuTitle: 'Manage MFA', isSubmenuTitle: true }
+        { name: 'Manage MFA', link: 'admin-center/manage-mfa', submenuTitle: 'Manage MFA', isSubmenuTitle: true },
+        { name: 'Manage Notifications', link: 'admin-center/device-management', submenuTitle: 'Manage Notification', isSubmenuTitle: true }
       ],
       expanded: false
     },
