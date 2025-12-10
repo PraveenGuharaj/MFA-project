@@ -101,7 +101,7 @@
     <button class="retail_product " (click)="openAtmModal()" *ngIf="subMenuTitle == 'Manage Locators'"> <img
         src="images/plus-mini.png">Add ATM</button>
     <!-- admin center manage License filter and search bar -->
-    <div class="search-wrapper">
+    <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
       <div class="search-box">
         <input type="text" placeholder="Search" />
         <img src="images/admin_search.png" class="notification_icon">

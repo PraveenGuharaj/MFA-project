@@ -1,0 +1,32 @@
+@use '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product.scss';
+
+.p-10 {
+    padding-top: 10px;
+}
+
+.fs-16 {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #030303 !important;
+}
+
+
+.mat-mdc-checkbox label {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: red !important;
+}
+
+::ng-deep .mdc-switch__icons {
+    display: none;
+}
+
+.bottom-btn {
+    position: absolute;
+    bottom: 0 !important;
+    width: -webkit-fill-available;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}

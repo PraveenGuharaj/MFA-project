@@ -6,6 +6,7 @@ import { DashboardAddRetailProduct } from '../../../../component/dashboard/dashb
 import { DashboardSubProduct } from '../../../../component/dashboard/dashboard-sub-product/dashboard-sub-product';
 import { AdminCenterAddConfiguration } from '../../../../component/admin-center/admin-center-add-configuration/admin-center-add-configuration';
 import { AdminCenterAddAtm } from '../../../../component/admin-center/admin-center-add-atm/admin-center-add-atm';
+import { AdminCenterAddLicense } from '../../../../component/admin-center/admin-center-add-license/admin-center-add-license';
 
 @Component({
   selector: 'app-dbx-header',
@@ -63,15 +64,21 @@ export class DbxHeader {
   }
 
   openLicenseModal() {
-
+    this.dialog.open(AdminCenterAddLicense, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
   }
 
   openAtmModal() {
     this.dialog.open(AdminCenterAddAtm, {
-      width: '60%',  // Adjust width as needed
+      width: '60%',
       height: 'auto',
       position: {
-        right: '0',  // Ensure it opens on the right
+        right: '0',
       },
     });
   }

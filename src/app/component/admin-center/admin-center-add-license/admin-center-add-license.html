@@ -1,0 +1,71 @@
+<div class="overlay" (click)="closeForm()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>Add License</h2>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+      <!-- Text Inputs -->
+      <div class="full-width">
+        <label>Domain</label>
+        <input formControlName="atmCode" placeholder="Please select a domain." />
+      </div>
+
+      <h3>Notification Type</h3>
+      <div class="checkbox-group">
+        <mat-checkbox formControlName="ramp"><span class="fs-16">SMS</span></mat-checkbox>
+        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Email</span></mat-checkbox>
+        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Push</span></mat-checkbox>
+      </div>
+
+      <div class="full-width">
+        <input formControlName="atmCode" placeholder="Enter a valid mobile number.." />
+      </div>
+
+      <div class="form-row p-10">
+        <div class="form-group">
+          <label>Effective From Date</label>
+          <input class="input-small" type="date">
+        </div>
+
+        <div class="form-group">
+          <!-- <label>Warning Status</label>
+          <mat-select placeholder="Select Category">
+            <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+          </mat-select> -->
+        </div>
+      </div>
+
+      <div class="form-row p-10">
+        <div class="form-group">
+          <label>Alert Status</label>
+          <mat-select placeholder="Select Channel">
+            <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+          </mat-select>
+        </div>
+
+        <div class="form-group">
+          <label>Warning Status</label>
+          <mat-select placeholder="Select Category">
+            <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+
+      <!-- Status -->
+      <div class="">
+        <label class="mr-10">Status</label>
+        <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+      </div>
+
+      <!-- Buttons -->
+      <div class="form-actions p-10 bottom-btn">
+        <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
