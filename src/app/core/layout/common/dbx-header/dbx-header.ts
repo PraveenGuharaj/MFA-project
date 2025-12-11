@@ -10,6 +10,7 @@ import { AdminCenterAddLicense } from '../../../../component/admin-center/admin-
 import { AdminCenterAddMfa } from '../../../../component/admin-center/admin-center-add-mfa/admin-center-add-mfa';
 import { AdminCenterAddBranch } from '../../../../component/admin-center/admin-center-add-branch/admin-center-add-branch';
 import { AdminCenterAddDeviceManagement } from '../../../../component/admin-center/admin-center-add-device-management/admin-center-add-device-management';
+import { AdminCenterAddMessageCampaign } from '../../../../component/admin-center/admin-center-add-message-campaign/admin-center-add-message-campaign';
 
 @Component({
   selector: 'app-dbx-header',
@@ -108,11 +109,22 @@ export class DbxHeader {
   }
 
   openNotificationAddModal() {
-        this.dialog.open(AdminCenterAddDeviceManagement, {
+    this.dialog.open(AdminCenterAddDeviceManagement, {
       width: '60%',
       height: 'auto',
       position: {
         right: '0',
+      },
+    });
+  }
+
+
+  openMessageCapaignModal() {
+    this.dialog.open(AdminCenterAddMessageCampaign, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
       },
     });
   }
