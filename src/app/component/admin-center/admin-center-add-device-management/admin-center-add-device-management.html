@@ -1,0 +1,77 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2>Add Apple Push Notification Service</h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <h3>FCM Mode</h3>
+            <div class="checkbox-group">
+                <mat-checkbox><span class="fs-16">Production</span></mat-checkbox>
+                <mat-checkbox class="fs-16"><span class="fs-16">Development</span></mat-checkbox>
+                <mat-checkbox class="fs-16"><span class="fs-16">Apple Certificate
+                        Wizard</span></mat-checkbox>
+            </div>
+
+            <!-- upload filed -->
+            <div class="upload-wrapper mt-24">
+                <label>Upload iPhone Push Certificate</label>
+
+                <div class="upload-box">
+                    <span class="placeholder-text">Upload the file here</span>
+
+                    <button type="button" class="upload-btn">
+                        <mat-icon>upload</mat-icon>
+                        Upload
+                    </button>
+
+                    <input type="file" class="file-input">
+                </div>
+            </div>
+
+
+            <!-- Text Inputs -->
+            <div class="password-wrapper mt-24">
+                <label>Certificate Password</label>
+
+                <div class="password-box">
+                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password" />
+
+                    <mat-icon class="eye-icon" (click)="togglePassword()">
+                        {{ showPassword ? 'visibility_off' : 'visibility' }}
+                    </mat-icon>
+                </div>
+            </div>
+
+            <div class="full-width">
+                <label>Bundle Identifier</label>
+                <input placeholder="Enter Bundle Identifier" />
+            </div>
+
+
+            <h3>Upload iPad Push Certificate</h3>
+            <div class="checkbox-group">
+                <mat-checkbox><span class="fs-16">Yes</span></mat-checkbox>
+                <mat-checkbox class="fs-16"><span class="fs-16">No</span></mat-checkbox>
+            </div>
+
+            <button class="connectivity-btn">Test Connectivity With Could</button>
+
+            <!-- Status -->
+            <div class="mrt24">
+                <label class="mr-10">Status</label>
+                <mat-slide-toggle color="primary"></mat-slide-toggle>
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="form-actions p-10 bottom-btn">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

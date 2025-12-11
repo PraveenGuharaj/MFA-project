@@ -9,6 +9,7 @@ import { AdminCenterAddAtm } from '../../../../component/admin-center/admin-cent
 import { AdminCenterAddLicense } from '../../../../component/admin-center/admin-center-add-license/admin-center-add-license';
 import { AdminCenterAddMfa } from '../../../../component/admin-center/admin-center-add-mfa/admin-center-add-mfa';
 import { AdminCenterAddBranch } from '../../../../component/admin-center/admin-center-add-branch/admin-center-add-branch';
+import { AdminCenterAddDeviceManagement } from '../../../../component/admin-center/admin-center-add-device-management/admin-center-add-device-management';
 
 @Component({
   selector: 'app-dbx-header',
@@ -98,6 +99,16 @@ export class DbxHeader {
 
   openMfaModal() {
     this.dialog.open(AdminCenterAddMfa, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openNotificationAddModal() {
+        this.dialog.open(AdminCenterAddDeviceManagement, {
       width: '60%',
       height: 'auto',
       position: {

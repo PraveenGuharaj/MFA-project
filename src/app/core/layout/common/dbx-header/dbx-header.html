@@ -66,30 +66,30 @@
     </div>
 
     <!-- manage notification -->
-      <div *ngIf="subMenuTitle == 'Manage Notification'" class="d-flex">
+    <div *ngIf="subMenuTitle == 'Manage Notification'" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Device Management'}"
-        *ngIf="!isProductHub" (click)="setActiveTab('Device Management')" (click)="atmLocator(false)">
+        *ngIf="!isProductHub" (click)="setActiveTab('Device Management')">
         <img src="images/retail_product.png" class="pr-10">Device Management
       </button>
 
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Push Notification'}"
-        *ngIf="!isProductHub" (click)="setActiveTab('Push Notification')" (click)="branchLocator(true)">
+        *ngIf="!isProductHub" (click)="setActiveTab('Push Notification')">
         <img src="images/sub_product.png" class="pr-10">Push Notification
       </button>
 
-       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Message Campaign'}"
-        *ngIf="!isProductHub" (click)="setActiveTab('Message Campaign')" (click)="branchLocator(true)">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Message Campaign'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Message Campaign')">
         <img src="images/sub_product.png" class="pr-10">Message Campaign
       </button>
 
 
-       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Customer Segments'}"
-        *ngIf="!isProductHub" (click)="setActiveTab('Customer Segments')" (click)="branchLocator(true)">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Customer Segments'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Customer Segments')">
         <img src="images/sub_product.png" class="pr-10">Customer Segments
       </button>
 
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Template Creation'}"
-        *ngIf="!isProductHub" (click)="setActiveTab('Template Creation')" (click)="branchLocator(true)">
+        *ngIf="!isProductHub" (click)="setActiveTab('Template Creation')">
         <img src="images/sub_product.png" class="pr-10">Template Creation
       </button>
     </div>
@@ -127,19 +127,46 @@
 
 
   <!-- admin center otp adn atm -->
-  <div class="actions"
-    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
+  <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
      subMenuTitle == 'Manage Notification'">
+
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
+
     <button class="retail_product " (click)="openAtmModal()" *ngIf="subMenuTitle == 'Manage Locators' && !atmLocators">
       <img src="images/plus-mini.png">Add ATM</button>
+
     <button class="retail_product " (click)="openBranchModal()"
       *ngIf="subMenuTitle == 'Manage Locators' && atmLocators"> <img src="images/plus-mini.png">Add Branch</button>
+
     <button class="retail_product " (click)="openMfaModal()" *ngIf="subMenuTitle == 'Manage MFA'"> <img
         src="images/plus-mini.png">Add MFA</button>
-         <button class="retail_product " (click)="openAtmModal()" *ngIf="subMenuTitle == 'Manage Notification'">
+
+    <!-- notification device management -->
+    <button class="retail_product " (click)="openNotificationAddModal()" *ngIf="activeTab == 'Device Management' && subMenuTitle == 'Manage Notification' ">
       <img src="images/plus-mini.png">Add</button>
+
+    <!-- notification push notification -->
+    <button class="export-btn" *ngIf="activeTab == 'Push Notification' && subMenuTitle == 'Manage Notification'">
+      <img src="images/import.png" class="notification_icon"><span>Export</span>
+    </button>
+
+    <!-- notification message campaign -->
+    <button class="retail_product " (click)="openAtmModal()" *ngIf="activeTab == 'Message Campaign' && subMenuTitle == 'Manage Notification'">
+      <img src="images/plus-mini.png">Message Campaign</button>
+
+    <!-- notification customer segment -->
+    <button class="retail_product " (click)="openAtmModal()" *ngIf="activeTab == 'Customer Segments' && subMenuTitle == 'Manage Notification'">
+      <img src="images/plus-mini.png">Add Segment</button>
+
+    <!-- notification template creation -->
+    <button class="retail_product mr-10" (click)="openAtmModal()" *ngIf="activeTab == 'Template Creation' && subMenuTitle == 'Manage Notification'">
+      <img src="images/plus-mini.png">New Template</button>
+
+    <button class="export-btn" *ngIf="activeTab == 'Template Creation' && subMenuTitle == 'Manage Notification'">
+      <img src="images/import.png" class="notification_icon"><span>Upload Excel</span>
+    </button>
+
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
       <div class="search-box">
