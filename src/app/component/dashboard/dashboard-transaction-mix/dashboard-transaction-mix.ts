@@ -115,7 +115,6 @@ export class DashboardTransactionMix {
             weight: 'bold'    // Make the text bold
           },
           formatter: (value: number) => {
-            console.log('formatter called, value:', value);  // Debug line to ensure it's called
             return `${value}%`; // Display the percentage inside the bar
           },
           // Ensuring the labels are above the bars

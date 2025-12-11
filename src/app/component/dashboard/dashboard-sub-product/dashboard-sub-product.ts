@@ -45,13 +45,10 @@ export class DashboardSubProduct {
   }
   submitForm() {
     if (this.productForm.valid) {
-      console.log('Form Submitted:', this.productForm.value);
     } else {
-      console.log('Form is invalid');
     }
   }
 
   closeForm() {
-    console.log('Closing form');
   }
 }

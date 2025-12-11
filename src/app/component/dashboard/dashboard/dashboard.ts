@@ -29,55 +29,77 @@ export class Dashboard {
   constructor(private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    console.log('activeTab', this.activeTab)
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         const url = this.router.url;
-        console.log('url', url)
-
         if (url.includes('user-overview')) {
           this.currentPage = 'user-overview';
+          this.cdr.markForCheck();
         } else if (url.includes('login-activity')) {
           this.currentPage = 'login-activity';
+          this.cdr.markForCheck();
         } else if (url.includes('mfa-otp-activity')) {
           this.currentPage = 'mfa-otp-activity';
+          this.cdr.markForCheck();
         } else if (url.includes('security-account-status')) {
           this.currentPage = 'security-account-status';
+          this.cdr.markForCheck();
         } else if (url.includes('geographic-metrics')) {
           this.currentPage = 'geographic-metrics';
+          this.cdr.markForCheck();
         } else if (url.includes('session-metrics')) {
           this.currentPage = 'session-metrics';
+          this.cdr.markForCheck();
         } else if (url.includes('service-request')) {
           this.currentPage = 'service-request';
+          this.cdr.markForCheck();
         } else if (url.includes('transaction-mix')) {
           this.currentPage = 'transaction-mix';
+          this.cdr.markForCheck();
         } else if (url.includes('digital-onboarding-journey')) {
           this.currentPage = 'digital-onboarding-journey';
+          this.cdr.markForCheck();
         } else if (url.includes('transaction-perfomance')) {
           this.currentPage = 'transaction-perfomance';
+          this.cdr.markForCheck();
         } else if (url.includes('digital-onboarding-journey-insights')) {
           this.currentPage = 'digital-onboarding-insights';
+          this.cdr.markForCheck();
         } else if (url.includes('manage-locators')) {
           this.currentPage = 'manage-locators';
+          this.cdr.markForCheck();
         } else if (url.includes('device-management')) {
           this.currentPage = 'device-management';
+          this.cdr.markForCheck();
         } else if (url.includes('push-notification')) {
           this.currentPage = 'device-management';
+          this.cdr.markForCheck();
         } else if (url.includes('message-campaign')) {
           this.currentPage = 'device-management';
+          this.cdr.markForCheck();
         } else if (url.includes('customer-segments')) {
           this.currentPage = 'device-management';
+          this.cdr.markForCheck();
         } else if (url.includes('template-creation')) {
           this.currentPage = 'device-management';
+          this.cdr.markForCheck();
         } else if (url.includes('branch-locators')) {
           this.currentPage = 'manage-locators';
+          this.cdr.markForCheck();
+        }else if (url.includes('manage-otp')) {
+          this.currentPage = 'manage-otp';
+          this.cdr.markForCheck();
+        }else if (url.includes('manage-license')) {
+          this.currentPage = 'manage-license';
+          this.cdr.markForCheck();
+        }else if (url.includes('manage-mfa')) {
+          this.currentPage = 'manage-mfa';
+          this.cdr.markForCheck();
         }
         else {
           this.currentPage = 'user-overview';
         }
-
-        console.log("Current Active Page:", this.currentPage);
       });
   }
   onProductTypeChanged(subProduct: boolean) {
@@ -86,27 +108,76 @@ export class Dashboard {
 
 
   onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean }) {
-    console.log('event', event);
-
+    
     if (event.menu === 'User Overview') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
+    } else if (event.menu === 'Login Activity') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    } else if (event.menu === 'MFA & OTP Activity') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Security Alerts & Account') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Session Metrics') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Geographic Metrics') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Service Request') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Transaction Mix') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Digital Onboarding Journey') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Transaction Performance') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
+    }  else if (event.menu === 'Digital Onboarding Journey Insights') {
+      this.isProductHub = false;
+      this.headerTitle = 'Dashboard';
+      this.activeTab = 'all';
+      this.cdr.markForCheck();
     } else if (event.menu === 'Product Hub') {
       this.isProductHub = true;
       this.headerTitle = 'Product Hub';
       this.activeTab = 'retail';
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     } else if (event.menu === 'Login Activity') {
       this.isProductHub = false;
       this.headerTitle = 'Login Activity';
       this.activeTab = 'retail';
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     } else if (event.menu == 'Admin Center') {
       this.headerTitle = 'Admin Center';
       this.isProductHub = false
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     } else if (event.menu == 'Manage OTP') {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'OTP Management'
@@ -115,22 +186,22 @@ export class Dashboard {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Manage Locators'
       this.isSubmenu = event.isSubmenu;
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     } else if (event.menu == 'Manage License') {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Manage License'
       this.isSubmenu = event.isSubmenu;
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     } else if (event.menu == 'Manage MFA') {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Manage MFA'
       this.isSubmenu = event.isSubmenu;
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     }else if (event.menu == 'Manage Notifications') {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Manage Notification'
       this.isSubmenu = event.isSubmenu;
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title
@@ -153,7 +224,6 @@ export class Dashboard {
   }
 
   navigateBasedOnTab() {
-    console.log('zzzz', this.activeTab)
     if (this.currentPage === 'user-overview') {
       if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/user-overview']);
@@ -208,9 +278,7 @@ export class Dashboard {
       } else if (this.activeTab === 'Branch Locator') {
         this.router.navigate(['/admin-center/branch-locators']);
       }
-    } else if (this.currentPage == 'device-management') {
-      console.log('hh',this.activeTab);
-      
+    } else if (this.currentPage == 'device-management') {      
       if (this.activeTab === 'Device Management') {
         this.router.navigate(['/admin-center/device-management']);
       } else if (this.activeTab === 'Push Notification') {

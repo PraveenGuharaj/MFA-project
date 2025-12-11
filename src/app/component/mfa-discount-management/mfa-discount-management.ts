@@ -107,9 +107,7 @@ export class MfaDiscountManagement {
 
         if (item) {
           this.selectedMfa = { ...item };
-          console.log('selectedMfa', this.selectedMfa);
         } else {
-          console.log('Item not found for index', index);
         }
       }
 
@@ -202,7 +200,6 @@ export class MfaDiscountManagement {
   }
 
   openDrawer() {
-    console.log("Drawer OPEN triggered");
     this.isDrawerOpen = true;
     this.drawerState.emit(true);
   }
@@ -223,7 +220,6 @@ export class MfaDiscountManagement {
 
   onRenewOffer(mfa: any) {
     this.selectedOffer = mfa;
-    console.log('selectedOffer', this.selectedOffer)
     this.isRenewOpen = true;
   }
 

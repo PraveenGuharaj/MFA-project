@@ -65,7 +65,7 @@ export class DbxSidebar {
       subMenu: [
         { name: 'Manage OTP', link: 'admin-center/manage-otp', submenuTitle: 'OTP Management', isSubmenuTitle: true },
         { name: 'Manage Locators', link: 'admin-center/manage-locators', submenuTitle: 'Manage Locators', isSubmenuTitle: true },
-        { name: 'Manage License', link: 'admin-center/Manage License', submenuTitle: 'Manage License', isSubmenuTitle: true },
+        { name: 'Manage License', link: 'admin-center/manage-license', submenuTitle: 'Manage License', isSubmenuTitle: true },
         { name: 'Manage MFA', link: 'admin-center/manage-mfa', submenuTitle: 'Manage MFA', isSubmenuTitle: true },
         { name: 'Manage Notifications', link: 'admin-center/device-management', submenuTitle: 'Manage Notification', isSubmenuTitle: true }
       ],
@@ -79,12 +79,6 @@ export class DbxSidebar {
   }
 
   selectMenu(menu: string, type: string, link?: string, isSubmenu?: boolean) {
-    console.log('menu', menu);
-    console.log('type', type);
-    console.log('link', link);
-    console.log('isSUbmenu', isSubmenu);
-
-
     if (link) {
       this.router.navigate([link]); // Navigate to the selected route
     }

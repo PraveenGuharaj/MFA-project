@@ -13,9 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class DashboardProductHub {
   @Input() subProduct: boolean = false;
-  ngOnInit() {
-    console.log('subProduct', this.subProduct)
-  }
 
   products = [
     {

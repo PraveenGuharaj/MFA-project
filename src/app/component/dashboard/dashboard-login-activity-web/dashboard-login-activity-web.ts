@@ -444,10 +444,6 @@ export class DashboardLoginActivityWeb {
   }
 
   createPatternWithBackground(bgColor: string, stripeColor: string) {
-    console.log('bgColor', bgColor);
-    console.log('stripeColor', stripeColor);
-
-
     const size = 5;
     const canvas = document.createElement('canvas');
     canvas.width = size;

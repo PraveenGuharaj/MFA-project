@@ -77,7 +77,6 @@ export class MerchantOfferManagement {
     validPeriod: '',
     description: ''
   }; createOffer() {
-    console.log('Create a new offer');
   }
 
 

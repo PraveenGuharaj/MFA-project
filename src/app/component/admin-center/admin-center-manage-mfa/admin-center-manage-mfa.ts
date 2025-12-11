@@ -13,9 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterManageMfa {
   @Input() subProduct: boolean = false;
-  ngOnInit() {
-    console.log('subProduct', this.subProduct)
-  }
 
   products = [
     {

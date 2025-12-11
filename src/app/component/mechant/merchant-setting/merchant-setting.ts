@@ -25,14 +25,11 @@ export class MerchantSetting {
 
   regenerateKey() {
     this.settings.apiKey = Math.random().toString(36).substring(2, 18);
-    console.log("API Key regenerated:", this.settings.apiKey);
   }
 
   saveGeneral() {
-    console.log("Saved general:", this.settings);
   }
 
   manualBackup() {
-    console.log("Manual backup started...");
   }
 }

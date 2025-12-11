@@ -27,10 +27,6 @@ export class MfaDiscountEdit {
   @Output() close = new EventEmitter<void>();
   @Output() update = new EventEmitter<any>();
 
-
-  ngOnInit() {
-    console.log('mfa', this.mfa)
-  }
   onClose() {
     this.close.emit();
   }

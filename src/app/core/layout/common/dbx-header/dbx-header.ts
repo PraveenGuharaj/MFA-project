@@ -27,7 +27,7 @@ export class DbxHeader {
   @Output() productTypeChanged = new EventEmitter<boolean>();
   @Output() tabChanged = new EventEmitter<string>();
   @Input() pageTitle?: string; // Title passed from the parent
-  @Input() subMenuTitle: string = '';
+  @Input() subMenuTitle?: string;
   @Input() isSubMenu?: boolean;
   @Input() headerTabs: any[] = [];  // Dynamic tabs
   @Input() isProductHub: boolean = false; // Property to check if we are in Product Hub
@@ -35,15 +35,18 @@ export class DbxHeader {
   @Input() activeTab: string = '';
   subProduct: boolean = false;
   atmLocators: boolean = false;
+  selectedDateLabel = 'Today';
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+    console.log('pageTitle',this.pageTitle);
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
     // Log to track changes in input properties
     if (changes['pageTitle']) {
-      console.log('ngOnChanges - pageTitle changed:', changes['pageTitle'].currentValue);
     }
   }
 
@@ -182,8 +185,13 @@ export class DbxHeader {
 
   // Method to change active tab for User Overview
   setActiveTab(tab: string) {
-    console.log('tab', tab)
     this.activeTab = tab;
     this.tabChanged.emit(tab);
   }
+
+  openDatePicker() {
+}
+
+refresh() {
+}
 }

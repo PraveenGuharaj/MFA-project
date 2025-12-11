@@ -53,7 +53,6 @@ export class AdminCenterAddMessageCampaign {
 
   submitForm() {
     if (this.productForm.valid) {
-      console.log("Form Submitted:", this.productForm.value);
     } else {
       this.productForm.markAllAsTouched();
     }

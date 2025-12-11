@@ -57,7 +57,6 @@ export class Login {
 
   verifyOtp() {
     // Add OTP verification logic here
-    console.log('OTP Submitted:', this.otp.join(''));
       this.router.navigate(['/dashboard']);
     
     // Assuming OTP is valid, reset or handle further
@@ -66,7 +65,6 @@ export class Login {
    resendOtp() {
     this.otpTimer = 60; // Reset timer
     this.startOtpTimer();
-    console.log('OTP resent');
   }
 
    // Show QR code screen

@@ -24,10 +24,6 @@ export class MfaOfferDelete {
   }
 
   confirmDelete() {
-    console.log("Deleting:", {
-      id: this.mfa?.id,
-      name: this.mfaName
-    });
   }
 
   onClose() {

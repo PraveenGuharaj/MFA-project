@@ -12,9 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterPushNotification {
   @Input() subProduct: boolean = false;
-  ngOnInit() {
-    console.log('subProduct', this.subProduct)
-  }
 
   products = [
     {

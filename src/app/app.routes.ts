@@ -91,7 +91,7 @@ export const routes: Routes = [
       { path: 'manage-otp', component: AdminCenterManageOtp},
       { path: 'manage-locators', component: AdminCenterManageLocators},
       { path: 'branch-locators', component: AdminCenterBranchLocator},
-      { path: 'Manage License', component: AdminCenterManageLicense},
+      { path: 'manage-license', component: AdminCenterManageLicense},
       { path: 'manage-mfa', component: AdminCenterManageMfa},
       { path: 'device-management', component: AdminCenterDeviceManagement},
       { path: 'push-notification', component: AdminCenterPushNotification},

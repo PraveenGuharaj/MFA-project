@@ -12,10 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterMessageCampaign {
   @Input() subProduct: boolean = false;
-  ngOnInit() {
-    console.log('subProduct', this.subProduct)
-  }
-
+ 
   products = [
     {
       campaignId: '3a323c2e-0e5a-4016-bdab-c10e1d18e6ed',

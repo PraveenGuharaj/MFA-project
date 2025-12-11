@@ -206,7 +206,6 @@ export class MfaOfferManagement {
   }
 
   openDrawer() {
-    console.log("Drawer OPEN triggered");
     this.isDrawerOpen = true;
     this.drawerState.emit(true);
   }
@@ -227,7 +226,6 @@ export class MfaOfferManagement {
 
   onRenewOffer(mfa: any) {
     this.selectedOffer = mfa;
-    console.log('selectedOffer', this.selectedOffer)
     this.isRenewOpen = true;
   }
 

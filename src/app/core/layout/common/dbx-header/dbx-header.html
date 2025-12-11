@@ -1,7 +1,7 @@
 <!-- Top Section -->
 <div class="header-top">
   <div class="dashboard-title">
-    <p>{{pageTitle}}</p> <!-- This title will dynamically change -->
+    <p>{{pageTitle}}</p> 
 
     <div *ngIf="isSubMenu" class="d-flex">
       <mat-icon>chevron_right</mat-icon>
@@ -33,7 +33,7 @@
 <!-- Bottom Section -->
 <!-- Bottom Section -->
 <div class="header-bottom">
-  <div class="tabs">
+  <div class="tabs" >
     <div *ngIf="pageTitle =='Dashboard'" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
         (click)="setActiveTab('all')">
@@ -50,6 +50,24 @@
         <img src="images/sub_product.png" class="pr-10">Mobile
       </button>
     </div>
+
+    <!-- calendar -->
+     <div class="date-filter-wrapper mt-24" *ngIf="pageTitle =='Dashboard'">
+
+  <!-- Date Selector -->
+  <div class="date-box" (click)="openDatePicker()" >
+    <mat-icon class="date-icon">calendar_today</mat-icon>
+    <span class="date-text">{{ selectedDateLabel }}</span>
+    <mat-icon class="arrow-icon">chevron_right</mat-icon>
+  </div>
+
+  <!-- Refresh Button -->
+  <button class="refresh-btn" (click)="refresh()" *ngIf="pageTitle =='Dashboard'">
+  <img src="images/refresh.png" class="pr-10">
+  </button>
+
+</div>
+
 
 
     <!-- manage locators -->

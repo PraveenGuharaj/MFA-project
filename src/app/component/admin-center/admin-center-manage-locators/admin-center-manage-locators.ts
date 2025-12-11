@@ -13,10 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterManageLocators {
   @Input() subProduct: boolean = false;
-  ngOnInit() {
-    console.log('subProduct', this.subProduct)
-  }
-
+ 
   products = [
     {
       name: 'ATM 01',

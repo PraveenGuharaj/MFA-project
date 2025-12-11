@@ -70,6 +70,7 @@
 
 .tabs {
     display: flex;
+    width: 100%;
 }
 
 .tab-button {
@@ -100,6 +101,8 @@
 .actions {
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: end;
 }
 
 .today-btn {
@@ -248,4 +251,53 @@
         position: relative;
         right: 10px;
     }
+}
+
+.date-filter-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.date-box {
+  background: #f4f4f4;
+  border-radius: 14px;
+  padding: 10px 16px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border: 1px solid #ededed;
+}
+
+.date-icon,
+.arrow-icon {
+  color: #1a0738;
+  font-size: 20px;
+}
+
+.date-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a0738;
+}
+
+.refresh-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid #ededed;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.refresh-btn mat-icon {
+  font-size: 22px;
+  color: #1a0738;
 }

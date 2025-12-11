@@ -59,7 +59,6 @@ export class MerchantProduct {
   ];
 
   manageSubProducts(category: any) {
-    console.log('Managing sub-products for:', category);
   }
 
 }
