@@ -113,70 +113,84 @@ export class Dashboard {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     } else if (event.menu === 'Login Activity') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     } else if (event.menu === 'MFA & OTP Activity') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Security Alerts & Account') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Session Metrics') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Geographic Metrics') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Service Request') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Transaction Mix') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Digital Onboarding Journey') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Transaction Performance') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     }  else if (event.menu === 'Digital Onboarding Journey Insights') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     } else if (event.menu === 'Product Hub') {
       this.isProductHub = true;
       this.headerTitle = 'Product Hub';
       this.activeTab = 'retail';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     } else if (event.menu === 'Login Activity') {
       this.isProductHub = false;
       this.headerTitle = 'Login Activity';
       this.activeTab = 'retail';
+      this.subMenuTitle = '';
       this.cdr.markForCheck();
     } else if (event.menu == 'Admin Center') {
       this.headerTitle = 'Admin Center';
       this.isProductHub = false
+      
       this.cdr.markForCheck();
     } else if (event.menu == 'Manage OTP') {
       this.headerTitle = 'Admin Center';
@@ -280,16 +294,16 @@ export class Dashboard {
       }
     } else if (this.currentPage == 'device-management') {      
       if (this.activeTab === 'Device Management') {
-        this.router.navigate(['/admin-center/device-management']);
+        this.router.navigate(['/dashboard/device-management']);
       } else if (this.activeTab === 'Push Notification') {
-        this.router.navigate(['/admin-center/push-notification']);
+        this.router.navigate(['/dashboard/push-notification']);
       } 
       else if (this.activeTab === 'Message Campaign') {
-        this.router.navigate(['/admin-center/message-campaign']);
+        this.router.navigate(['/dashboard/message-campaign']);
       }else if (this.activeTab === 'Customer Segments') {
-        this.router.navigate(['/admin-center/customer-segments']);
+        this.router.navigate(['/dashboard/customer-segments']);
       }else if (this.activeTab === 'Template Creation') {
-        this.router.navigate(['/admin-center/template-creation']);
+        this.router.navigate(['/dashboard/template-creation']);
       }
     }
     if (this.currentPage === 'transaction-perfomance') {

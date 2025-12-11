@@ -80,15 +80,9 @@ export const routes: Routes = [
       { path: 'digital-onboarding-insights',component: DashboardDigitalJourneyInsights},
       { path: 'user-overview-mobile',component: DashboardUserOverviewMobile},
       { path: 'user-overview-web',component: DashboarUserOverviewWeb},
-      { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
-    ]
-  },
 
-  {
-    path: 'admin-center',
-    component:Dashboard,
-    children: [
-      { path: 'manage-otp', component: AdminCenterManageOtp},
+
+       { path: 'manage-otp', component: AdminCenterManageOtp},
       { path: 'manage-locators', component: AdminCenterManageLocators},
       { path: 'branch-locators', component: AdminCenterBranchLocator},
       { path: 'manage-license', component: AdminCenterManageLicense},
@@ -97,9 +91,27 @@ export const routes: Routes = [
       { path: 'push-notification', component: AdminCenterPushNotification},
       { path: 'message-campaign', component: AdminCenterMessageCampaign},
       { path: 'customer-segments', component: AdminCenterCustomerSegments},
-      { path: 'template-creation', component: AdminCenterTemplateCreation}
-    ] 
+      { path: 'template-creation', component: AdminCenterTemplateCreation},
+      { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
+    ]
   },
+
+  // {
+  //   path: 'admin-center',
+  //   component:Dashboard,
+  //   children: [
+  //     { path: 'manage-otp', component: AdminCenterManageOtp},
+  //     { path: 'manage-locators', component: AdminCenterManageLocators},
+  //     { path: 'branch-locators', component: AdminCenterBranchLocator},
+  //     { path: 'manage-license', component: AdminCenterManageLicense},
+  //     { path: 'manage-mfa', component: AdminCenterManageMfa},
+  //     { path: 'device-management', component: AdminCenterDeviceManagement},
+  //     { path: 'push-notification', component: AdminCenterPushNotification},
+  //     { path: 'message-campaign', component: AdminCenterMessageCampaign},
+  //     { path: 'customer-segments', component: AdminCenterCustomerSegments},
+  //     { path: 'template-creation', component: AdminCenterTemplateCreation}
+  //   ] 
+  // },
 
   {
     path: '',

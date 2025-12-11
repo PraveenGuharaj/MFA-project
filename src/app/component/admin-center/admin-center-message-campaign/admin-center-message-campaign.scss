@@ -10,3 +10,51 @@
 .d-flex {
     display: flex;
 }
+
+
+.toggle-container {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f8f8f8;
+    width: fit-content;
+    border: 1px solid #ddd;
+}
+
+/* Toggle button style */
+.toggle-button {
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 400;
+    border: none;
+    background-color: #fff;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Active button style */
+.toggle-button.active {
+        background-color: #221340;
+    color: #fff;
+    box-shadow: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+/* On hover, change the background of non-active buttons */
+.toggle-button:hover {
+    background-color: #f1f1f1;
+}
+
+
+.d-flex {
+    display: flex;
+    width: 100%;
+}

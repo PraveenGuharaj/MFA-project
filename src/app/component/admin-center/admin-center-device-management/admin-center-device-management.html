@@ -1,64 +1,88 @@
 <div class="product-table-container">
-    <table class="product-table">
-        <thead>
-            <tr>
-                <th *ngIf="!subProduct">ID</th>
-                <th *ngIf="!subProduct">Application Mode</th>
-                <th *ngIf="!subProduct">Bundle Identifier</th>
-                <th *ngIf="!subProduct">iPhone Cert Password</th>
-                <th *ngIf="!subProduct">iPad Cert Uploaded</th>
-                <th *ngIf="!subProduct">Status</th>
-                <th *ngIf="!subProduct">Actions</th>
+    <!-- admin center manage License filter and search bar -->
+
+    <div class="top-bar">
+        <div class="d-flex">
+            <div class="toggle-container">
+                <button class="toggle-button active">Apple</button>
+                <button class="toggle-button">Android</button>
+            </div>
 
 
-                <th *ngIf="subProduct">Sub-Product Name</th>
-                <th *ngIf="subProduct">Parent Product</th>
-                <th *ngIf="subProduct">Features</th>
-                <th *ngIf="subProduct">Channel</th>
-                <th *ngIf="subProduct">Screen</th>
-                <th *ngIf="subProduct">Status</th>
-                <th *ngIf="subProduct">Priority</th>
-                <th *ngIf="subProduct">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <input type="text" placeholder="Search" />
+                    <img src="images/admin_search.png" class="notification_icon">
+                </div>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.id }}</td>
-                <td>{{ p.applicationMode}}</td>
-                <td>{{ p.bundleidentifier}}</td>
-                <td>{{ p.iPhoneCertPassword}}</td>
-                <td>{{ p.iPadCertUploaded}}</td>
-                <td>
-                    <span class="status" [ngClass]="{
+                <button class="filter-btn mr-10">
+                    <img src="images/admin_filter.png" class="notification_icon">
+                </button>
+            </div>
+        </div>
+
+
+
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th *ngIf="!subProduct">ID</th>
+                    <th *ngIf="!subProduct">Application Mode</th>
+                    <th *ngIf="!subProduct">Bundle Identifier</th>
+                    <th *ngIf="!subProduct">iPhone Cert Password</th>
+                    <th *ngIf="!subProduct">iPad Cert Uploaded</th>
+                    <th *ngIf="!subProduct">Status</th>
+                    <th *ngIf="!subProduct">Actions</th>
+
+
+                    <th *ngIf="subProduct">Sub-Product Name</th>
+                    <th *ngIf="subProduct">Parent Product</th>
+                    <th *ngIf="subProduct">Features</th>
+                    <th *ngIf="subProduct">Channel</th>
+                    <th *ngIf="subProduct">Screen</th>
+                    <th *ngIf="subProduct">Status</th>
+                    <th *ngIf="subProduct">Priority</th>
+                    <th *ngIf="subProduct">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let p of products">
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.applicationMode}}</td>
+                    <td>{{ p.bundleidentifier}}</td>
+                    <td>{{ p.iPhoneCertPassword}}</td>
+                    <td>{{ p.iPadCertUploaded}}</td>
+                    <td>
+                        <span class="status" [ngClass]="{
                           'active': p.status === 'Active',
                           'inactive': p.status === 'Inactive'
                         }">
-                        {{ p.status }}
-                    </span>
-                </td>
-                <td class="actions">
-                    <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
-                        <img src="images/eye.png" />
-                        <img src="images/edit.png" />
-                        <img src="images/trash_red.png" />
-                    </ng-container>
+                            {{ p.status }}
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <!-- Use images -->
+                        <ng-container *ngIf="p.actionsType === 'image'">
+                            <img src="images/eye.png" />
+                            <img src="images/edit.png" />
+                            <img src="images/trash_red.png" />
+                        </ng-container>
 
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <!-- Pagination -->
-    <div class="pagination">
-        <button>&lt;</button>
-        <button class="active-page">1</button>
-        <button>2</button>
-        <button>3</button>
-        <span>…</span>
-        <button>10</button>
-        <button>&gt;</button>
+        <!-- Pagination -->
+        <div class="pagination">
+            <button>&lt;</button>
+            <button class="active-page">1</button>
+            <button>2</button>
+            <button>3</button>
+            <span>…</span>
+            <button>10</button>
+            <button>&gt;</button>
+        </div>
+
     </div>
-
-</div>
