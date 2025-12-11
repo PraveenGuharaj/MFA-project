@@ -1,0 +1,96 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2>Template Creation</h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+            <div class="p-10">
+                <div class="form-group">
+                    <label>Domain</label>
+                    <mat-select formControlName="country" placeholder="Select Domain">
+                        <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group mt-20">
+                    <label>Unit</label>
+                    <mat-select formControlName="city" placeholder="Select Unit ID">
+                        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group mt-20">
+                    <label>Channel</label>
+                    <mat-select formControlName="city" placeholder="Select Channel ID">
+                        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group mt-20">
+                    <label>Category</label>
+                    <mat-select formControlName="city" placeholder="Select Category">
+                        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="full-width mt-20">
+                <label>Template Name</label>
+                <input formControlName="atmCode" placeholder="Enter Template Name" />
+            </div>
+
+            <h3>Notification Delivery Type</h3>
+            <div class="checkbox-group">
+                <mat-checkbox formControlName="cashDispenser"><span class="fs-16">SMS</span></mat-checkbox>
+                <mat-checkbox formControlName="recycler"><span class="fs-16">Email</span></mat-checkbox>
+                <mat-checkbox formControlName="cdm"><span class="fs-16">Push</span></mat-checkbox>
+            </div>
+
+            <div class="p-10">
+                <div class="form-group">
+                    <label>Language</label>
+                    <mat-select formControlName="country" placeholder="Select Language">
+                        <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group p-10">
+                    <label>Template</label>
+                    <mat-select formControlName="city" placeholder="Input Variable">
+                        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="p-10 full-width">
+                <label>Deep Link URL</label>
+                <input formControlName="latitude" placeholder="Add Deep Link URL" />
+            </div>
+
+            <div class="upload-wrapper mt-20">
+                <label>Upload iPhone Push Certificate</label>
+                <div class="upload-box">
+                    <span class="placeholder-text">Upload the file here</span>
+                    <button type="button" class="upload-btn">
+                        <mat-icon>upload</mat-icon>
+                        Upload
+                    </button>
+                    <input type="file" class="file-input">
+                </div>
+            </div>
+
+            <div class="p-10 full-width">
+                <label>Remarks</label>
+                <input formControlName="latitude" placeholder="Enter Remarks" />
+            </div>
+
+            <div class="form-actions p-10">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

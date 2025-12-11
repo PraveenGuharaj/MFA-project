@@ -12,6 +12,7 @@ import { AdminCenterAddBranch } from '../../../../component/admin-center/admin-c
 import { AdminCenterAddDeviceManagement } from '../../../../component/admin-center/admin-center-add-device-management/admin-center-add-device-management';
 import { AdminCenterAddMessageCampaign } from '../../../../component/admin-center/admin-center-add-message-campaign/admin-center-add-message-campaign';
 import { AdminCenterAddSegment } from '../../../../component/admin-center/admin-center-add-segment/admin-center-add-segment';
+import { AdminCenterAddTemplateCreation } from '../../../../component/admin-center/admin-center-add-template-creation/admin-center-add-template-creation';
 
 @Component({
   selector: 'app-dbx-header',
@@ -132,6 +133,16 @@ export class DbxHeader {
 
   openSegmentModal() {
     this.dialog.open(AdminCenterAddSegment, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openTemplateCreationModal() {
+       this.dialog.open(AdminCenterAddTemplateCreation, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
