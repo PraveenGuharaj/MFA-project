@@ -1,1 +1,64 @@
-<p>admin-center-message-campaign works!</p>
+<div class="product-table-container">
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th *ngIf="!subProduct">Campaign ID</th>
+                <th *ngIf="!subProduct">Campaign Name</th>
+                <th *ngIf="!subProduct">Created On</th>
+                <th *ngIf="!subProduct">Executed On</th>
+                <th *ngIf="!subProduct">Notification Type</th>
+                <th *ngIf="!subProduct">Actions</th>
+
+                <th *ngIf="subProduct">Sub-Product Name</th>
+                <th *ngIf="subProduct">Parent Product</th>
+                <th *ngIf="subProduct">Features</th>
+                <th *ngIf="subProduct">Channel</th>
+                <th *ngIf="subProduct">Screen</th>
+                <th *ngIf="subProduct">Status</th>
+                <th *ngIf="subProduct">Priority</th>
+                <th *ngIf="subProduct">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let p of products">
+                <td>{{ p.campaignId }}</td>
+                <td>{{ p.campaignName}}</td>
+                <td>{{ p.createdOn}}</td>
+                <td>{{ p.executedOn}}</td>
+                <td>
+                    <!-- Use images -->
+                    <ng-container *ngIf="p.notificationType === 'image'">
+                        <span class="d-flex">
+                            <img src="images/silent.png" />
+                            <span class="f-14">Silent</span>
+                        </span>
+                    </ng-container>
+
+                </td>
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container *ngIf="p.actionsType === 'image'">
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" />
+                        <img src="images/trash_red.png" />
+                        <img src="images/referesh_admin.png" />
+                    </ng-container>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>&lt;</button>
+        <button class="active-page">1</button>
+        <button>2</button>
+        <button>3</button>
+        <span>…</span>
+        <button>10</button>
+        <button>&gt;</button>
+    </div>
+
+</div>

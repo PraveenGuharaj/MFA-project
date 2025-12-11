@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th *ngIf="!subProduct">ID</th>
-                <th *ngIf="!subProduct">Application  Mode</th>
+                <th *ngIf="!subProduct">Application Mode</th>
                 <th *ngIf="!subProduct">Bundle Identifier</th>
                 <th *ngIf="!subProduct">iPhone Cert Password</th>
                 <th *ngIf="!subProduct">iPad Cert Uploaded</th>
@@ -31,9 +31,9 @@
                 <td>{{ p.iPadCertUploaded}}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
-        }">
+                          'active': p.status === 'Active',
+                          'inactive': p.status === 'Inactive'
+                        }">
                         {{ p.status }}
                     </span>
                 </td>

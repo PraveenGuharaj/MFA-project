@@ -1,1 +1,65 @@
-<p>admin-center-customer-segments works!</p>
+<div class="product-table-container">
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th *ngIf="!subProduct">Unit</th>
+                <th *ngIf="!subProduct">Segment ID</th>
+                <th *ngIf="!subProduct">Segment Code</th>
+                <th *ngIf="!subProduct">Segment Desc</th>
+                <th *ngIf="!subProduct">Segment Type</th>
+                <th *ngIf="!subProduct">Segment Status</th>
+                <th *ngIf="!subProduct">Actions</th>
+
+
+                <th *ngIf="subProduct">Sub-Product Name</th>
+                <th *ngIf="subProduct">Parent Product</th>
+                <th *ngIf="subProduct">Features</th>
+                <th *ngIf="subProduct">Channel</th>
+                <th *ngIf="subProduct">Screen</th>
+                <th *ngIf="subProduct">Status</th>
+                <th *ngIf="subProduct">Priority</th>
+                <th *ngIf="subProduct">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let p of products">
+                <td>{{ p.unit }}</td>
+                <td>{{ p.segmentId}}</td>
+                <td>{{ p.segmentCode}}</td>
+                <td>{{ p.segmentDesc}}</td>
+                <td>{{ p.segmentType}}</td>
+                <td>
+                    <span class="status" [ngClass]="{
+                          'active': p.segmentStatus === 'Active',
+                          'inactive': p.segmentStatus === 'Inactive'
+                        }">
+                        {{ p.segmentStatus }}
+                    </span>
+                </td>
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container *ngIf="p.actionsType === 'image'">
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" />
+                        <img src="images/trash_red.png" />
+                        <img src="images/referesh_admin.png" />
+                    </ng-container>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>&lt;</button>
+        <button class="active-page">1</button>
+        <button>2</button>
+        <button>3</button>
+        <span>…</span>
+        <button>10</button>
+        <button>&gt;</button>
+    </div>
+
+</div>
