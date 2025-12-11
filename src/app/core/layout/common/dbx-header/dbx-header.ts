@@ -11,6 +11,7 @@ import { AdminCenterAddMfa } from '../../../../component/admin-center/admin-cent
 import { AdminCenterAddBranch } from '../../../../component/admin-center/admin-center-add-branch/admin-center-add-branch';
 import { AdminCenterAddDeviceManagement } from '../../../../component/admin-center/admin-center-add-device-management/admin-center-add-device-management';
 import { AdminCenterAddMessageCampaign } from '../../../../component/admin-center/admin-center-add-message-campaign/admin-center-add-message-campaign';
+import { AdminCenterAddSegment } from '../../../../component/admin-center/admin-center-add-segment/admin-center-add-segment';
 
 @Component({
   selector: 'app-dbx-header',
@@ -121,6 +122,16 @@ export class DbxHeader {
 
   openMessageCapaignModal() {
     this.dialog.open(AdminCenterAddMessageCampaign, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openSegmentModal() {
+    this.dialog.open(AdminCenterAddSegment, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {

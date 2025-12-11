@@ -1,0 +1,47 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2>Add New Segment</h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <!-- Product Name -->
+            <div class="form-row full-width">
+                <label class="w-100">Unit</label>
+                <mat-select formControlName="domain" placeholder="Select Unit">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="full-width mt-10">
+                <label>Segment ID</label>
+                <input placeholder="Add New Segment ID" />
+            </div>
+
+            <div class="full-width mt-10">
+                <label>Segment Code</label>
+                <input placeholder="Add New Segment Code" />
+            </div>
+
+            <div class="full-width mt-10">
+                <label>Segment Desc</label>
+                <input placeholder="Add New Segment Desc" />
+            </div>
+
+            <div class="form-row mt-10">
+                <div class="form-group">
+                    <span class="pr-10">Status</span>
+                    <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="form-actions bottom-btn">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

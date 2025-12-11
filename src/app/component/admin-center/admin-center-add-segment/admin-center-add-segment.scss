@@ -1,0 +1,30 @@
+@use '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product.scss';
+
+.fs-16 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #030303;
+    margin-bottom: 10px;
+}
+
+.mt-10 {
+    margin-top: 20px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+::ng-deep .mdc-switch__icons {
+    display: none;
+}
+
+.pr-10 {
+    padding-right: 10px;
+}
+
+.bottom-btn {
+    position: absolute;
+    bottom: 0 !important;
+    width: -webkit-fill-available;
+}
