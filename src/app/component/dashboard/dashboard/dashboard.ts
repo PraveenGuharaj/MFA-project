@@ -99,6 +99,15 @@ export class Dashboard {
         } else if (url.includes('manage-content')) {
           this.currentPage = 'manage-content';
           this.cdr.markForCheck();
+        } else if (url.includes('cfms-parameter')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
+        } else if (url.includes('content-management')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
+        } else if (url.includes('tc')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
         }
         else {
           this.currentPage = 'user-overview';
@@ -319,12 +328,12 @@ export class Dashboard {
       console.log('activeTab', this.activeTab);
 
       if (this.activeTab === 'Content Management') {
-        this.router.navigate(['/dashboard/device-management']);
-      } else if (this.activeTab === 'Push Notification') {
-        this.router.navigate(['/dashboard/push-notification']);
+        this.router.navigate(['/dashboard/content-management']);
+      } else if (this.activeTab === 'CFMS Parameters') {
+        this.router.navigate(['/dashboard/cfms-parameter']);
       }
-      else if (this.activeTab === 'Message Campaign') {
-        this.router.navigate(['/dashboard/message-campaign']);
+      else if (this.activeTab === 'T&C') {
+        this.router.navigate(['/dashboard/tc']);
       } else if (this.activeTab === 'Customer Segments') {
         this.router.navigate(['/dashboard/customer-segments']);
       } else if (this.activeTab === 'Template Creation') {

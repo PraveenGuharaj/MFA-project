@@ -130,8 +130,8 @@
       </button>
 
 
-      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Customer Segments'}"
-        *ngIf="!isProductHub" (click)="setActiveTab('Customer Segments')">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'T&C'}" *ngIf="!isProductHub"
+        (click)="setActiveTab('T&C')">
         T&C
       </button>
 
@@ -223,8 +223,11 @@
       <img src="images/import.png" class="notification_icon"><span>Upload Excel</span>
     </button>
 
-    <button class="retail_product " (click)="openSegmentModal()" *ngIf="subMenuTitle == 'Manage Content'">
+    <button class="retail_product " (click)="openSegmentModal()" *ngIf="activeTab == 'Content Management'">
       <img src="images/plus-mini.png">Add Banner</button>
+
+    <button class="retail_product " (click)="openSegmentModal()" *ngIf="activeTab == 'T&C'">
+      <img src="images/plus-mini.png">Add Terms & Conditions</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
