@@ -45,6 +45,7 @@ import { AdminCenterPushNotification } from './component/admin-center/admin-cent
 import { AdminCenterMessageCampaign } from './component/admin-center/admin-center-message-campaign/admin-center-message-campaign';
 import { AdminCenterCustomerSegments } from './component/admin-center/admin-center-customer-segments/admin-center-customer-segments';
 import { AdminCenterTemplateCreation } from './component/admin-center/admin-center-template-creation/admin-center-template-creation';
+import { AdminCenterManageContent } from './component/admin-center/admin-center-manage-content/admin-center-manage-content';
 
 export const routes: Routes = [
   {
@@ -92,6 +93,7 @@ export const routes: Routes = [
       { path: 'message-campaign', component: AdminCenterMessageCampaign},
       { path: 'customer-segments', component: AdminCenterCustomerSegments},
       { path: 'template-creation', component: AdminCenterTemplateCreation},
+      { path: 'manage-content', component: AdminCenterManageContent},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

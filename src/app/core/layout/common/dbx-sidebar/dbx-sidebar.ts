@@ -67,7 +67,8 @@ export class DbxSidebar {
         { name: 'Manage Locators', link: 'dashboard/manage-locators', submenuTitle: 'Manage Locators', isSubmenuTitle: true },
         { name: 'Manage License', link: 'dashboard/manage-license', submenuTitle: 'Manage License', isSubmenuTitle: true },
         { name: 'Manage MFA', link: 'dashboard/manage-mfa', submenuTitle: 'Manage MFA', isSubmenuTitle: true },
-        { name: 'Manage Notifications', link: 'dashboard/device-management', submenuTitle: 'Manage Notification', isSubmenuTitle: true }
+        { name: 'Manage Notifications', link: 'dashboard/device-management', submenuTitle: 'Manage Notification', isSubmenuTitle: true },
+        { name: 'Manage Content', link: 'dashboard/manage-content', submenuTitle: 'Manage Content', isSubmenuTitle: true }
       ],
       expanded: false
     },

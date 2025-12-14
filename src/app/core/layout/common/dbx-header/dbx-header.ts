@@ -40,8 +40,8 @@ export class DbxHeader {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log('pageTitle',this.pageTitle);
-    
+    console.log('pageTitle', this.subMenuTitle);
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -145,7 +145,7 @@ export class DbxHeader {
   }
 
   openTemplateCreationModal() {
-       this.dialog.open(AdminCenterAddTemplateCreation, {
+    this.dialog.open(AdminCenterAddTemplateCreation, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
@@ -190,8 +190,8 @@ export class DbxHeader {
   }
 
   openDatePicker() {
-}
+  }
 
-refresh() {
-}
+  refresh() {
+  }
 }

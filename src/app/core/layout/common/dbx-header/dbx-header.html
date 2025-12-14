@@ -1,7 +1,7 @@
 <!-- Top Section -->
 <div class="header-top">
   <div class="dashboard-title">
-    <p>{{pageTitle}}</p> 
+    <p>{{pageTitle}}</p>
 
     <div *ngIf="isSubMenu" class="d-flex">
       <mat-icon>chevron_right</mat-icon>
@@ -33,7 +33,7 @@
 <!-- Bottom Section -->
 <!-- Bottom Section -->
 <div class="header-bottom">
-  <div class="tabs" >
+  <div class="tabs">
     <div *ngIf="pageTitle =='Dashboard'" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
         (click)="setActiveTab('all')">
@@ -52,21 +52,21 @@
     </div>
 
     <!-- calendar -->
-     <div class="date-filter-wrapper mt-24" *ngIf="pageTitle =='Dashboard'">
+    <div class="date-filter-wrapper mt-24" *ngIf="pageTitle =='Dashboard'">
 
-  <!-- Date Selector -->
-  <div class="date-box" (click)="openDatePicker()" >
-    <mat-icon class="date-icon">calendar_today</mat-icon>
-    <span class="date-text">{{ selectedDateLabel }}</span>
-    <mat-icon class="arrow-icon">chevron_right</mat-icon>
-  </div>
+      <!-- Date Selector -->
+      <div class="date-box" (click)="openDatePicker()">
+        <mat-icon class="date-icon">calendar_today</mat-icon>
+        <span class="date-text">{{ selectedDateLabel }}</span>
+        <mat-icon class="arrow-icon">chevron_right</mat-icon>
+      </div>
 
-  <!-- Refresh Button -->
-  <button class="refresh-btn" (click)="refresh()" *ngIf="pageTitle =='Dashboard'">
-  <img src="images/refresh.png" class="pr-10">
-  </button>
+      <!-- Refresh Button -->
+      <button class="refresh-btn" (click)="refresh()" *ngIf="pageTitle =='Dashboard'">
+        <img src="images/refresh.png" class="pr-10">
+      </button>
 
-</div>
+    </div>
 
 
 
@@ -112,17 +112,51 @@
       </button>
     </div>
 
+    <!-- manage content -->
+    <div *ngIf="subMenuTitle == 'Manage Content'" class="d-flex">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Content Management'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Content Management')">
+        Content Management
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'CFMS Parameters'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('CFMS Parameters')">
+        CFMS Parameters
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Message Campaign'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Message Campaign')">
+        Banner
+      </button>
 
 
-    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retail'}" *ngIf="isProductHub"
-      (click)="setActiveTab('retail')" (click)="retailProduct(false)">
-      <img src="images/retail_product.png" class="pr-10">Retail Product
-    </button>
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Customer Segments'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Customer Segments')">
+        T&C
+      </button>
 
-    <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}" *ngIf="isProductHub"
-      (click)="setActiveTab('sub')" (click)="subProductModel(true)">
-      <img src="images/sub_product.png" class="pr-10">Sub Product
-    </button>
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Template Creation'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Template Creation')">
+        Product
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retail'}"
+        (click)="setActiveTab('retail')" (click)="retailProduct(false)">
+        Database Configuration
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}"
+        (click)="setActiveTab('sub')" (click)="subProductModel(true)">
+        Sub Product
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}"
+        (click)="setActiveTab('sub')" (click)="subProductModel(true)">
+        l18 Maintanence
+      </button>
+    </div>
+
+
 
     <span class="f-15" *ngIf="subMenuTitle == 'OTP Management'">Configuration List</span>
 
@@ -146,7 +180,7 @@
 
   <!-- admin center otp adn atm -->
   <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
-     subMenuTitle == 'Manage Notification'">
+     subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content'">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
@@ -188,6 +222,9 @@
     <button class="export-btn" *ngIf="activeTab == 'Template Creation' && subMenuTitle == 'Manage Notification'">
       <img src="images/import.png" class="notification_icon"><span>Upload Excel</span>
     </button>
+
+    <button class="retail_product " (click)="openSegmentModal()" *ngIf="subMenuTitle == 'Manage Content'">
+      <img src="images/plus-mini.png">Add Banner</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">

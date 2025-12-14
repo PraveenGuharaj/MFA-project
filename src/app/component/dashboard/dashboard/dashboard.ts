@@ -87,14 +87,17 @@ export class Dashboard {
         } else if (url.includes('branch-locators')) {
           this.currentPage = 'manage-locators';
           this.cdr.markForCheck();
-        }else if (url.includes('manage-otp')) {
+        } else if (url.includes('manage-otp')) {
           this.currentPage = 'manage-otp';
           this.cdr.markForCheck();
-        }else if (url.includes('manage-license')) {
+        } else if (url.includes('manage-license')) {
           this.currentPage = 'manage-license';
           this.cdr.markForCheck();
-        }else if (url.includes('manage-mfa')) {
+        } else if (url.includes('manage-mfa')) {
           this.currentPage = 'manage-mfa';
+          this.cdr.markForCheck();
+        } else if (url.includes('manage-content')) {
+          this.currentPage = 'manage-content';
           this.cdr.markForCheck();
         }
         else {
@@ -108,7 +111,7 @@ export class Dashboard {
 
 
   onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean }) {
-    
+    console.log('event', event)
     if (event.menu === 'User Overview') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
@@ -127,49 +130,49 @@ export class Dashboard {
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Security Alerts & Account') {
+    } else if (event.menu === 'Security Alerts & Account') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Session Metrics') {
+    } else if (event.menu === 'Session Metrics') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Geographic Metrics') {
+    } else if (event.menu === 'Geographic Metrics') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Service Request') {
+    } else if (event.menu === 'Service Request') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Transaction Mix') {
+    } else if (event.menu === 'Transaction Mix') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Digital Onboarding Journey') {
+    } else if (event.menu === 'Digital Onboarding Journey') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Transaction Performance') {
+    } else if (event.menu === 'Transaction Performance') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.cdr.markForCheck();
-    }  else if (event.menu === 'Digital Onboarding Journey Insights') {
+    } else if (event.menu === 'Digital Onboarding Journey Insights') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
@@ -190,7 +193,7 @@ export class Dashboard {
     } else if (event.menu == 'Admin Center') {
       this.headerTitle = 'Admin Center';
       this.isProductHub = false
-      
+
       this.cdr.markForCheck();
     } else if (event.menu == 'Manage OTP') {
       this.headerTitle = 'Admin Center';
@@ -211,9 +214,14 @@ export class Dashboard {
       this.subMenuTitle = 'Manage MFA'
       this.isSubmenu = event.isSubmenu;
       this.cdr.markForCheck();
-    }else if (event.menu == 'Manage Notifications') {
+    } else if (event.menu == 'Manage Notifications') {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Manage Notification'
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.markForCheck();
+    } else if (event.menu == 'Manage Content') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Manage Content'
       this.isSubmenu = event.isSubmenu;
       this.cdr.markForCheck();
     }
@@ -238,6 +246,8 @@ export class Dashboard {
   }
 
   navigateBasedOnTab() {
+    console.log('currentPage', this.currentPage);
+
     if (this.currentPage === 'user-overview') {
       if (this.activeTab === 'all') {
         this.router.navigate(['/dashboard/user-overview']);
@@ -292,17 +302,32 @@ export class Dashboard {
       } else if (this.activeTab === 'Branch Locator') {
         this.router.navigate(['/admin-center/branch-locators']);
       }
-    } else if (this.currentPage == 'device-management') {      
+    } else if (this.currentPage == 'device-management') {
       if (this.activeTab === 'Device Management') {
         this.router.navigate(['/dashboard/device-management']);
       } else if (this.activeTab === 'Push Notification') {
         this.router.navigate(['/dashboard/push-notification']);
-      } 
+      }
       else if (this.activeTab === 'Message Campaign') {
         this.router.navigate(['/dashboard/message-campaign']);
-      }else if (this.activeTab === 'Customer Segments') {
+      } else if (this.activeTab === 'Customer Segments') {
         this.router.navigate(['/dashboard/customer-segments']);
-      }else if (this.activeTab === 'Template Creation') {
+      } else if (this.activeTab === 'Template Creation') {
+        this.router.navigate(['/dashboard/template-creation']);
+      }
+    } else if (this.currentPage == 'manage-content') {
+      console.log('activeTab', this.activeTab);
+
+      if (this.activeTab === 'Content Management') {
+        this.router.navigate(['/dashboard/device-management']);
+      } else if (this.activeTab === 'Push Notification') {
+        this.router.navigate(['/dashboard/push-notification']);
+      }
+      else if (this.activeTab === 'Message Campaign') {
+        this.router.navigate(['/dashboard/message-campaign']);
+      } else if (this.activeTab === 'Customer Segments') {
+        this.router.navigate(['/dashboard/customer-segments']);
+      } else if (this.activeTab === 'Template Creation') {
         this.router.navigate(['/dashboard/template-creation']);
       }
     }
