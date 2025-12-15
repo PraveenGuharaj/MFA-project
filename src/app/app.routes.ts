@@ -48,6 +48,7 @@ import { AdminCenterTemplateCreation } from './component/admin-center/admin-cent
 import { AdminCenterManageContent } from './component/admin-center/admin-center-manage-content/admin-center-manage-content';
 import { AdminCenterCfmsParameters } from './component/admin-center/admin-center-cfms-parameters/admin-center-cfms-parameters';
 import { AdminCenterTc } from './component/admin-center/admin-center-tc/admin-center-tc';
+import { AdminCenterBaner } from './component/admin-center/admin-center-baner/admin-center-baner';
 
 export const routes: Routes = [
   {
@@ -99,6 +100,7 @@ export const routes: Routes = [
       { path: 'content-management', component: AdminCenterManageContent},
       { path: 'cfms-parameter', component: AdminCenterCfmsParameters},
       { path: 'tc', component: AdminCenterTc},
+      { path: 'banner', component: AdminCenterBaner},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

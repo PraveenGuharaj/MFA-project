@@ -124,8 +124,8 @@
         CFMS Parameters
       </button>
 
-      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Message Campaign'}"
-        *ngIf="!isProductHub" (click)="setActiveTab('Message Campaign')">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'banner'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('banner')">
         Banner
       </button>
 
@@ -224,7 +224,7 @@
       <img src="images/import.png" class="notification_icon"><span>Upload Excel</span>
     </button>
 
-    <button class="retail_product " (click)="openSegmentModal()" *ngIf="activeTab == 'Content Management'">
+    <button class="retail_product " (click)="openAddBannerModal()" *ngIf="activeTab == 'banner'">
       <img src="images/plus-mini.png">Add Banner</button>
 
     <button class="retail_product " (click)="openTCModal()" *ngIf="activeTab == 'T&C'">
