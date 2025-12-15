@@ -108,6 +108,9 @@ export class Dashboard {
         } else if (url.includes('tc')) {
           this.currentPage = 'manage-content';
           this.cdr.markForCheck();
+        } else if (url.includes('product')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
         } else if (url.includes('banner')) {
           this.currentPage = 'manage-content';
           this.cdr.markForCheck();
@@ -339,6 +342,8 @@ export class Dashboard {
         this.router.navigate(['/dashboard/tc']);
       } else if (this.activeTab === 'banner') {
         this.router.navigate(['/dashboard/banner']);
+      } else if (this.activeTab === 'product') {
+        this.router.navigate(['/dashboard/product']);
       } else if (this.activeTab === 'Customer Segments') {
         this.router.navigate(['/dashboard/customer-segments']);
       } else if (this.activeTab === 'Template Creation') {
