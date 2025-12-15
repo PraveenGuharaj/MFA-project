@@ -15,6 +15,7 @@ import { AdminCenterAddSegment } from '../../../../component/admin-center/admin-
 import { AdminCenterAddTemplateCreation } from '../../../../component/admin-center/admin-center-add-template-creation/admin-center-add-template-creation';
 import { AdminCenterAddTermsCondition } from '../../../../component/admin-center/admin-center-add-terms-condition/admin-center-add-terms-condition';
 import { AdminCenterAddBanner } from '../../../../component/admin-center/admin-center-add-banner/admin-center-add-banner';
+import { AdminCenterAddProduct } from '../../../../component/admin-center/admin-center-add-product/admin-center-add-product';
 
 @Component({
   selector: 'app-dbx-header',
@@ -187,6 +188,16 @@ export class DbxHeader {
 
   openTCModal() {
     this.dialog.open(AdminCenterAddTermsCondition, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+   openProductModal() {
+    this.dialog.open(AdminCenterAddProduct, {
       width: '60%',
       height: 'auto',
       position: {

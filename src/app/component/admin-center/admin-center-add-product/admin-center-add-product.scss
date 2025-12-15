@@ -1,0 +1,9 @@
+@use '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product.scss';
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+::ng-deep .mdc-switch__icons {
+    display: none;
+}

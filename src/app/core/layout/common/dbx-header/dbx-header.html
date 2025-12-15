@@ -230,6 +230,9 @@
     <button class="retail_product " (click)="openTCModal()" *ngIf="activeTab == 'T&C'">
       <img src="images/plus-mini.png">Add Terms & Conditions</button>
 
+    <button class="retail_product " (click)="openProductModal()" *ngIf="activeTab === 'product'">
+      <img src="images/plus-mini.png">Add Product</button>
+
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
       <div class="search-box">
