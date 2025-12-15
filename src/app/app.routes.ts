@@ -50,6 +50,7 @@ import { AdminCenterCfmsParameters } from './component/admin-center/admin-center
 import { AdminCenterTc } from './component/admin-center/admin-center-tc/admin-center-tc';
 import { AdminCenterBaner } from './component/admin-center/admin-center-baner/admin-center-baner';
 import { AdminCenterProduct } from './component/admin-center/admin-center-product/admin-center-product';
+import { AdminCenterDatabaseConfiguration } from './component/admin-center/admin-center-database-configuration/admin-center-database-configuration';
 
 export const routes: Routes = [
   {
@@ -103,6 +104,7 @@ export const routes: Routes = [
       { path: 'tc', component: AdminCenterTc },
       { path: 'banner', component: AdminCenterBaner },
       { path: 'product', component: AdminCenterProduct },
+      { path: 'databaseConfiguration', component: AdminCenterDatabaseConfiguration },
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

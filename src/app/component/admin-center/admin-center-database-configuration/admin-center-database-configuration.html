@@ -1,0 +1,58 @@
+<div class="product-table-container">
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input type="text" placeholder="Search" />
+            <img src="images/admin_search.png" class="notification_icon">
+        </div>
+
+        <button class="filter-btn mr-10">
+            <img src="images/admin_filter.png" class="notification_icon">
+        </button>
+    </div>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th *ngIf="!subProduct">Database Type</th>
+                <th *ngIf="!subProduct">Host Name</th>
+                <th *ngIf="!subProduct">Port</th>
+                <th *ngIf="!subProduct">Database Name</th>
+                <th *ngIf="!subProduct">Username</th>
+                <th *ngIf="!subProduct">Password</th>
+                <th *ngIf="!subProduct">Encrypted</th>
+
+                <th *ngIf="subProduct">Sub-Product Name</th>
+                <th *ngIf="subProduct">Parent Product</th>
+                <th *ngIf="subProduct">Features</th>
+                <th *ngIf="subProduct">Channel</th>
+                <th *ngIf="subProduct">Screen</th>
+                <th *ngIf="subProduct">Status</th>
+                <th *ngIf="subProduct">Priority</th>
+                <th *ngIf="subProduct">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let p of products">
+                <td>{{ p.databaseType }}</td>
+                <td>{{ p.hostName }}</td>
+                <td>{{ p.port }}</td>
+                <td class="redirectUrl">{{ p.databaseName }}</td>
+                <td class="redirectUrl">{{ p.userName }}</td>
+                <td>{{ p.password }}</td>
+                <td>{{ p.encrypted }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>&lt;</button>
+        <button class="active-page">1</button>
+        <button>2</button>
+        <button>3</button>
+        <span>…</span>
+        <button>10</button>
+        <button>&gt;</button>
+    </div>
+
+</div>

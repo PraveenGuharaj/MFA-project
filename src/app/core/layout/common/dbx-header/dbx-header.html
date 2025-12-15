@@ -140,8 +140,8 @@
         Product
       </button>
 
-      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retail'}"
-        (click)="setActiveTab('retail')" (click)="retailProduct(false)">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'databaseConfiguration'}"
+        (click)="setActiveTab('databaseConfiguration')">
         Database Configuration
       </button>
 
@@ -232,6 +232,9 @@
 
     <button class="retail_product " (click)="openProductModal()" *ngIf="activeTab === 'product'">
       <img src="images/plus-mini.png">Add Product</button>
+
+    <button class="retail_product " (click)="openProductModal()" *ngIf="activeTab === 'databaseConfiguration'">
+      <img src="images/plus-mini.png">Add Database</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
