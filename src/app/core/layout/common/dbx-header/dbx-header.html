@@ -146,7 +146,7 @@
       </button>
 
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}"
-        (click)="setActiveTab('sub')" (click)="subProductModel(true)">
+        (click)="setActiveTab('subProduct')" (click)="subProductModel(true)">
         Sub Product
       </button>
 
@@ -174,9 +174,6 @@
     <button class="retail_product " *ngIf="subProduct" (click)="openSubModal()"> <img src="images/plus-mini.png">Add Sub
       Product</button>
   </div>
-
-
-
 
   <!-- admin center otp adn atm -->
   <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
@@ -233,7 +230,10 @@
     <button class="retail_product " (click)="openProductModal()" *ngIf="activeTab === 'product'">
       <img src="images/plus-mini.png">Add Product</button>
 
-    <button class="retail_product " (click)="openProductModal()" *ngIf="activeTab === 'databaseConfiguration'">
+    <button class="retail_product " (click)="openSubProductModal()" *ngIf="activeTab === 'subProduct'">
+      <img src="images/plus-mini.png">Add Sub-Product</button>
+
+    <button class="retail_product " (click)="openDatabaseModal()" *ngIf="activeTab === 'databaseConfiguration'">
       <img src="images/plus-mini.png">Add Database</button>
 
     <!-- admin center manage License filter and search bar -->

@@ -16,6 +16,8 @@ import { AdminCenterAddTemplateCreation } from '../../../../component/admin-cent
 import { AdminCenterAddTermsCondition } from '../../../../component/admin-center/admin-center-add-terms-condition/admin-center-add-terms-condition';
 import { AdminCenterAddBanner } from '../../../../component/admin-center/admin-center-add-banner/admin-center-add-banner';
 import { AdminCenterAddProduct } from '../../../../component/admin-center/admin-center-add-product/admin-center-add-product';
+import { AdminCenterAddDatabase } from '../../../../component/admin-center/admin-center-add-database/admin-center-add-database';
+import { AdminCenterAddSubProduct } from '../../../../component/admin-center/admin-center-add-sub-product/admin-center-add-sub-product';
 
 @Component({
   selector: 'app-dbx-header',
@@ -126,6 +128,15 @@ export class DbxHeader {
     });
   }
 
+   openSubProductModal() {
+    this.dialog.open(AdminCenterAddSubProduct, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
 
   openMessageCapaignModal() {
     this.dialog.open(AdminCenterAddMessageCampaign, {
@@ -198,6 +209,16 @@ export class DbxHeader {
 
    openProductModal() {
     this.dialog.open(AdminCenterAddProduct, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openDatabaseModal() {
+     this.dialog.open(AdminCenterAddDatabase, {
       width: '60%',
       height: 'auto',
       position: {

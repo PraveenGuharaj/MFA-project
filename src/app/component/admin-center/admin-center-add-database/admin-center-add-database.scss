@@ -1,0 +1,62 @@
+@use '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product.scss';
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+::ng-deep .mdc-switch__icons {
+    display: none;
+}
+
+.password-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.password-box {
+    border-radius: 12px;
+    height: 52px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #E7E7E8;
+    width: 92%;
+}
+
+.password-box input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    color: #0D0B17;
+}
+
+.password-box input::placeholder {
+    color: #9b9b9b;
+}
+
+.eye-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #4a4a4a;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.full-width {
+    gap:10px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.p-10 {
+    padding-right: 10px;
+}

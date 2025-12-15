@@ -1,7 +1,7 @@
 <div class="stats-container">
     <div class="stat-card">
         <div class="stat-title">
-            <span class="card-title">Total Products</span>
+            <span class="card-title">Total Sub-Products</span>
             <div class="stat-change">
                 <img src="images/sub_product.png" class="notification_icon">
             </div>
@@ -12,8 +12,8 @@
 
     <div class="stat-card-newusers">
         <div class="stat-title">
-            <span class="card-title">Active Products</span>
-            <div class="stat-change">ub
+            <span class="card-title">Active Sub-Products</span>
+            <div class="stat-change">
                 <img src="images/copy-success.png" class="notification_icon">
             </div>
         </div>
@@ -24,7 +24,7 @@
 
     <div class="stat-card-activeusers">
         <div class="stat-title">
-            <span class="card-title">Inctive Products</span>
+            <span class="card-title">Inctive Sub-Products</span>
             <div class="stat-change">
                 <img src="images/copy.png" class="notification_icon">
             </div>
@@ -48,13 +48,13 @@
     <table class="product-table">
         <thead>
             <tr>
-                <th *ngIf="!subProduct">Product Code</th>
-                <th *ngIf="!subProduct">Product Name (English)</th>
-                <th *ngIf="!subProduct">Product Name (Arabic)</th>
-                <th *ngIf="!subProduct">Product Description (English)</th>
-                <th *ngIf="!subProduct">Product Description (Arabic)</th>
+                <th *ngIf="!subProduct">Sub Product ID</th>
+                <th *ngIf="!subProduct">Sub Product Type</th>
+                <th *ngIf="!subProduct">Sub Product Name (English)</th>
+                <th *ngIf="!subProduct">Sub Product Name (Arabic)</th>
+                <th *ngIf="!subProduct">Sub Product Description (English)</th>
+                <th *ngIf="!subProduct">Sub Product Description (Arabic)</th>
                 <th *ngIf="!subProduct">Status</th>
-                <th *ngIf="!subProduct">Priority</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -69,13 +69,13 @@
         <tbody>
 
             <tr *ngFor="let p of products">
-                <td>{{ p.productCode }}</td>
-                <td>{{ p.productNameEnglish }}</td>
-                <td>{{ p.productNameArabic }}</td>
-                <td class="w-180">{{ p.productDescriptionEnglish }}</td>
-                <td>{{ p.productDescriptionArabic }}</td>
+                <td>{{ p.subProductId }}</td>
+                <td>{{ p.subProductType }}</td>
+                <td>{{ p.subProductNameEnglish }}</td>
+                <td>{{ p.subProductNameArabic }}</td>
+                <td class="w-180">{{ p.subProductDescriptionEnglish }}</td>
+                <td>{{ p.subProductDescriptionArabic }}</td>
                 <td>{{ p.status }}</td>
-                <td>{{ p.priority }}</td>
             </tr>
         </tbody>
     </table>

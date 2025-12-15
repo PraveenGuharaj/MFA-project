@@ -1,0 +1,72 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />
+                Add Database </h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <div class="form-row full-width">
+                <label>Database Type</label>
+                <mat-select formControlName="domain" placeholder="Select Database" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Port Name</label>
+                <input placeholder="Enter Port Name" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Host Name</label>
+                <input placeholder="Enter Port Name" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Data Base</label>
+                <input placeholder="Enter Database" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>User Name</label>
+                <input placeholder="Enter Username" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Encrypted Password</label>
+                <mat-select formControlName="domain" placeholder="Select Encryption" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-row full-width">
+                <label class="w-100">Password</label>
+
+                <div class="password-box">
+                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password" />
+
+                    <!-- Replace mat-icon with img -->
+
+                    <img class="eye-icon" src="images/eye.png" alt="toggle visibility" (click)="togglePassword()" />
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="form-row">
+                <div class="form-group">
+                    Enable <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

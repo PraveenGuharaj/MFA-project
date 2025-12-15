@@ -2,7 +2,7 @@
     <div class="modal-container" (click)="$event.stopPropagation()">
 
         <div class="modal-header">
-            <h2>Add Product </h2>
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add Product </h2>
         </div>
 
         <form [formGroup]="productForm" (ngSubmit)="submitForm()">
