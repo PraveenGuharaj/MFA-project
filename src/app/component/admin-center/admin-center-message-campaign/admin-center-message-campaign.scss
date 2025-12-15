@@ -39,7 +39,7 @@
 
 /* Active button style */
 .toggle-button.active {
-        background-color: #221340;
+    background-color: #221340;
     color: #fff;
     box-shadow: none;
     border-radius: 10px;
@@ -57,4 +57,8 @@
 .d-flex {
     display: flex;
     width: 100%;
+}
+
+.toggle-container {
+    width: 25%;
 }

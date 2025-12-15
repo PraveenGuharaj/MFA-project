@@ -180,7 +180,8 @@
 
   <!-- admin center otp adn atm -->
   <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
-     subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content'">
+     subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content'"
+    [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
@@ -226,7 +227,7 @@
     <button class="retail_product " (click)="openSegmentModal()" *ngIf="activeTab == 'Content Management'">
       <img src="images/plus-mini.png">Add Banner</button>
 
-    <button class="retail_product " (click)="openSegmentModal()" *ngIf="activeTab == 'T&C'">
+    <button class="retail_product " (click)="openTCModal()" *ngIf="activeTab == 'T&C'">
       <img src="images/plus-mini.png">Add Terms & Conditions</button>
 
     <!-- admin center manage License filter and search bar -->

@@ -13,6 +13,7 @@ import { AdminCenterAddDeviceManagement } from '../../../../component/admin-cent
 import { AdminCenterAddMessageCampaign } from '../../../../component/admin-center/admin-center-add-message-campaign/admin-center-add-message-campaign';
 import { AdminCenterAddSegment } from '../../../../component/admin-center/admin-center-add-segment/admin-center-add-segment';
 import { AdminCenterAddTemplateCreation } from '../../../../component/admin-center/admin-center-add-template-creation/admin-center-add-template-creation';
+import { AdminCenterAddTermsCondition } from '../../../../component/admin-center/admin-center-add-terms-condition/admin-center-add-terms-condition';
 
 @Component({
   selector: 'app-dbx-header',
@@ -175,6 +176,16 @@ export class DbxHeader {
 
   openSubModal() {
     this.dialog.open(DashboardSubProduct, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openTCModal() {
+    this.dialog.open(AdminCenterAddTermsCondition, {
       width: '60%',
       height: 'auto',
       position: {
