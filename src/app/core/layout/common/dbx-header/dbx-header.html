@@ -150,6 +150,11 @@
         Sub Product
       </button>
 
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'readyToSync'}"
+        (click)="setActiveTab('readyToSync')">
+        Ready to Sync
+      </button>
+
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}"
         (click)="setActiveTab('sub')" (click)="subProductModel(true)">
         l18 Maintanence

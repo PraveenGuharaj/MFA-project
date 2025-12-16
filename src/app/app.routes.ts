@@ -52,6 +52,7 @@ import { AdminCenterBaner } from './component/admin-center/admin-center-baner/ad
 import { AdminCenterProduct } from './component/admin-center/admin-center-product/admin-center-product';
 import { AdminCenterDatabaseConfiguration } from './component/admin-center/admin-center-database-configuration/admin-center-database-configuration';
 import { AdminCenterSubProduct } from './component/admin-center/admin-center-sub-product/admin-center-sub-product';
+import { AdminCenterReadyToSync } from './component/admin-center/admin-center-ready-to-sync/admin-center-ready-to-sync';
 
 export const routes: Routes = [
   {
@@ -107,6 +108,7 @@ export const routes: Routes = [
       { path: 'product', component: AdminCenterProduct },
       { path: 'databaseConfiguration', component: AdminCenterDatabaseConfiguration },
       { path: 'subProduct', component: AdminCenterSubProduct },
+      { path: 'readyToSync', component: AdminCenterReadyToSync },
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

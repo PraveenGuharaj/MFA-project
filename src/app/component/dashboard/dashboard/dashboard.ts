@@ -120,16 +120,19 @@ export class Dashboard {
         } else if (url.includes('subProduct')) {
           this.currentPage = 'manage-content';
           this.cdr.markForCheck();
+        } else if (url.includes('readyToSync')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
         }
         else {
           this.currentPage = 'user-overview';
         }
       });
   }
+
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
   }
-
 
   onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean }) {
     console.log('event', event)
@@ -354,6 +357,8 @@ export class Dashboard {
         this.router.navigate(['/dashboard/databaseConfiguration']);
       } else if (this.activeTab === 'subProduct') {
         this.router.navigate(['/dashboard/subProduct']);
+      } else if (this.activeTab === 'readyToSync') {
+        this.router.navigate(['/dashboard/readyToSync']);
       } else if (this.activeTab === 'Customer Segments') {
         this.router.navigate(['/dashboard/customer-segments']);
       } else if (this.activeTab === 'Template Creation') {
