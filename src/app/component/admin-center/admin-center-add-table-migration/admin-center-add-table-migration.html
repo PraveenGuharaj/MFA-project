@@ -1,0 +1,29 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add
+                Table Migration </h2>
+        </div>
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <div class="form-row full-width">
+                <label>Sync Table</label>
+                <input placeholder="Enter Sync Table" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Sync/Migration</label>
+                <mat-select formControlName="domain" placeholder="Select Sync/Migration" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions bottom-btn">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Discard</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

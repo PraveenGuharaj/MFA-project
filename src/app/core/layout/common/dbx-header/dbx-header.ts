@@ -18,6 +18,7 @@ import { AdminCenterAddBanner } from '../../../../component/admin-center/admin-c
 import { AdminCenterAddProduct } from '../../../../component/admin-center/admin-center-add-product/admin-center-add-product';
 import { AdminCenterAddDatabase } from '../../../../component/admin-center/admin-center-add-database/admin-center-add-database';
 import { AdminCenterAddSubProduct } from '../../../../component/admin-center/admin-center-add-sub-product/admin-center-add-sub-product';
+import { AdminCenterAddTableMigration } from '../../../../component/admin-center/admin-center-add-table-migration/admin-center-add-table-migration';
 
 @Component({
   selector: 'app-dbx-header',
@@ -128,7 +129,7 @@ export class DbxHeader {
     });
   }
 
-   openSubProductModal() {
+  openSubProductModal() {
     this.dialog.open(AdminCenterAddSubProduct, {
       width: '60%',
       height: 'auto',
@@ -160,6 +161,16 @@ export class DbxHeader {
 
   openTemplateCreationModal() {
     this.dialog.open(AdminCenterAddTemplateCreation, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openTableMigrationModal() {
+    this.dialog.open(AdminCenterAddTableMigration, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
@@ -207,7 +218,7 @@ export class DbxHeader {
     });
   }
 
-   openProductModal() {
+  openProductModal() {
     this.dialog.open(AdminCenterAddProduct, {
       width: '60%',
       height: 'auto',
@@ -218,7 +229,7 @@ export class DbxHeader {
   }
 
   openDatabaseModal() {
-     this.dialog.open(AdminCenterAddDatabase, {
+    this.dialog.open(AdminCenterAddDatabase, {
       width: '60%',
       height: 'auto',
       position: {
@@ -227,7 +238,7 @@ export class DbxHeader {
     });
   }
 
-    openAddBannerModal() {
+  openAddBannerModal() {
     this.dialog.open(AdminCenterAddBanner, {
       width: '60%',
       height: 'auto',

@@ -155,6 +155,11 @@
         Ready to Sync
       </button>
 
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'linkConfiguration'}"
+        (click)="setActiveTab('linkConfiguration')">
+        Link Configuration
+      </button>
+
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}"
         (click)="setActiveTab('sub')" (click)="subProductModel(true)">
         l18 Maintanence
@@ -226,20 +231,33 @@
       <img src="images/import.png" class="notification_icon"><span>Upload Excel</span>
     </button>
 
-    <button class="retail_product " (click)="openAddBannerModal()" *ngIf="activeTab == 'banner'">
+    <button class="retail_product " (click)="openAddBannerModal()"
+      *ngIf="activeTab == 'banner' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Banner</button>
 
-    <button class="retail_product " (click)="openTCModal()" *ngIf="activeTab == 'T&C'">
+    <button class="retail_product " (click)="openTCModal()"
+      *ngIf="activeTab == 'T&C' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Terms & Conditions</button>
 
-    <button class="retail_product " (click)="openProductModal()" *ngIf="activeTab === 'product'">
+    <button class="retail_product " (click)="openProductModal()"
+      *ngIf="activeTab === 'product' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Product</button>
 
-    <button class="retail_product " (click)="openSubProductModal()" *ngIf="activeTab === 'subProduct'">
+    <button class="retail_product " (click)="openSubProductModal()"
+      *ngIf="activeTab === 'subProduct' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Sub-Product</button>
 
-    <button class="retail_product " (click)="openDatabaseModal()" *ngIf="activeTab === 'databaseConfiguration'">
+    <button class="retail_product " (click)="openDatabaseModal()"
+      *ngIf="activeTab === 'databaseConfiguration' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Database</button>
+
+    <button class="retail_product " (click)="openTableMigrationModal()"
+      *ngIf="activeTab === 'readyToSync' && subMenuTitle == 'Manage Content'">
+      <img src="images/plus-mini.png">Add Table Migration</button>
+
+    <button class="retail_product " (click)="openDatabaseModal()"
+      *ngIf="activeTab === 'linkConfiguration' && subMenuTitle == 'Manage Content'">
+      <img src="images/plus-mini.png">Add Sub Product</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
