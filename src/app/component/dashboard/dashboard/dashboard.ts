@@ -126,6 +126,9 @@ export class Dashboard {
         } else if (url.includes('linkConfiguration')) {
           this.currentPage = 'manage-content';
           this.cdr.markForCheck();
+        } else if (url.includes('faqManagement')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
         }
         else {
           this.currentPage = 'user-overview';
@@ -364,6 +367,8 @@ export class Dashboard {
         this.router.navigate(['/dashboard/readyToSync']);
       } else if (this.activeTab === 'linkConfiguration') {
         this.router.navigate(['/dashboard/linkConfiguration']);
+      } else if (this.activeTab === 'faqManagement') {
+        this.router.navigate(['/dashboard/faqManagement']);
       } else if (this.activeTab === 'Customer Segments') {
         this.router.navigate(['/dashboard/customer-segments']);
       } else if (this.activeTab === 'Template Creation') {

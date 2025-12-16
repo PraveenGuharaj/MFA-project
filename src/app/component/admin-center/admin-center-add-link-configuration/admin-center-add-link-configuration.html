@@ -1,0 +1,69 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />
+                Add Link </h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <div class="form-row full-width">
+                <label>Group Name (English)</label>
+                <input placeholder="Enter Group Name in English" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Group Name (Arabic)</label>
+                <input placeholder="Enter Group Name in Arabic" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Row Number</label>
+                <input placeholder="Enter Row Number" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>English Name</label>
+                <input placeholder="Enter English Name" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Arabic Name</label>
+                <input placeholder="Enter Arabic Name" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>English Link</label>
+                <input placeholder="Enter English Link" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Arabic Link</label>
+                <input placeholder="Enter Arabic Link" />
+            </div>
+
+            <div class="upload-wrapper mt-24">
+                <label>Upload iPhone Push Certificate</label>
+
+                <div class="upload-box">
+                    <span class="placeholder-text">Upload the file here</span>
+
+                    <button type="button" class="upload-btn">
+                        <mat-icon>upload</mat-icon>
+                        Upload
+                    </button>
+
+                    <input type="file" class="file-input">
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

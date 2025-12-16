@@ -54,6 +54,7 @@ import { AdminCenterDatabaseConfiguration } from './component/admin-center/admin
 import { AdminCenterSubProduct } from './component/admin-center/admin-center-sub-product/admin-center-sub-product';
 import { AdminCenterReadyToSync } from './component/admin-center/admin-center-ready-to-sync/admin-center-ready-to-sync';
 import { AdminCenterLinkConfiguration } from './component/admin-center/admin-center-link-configuration/admin-center-link-configuration';
+import { AdminCenterFaqManagement } from './component/admin-center/admin-center-faq-management/admin-center-faq-management';
 
 export const routes: Routes = [
   {
@@ -111,6 +112,7 @@ export const routes: Routes = [
       { path: 'subProduct', component: AdminCenterSubProduct },
       { path: 'readyToSync', component: AdminCenterReadyToSync },
       { path: 'linkConfiguration', component: AdminCenterLinkConfiguration },
+      { path: 'faqManagement', component: AdminCenterFaqManagement },
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

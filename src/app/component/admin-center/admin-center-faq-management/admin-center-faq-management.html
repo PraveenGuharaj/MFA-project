@@ -1,0 +1,70 @@
+<div class="dropdown-container manage-content-header">
+    <div>
+        <select class="dropdown sync-dropdown">
+            <option>Sync Table Name</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+        </select>
+    </div>
+    <div>
+        <button class="reset-button">Reset</button>
+    </div>
+</div>
+<div class="product-table-container">
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input type="text" placeholder="Search" />
+            <img src="images/admin_search.png" class="notification_icon">
+        </div>
+
+        <button class="filter-btn mr-10">
+            <img src="images/admin_filter.png" class="notification_icon">
+        </button>
+    </div>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th *ngIf="!subProduct">Row Number</th>
+                <th *ngIf="!subProduct">Channel</th>
+                <th *ngIf="!subProduct">Category</th>
+                <th *ngIf="!subProduct">English Question</th>
+                <th *ngIf="!subProduct">English Response</th>
+                <th *ngIf="!subProduct">Arabic Question</th>
+                <th *ngIf="!subProduct">Arabic Response</th>
+
+                <th *ngIf="subProduct">Sub-Product Name</th>
+                <th *ngIf="subProduct">Parent Product</th>
+                <th *ngIf="subProduct">Features</th>
+                <th *ngIf="subProduct">Channel</th>
+                <th *ngIf="subProduct">Screen</th>
+                <th *ngIf="subProduct">Status</th>
+                <th *ngIf="subProduct">Priority</th>
+                <th *ngIf="subProduct">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let p of products">
+                <td>{{ p.rowNumber }}</td>
+                <td>{{ p.channel }}</td>
+                <td>{{ p.category }}</td>
+                <td>{{ p.englishQuestion }}</td>
+                <td class="w-180">{{ p.englishResponse }}</td>
+                <td>{{ p.arabicQuestion }}</td>
+                <td>{{ p.arabicResponse }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>&lt;</button>
+        <button class="active-page">1</button>
+        <button>2</button>
+        <button>3</button>
+        <span>…</span>
+        <button>10</button>
+        <button>&gt;</button>
+    </div>
+
+</div>

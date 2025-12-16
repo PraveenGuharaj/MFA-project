@@ -160,6 +160,11 @@
         Link Configuration
       </button>
 
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'faqManagement'}"
+        (click)="setActiveTab('faqManagement')">
+        FAQ Management
+      </button>
+
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'sub'}"
         (click)="setActiveTab('sub')" (click)="subProductModel(true)">
         l18 Maintanence
@@ -255,7 +260,7 @@
       *ngIf="activeTab === 'readyToSync' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Table Migration</button>
 
-    <button class="retail_product " (click)="openDatabaseModal()"
+    <button class="retail_product " (click)="openLinkConfigurationModal()"
       *ngIf="activeTab === 'linkConfiguration' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Sub Product</button>
 
