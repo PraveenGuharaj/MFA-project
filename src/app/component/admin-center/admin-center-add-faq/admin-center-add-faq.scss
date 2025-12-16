@@ -1,0 +1,113 @@
+@use '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product.scss';
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+::ng-deep .mdc-switch__icons {
+    display: none;
+}
+
+.password-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.password-box {
+    border-radius: 12px;
+    height: 52px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #E7E7E8;
+    width: 92%;
+}
+
+.password-box input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    color: #0D0B17;
+}
+
+.password-box input::placeholder {
+    color: #9b9b9b;
+}
+
+.eye-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #4a4a4a;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.full-width {
+    gap: 10px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.p-10 {
+    padding-right: 10px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+.upload-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.upload-box {
+    background: #f4f4f4;
+    border-radius: 12px;
+    height: 48px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.upload-btn {
+    background: #221340;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px;
+}
+
+.upload-btn mat-icon {
+    font-size: 18px;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}

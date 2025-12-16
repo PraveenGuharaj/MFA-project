@@ -20,6 +20,7 @@ import { AdminCenterAddDatabase } from '../../../../component/admin-center/admin
 import { AdminCenterAddSubProduct } from '../../../../component/admin-center/admin-center-add-sub-product/admin-center-add-sub-product';
 import { AdminCenterAddTableMigration } from '../../../../component/admin-center/admin-center-add-table-migration/admin-center-add-table-migration';
 import { AdminCenterAddLinkConfiguration } from '../../../../component/admin-center/admin-center-add-link-configuration/admin-center-add-link-configuration';
+import { AdminCenterAddFaq } from '../../../../component/admin-center/admin-center-add-faq/admin-center-add-faq';
 
 @Component({
   selector: 'app-dbx-header',
@@ -172,6 +173,16 @@ export class DbxHeader {
 
   openLinkConfigurationModal() {
     this.dialog.open(AdminCenterAddLinkConfiguration, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openFaqModal() {
+    this.dialog.open(AdminCenterAddFaq, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
