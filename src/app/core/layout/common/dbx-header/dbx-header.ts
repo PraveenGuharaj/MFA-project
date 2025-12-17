@@ -22,6 +22,7 @@ import { AdminCenterAddTableMigration } from '../../../../component/admin-center
 import { AdminCenterAddLinkConfiguration } from '../../../../component/admin-center/admin-center-add-link-configuration/admin-center-add-link-configuration';
 import { AdminCenterAddFaq } from '../../../../component/admin-center/admin-center-add-faq/admin-center-add-faq';
 import { AddManageParameter } from '../../../../component/manage-parameter/add-manage-parameter/add-manage-parameter';
+import { AdminCenterAddForceUpdate } from '../../../../component/admin-center/admin-center-add-force-update/admin-center-add-force-update';
 
 @Component({
   selector: 'app-dbx-header',
@@ -272,6 +273,16 @@ export class DbxHeader {
 
   openManageParameterModal() {
     this.dialog.open(AddManageParameter, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openForceUpdateModal() {
+    this.dialog.open(AdminCenterAddForceUpdate, {
       width: '60%',
       height: 'auto',
       position: {

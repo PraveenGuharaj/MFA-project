@@ -183,6 +183,8 @@
 
     <!-- manage parameter -->
     <span class="f-15" *ngIf="subMenuTitle == 'Manage Parameters'">Parameter List</span>
+
+    <span class="f-15" *ngIf="subMenuTitle == 'Force Update'">Force Update Configuration</span>
   </div>
 
 
@@ -194,8 +196,9 @@
   </div>
 
   <!-- admin center otp adn atm -->
-  <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
-     subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters'"
+  <div class="actions"
+    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
+     subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'"
     [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
@@ -272,6 +275,9 @@
       <img src="images/plus-mini.png">Add FAQ</button>
 
     <button class="retail_product " (click)="openManageParameterModal()" *ngIf="subMenuTitle == 'Manage Parameters'">
+      <img src="images/plus-mini.png">Add Parameters</button>
+
+    <button class="retail_product " (click)="openForceUpdateModal()" *ngIf="subMenuTitle == 'Force Update'">
       <img src="images/plus-mini.png">Add Parameters</button>
 
     <!-- admin center manage License filter and search bar -->
