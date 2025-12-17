@@ -271,10 +271,8 @@
       *ngIf="activeTab === 'faqManagement' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add FAQ</button>
 
-    <button class="retail_product " (click)="openFaqModal()" *ngIf="subMenuTitle == 'Manage Parameters'">
+    <button class="retail_product " (click)="openManageParameterModal()" *ngIf="subMenuTitle == 'Manage Parameters'">
       <img src="images/plus-mini.png">Add Parameters</button>
-
-
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">

@@ -21,6 +21,7 @@ import { AdminCenterAddSubProduct } from '../../../../component/admin-center/adm
 import { AdminCenterAddTableMigration } from '../../../../component/admin-center/admin-center-add-table-migration/admin-center-add-table-migration';
 import { AdminCenterAddLinkConfiguration } from '../../../../component/admin-center/admin-center-add-link-configuration/admin-center-add-link-configuration';
 import { AdminCenterAddFaq } from '../../../../component/admin-center/admin-center-add-faq/admin-center-add-faq';
+import { AddManageParameter } from '../../../../component/manage-parameter/add-manage-parameter/add-manage-parameter';
 
 @Component({
   selector: 'app-dbx-header',
@@ -261,6 +262,16 @@ export class DbxHeader {
 
   openAddBannerModal() {
     this.dialog.open(AdminCenterAddBanner, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openManageParameterModal() {
+    this.dialog.open(AddManageParameter, {
       width: '60%',
       height: 'auto',
       position: {

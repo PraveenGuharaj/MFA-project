@@ -57,6 +57,7 @@ import { AdminCenterLinkConfiguration } from './component/admin-center/admin-cen
 import { AdminCenterFaqManagement } from './component/admin-center/admin-center-faq-management/admin-center-faq-management';
 import { BlockUnblockUsers } from './component/block-unblock-users/block-unblock-users/block-unblock-users';
 import { ManageParameter } from './component/manage-parameter/manage-parameter/manage-parameter';
+import { AdminCenterForceUpdate } from './component/admin-center/admin-center-force-update/admin-center-force-update';
 
 export const routes: Routes = [
   {
@@ -116,11 +117,9 @@ export const routes: Routes = [
       { path: 'readyToSync', component: AdminCenterReadyToSync },
       { path: 'linkConfiguration', component: AdminCenterLinkConfiguration },
       { path: 'faqManagement', component: AdminCenterFaqManagement },
-
       { path: 'blockUnblockUsers', component: BlockUnblockUsers },
-
       { path: 'manageParameter', component: ManageParameter },
-
+      { path: 'forceUpdate', component: AdminCenterForceUpdate},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

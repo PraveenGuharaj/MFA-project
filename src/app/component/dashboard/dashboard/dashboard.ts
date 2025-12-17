@@ -129,6 +129,15 @@ export class Dashboard {
         } else if (url.includes('faqManagement')) {
           this.currentPage = 'manage-content';
           this.cdr.markForCheck();
+        } else if (url.includes('manageParameter')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
+        } else if (url.includes('blockUnblockUsers')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
+        } else if (url.includes('forceUpdate')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
         }
         else {
           this.currentPage = 'user-overview';
@@ -270,13 +279,18 @@ export class Dashboard {
       this.cdr.markForCheck();
     } else if (event.menu === 'Block/Unblock Users') {
       this.headerTitle = 'Admin Center';
-      this.activeTab = 'retail';
       this.subMenuTitle = 'Block/Unblock Users';
+      this.isSubmenu = event.isSubmenu;
       this.cdr.markForCheck();
     } else if (event.menu === 'Manage Parameters') {
       this.headerTitle = 'Admin Center';
-      this.activeTab = 'retail';
       this.subMenuTitle = 'Manage Parameters';
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.markForCheck();
+    } else if (event.menu === 'Force Update') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Force Update';
+      this.isSubmenu = event.isSubmenu;
       this.cdr.markForCheck();
     }
     else {

@@ -68,23 +68,13 @@ export class DbxSidebar {
         { name: 'Manage License', link: 'dashboard/manage-license', submenuTitle: 'Manage License', isSubmenuTitle: true },
         { name: 'Manage MFA', link: 'dashboard/manage-mfa', submenuTitle: 'Manage MFA', isSubmenuTitle: true },
         { name: 'Manage Notifications', link: 'dashboard/device-management', submenuTitle: 'Manage Notification', isSubmenuTitle: true },
-        { name: 'Manage Content', link: 'dashboard/manage-content', submenuTitle: 'Manage Content', isSubmenuTitle: true }
+        { name: 'Manage Content', link: 'dashboard/manage-content', submenuTitle: 'Manage Content', isSubmenuTitle: true },
+        { name: 'Block/Unblock Users', link: 'dashboard/blockUnblockUsers', submenuTitle: 'Block/Unblock Users', isSubmenuTitle: true },
+        { name: 'Manage Parameters', link: 'dashboard/manageParameter', submenuTitle: 'Manage Parameters', isSubmenuTitle: true },
+        { name: 'Force Update', link: 'dashboard/forceUpdate', submenuTitle: 'Force Update', isSubmenuTitle: true },
+
       ],
       expanded: false
-    },
-    {
-      name: 'Block/Unblock Users',
-      subMenu: null,
-      expanded: false,
-      isSubmenuTitle: true,
-      link: '/dashboard/blockUnblockUsers', submenuTitle: 'Block/Unblock Users'
-    },
-    {
-      name: 'Manage Parameters',
-      subMenu: null,
-      expanded: false,
-      isSubmenuTitle: true,
-      link: '/dashboard/manageParameter', submenuTitle: 'Manage Parameters'
     },
 
   ]
