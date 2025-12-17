@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -31,7 +32,7 @@ export class AdminCenterAddLinkConfiguration {
   deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AdminCenterAddLinkConfiguration>) {
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
       channel: ['', Validators.required],
@@ -61,5 +62,9 @@ export class AdminCenterAddLinkConfiguration {
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 }

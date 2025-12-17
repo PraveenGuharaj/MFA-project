@@ -13,14 +13,19 @@
 <div class="product-table-container">
     <div class="search-wrapper">
         <div class="search-box">
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="onSearchChange()" />
             <img src="images/admin_search.png" class="notification_icon">
         </div>
 
-        <button class="filter-btn mr-10">
+        <button class="filter-btn mr-10" (click)="sortData()">
             <img src="images/admin_filter.png" class="notification_icon">
         </button>
     </div>
+
+    <div>
+    </div>
+
+
     <table class="product-table">
         <thead>
             <tr>
@@ -44,7 +49,7 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
+            <tr *ngFor="let p of filteredProducts">
                 <td>{{ p.syncTable }}</td>
                 <td>{{ p.syncMigration }}</td>
                 <td>{{ p.migrationDate }}</td>

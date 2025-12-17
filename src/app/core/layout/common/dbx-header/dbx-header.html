@@ -32,7 +32,7 @@
 
 <!-- Bottom Section -->
 <!-- Bottom Section -->
-<div class="header-bottom">
+<div class="header-bottom" *ngIf="subMenuTitle != 'Block/Unblock Users'">
   <div class="tabs">
     <div *ngIf="pageTitle =='Dashboard'" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
