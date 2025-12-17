@@ -273,6 +273,11 @@ export class Dashboard {
       this.activeTab = 'retail';
       this.subMenuTitle = 'Block/Unblock Users';
       this.cdr.markForCheck();
+    } else if (event.menu === 'Manage Parameters') {
+      this.headerTitle = 'Admin Center';
+      this.activeTab = 'retail';
+      this.subMenuTitle = 'Manage Parameters';
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

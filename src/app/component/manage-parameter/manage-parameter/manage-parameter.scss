@@ -1,0 +1,22 @@
+// @use '../../admin-center/admin-center-manage-otp/admin-center-manage-otp.scss';
+
+@use '../../admin-center/admin-center-manage-content/admin-center-manage-content.scss';
+
+.export-btn {
+    background-color: #221340;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+
+    img {
+        position: relative;
+        right: 10px;
+    }
+}
