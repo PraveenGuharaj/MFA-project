@@ -72,6 +72,14 @@ export class DbxSidebar {
       ],
       expanded: false
     },
+    {
+      name: 'Block/Unblock Users',
+      // No submenu for Product Hub
+      subMenu: null,
+      expanded: false,
+      isSubmenuTitle: true,
+      link: '/dashboard/blockUnblockUsers', submenuTitle: 'Block/Unblock Users'
+    },
 
   ]
 

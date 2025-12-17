@@ -55,6 +55,7 @@ import { AdminCenterSubProduct } from './component/admin-center/admin-center-sub
 import { AdminCenterReadyToSync } from './component/admin-center/admin-center-ready-to-sync/admin-center-ready-to-sync';
 import { AdminCenterLinkConfiguration } from './component/admin-center/admin-center-link-configuration/admin-center-link-configuration';
 import { AdminCenterFaqManagement } from './component/admin-center/admin-center-faq-management/admin-center-faq-management';
+import { BlockUnblockUsers } from './component/block-unblock-users/block-unblock-users/block-unblock-users';
 
 export const routes: Routes = [
   {
@@ -105,6 +106,7 @@ export const routes: Routes = [
       { path: 'manage-content', component: AdminCenterManageContent },
       { path: 'content-management', component: AdminCenterManageContent },
       { path: 'cfms-parameter', component: AdminCenterCfmsParameters },
+
       { path: 'tc', component: AdminCenterTc },
       { path: 'banner', component: AdminCenterBaner },
       { path: 'product', component: AdminCenterProduct },
@@ -113,6 +115,9 @@ export const routes: Routes = [
       { path: 'readyToSync', component: AdminCenterReadyToSync },
       { path: 'linkConfiguration', component: AdminCenterLinkConfiguration },
       { path: 'faqManagement', component: AdminCenterFaqManagement },
+
+      { path: 'blockUnblockUsers', component: BlockUnblockUsers },
+
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

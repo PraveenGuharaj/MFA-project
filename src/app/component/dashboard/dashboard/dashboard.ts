@@ -142,83 +142,97 @@ export class Dashboard {
 
   onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean }) {
     console.log('event', event)
+    this.isProductHub = false;
     if (event.menu === 'User Overview') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Login Activity') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'MFA & OTP Activity') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Security Alerts & Account') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Session Metrics') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Geographic Metrics') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Service Request') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Transaction Mix') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Digital Onboarding Journey') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Transaction Performance') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Digital Onboarding Journey Insights') {
       this.isProductHub = false;
       this.headerTitle = 'Dashboard';
       this.activeTab = 'all';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Product Hub') {
       this.isProductHub = true;
       this.headerTitle = 'Product Hub';
       this.activeTab = 'retail';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu === 'Login Activity') {
       this.isProductHub = false;
       this.headerTitle = 'Login Activity';
       this.activeTab = 'retail';
       this.subMenuTitle = '';
+      this.isSubmenu = false;
       this.cdr.markForCheck();
     } else if (event.menu == 'Admin Center') {
       this.headerTitle = 'Admin Center';
@@ -253,6 +267,11 @@ export class Dashboard {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Manage Content'
       this.isSubmenu = event.isSubmenu;
+      this.cdr.markForCheck();
+    } else if (event.menu === 'Block/Unblock Users') {
+      this.headerTitle = 'Admin Center';
+      this.activeTab = 'retail';
+      this.subMenuTitle = 'Block/Unblock Users';
       this.cdr.markForCheck();
     }
     else {

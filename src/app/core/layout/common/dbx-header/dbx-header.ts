@@ -48,7 +48,6 @@ export class DbxHeader {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log('pageTitle', this.activeTab);
 
   }
 
