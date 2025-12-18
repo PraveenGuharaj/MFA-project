@@ -58,6 +58,7 @@ import { AdminCenterFaqManagement } from './component/admin-center/admin-center-
 import { BlockUnblockUsers } from './component/block-unblock-users/block-unblock-users/block-unblock-users';
 import { ManageParameter } from './component/manage-parameter/manage-parameter/manage-parameter';
 import { AdminCenterForceUpdate } from './component/admin-center/admin-center-force-update/admin-center-force-update';
+import { AdminCenterPartnerOnboarding } from './component/admin-center/admin-center-partner-onboarding/admin-center-partner-onboarding';
 
 export const routes: Routes = [
   {
@@ -120,6 +121,7 @@ export const routes: Routes = [
       { path: 'blockUnblockUsers', component: BlockUnblockUsers },
       { path: 'manageParameter', component: ManageParameter },
       { path: 'forceUpdate', component: AdminCenterForceUpdate},
+      { path: 'partnerOnboarding', component: AdminCenterPartnerOnboarding},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },

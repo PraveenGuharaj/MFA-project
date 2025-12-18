@@ -138,6 +138,9 @@ export class Dashboard {
         } else if (url.includes('forceUpdate')) {
           this.currentPage = 'manage-content';
           this.cdr.markForCheck();
+        } else if (url.includes('partnerOnboarding')) {
+          this.currentPage = 'manage-content';
+          this.cdr.markForCheck();
         }
         else {
           this.currentPage = 'user-overview';
@@ -290,6 +293,11 @@ export class Dashboard {
     } else if (event.menu === 'Force Update') {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Force Update';
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.markForCheck();
+    } else if (event.menu === 'Partner Onboarding') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Partner Onboarding';
       this.isSubmenu = event.isSubmenu;
       this.cdr.markForCheck();
     }

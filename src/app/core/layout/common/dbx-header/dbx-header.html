@@ -112,7 +112,36 @@
       </button>
     </div>
 
-    <!-- manage content -->
+    <!-- partner onboarding -->
+    <div *ngIf="subMenuTitle == 'Partner Onboarding'" class="d-flex g-20">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Registration'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Registration')">
+        Registration
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Listing'}" *ngIf="!isProductHub"
+        (click)="setActiveTab('Listing')">
+        Listing
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'API Key Management'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('API Key Management')">
+        API Key Management
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Developer Account'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Developer Account')">
+        Developer Account
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Monitoring & Analytics'}"
+        *ngIf="!isProductHub" (click)="setActiveTab('Monitoring & Analytics')">
+        Monitoring & Analytics
+      </button>
+    </div>
+
+
+
     <div *ngIf="subMenuTitle == 'Manage Content'" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'Content Management'}"
         *ngIf="!isProductHub" (click)="setActiveTab('Content Management')">
@@ -169,6 +198,8 @@
         (click)="setActiveTab('sub')" (click)="subProductModel(true)">
         l18 Maintanence
       </button>
+
+
     </div>
 
 
@@ -196,10 +227,9 @@
   </div>
 
   <!-- admin center otp adn atm -->
-  <div class="actions"
-    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
-     subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'"
-    [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
+  <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
+     subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'
+      || subMenuTitle == 'Partner Onboarding'" [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
@@ -279,6 +309,9 @@
 
     <button class="retail_product " (click)="openForceUpdateModal()" *ngIf="subMenuTitle == 'Force Update'">
       <img src="images/plus-mini.png">Add Parameters</button>
+
+    <button class="retail_product " (click)="openForceUpdateModal()" *ngIf="subMenuTitle == 'Partner Onboarding'">
+      <img src="images/plus-mini.png">Register Partner</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">

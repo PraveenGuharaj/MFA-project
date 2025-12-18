@@ -72,6 +72,7 @@ export class DbxSidebar {
         { name: 'Block/Unblock Users', link: 'dashboard/blockUnblockUsers', submenuTitle: 'Block/Unblock Users', isSubmenuTitle: true },
         { name: 'Manage Parameters', link: 'dashboard/manageParameter', submenuTitle: 'Manage Parameters', isSubmenuTitle: true },
         { name: 'Force Update', link: 'dashboard/forceUpdate', submenuTitle: 'Force Update', isSubmenuTitle: true },
+        { name: 'Partner Onboarding', link: 'dashboard/partnerOnboarding', submenuTitle: 'Partner Onboarding', isSubmenuTitle: true },
 
       ],
       expanded: false
