@@ -23,6 +23,7 @@ import { AdminCenterAddLinkConfiguration } from '../../../../component/admin-cen
 import { AdminCenterAddFaq } from '../../../../component/admin-center/admin-center-add-faq/admin-center-add-faq';
 import { AddManageParameter } from '../../../../component/manage-parameter/add-manage-parameter/add-manage-parameter';
 import { AdminCenterAddForceUpdate } from '../../../../component/admin-center/admin-center-add-force-update/admin-center-add-force-update';
+import { AdminCenterAddRegisterPartner } from '../../../../component/admin-center/admin-center-add-register-partner/admin-center-add-register-partner';
 
 @Component({
   selector: 'app-dbx-header',
@@ -283,6 +284,16 @@ export class DbxHeader {
 
   openForceUpdateModal() {
     this.dialog.open(AdminCenterAddForceUpdate, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openRegisterPartnerModal() {
+    this.dialog.open(AdminCenterAddRegisterPartner, {
       width: '60%',
       height: 'auto',
       position: {

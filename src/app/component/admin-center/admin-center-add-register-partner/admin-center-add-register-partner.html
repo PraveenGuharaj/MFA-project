@@ -1,0 +1,139 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Register
+                Partner </h2>
+        </div>
+
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <span class="step-text">Step 1 of 4: Partner Profile</span>
+            <div class="progress-bar">
+                <div class="progress-step active"></div>
+                <div class="progress-gap"></div>
+                <div class="progress-step"></div>
+                <div class="progress-gap"></div>
+                <div class="progress-step"></div>
+                <div class="progress-gap"></div>
+                <div class="progress-step"></div>
+            </div>
+        </div>
+
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <!-- Channel + Category Dropdown -->
+            <p class="fs-20">Partner Information</p>
+            <div class="form-row full-width mt-20">
+                <div class="form-group">
+                    <label>Partner Profile </label>
+                    <mat-select formControlName="channel" placeholder="Select">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+            <div class="form-row full-width">
+                <div class="form-group">
+                    <label>Partner Description</label>
+                    <mat-select formControlName="channel" placeholder="Enter Name">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Business Type</label>
+                    <mat-select formControlName="category" placeholder="Enter Name">
+                        <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Company Email</label>
+                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <p class="fs-20">Company Details</p>
+
+            <div class="form-row full-width mt-20">
+                <label>Company Registration Number</label>
+                <mat-select formControlName="domain" placeholder="Select" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Office Phone Number</label>
+                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Company Website</label>
+                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Address 1</label>
+                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Address 2</label>
+                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <p class="fs-20">Agreement Details</p>
+
+            <div class="form-row full-width mt-20">
+                <label>Signed NDA (Upload)</label>
+                <mat-select formControlName="domain" placeholder="Select" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Start Date</label>
+                <div class="form-group">
+                    <label>Effective From Date</label>
+                    <input class="input-small" type="date">
+                </div>
+            </div>
+
+            <div class="form-row full-width">
+                <label>End Date</label>
+                <div class="form-group">
+                    <label>Effective From Date</label>
+                    <input class="input-small" type="date">
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="form-row">
+                <div class="form-group">
+                    Enable <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

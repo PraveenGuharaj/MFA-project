@@ -5,7 +5,7 @@
 
     <div *ngIf="isSubMenu" class="d-flex">
       <mat-icon>chevron_right</mat-icon>
-      <span class="header-title" style="font-weight:700;">
+      <span class="header-title sub-menu" style="font-weight:700;">
         {{subMenuTitle}}
       </span>
     </div>
@@ -310,7 +310,7 @@
     <button class="retail_product " (click)="openForceUpdateModal()" *ngIf="subMenuTitle == 'Force Update'">
       <img src="images/plus-mini.png">Add Parameters</button>
 
-    <button class="retail_product " (click)="openForceUpdateModal()" *ngIf="subMenuTitle == 'Partner Onboarding'">
+    <button class="retail_product " (click)="openRegisterPartnerModal()" *ngIf="subMenuTitle == 'Partner Onboarding'">
       <img src="images/plus-mini.png">Register Partner</button>
 
     <!-- admin center manage License filter and search bar -->
