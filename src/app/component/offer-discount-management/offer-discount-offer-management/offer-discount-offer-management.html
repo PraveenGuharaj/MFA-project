@@ -78,7 +78,7 @@
                 <td>{{ p.rewardType }}</td>
                 <td>{{p.validFrom}}</td>
                 <td>{{p.validTo}}</td>
-                  <td>
+                <td>
                     <span class="status" [ngClass]="{
           'active': p.status === 'Active',
           'inactive': p.status === 'Inactive'
@@ -86,7 +86,7 @@
                         {{ p.status }}
                     </span>
                 </td>
-                      <td class="actions">
+                <td class="actions">
                     <!-- Use images -->
                     <ng-container *ngIf="p.actionsType === 'image'">
                         <img src="images/eye.png" />

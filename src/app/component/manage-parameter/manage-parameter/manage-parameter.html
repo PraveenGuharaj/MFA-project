@@ -40,7 +40,7 @@
                 <th *ngIf="!subProduct">Value</th>
                 <th *ngIf="!subProduct">Remarks</th>
                 <th *ngIf="!subProduct">Status</th>
-                <th *ngIf="!subProduct">Actions</th>
+                <th *ngIf="!subProduct" class="text-center">Actions</th>
 
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
@@ -67,7 +67,7 @@
                         {{ p.status }}
                     </span>
                 </td>
-                <td class="actions">
+                <td class="actions d-flex">
                     <!-- Use images -->
                     <ng-container *ngIf="p.actionsType === 'image'">
                         <img src="images/eye.png" />

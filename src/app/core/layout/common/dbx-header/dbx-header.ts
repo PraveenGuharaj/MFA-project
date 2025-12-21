@@ -24,6 +24,7 @@ import { AdminCenterAddFaq } from '../../../../component/admin-center/admin-cent
 import { AddManageParameter } from '../../../../component/manage-parameter/add-manage-parameter/add-manage-parameter';
 import { AdminCenterAddForceUpdate } from '../../../../component/admin-center/admin-center-add-force-update/admin-center-add-force-update';
 import { AdminCenterAddRegisterPartner } from '../../../../component/admin-center/admin-center-add-register-partner/admin-center-add-register-partner';
+import { OfferDiscountAddOfferManagement } from '../../../../component/offer-discount-management/offer-discount-add-offer-management/offer-discount-add-offer-management';
 
 @Component({
   selector: 'app-dbx-header',
@@ -195,6 +196,16 @@ export class DbxHeader {
 
   openTableMigrationModal() {
     this.dialog.open(AdminCenterAddTableMigration, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openOfferManagementModal() {
+    this.dialog.open(OfferDiscountAddOfferManagement, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
