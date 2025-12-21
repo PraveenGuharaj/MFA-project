@@ -300,6 +300,11 @@ export class Dashboard {
       this.subMenuTitle = 'Partner Onboarding';
       this.isSubmenu = event.isSubmenu;
       this.cdr.markForCheck();
+    } else if (event.menu === 'Offer Management') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Offer Management';
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

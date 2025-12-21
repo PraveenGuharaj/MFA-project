@@ -59,6 +59,7 @@ import { BlockUnblockUsers } from './component/block-unblock-users/block-unblock
 import { ManageParameter } from './component/manage-parameter/manage-parameter/manage-parameter';
 import { AdminCenterForceUpdate } from './component/admin-center/admin-center-force-update/admin-center-force-update';
 import { AdminCenterPartnerOnboarding } from './component/admin-center/admin-center-partner-onboarding/admin-center-partner-onboarding';
+import { OfferDiscountOfferManagement } from './component/offer-discount-management/offer-discount-offer-management/offer-discount-offer-management';
 
 export const routes: Routes = [
   {
@@ -124,6 +125,15 @@ export const routes: Routes = [
       { path: 'partnerOnboarding', component: AdminCenterPartnerOnboarding},
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
+  },
+
+  {
+    path: 'offer-discount',
+    component: Dashboard,
+     children: [
+      { path: 'offer-management', component: OfferDiscountOfferManagement },
+      { path: '', redirectTo: 'user-overview', pathMatch: 'full' } 
+     ]
   },
 
   // {

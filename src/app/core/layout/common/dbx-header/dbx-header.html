@@ -216,6 +216,8 @@
     <span class="f-15" *ngIf="subMenuTitle == 'Manage Parameters'">Parameter List</span>
 
     <span class="f-15" *ngIf="subMenuTitle == 'Force Update'">Force Update Configuration</span>
+
+    <span class="f-15" *ngIf="subMenuTitle == 'Offer Management'">Offer Management</span>
   </div>
 
 
@@ -229,7 +231,7 @@
   <!-- admin center otp adn atm -->
   <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
      subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'
-      || subMenuTitle == 'Partner Onboarding'" [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
+      || subMenuTitle == 'Partner Onboarding' || subMenuTitle == 'Offer Management'" [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
@@ -312,6 +314,9 @@
 
     <button class="retail_product " (click)="openRegisterPartnerModal()" *ngIf="subMenuTitle == 'Partner Onboarding'">
       <img src="images/plus-mini.png">Register Partner</button>
+
+       <button class="retail_product " (click)="openRegisterPartnerModal()" *ngIf="subMenuTitle == 'Offer Management'">
+      <img src="images/plus-mini.png">Add Offer</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">

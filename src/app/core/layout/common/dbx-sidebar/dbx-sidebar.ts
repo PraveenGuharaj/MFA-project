@@ -77,6 +77,15 @@ export class DbxSidebar {
       ],
       expanded: false
     },
+      {
+      name: 'Offers & Discounts',
+      isSubmenuTitle: true,
+      subMenu: [
+        { name: 'Offer Management', link: 'offer-discount/offer-management', submenuTitle: 'Offer Management', isSubmenuTitle: true },
+      ],
+      expanded: false
+    },
+    
 
   ]
 
