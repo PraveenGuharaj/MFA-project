@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ChartData, ChartOptions, CategoryScale, LinearScale, BarController, BarElement, DoughnutController, ArcElement, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, Chart } from 'chart.js';
+import { ChartData, ChartOptions, CategoryScale, LinearScale, BarController, BarElement, DoughnutController, ArcElement, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, Chart, registerables } from 'chart.js';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart as ChartJS } from 'chart.js';
@@ -29,7 +29,7 @@ ChartJS.register(
   standalone: true,
   imports: [
     CommonModule,
-    BaseChartDirective,
+    // BaseChartDirective,
     MatCardModule,
     MatIconModule,
     NgApexchartsModule,
@@ -40,7 +40,7 @@ ChartJS.register(
 export class DashboardUserOverview implements OnInit {
   @ViewChild('myChart', { static: false }) myChartElement!: ElementRef;
   @ViewChild('myDonutChart', { static: false }) myDonutChartElement!: ElementRef;
-
+  @ViewChild('myLineChart', { static: false }) myLineChartElement!: ElementRef;
   public doughnutChartData: ChartData<'doughnut'> = {
     labels: ['Mobile', 'Web'],
     datasets: [
@@ -244,18 +244,19 @@ export class DashboardUserOverview implements OnInit {
   }
 
   ngAfterViewInit() {
+        // this.initAccountBarChart();
     // Bar Chart setup
     const ctx = this.myChartElement.nativeElement.getContext('2d');
 
     // Create gradient for Web (Purple)
     const gradientPurple = ctx.createLinearGradient(0, 0, 0, 400);
-    gradientPurple.addColorStop(0, 'rgba(119, 0, 255, 0.7)');
-    gradientPurple.addColorStop(1, 'rgba(120, 0, 180, 0.4)');
+    gradientPurple.addColorStop(0, '#6D28D9');
+    gradientPurple.addColorStop(1, '#A78BFA');
 
     // Create gradient for Mobile (Green)
     const gradientGreen = ctx.createLinearGradient(0, 0, 0, 400);
-    gradientGreen.addColorStop(0, 'rgba(77, 255, 0, 0.7)');
-    gradientGreen.addColorStop(1, 'rgba(0, 200, 0, 0.4)');
+    gradientGreen.addColorStop(0, '#22C55E');
+    gradientGreen.addColorStop(1, '#86EFAC');
 
     // Create pattern function for a single left-to-right diagonal line
     function createSingleDiagonalPattern() {
@@ -414,6 +415,263 @@ export class DashboardUserOverview implements OnInit {
       },
       plugins: [patternPlugin], // Register the same plugin to apply pattern
     });
+    this.initializeLineChart();
 
+  }
+
+
+    initAccountBarChart() {
+    const canvas = this.myChartElement.nativeElement;
+    const ctx = canvas.getContext('2d');
+
+    Chart.register(...registerables);
+
+    // -------- GRADIENT FILLS --------
+    const purpleGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    purpleGradient.addColorStop(0, '#6D28D9');
+    purpleGradient.addColorStop(1, '#A78BFA');
+
+    const greenGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    greenGradient.addColorStop(0, '#22C55E');
+    greenGradient.addColorStop(1, '#86EFAC');
+
+    // -------- DIAGONAL WHITE PATTERN --------
+    function makePattern() {
+      const pc = document.createElement('canvas');
+      pc.width = 14;
+      pc.height = 14;
+      const pctx: any = pc.getContext('2d');
+
+      pctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      pctx.lineWidth = 2;
+
+      pctx.beginPath();
+      pctx.moveTo(0, 14);
+      pctx.lineTo(14, 0);
+      pctx.stroke();
+
+      return pctx.createPattern(pc, 'repeat');
+    }
+
+    const stripePattern = makePattern();
+
+    // -------- APPLY PATTERN TO BARS --------
+    const patternPlugin = {
+      id: "patternPlugin",
+      afterDatasetsDraw(chart: any, args: any, options: any) {
+        const { ctx } = chart;
+
+        chart.data.datasets.forEach((dataset: any, datasetIndex: any) => {
+          const meta = chart.getDatasetMeta(datasetIndex);
+
+          meta.data.forEach((bar: any) => {
+            const x = bar.x - 14;  // width = 28px → 28/2
+            const y = bar.y;
+            const width = 48;
+            const height = bar.base - bar.y;
+
+            ctx.save();
+
+            // Rounded rect (top-left & top-right only)
+            const tl = 4;  // top-left radius
+            const tr = 4;  // top-right radius
+            const br = 0;  // bottom-right
+            const bl = 0;  // bottom-left
+
+            ctx.beginPath();
+            ctx.moveTo(x + tl, y);
+
+            ctx.lineTo(x + width - tr, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + tr);
+
+            ctx.lineTo(x + width, y + height - br);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - br, y + height);
+
+            ctx.lineTo(x + bl, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - bl);
+
+            ctx.lineTo(x, y + tl);
+            ctx.quadraticCurveTo(x, y, x + tl, y);
+
+            ctx.closePath();
+            ctx.clip();
+
+            ctx.fillStyle = stripePattern;
+            ctx.fillRect(x, y, width, height);
+
+            ctx.restore();
+          });
+        });
+      }
+    };
+
+
+    // -------- FINAL CHART --------
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [
+          {
+            label: 'Mobile',
+            data: [6500, 6600, 6700, 6800, 6900, 7000, 7100],
+            backgroundColor: purpleGradient,
+            borderRadius: 4,
+            maxBarThickness: 30
+          },
+          {
+            label: 'Web',
+            data: [9300, 9400, 9500, 9600, 9700, 9800, 9900],
+            backgroundColor: greenGradient,
+            borderRadius: 4,
+            maxBarThickness: 30
+          }
+        ]
+      },
+
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        },
+
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: '#8E8E8E',
+              font: { size: 14 }
+            }
+          },
+          y: {
+            min: 0,
+            max: 12000,
+            ticks: {
+              stepSize: 3000,
+              color: '#8E8E8E',
+              font: { size: 13 }
+            },
+            grid: {
+              color: '#E5E7EB'
+            }
+          }
+        }
+      },
+
+      plugins: [patternPlugin]
+    });
+  }
+  
+    initializeLineChart() {
+      if (this.myLineChartElement && this.myLineChartElement.nativeElement) {
+        const ctxLineChart = this.myLineChartElement.nativeElement.getContext('2d');
+        Chart.register(...registerables);
+  
+        // Gradient fill for the mobile and web lines
+        const mobileGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
+        mobileGradient.addColorStop(0, '#6017EB99');
+        mobileGradient.addColorStop(1, '#FFFFFF00');
+  
+        const webGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
+        webGradient.addColorStop(0, '#29CC5A99');
+        webGradient.addColorStop(1, '#FFFFFF00');
+  
+        // Create the line chart
+        const lineChart: any = new Chart(ctxLineChart, {
+          type: 'line',
+          data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [
+              {
+                data: [1500, 5900, 2000, 6000, 10000, 8000, 6000],  // 7 values for Mobile
+                borderColor: '#6017EB99',
+                backgroundColor: mobileGradient,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0,
+                borderWidth: 2,
+              },
+              {
+                data: [6000, 4000, 9000, 6000, 2000, 7000, 2000],  // 7 values for Web
+                borderColor: '#29CC5A99',
+                backgroundColor: webGradient,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0,
+                borderWidth: 2,
+              }
+            ]
+          },
+  
+          options: {
+            responsive: true,
+            plugins: {
+              tooltip: {
+                enabled: true,
+                callbacks: {
+                  title: function () { return ''; },
+                  label: function (tooltipItem) { return `${tooltipItem.raw}`; }
+                }
+              },
+              legend: { display: false }
+            },
+  
+            scales: {
+              x: {
+                ticks: {
+                  font: {
+                    size: 14,
+                    weight: 'normal',
+                    family: 'Arial',
+                  },
+                  color: '#A2A3A5',
+                },
+                grid: { color: '#E6E6E6', display: false }
+              },
+  
+              y: {
+                min: 0,
+                max: 12000,     // Ensures 12000 is shown
+                ticks: {
+                  stepSize: 3000,   // 0, 3000, 6000, 9000, 12000
+                  font: {
+                    size: 14,
+                    weight: 'normal',
+                    family: 'Arial',
+                  },
+                  color: '#A2A3A5',
+                  callback: function (value) { return value; }
+                },
+                grid: { color: '#E6E6E6' }
+              }
+            },
+  
+            onClick: (event: any) => {
+              const activePoints = lineChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+              if (activePoints.length > 0) {
+                const firstPoint = activePoints[0];
+                this.showDottedLine(firstPoint, event);
+              }
+            }
+          }
+        });
+      }
+    }
+
+      showDottedLine(firstPoint: any, event: any) {
+    const ctx = this.myLineChartElement.nativeElement.getContext('2d');
+    const x = event.offsetX;
+    const y = event.offsetY;
+    ctx.clearRect(0, 0, this.myLineChartElement.nativeElement.width, this.myLineChartElement.nativeElement.height); // Clear previous dotted lines
+    ctx.beginPath();
+    ctx.setLineDash([5, 5]); // Dotted line
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, this.myLineChartElement.nativeElement.height);
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.stroke();
+    ctx.setLineDash([]); // Reset line style
   }
 }
