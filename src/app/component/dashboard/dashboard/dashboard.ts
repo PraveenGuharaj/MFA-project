@@ -25,6 +25,7 @@ export class Dashboard {
   isProductHub: boolean = false; // Track if we are in 'Product Hub'
   subMenuTitle: any;
   isSubmenu!: boolean;
+  mainMenu: any;
 
   constructor(private router: Router, private cdr: ChangeDetectorRef) { }
 
@@ -152,7 +153,7 @@ export class Dashboard {
     this.subProduct = subProduct;
   }
 
-  onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean }) {
+  onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean, mainMenu?: string }) {
     console.log('event', event)
     this.isProductHub = false;
     if (event.menu === 'User Overview') {
@@ -279,6 +280,7 @@ export class Dashboard {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Manage Content'
       this.isSubmenu = event.isSubmenu;
+      this.mainMenu = event.mainMenu;
       this.cdr.markForCheck();
     } else if (event.menu === 'Block/Unblock Users') {
       this.headerTitle = 'Admin Center';
@@ -302,8 +304,15 @@ export class Dashboard {
       this.cdr.markForCheck();
     } else if (event.menu === 'Offer Management') {
       this.headerTitle = 'Admin Center';
-      this.subMenuTitle = 'Offer Management';
+      this.subMenuTitle = 'Manage Content';
       this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'Offer Management';
+      this.cdr.markForCheck();
+    } else if (event.menu === 'Discount Management') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Manage Content';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'Discount Management'
       this.cdr.markForCheck();
     } else if (event.menu === 'Country') {
       this.headerTitle = 'Admin Center';

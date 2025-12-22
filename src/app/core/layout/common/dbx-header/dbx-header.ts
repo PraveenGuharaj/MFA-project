@@ -41,6 +41,7 @@ export class DbxHeader {
   @Output() tabChanged = new EventEmitter<string>();
   @Input() pageTitle?: string; // Title passed from the parent
   @Input() subMenuTitle?: string;
+  @Input() mainMenu?: string;
   @Input() isSubMenu?: boolean;
   @Input() headerTabs: any[] = [];  // Dynamic tabs
   @Input() isProductHub: boolean = false; // Property to check if we are in Product Hub
@@ -63,6 +64,8 @@ export class DbxHeader {
   }
 
   ngAfterViewInit() {
+    console.log('mainMenu', this.mainMenu);
+
     this.pageTitle = this.pageTitle;
   }
   openModal() {

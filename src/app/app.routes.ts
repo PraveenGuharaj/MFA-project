@@ -61,6 +61,7 @@ import { AdminCenterForceUpdate } from './component/admin-center/admin-center-fo
 import { AdminCenterPartnerOnboarding } from './component/admin-center/admin-center-partner-onboarding/admin-center-partner-onboarding';
 import { OfferDiscountOfferManagement } from './component/offer-discount-management/offer-discount-offer-management/offer-discount-offer-management';
 import { MasterDataCountry } from './component/master-data/master-data-country/master-data-country';
+import { OfferDiscountDiscountManagement } from './component/offer-discount-management/offer-discount-discount-management/offer-discount-discount-management';
 
 export const routes: Routes = [
   {
@@ -133,6 +134,7 @@ export const routes: Routes = [
     component: Dashboard,
     children: [
       { path: 'offer-management', component: OfferDiscountOfferManagement },
+      { path: 'discount-management', component: OfferDiscountDiscountManagement },
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }
     ]
   },

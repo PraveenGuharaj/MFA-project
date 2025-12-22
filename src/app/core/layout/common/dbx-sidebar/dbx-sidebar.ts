@@ -68,7 +68,7 @@ export class DbxSidebar {
         { name: 'Manage License', link: 'dashboard/manage-license', submenuTitle: 'Manage License', isSubmenuTitle: true },
         { name: 'Manage MFA', link: 'dashboard/manage-mfa', submenuTitle: 'Manage MFA', isSubmenuTitle: true },
         { name: 'Manage Notifications', link: 'dashboard/device-management', submenuTitle: 'Manage Notification', isSubmenuTitle: true },
-        { name: 'Manage Content', link: 'dashboard/manage-content', submenuTitle: 'Manage Content', isSubmenuTitle: true },
+        { name: 'Manage Content', link: 'dashboard/manage-content', submenuTitle: 'Manage Content', isSubmenuTitle: true, mainMenuTitle: 'admin-center' },
         { name: 'Block/Unblock Users', link: 'dashboard/blockUnblockUsers', submenuTitle: 'Block/Unblock Users', isSubmenuTitle: true },
         { name: 'Manage Parameters', link: 'dashboard/manageParameter', submenuTitle: 'Manage Parameters', isSubmenuTitle: true },
         { name: 'Force Update', link: 'dashboard/forceUpdate', submenuTitle: 'Force Update', isSubmenuTitle: true },
@@ -81,7 +81,8 @@ export class DbxSidebar {
       name: 'Offers & Discounts',
       isSubmenuTitle: true,
       subMenu: [
-        { name: 'Offer Management', link: 'offer-discount/offer-management', submenuTitle: 'Offer Management', isSubmenuTitle: true },
+        { name: 'Offer Management', link: 'offer-discount/offer-management', submenuTitle: 'Offer Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
+        { name: 'Discount Management', link: 'offer-discount/discount-management', submenuTitle: 'Discount Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
       ],
       expanded: false
     },
@@ -101,11 +102,13 @@ export class DbxSidebar {
     item.expanded = !item.expanded;
   }
 
-  selectMenu(menu: string, type: string, link?: string, isSubmenu?: boolean) {
+  selectMenu(menu: string, type: string, link?: string, isSubmenu?: boolean, mainMenu?: string) {
+    console.log('menu', mainMenu);
+
     if (link) {
       this.router.navigate([link]); // Navigate to the selected route
     }
-    this.menuChanged.emit({ menu, type, isSubmenu });
+    this.menuChanged.emit({ menu, type, isSubmenu, mainMenu });
   }
 
 }
