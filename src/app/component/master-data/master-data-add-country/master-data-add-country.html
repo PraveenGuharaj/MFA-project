@@ -1,0 +1,105 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add
+                Country </h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <!-- Channel + Category Dropdown -->
+            <div class="form-row full-width mt-20">
+                <div class="form-group">
+                    <label>Country Code </label>
+                    <mat-select formControlName="channel" placeholder="Select Partner Name" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+            <div class="form-row full-width">
+                <div class="form-group">
+                    <label>Country Description</label>
+                    <input placeholder="Enter Product Name" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>ISO Country Code</label>
+                    <input placeholder="Enter Offer Title" class="mt-20" />
+                </div>
+            </div>
+
+            <div class="form-row full-width">
+                <label>Country Code Iso3a</label>
+                <input placeholder="Enter Offer Tag" class="m-0" />
+            </div>
+
+
+            <div class="form-row full-width">
+                <label>Colour</label>
+                <input placeholder="Enter Offer Description" class="m-0" />
+            </div>
+
+
+            <div class="form-row full-width">
+                <label>Unit Description</label>
+                <input placeholder="Enter Terms & Condition" class="m-0" />
+            </div>
+
+
+            <div class="form-row full-width">
+                <label>Base Currency</label>
+                <input placeholder="Select Offer Type" class="m-0" />
+            </div>
+
+            <div class="form-row full-width mt-20">
+                <div class="form-group">
+                    <label>Eurozone Flag </label>
+                    <mat-select formControlName="channel" placeholder="Select Partner Name">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+            <div class="form-row full-width">
+                <label>Remarks</label>
+                <input placeholder="Select Reward Type" class="m-0" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Mobile Number Prefix</label>
+                <input placeholder="Select Reward Type" class="m-0" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Nationality</label>
+                <input placeholder="Select Reward Type" class="m-0" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Language EN</label>
+                <input placeholder="Select Reward Type" class="m-0" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Language AR</label>
+                <input placeholder="Select Reward Type" class="m-0" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Language FR</label>
+                <input placeholder="Select Reward Type" class="m-0" />
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
