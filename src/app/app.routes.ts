@@ -60,6 +60,7 @@ import { ManageParameter } from './component/manage-parameter/manage-parameter/m
 import { AdminCenterForceUpdate } from './component/admin-center/admin-center-force-update/admin-center-force-update';
 import { AdminCenterPartnerOnboarding } from './component/admin-center/admin-center-partner-onboarding/admin-center-partner-onboarding';
 import { OfferDiscountOfferManagement } from './component/offer-discount-management/offer-discount-offer-management/offer-discount-offer-management';
+import { MasterDataCountry } from './component/master-data/master-data-country/master-data-country';
 
 export const routes: Routes = [
   {
@@ -121,8 +122,8 @@ export const routes: Routes = [
       { path: 'faqManagement', component: AdminCenterFaqManagement },
       { path: 'blockUnblockUsers', component: BlockUnblockUsers },
       { path: 'manageParameter', component: ManageParameter },
-      { path: 'forceUpdate', component: AdminCenterForceUpdate},
-      { path: 'partnerOnboarding', component: AdminCenterPartnerOnboarding},
+      { path: 'forceUpdate', component: AdminCenterForceUpdate },
+      { path: 'partnerOnboarding', component: AdminCenterPartnerOnboarding },
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },
@@ -130,10 +131,18 @@ export const routes: Routes = [
   {
     path: 'offer-discount',
     component: Dashboard,
-     children: [
+    children: [
       { path: 'offer-management', component: OfferDiscountOfferManagement },
-      { path: '', redirectTo: 'user-overview', pathMatch: 'full' } 
-     ]
+      { path: '', redirectTo: 'user-overview', pathMatch: 'full' }
+    ]
+  },
+
+  {
+    path: 'master-data',
+    component: Dashboard,
+    children: [
+      { path: 'country', component: MasterDataCountry }
+    ]
   },
 
   // {

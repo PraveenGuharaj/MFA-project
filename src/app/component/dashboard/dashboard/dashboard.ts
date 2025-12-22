@@ -305,6 +305,11 @@ export class Dashboard {
       this.subMenuTitle = 'Offer Management';
       this.isSubmenu = event.isSubmenu;
       this.cdr.markForCheck();
+    } else if (event.menu === 'Country') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Master Data';
+      this.isSubmenu = event.isSubmenu;
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

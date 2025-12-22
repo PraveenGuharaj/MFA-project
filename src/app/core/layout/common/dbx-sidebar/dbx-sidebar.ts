@@ -77,7 +77,7 @@ export class DbxSidebar {
       ],
       expanded: false
     },
-      {
+    {
       name: 'Offers & Discounts',
       isSubmenuTitle: true,
       subMenu: [
@@ -85,7 +85,15 @@ export class DbxSidebar {
       ],
       expanded: false
     },
-    
+    {
+      name: 'Master Data',
+      isSubmenuTitle: true,
+      subMenu: [
+        { name: 'Country', link: 'master-data/country', submenuTitle: 'Country', isSubmenuTitle: true },
+      ],
+      expanded: false
+    },
+
 
   ]
 
