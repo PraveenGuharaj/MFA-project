@@ -1,0 +1,116 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add
+                Discount Management </h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <!-- Channel + Category Dropdown -->
+            <div class="form-row full-width mt-20">
+                <div class="form-group">
+                    <label>Partner Name </label>
+                    <mat-select formControlName="channel" placeholder="Select Partner Name" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+            <div class="form-row full-width">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input placeholder="Enter Product Name" />
+                </div>
+
+                <div class="form-group">
+                    <label>Discount Title</label>
+                    <input placeholder="Enter Discount Title" />
+                </div>
+            </div>
+
+            <div class="form-row full-width mt-20">
+                <div class="form-group">
+                    <label>Discount Type </label>
+                    <mat-select formControlName="channel" placeholder="Select Offer Type" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+            <div class="form-row full-width">
+                <label>Discount Description</label>
+                <input placeholder="Enter Discount Description" class="mt-0" />
+            </div>
+
+
+            <div class="form-row full-width">
+                <label>Discount Value</label>
+                <input placeholder="Enter Discount Value" class="mt-0" />
+            </div>
+
+
+            <div class="form-row full-width">
+                <label>Terms & Conditions</label>
+                <input placeholder="Enter Terms & Condition" class="mt-0" />
+            </div>
+
+            <h3>Applicable Channels</h3>
+            <div class="checkbox-group">
+                <mat-checkbox><span class="fs-16">Mobile</span></mat-checkbox>
+                <mat-checkbox><span class="fs-16">Web</span></mat-checkbox>
+                <mat-checkbox><span class="fs-16">All</span></mat-checkbox>
+            </div>
+
+            <div class="form-row full-width mt-20">
+                <div class="form-group">
+                    <label>Customer Segment </label>
+                    <mat-select formControlName="channel" placeholder="Select Customer Segment" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+
+            <div class="form-row full-width">
+                <label>Start Date</label>
+                <input placeholder="Select Offer Type" type="date" class="mt-0" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>End Date</label>
+                <input placeholder="Select Reward Type" type="date" class="mt-0" />
+            </div>
+
+            <div class="form-row full-width">
+                <label>Usage Limit per User</label>
+                <input placeholder="Enter Usage Limit per User" class="mt-0" />
+            </div>
+
+
+
+            <div class="form-row full-width">
+                <label>Total Usage Limit</label>
+                <input placeholder="Enter total usage limit" class="mt-0" />
+            </div>
+
+            <!-- Status -->
+            <div class="form-row">
+                <div class="form-group">
+                    Status <mat-slide-toggle formControlName="status" color="primary" class="pl-10"></mat-slide-toggle>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

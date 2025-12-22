@@ -26,6 +26,7 @@ import { AdminCenterAddForceUpdate } from '../../../../component/admin-center/ad
 import { AdminCenterAddRegisterPartner } from '../../../../component/admin-center/admin-center-add-register-partner/admin-center-add-register-partner';
 import { OfferDiscountAddOfferManagement } from '../../../../component/offer-discount-management/offer-discount-add-offer-management/offer-discount-add-offer-management';
 import { MasterDataAddCountry } from '../../../../component/master-data/master-data-add-country/master-data-add-country';
+import { OfferDiscountAddDiscountManagement } from '../../../../component/offer-discount-management/offer-discount-add-discount-management/offer-discount-add-discount-management';
 
 @Component({
   selector: 'app-dbx-header',
@@ -319,6 +320,16 @@ export class DbxHeader {
 
   openRegisterPartnerModal() {
     this.dialog.open(AdminCenterAddRegisterPartner, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openDiscountManagementModal() {
+    this.dialog.open(OfferDiscountAddDiscountManagement, {
       width: '60%',
       height: 'auto',
       position: {
