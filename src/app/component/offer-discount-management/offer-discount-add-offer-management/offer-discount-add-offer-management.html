@@ -12,7 +12,7 @@
             <div class="form-row full-width mt-20">
                 <div class="form-group">
                     <label>Partner Name </label>
-                    <mat-select formControlName="channel" placeholder="Select Partner Name">
+                    <mat-select formControlName="channel" placeholder="Select Partner Name" class="mt-20">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
                     </mat-select>
                 </div>
@@ -22,56 +22,56 @@
             <div class="form-row full-width">
                 <div class="form-group">
                     <label>Product Name</label>
-                    <input placeholder="Enter Product Name" />
+                    <input placeholder="Enter Product Name" class="mt-20"/>
                 </div>
 
                 <div class="form-group">
                     <label>Offer Title</label>
-                    <input placeholder="Enter Offer Title" />
+                    <input placeholder="Enter Offer Title" class="mt-20" />
                 </div>
             </div>
 
-            <div class="form-row full-width">
+            <div class="form-group full-width mb-20">
                 <label>Offer Tag</label>
-                <input placeholder="Enter Offer Description" />
+                <input placeholder="Enter Offer Description" class="mt-20"/>
             </div>
 
 
-            <div class="form-row full-width">
+            <div class="form-group full-width mb-20">
                 <label>Offer Description</label>
-                <input placeholder="Enter Offer Description" />
+                <input placeholder="Enter Offer Description" class="mt-20"/>
             </div>
 
 
-            <div class="form-row full-width">
+            <div class="form-group full-width mb-20">
                 <label>Terms & Conditions</label>
-                <input placeholder="Enter Terms & Condition" />
+                <input placeholder="Enter Terms & Condition" class="mt-20"/>
             </div>
 
 
-            <div class="form-row full-width">
+            <div class="form-group full-width mb-20">
                 <label>Offer Type</label>
-                <input placeholder="Select Offer Type" />
+                <input placeholder="Select Offer Type" class="mt-20"/>
             </div>
 
-            <div class="form-row full-width">
+            <div class="form-group full-width">
                 <label>Reward Type</label>
-                <input placeholder="Select Reward Type" />
+                <input placeholder="Select Reward Type" class="mt-20"/>
             </div>
 
             <h3>Applicable Channels</h3>
-            <div class="checkbox-group">
+            <div class="checkbox-group mb-20">
                 <mat-checkbox><span class="fs-16">Mobile</span></mat-checkbox>
                 <mat-checkbox><span class="fs-16">Web</span></mat-checkbox>
                 <mat-checkbox><span class="fs-16">All</span></mat-checkbox>
             </div>
 
-            <div class="form-row full-width">
+            <div class="form-group full-width">
                 <label>Reward Value</label>
                 <input placeholder="Select Reward Value" />
             </div>
 
-            <div class="form-row full-width mt-20">
+            <div class="form-group full-width mt-20 mb-20">
                 <div class="form-group">
                     <label>Redemption Method </label>
                     <mat-select formControlName="channel" placeholder="Select Redemption Methos">
@@ -81,28 +81,28 @@
 
             </div>
 
-            <div class="form-row full-width">
+            <div class="form-group full-width mb-20">
                 <label>Redemption Limit per User</label>
                 <input placeholder="Enter Redemption Limit per User" />
             </div>
 
-            <div class="form-row full-width">
+            <div class="form-group full-width mb-20">
                 <label>Total Redemption Allowed</label>
                 <input placeholder="Enter Total Redemption Allowed" />
             </div>
 
 
-            <div class="form-row full-width">
+            <div class="form-group full-width">
                 <label>Valid From</label>
                 <input placeholder="Enter Total Redemption Allowed" type="date" />
             </div>
 
-            <div class="form-row full-width">
+            <div class="form-group full-width">
                 <label>Valid To</label>
                 <input placeholder="Enter Total Redemption Allowed" type="date" />
             </div>
 
-            <div class="form-row full-width mt-20">
+            <div class="form-group full-width mt-20 mb-20">
                 <div class="form-group">
                     <label>Customer Segment </label>
                     <mat-select formControlName="channel" placeholder="Select Customer Segment">
@@ -115,7 +115,7 @@
             <!-- Status -->
             <div class="form-row">
                 <div class="form-group">
-                    Enable <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+                    Enable <mat-slide-toggle formControlName="status" color="primary" class="pl-10"></mat-slide-toggle>
                 </div>
             </div>
 
