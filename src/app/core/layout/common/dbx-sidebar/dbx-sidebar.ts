@@ -91,7 +91,8 @@ export class DbxSidebar {
       isSubmenuTitle: true,
       subMenu: [
         { name: 'Country', link: 'master-data/country', submenuTitle: 'Country', isSubmenuTitle: true, mainMenuTitle: 'master-country' },
-        { name: 'Channel', link: 'master-data/channel', submenuTitle: 'Channel', isSubmenuTitle: true, mainMenuTitle: 'master-channel' }
+        { name: 'Channel', link: 'master-data/channel', submenuTitle: 'Channel', isSubmenuTitle: true, mainMenuTitle: 'master-channel' },
+        { name: 'Language', link: 'master-data/language', submenuTitle: 'Language', isSubmenuTitle: true, mainMenuTitle: 'master-language' }
       ],
       expanded: false
     },

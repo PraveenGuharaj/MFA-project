@@ -326,6 +326,12 @@ export class Dashboard {
       this.isSubmenu = event.isSubmenu;
       this.mainMenu = 'master-channel';
       this.cdr.markForCheck();
+    } else if (event.menu === 'Language') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Master Data';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'master-language';
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

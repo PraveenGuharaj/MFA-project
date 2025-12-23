@@ -220,6 +220,7 @@
 
     <span class="f-15" *ngIf="mainMenu == 'master-country'">Country</span>
     <span class="f-15" *ngIf="mainMenu == 'master-channel'">Channel</span>
+    <span class="f-15" *ngIf="mainMenu == 'master-language'">Language</span>
   </div>
 
 
@@ -231,11 +232,10 @@
   </div>
 
   <!-- admin center otp adn atm -->
-  <div class="actions"
-    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
+  <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
      subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'
-      || subMenuTitle == 'Partner Onboarding' || mainMenu == 'Offer Management' || subMenuTitle == 'Master Data' ||  mainMenu == 'Discount Management' || mainMenu == 'master-country'"
-    [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
+      || subMenuTitle == 'Partner Onboarding' || mainMenu == 'Offer Management' || subMenuTitle == 'Master Data' ||  mainMenu == 'Discount Management' || mainMenu == 'master-country'
+      || mainMenu == 'master-language'" [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
@@ -331,6 +331,9 @@
 
     <button class="retail_product " (click)="openChannelModal()" *ngIf="mainMenu == 'master-channel'">
       <img src="images/plus-mini.png">Add Channel</button>
+
+    <button class="retail_product " (click)="openChannelModal()" *ngIf="mainMenu == 'master-language'">
+      <img src="images/plus-mini.png">Add Language</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">

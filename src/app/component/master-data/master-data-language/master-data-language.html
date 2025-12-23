@@ -1,0 +1,95 @@
+<div class="stats-container">
+    <div class="stat-card">
+        <div class="stat-title">
+            <span class="card-title">Total Language</span>
+            <div class="stat-change">
+                <img src="images/sub_product_blue.png" class="notification_icon">
+            </div>
+        </div>
+        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-header">+100% </span><span
+                class="sub-product-month">from last month</span></div>
+    </div>
+
+    <div class="stat-card-newusers">
+        <div class="stat-title">
+            <span class="card-title">Active Language</span>
+            <div class="stat-change">
+                <img src="images/copy_success_yellow.png" class="notification_icon">
+            </div>
+        </div>
+        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-header">+100% </span><span
+                class="sub-product-month">of total</span></div>
+
+    </div>
+
+    <div class="stat-card-activeusers">
+        <div class="stat-title">
+            <span class="card-title">Inactive Language</span>
+            <div class="stat-change">
+                <img src="images/copy_green.png" class="notification_icon">
+            </div>
+        </div>
+        <div class="stat-value"><span class="mr-12">0</span><span class="sub-product-month">Pending review and
+                activation</span></div>
+    </div>
+</div>
+
+<div class="product-table-container">
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input type="text" placeholder="Search" />
+            <img src="images/admin_search.png" class="notification_icon">
+        </div>
+
+        <button class="filter-btn mr-10">
+            <img src="images/admin_filter.png" class="notification_icon">
+        </button>
+    </div>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th *ngIf="!subProduct">Language Code</th>
+                <th *ngIf="!subProduct">Language Description</th>
+                <th *ngIf="!subProduct">Description</th>
+                <th *ngIf="!subProduct">Status</th>
+                <th *ngIf="!subProduct" class="text-center">Actions</th>
+
+
+                <th *ngIf="subProduct">Sub-Product Name</th>
+                <th *ngIf="subProduct">Parent Product</th>
+                <th *ngIf="subProduct">Features</th>
+                <th *ngIf="subProduct">Status</th>
+                <th *ngIf="subProduct">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let p of products">
+                <td>{{ p.languageCode }}</td>
+                <td>{{ p.languageDescription }}</td>
+                <td>{{ p.description }}</td>
+                <td>{{ p.status }}</td>
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container *ngIf="p.actionsType === 'image'">
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" />
+                        <img src="images/referesh_admin.png" />
+                        <img src="images/trash_red.png" />
+                    </ng-container>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>&lt;</button>
+        <button class="active-page">1</button>
+        <button>2</button>
+        <button>3</button>
+        <span>…</span>
+        <button>10</button>
+        <button>&gt;</button>
+    </div>
+
+</div>
