@@ -221,6 +221,7 @@
     <span class="f-15" *ngIf="mainMenu == 'master-country'">Country</span>
     <span class="f-15" *ngIf="mainMenu == 'master-channel'">Channel</span>
     <span class="f-15" *ngIf="mainMenu == 'master-language'">Language</span>
+    <span class="f-15" *ngIf="mainMenu == 'master-unit'">Unit</span>
   </div>
 
 
@@ -333,6 +334,9 @@
       <img src="images/plus-mini.png">Add Channel</button>
 
     <button class="retail_product " (click)="openLanguageModal()" *ngIf="mainMenu == 'master-language'">
+      <img src="images/plus-mini.png">Add Language</button>
+
+    <button class="retail_product " (click)="openUnitModal()" *ngIf="mainMenu == 'master-unit'">
       <img src="images/plus-mini.png">Add Language</button>
 
     <!-- admin center manage License filter and search bar -->

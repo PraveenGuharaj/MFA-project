@@ -64,6 +64,7 @@ import { MasterDataCountry } from './component/master-data/master-data-country/m
 import { OfferDiscountDiscountManagement } from './component/offer-discount-management/offer-discount-discount-management/offer-discount-discount-management';
 import { MasterDataChannel } from './component/master-data/master-data-channel/master-data-channel';
 import { MasterDataLanguage } from './component/master-data/master-data-language/master-data-language';
+import { MasterDataUnit } from './component/master-data/master-data-unit/master-data-unit';
 
 export const routes: Routes = [
   {
@@ -147,7 +148,8 @@ export const routes: Routes = [
     children: [
       { path: 'country', component: MasterDataCountry },
       { path: 'channel', component: MasterDataChannel },
-      { path: 'language', component: MasterDataLanguage }
+      { path: 'language', component: MasterDataLanguage },
+      { path: 'unit', component: MasterDataUnit }
     ]
   },
 

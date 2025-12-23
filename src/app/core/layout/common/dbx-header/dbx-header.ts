@@ -29,6 +29,7 @@ import { MasterDataAddCountry } from '../../../../component/master-data/master-d
 import { OfferDiscountAddDiscountManagement } from '../../../../component/offer-discount-management/offer-discount-add-discount-management/offer-discount-add-discount-management';
 import { MasterDataAddChannel } from '../../../../component/master-data/master-data-add-channel/master-data-add-channel';
 import { MasterDataAddLanguage } from '../../../../component/master-data/master-data-add-language/master-data-add-language';
+import { MasterDataUnit } from '../../../../component/master-data/master-data-unit/master-data-unit';
 
 @Component({
   selector: 'app-dbx-header',
@@ -246,6 +247,16 @@ export class DbxHeader {
 
   openLanguageModal() {
     this.dialog.open(MasterDataAddLanguage, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openUnitModal() {
+    this.dialog.open(MasterDataUnit, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
