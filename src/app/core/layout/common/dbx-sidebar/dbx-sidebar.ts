@@ -93,7 +93,8 @@ export class DbxSidebar {
         { name: 'Country', link: 'master-data/country', submenuTitle: 'Country', isSubmenuTitle: true, mainMenuTitle: 'master-country' },
         { name: 'Channel', link: 'master-data/channel', submenuTitle: 'Channel', isSubmenuTitle: true, mainMenuTitle: 'master-channel' },
         { name: 'Language', link: 'master-data/language', submenuTitle: 'Language', isSubmenuTitle: true, mainMenuTitle: 'master-language' },
-        { name: 'Unit', link: 'master-data/unit', submenuTitle: 'Unit', isSubmenuTitle: true, mainMenuTitle: 'master-unit' }
+        { name: 'Unit', link: 'master-data/unit', submenuTitle: 'Unit', isSubmenuTitle: true, mainMenuTitle: 'master-unit' },
+        { name: 'Currency', link: 'master-data/currency', submenuTitle: 'Currency', isSubmenuTitle: true, mainMenuTitle: 'master-currency' }
       ],
       expanded: false
     },

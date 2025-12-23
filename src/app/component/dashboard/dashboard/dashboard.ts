@@ -338,6 +338,12 @@ export class Dashboard {
       this.isSubmenu = event.isSubmenu;
       this.mainMenu = 'master-unit';
       this.cdr.markForCheck();
+    } else if (event.menu === 'Currency') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Master Data';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'master-currency';
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

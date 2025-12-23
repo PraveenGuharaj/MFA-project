@@ -1,7 +1,7 @@
 <div class="stats-container">
     <div class="stat-card">
         <div class="stat-title">
-            <span class="card-title">Total Discounts</span>
+            <span class="card-title">Total Currency</span>
             <div class="stat-change">
                 <img src="images/sub_product_blue.png" class="notification_icon">
             </div>
@@ -12,7 +12,7 @@
 
     <div class="stat-card-newusers">
         <div class="stat-title">
-            <span class="card-title">Active Discounts</span>
+            <span class="card-title">Active Currency</span>
             <div class="stat-change">
                 <img src="images/copy_success_yellow.png" class="notification_icon">
             </div>
@@ -24,12 +24,12 @@
 
     <div class="stat-card-activeusers">
         <div class="stat-title">
-            <span class="card-title">Inctive Discounts</span>
+            <span class="card-title">Inactive Currency</span>
             <div class="stat-change">
                 <img src="images/copy_green.png" class="notification_icon">
             </div>
         </div>
-        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-month">Pending review and
+        <div class="stat-value"><span class="mr-12">0</span><span class="sub-product-month">Pending review and
                 activation</span></div>
     </div>
 </div>
@@ -48,54 +48,35 @@
     <table class="product-table">
         <thead>
             <tr>
-                <th *ngIf="!subProduct">Discount ID</th>
-                <th *ngIf="!subProduct">Partner Name</th>
-                <th *ngIf="!subProduct">Discount Name</th>
-                <th *ngIf="!subProduct">Discount Type</th>
-                <th *ngIf="!subProduct">Discount Value</th>
-                <th *ngIf="!subProduct">Start Date</th>
-                <th *ngIf="!subProduct">End Date</th>
+                <th *ngIf="!subProduct">Unit ID</th>
+                <th *ngIf="!subProduct">Currency Code</th>
+                <th *ngIf="!subProduct">Currency ISO Code</th>
+                <th *ngIf="!subProduct">QCB</th>
+                <th *ngIf="!subProduct">Spot Rate Reciprocal</th>
+                <th *ngIf="!subProduct">No. of Decimal</th>
+                <th *ngIf="!subProduct">Language</th>
                 <th *ngIf="!subProduct">Status</th>
-                <th *ngIf="!subProduct">Actions</th>
+
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
                 <th *ngIf="subProduct">Features</th>
-                <th *ngIf="subProduct">Channel</th>
-                <th *ngIf="subProduct">Screen</th>
                 <th *ngIf="subProduct">Status</th>
-                <th *ngIf="subProduct">Priority</th>
                 <th *ngIf="subProduct">Actions</th>
             </tr>
         </thead>
         <tbody>
 
             <tr *ngFor="let p of products">
-                <td>{{ p.offerId }}</td>
-                <td>{{ p.partnerName }}</td>
-                <td>{{ p.offerTitle }}</td>
-                <td>{{ p.offerType }}</td>
-                <td>{{ p.rewardType }}</td>
-                <td>{{p.validFrom}}</td>
-                <td>{{p.validTo}}</td>
-                <td>
-                    <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
-        }">
-                        {{ p.status }}
-                    </span>
-                </td>
-                <td class="actions">
-                    <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
-                        <img src="images/eye.png" />
-                        <img src="images/edit.png" />
-                        <img src="images/referesh_admin.png" />
-                        <img src="images/trash_red.png" />
-                    </ng-container>
+                <td>{{ p.unitId }}</td>
+                <td>{{ p.currencyCode }}</td>
+                <td>{{ p.currencyIsoCode }}</td>
+                <td>{{ p.QCB }}</td>
+                <td>{{ p.spotRateReciprocal }}</td>
+                <td>{{ p.noOfDecimal }}</td>
+                <td>{{ p.language}}</td>
+                <td>{{ p.status}}</td>
 
-                </td>
             </tr>
         </tbody>
     </table>

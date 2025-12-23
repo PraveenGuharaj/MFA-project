@@ -222,6 +222,7 @@
     <span class="f-15" *ngIf="mainMenu == 'master-channel'">Channel</span>
     <span class="f-15" *ngIf="mainMenu == 'master-language'">Language</span>
     <span class="f-15" *ngIf="mainMenu == 'master-unit'">Unit</span>
+    <span class="f-15" *ngIf="mainMenu == 'master-currency'">Currency</span>
   </div>
 
 
@@ -338,6 +339,9 @@
 
     <button class="retail_product " (click)="openUnitModal()" *ngIf="mainMenu == 'master-unit'">
       <img src="images/plus-mini.png">Add Language</button>
+
+    <button class="retail_product " (click)="openCurrencyModal()" *ngIf="mainMenu == 'master-currency'">
+      <img src="images/plus-mini.png">Add Currency</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">

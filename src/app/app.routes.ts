@@ -65,6 +65,7 @@ import { OfferDiscountDiscountManagement } from './component/offer-discount-mana
 import { MasterDataChannel } from './component/master-data/master-data-channel/master-data-channel';
 import { MasterDataLanguage } from './component/master-data/master-data-language/master-data-language';
 import { MasterDataUnit } from './component/master-data/master-data-unit/master-data-unit';
+import { MasterDataCurrency } from './component/master-data/master-data-currency/master-data-currency';
 
 export const routes: Routes = [
   {
@@ -149,7 +150,8 @@ export const routes: Routes = [
       { path: 'country', component: MasterDataCountry },
       { path: 'channel', component: MasterDataChannel },
       { path: 'language', component: MasterDataLanguage },
-      { path: 'unit', component: MasterDataUnit }
+      { path: 'unit', component: MasterDataUnit },
+      { path: 'currency', component: MasterDataCurrency },
     ]
   },
 

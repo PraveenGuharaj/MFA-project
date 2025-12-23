@@ -31,6 +31,8 @@ import { MasterDataAddChannel } from '../../../../component/master-data/master-d
 import { MasterDataAddLanguage } from '../../../../component/master-data/master-data-add-language/master-data-add-language';
 import { MasterDataUnit } from '../../../../component/master-data/master-data-unit/master-data-unit';
 import { MasterDataAddUnit } from '../../../../component/master-data/master-data-add-unit/master-data-add-unit';
+import { MasterDataCurrency } from '../../../../component/master-data/master-data-currency/master-data-currency';
+import { MasterDataAddCurrency } from '../../../../component/master-data/master-data-add-currency/master-data-add-currency';
 
 @Component({
   selector: 'app-dbx-header',
@@ -258,6 +260,16 @@ export class DbxHeader {
 
   openUnitModal() {
     this.dialog.open(MasterDataAddUnit, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openCurrencyModal() {
+    this.dialog.open(MasterDataAddCurrency, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
