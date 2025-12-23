@@ -7,7 +7,7 @@
     <li *ngFor="let item of menuItems" (click)="toggleSubMenu(item)">
       <div class="menu-item">
         <!-- Use click for main menu items -->
-        <span (click)="selectMenu(item.name, 'main', item.link)">
+        <span (click)="selectMenu(item.name, item.link)">
           {{ item.name }}
         </span>
 
@@ -20,7 +20,7 @@
       <!-- Show submenu only if the item has one and is expanded -->
       <ul *ngIf="item.subMenu && item.expanded">
         <li *ngFor="let subItem of item.subMenu">
-          <a (click)="selectMenu(subItem.name, 'submenu', subItem.link,subItem?.isSubmenuTitle,subItem?.mainMenuTitle)">
+          <a (click)="selectMenu(subItem.name, subItem.link,subItem?.isSubmenuTitle,subItem?.mainMenuTitle)">
             {{ subItem.name }}
           </a>
         </li>

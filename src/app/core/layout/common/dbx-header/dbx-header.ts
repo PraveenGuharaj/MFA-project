@@ -27,6 +27,7 @@ import { AdminCenterAddRegisterPartner } from '../../../../component/admin-cente
 import { OfferDiscountAddOfferManagement } from '../../../../component/offer-discount-management/offer-discount-add-offer-management/offer-discount-add-offer-management';
 import { MasterDataAddCountry } from '../../../../component/master-data/master-data-add-country/master-data-add-country';
 import { OfferDiscountAddDiscountManagement } from '../../../../component/offer-discount-management/offer-discount-add-discount-management/offer-discount-add-discount-management';
+import { MasterDataAddChannel } from '../../../../component/master-data/master-data-add-channel/master-data-add-channel';
 
 @Component({
   selector: 'app-dbx-header',
@@ -65,7 +66,10 @@ export class DbxHeader {
   }
 
   ngAfterViewInit() {
-    console.log('mainMenu', this.mainMenu);
+    setTimeout(() => {
+
+      console.log('mainMenu', this.mainMenu);
+    }, 5000);
 
     this.pageTitle = this.pageTitle;
   }
@@ -221,6 +225,16 @@ export class DbxHeader {
 
   openCountryModal() {
     this.dialog.open(MasterDataAddCountry, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openChannelModal() {
+    this.dialog.open(MasterDataAddChannel, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {

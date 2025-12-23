@@ -90,7 +90,8 @@ export class DbxSidebar {
       name: 'Master Data',
       isSubmenuTitle: true,
       subMenu: [
-        { name: 'Country', link: 'master-data/country', submenuTitle: 'Country', isSubmenuTitle: true },
+        { name: 'Country', link: 'master-data/country', submenuTitle: 'Country', isSubmenuTitle: true, mainMenuTitle: 'master-country' },
+        { name: 'Channel', link: 'master-data/channel', submenuTitle: 'Channel', isSubmenuTitle: true, mainMenuTitle: 'master-channel' }
       ],
       expanded: false
     },
@@ -102,13 +103,11 @@ export class DbxSidebar {
     item.expanded = !item.expanded;
   }
 
-  selectMenu(menu: string, type: string, link?: string, isSubmenu?: boolean, mainMenu?: string) {
-    console.log('menu', mainMenu);
-
+  selectMenu(menu: string, link?: string, isSubmenu?: boolean, mainMenu?: string) {
     if (link) {
       this.router.navigate([link]); // Navigate to the selected route
     }
-    this.menuChanged.emit({ menu, type, isSubmenu, mainMenu });
+    this.menuChanged.emit({ menu, isSubmenu, mainMenu });
   }
 
 }

@@ -153,7 +153,7 @@ export class Dashboard {
     this.subProduct = subProduct;
   }
 
-  onMenuChanged(event: { menu: string; type: string, isSubmenu: boolean, mainMenu?: string }) {
+  onMenuChanged(event: { menu: string, isSubmenu: boolean, mainMenu?: string }) {
     console.log('event', event)
     this.isProductHub = false;
     if (event.menu === 'User Overview') {
@@ -318,6 +318,13 @@ export class Dashboard {
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Master Data';
       this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'master-country';
+      this.cdr.markForCheck();
+    } else if (event.menu === 'Channel') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Master Data';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'master-channel';
       this.cdr.markForCheck();
     }
     else {

@@ -62,6 +62,7 @@ import { AdminCenterPartnerOnboarding } from './component/admin-center/admin-cen
 import { OfferDiscountOfferManagement } from './component/offer-discount-management/offer-discount-offer-management/offer-discount-offer-management';
 import { MasterDataCountry } from './component/master-data/master-data-country/master-data-country';
 import { OfferDiscountDiscountManagement } from './component/offer-discount-management/offer-discount-discount-management/offer-discount-discount-management';
+import { MasterDataChannel } from './component/master-data/master-data-channel/master-data-channel';
 
 export const routes: Routes = [
   {
@@ -143,7 +144,8 @@ export const routes: Routes = [
     path: 'master-data',
     component: Dashboard,
     children: [
-      { path: 'country', component: MasterDataCountry }
+      { path: 'country', component: MasterDataCountry },
+      { path: 'channel', component: MasterDataChannel }
     ]
   },
 
