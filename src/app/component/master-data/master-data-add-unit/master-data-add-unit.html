@@ -1,0 +1,42 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add
+                Language </h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+            <!-- Channel + Category Dropdown -->
+            <div class="form-row full-width mt-20">
+                <div class="form-group">
+                    <label>Language Code </label>
+                    <mat-select formControlName="channel" placeholder="Select Partner Name" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+            <div class="form-row full-width">
+                <div class="form-group">
+                    <label>Language Description</label>
+                    <input placeholder="Enter Product Name" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <input placeholder="Enter Offer Title" class="mt-20" />
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions bottom-btn">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Cancel</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
