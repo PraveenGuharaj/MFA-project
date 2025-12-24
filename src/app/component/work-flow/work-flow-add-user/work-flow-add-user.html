@@ -1,0 +1,117 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add User
+            </h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+            <!-- Channel + Category Dropdown -->
+
+            <div class="form-row full-width">
+                <div class="form-group">
+                    <label>Domain </label>
+                    <mat-select formControlName="channel" placeholder="Select Domain" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Role </label>
+                    <mat-select formControlName="channel" placeholder="Select Role" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Group </label>
+                    <mat-select formControlName="channel" placeholder="Select Groups" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Unit</label>
+                    <input placeholder="Unit" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Default Unit </label>
+                    <mat-select formControlName="channel" placeholder="Select Default Unit" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>User Type </label>
+                    <mat-select formControlName="channel" placeholder="Select User Type" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Enter User ID</label>
+                    <input placeholder="Enter User ID" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Enter User Name</label>
+                    <input placeholder="Enter User Name" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Enter First Name</label>
+                    <input placeholder="Enter First Name" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Enter Last Name</label>
+                    <input placeholder="Enter Last Name" class="mt-20" />
+                </div>
+
+
+                <div class="form-group">
+                    <label>Enter Mobile</label>
+                    <input placeholder="Enter Mobile" class="mt-20" />
+                </div>
+
+
+                <div class="form-group">
+                    <label>Enter Email</label>
+                    <input placeholder="Enter Email" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Enter Password</label>
+                    <input placeholder="Enter Password" class="mt-20" />
+                </div>
+
+
+                <div class="form-group d-flex">
+                    <mat-checkbox></mat-checkbox>
+                    <label>Enable Change Password</label>
+                </div>
+                <div class="form-group">
+                    <label>MFA</label>
+                    <mat-radio-group aria-label="Select MFA option" class="d-block">
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <mat-slide-toggle formControlName="status" color="primary" class="pl-10"></mat-slide-toggle>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Discard</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
