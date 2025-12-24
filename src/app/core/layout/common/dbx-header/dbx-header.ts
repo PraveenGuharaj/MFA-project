@@ -33,6 +33,7 @@ import { MasterDataUnit } from '../../../../component/master-data/master-data-un
 import { MasterDataAddUnit } from '../../../../component/master-data/master-data-add-unit/master-data-add-unit';
 import { MasterDataCurrency } from '../../../../component/master-data/master-data-currency/master-data-currency';
 import { MasterDataAddCurrency } from '../../../../component/master-data/master-data-add-currency/master-data-add-currency';
+import { WorkFlowAddDomain } from '../../../../component/work-flow/work-flow-add-domain/work-flow-add-domain';
 
 @Component({
   selector: 'app-dbx-header',
@@ -270,6 +271,16 @@ export class DbxHeader {
 
   openCurrencyModal() {
     this.dialog.open(MasterDataAddCurrency, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openDomainModal() {
+    this.dialog.open(WorkFlowAddDomain, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {
