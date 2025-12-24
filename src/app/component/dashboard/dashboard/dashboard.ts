@@ -344,6 +344,12 @@ export class Dashboard {
       this.isSubmenu = event.isSubmenu;
       this.mainMenu = 'master-currency';
       this.cdr.markForCheck();
+    } else if (event.menu === 'Domain Management') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Work Flow';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'domain-management';
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

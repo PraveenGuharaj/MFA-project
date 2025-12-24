@@ -32,7 +32,7 @@ export class DbxSidebar {
 
   @Output() menuChanged = new EventEmitter<any>(); // Emit selected menu
 
-  menuItems = [
+  menuItems: any = [
     {
       name: 'Dashboard',
       isSubmenuTitle: false,
@@ -98,7 +98,15 @@ export class DbxSidebar {
       ],
       expanded: false
     },
-
+    {
+      name: 'WorkFlow',
+      isSubmenuTitle: true,
+      subMenu: [
+        { name: 'Domain Management', link: 'work-flow/domain-management', submenuTitle: 'Domain Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
+        { name: 'Discount Management', link: 'offer-discount/discount-management', submenuTitle: 'Discount Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
+      ],
+      expanded: false
+    },
 
   ]
 

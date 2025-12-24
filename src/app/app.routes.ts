@@ -66,6 +66,7 @@ import { MasterDataChannel } from './component/master-data/master-data-channel/m
 import { MasterDataLanguage } from './component/master-data/master-data-language/master-data-language';
 import { MasterDataUnit } from './component/master-data/master-data-unit/master-data-unit';
 import { MasterDataCurrency } from './component/master-data/master-data-currency/master-data-currency';
+import { WorkFlowDomainManagement } from './component/work-flow/work-flow-domain-management/work-flow-domain-management';
 
 export const routes: Routes = [
   {
@@ -152,6 +153,14 @@ export const routes: Routes = [
       { path: 'language', component: MasterDataLanguage },
       { path: 'unit', component: MasterDataUnit },
       { path: 'currency', component: MasterDataCurrency },
+    ]
+  },
+
+  {
+    path: 'work-flow',
+    component: Dashboard,
+    children: [
+      { path: 'domain-management', component: WorkFlowDomainManagement }
     ]
   },
 
