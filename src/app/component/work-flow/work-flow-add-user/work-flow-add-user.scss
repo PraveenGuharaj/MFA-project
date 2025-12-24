@@ -109,3 +109,23 @@ input {
     // width: 98%;
 
 }
+
+::ng-deep .mdc-radio__outer-circle {
+    background-color: white !important;
+}
+
+::ng-deep .mdc-radio__inner-circle {
+    background-color: #030303 !important;
+}
+
+::ng-deep .mdc-radio__outer-circle {
+    border-color: #030303 !important;
+}
+
+::ng-deep .mdc-checkbox__checkmark {
+    background-color: #030303 !important;
+}
+
+::ng-deep .mdc-checkbox__background {
+    border-color: #030303 !important
+}

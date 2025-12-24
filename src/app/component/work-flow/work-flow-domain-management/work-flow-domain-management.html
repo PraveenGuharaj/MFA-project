@@ -69,7 +69,15 @@
             <tr *ngFor="let p of products">
                 <td>{{ p.domain }}</td>
                 <td>{{ p.domainDescription }}</td>
-                <td>{{ p.status }}</td>
+                <!-- <td>{{ p.status }}</td> -->
+                <td>
+                    <span class="status" [ngClass]="{
+          'active': p.status === 'Active',
+          'inactive': p.status === 'Inactive'
+        }">
+                        {{ p.status }}
+                    </span>
+                </td>
                 <td>{{ p.priority }}</td>
                 <td class="actions">
                     <!-- Use images -->

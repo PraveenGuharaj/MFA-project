@@ -69,7 +69,7 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
+            <tr *ngFor="let p of products;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
                 <td>{{ p.userId }}</td>
                 <td>{{ p.userName }}</td>
                 <td>{{ p.unit }}</td>

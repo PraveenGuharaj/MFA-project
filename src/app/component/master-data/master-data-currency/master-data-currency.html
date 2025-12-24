@@ -67,7 +67,7 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
+            <tr *ngFor="let p of products;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
                 <td>{{ p.unitId }}</td>
                 <td>{{ p.currencyCode }}</td>
                 <td>{{ p.currencyIsoCode }}</td>
