@@ -103,7 +103,7 @@ export class DbxSidebar {
       isSubmenuTitle: true,
       subMenu: [
         { name: 'Domain Management', link: 'work-flow/domain-management', submenuTitle: 'Domain Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
-        { name: 'Discount Management', link: 'offer-discount/discount-management', submenuTitle: 'Discount Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
+        { name: 'Manage User', link: 'work-flow/manage-user', submenuTitle: 'Manage User', isSubmenuTitle: true, mainMenuTitle: 'manage-user' },
       ],
       expanded: false
     },

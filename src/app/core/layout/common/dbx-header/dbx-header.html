@@ -224,6 +224,7 @@
     <span class="f-15" *ngIf="mainMenu == 'master-unit'">Unit</span>
     <span class="f-15" *ngIf="mainMenu == 'master-currency'">Currency</span>
     <span class="f-15" *ngIf="mainMenu == 'domain-management'">Domain Management</span>
+    <span class="f-15" *ngIf="mainMenu == 'manage-user'">User Creation</span>
   </div>
 
 
@@ -238,7 +239,7 @@
   <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
      subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'
       || subMenuTitle == 'Partner Onboarding' || mainMenu == 'Offer Management' || subMenuTitle == 'Master Data' ||  mainMenu == 'Discount Management' || mainMenu == 'master-country'
-      || mainMenu == 'master-language' || mainMenu == 'domain-management'"
+      || mainMenu == 'master-language' || mainMenu == 'domain-management' || mainMenu == 'manage-user'"
     [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
@@ -347,6 +348,10 @@
 
     <button class="retail_product " (click)="openDomainModal()" *ngIf="mainMenu == 'domain-management'">
       <img src="images/plus-mini.png">Add Domain</button>
+
+    <button class="retail_product " (click)="openDomainModal()" *ngIf="mainMenu == 'manage-user'">
+      <img src="images/plus-mini.png">Add User</button>
+
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
