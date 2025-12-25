@@ -1,0 +1,62 @@
+<div class="overlay" (click)="closeForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add
+                Sub-Product Management
+            </h2>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+            <!-- Channel + Category Dropdown -->
+
+            <div class="form-row full-width">
+                <div class="form-group">
+                    <label>Domain </label>
+                    <mat-select formControlName="channel" placeholder="Select Product" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Product </label>
+                    <mat-select formControlName="channel" placeholder="Select Role" class="mt-20">
+                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Sub-Product Code</label>
+                    <input placeholder="Enter Sub-Product Code" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Sub-Product Description</label>
+                    <input placeholder="Enter Sub-Product Description" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Sub-Product URL</label>
+                    <input placeholder="Enter Sub-Product URL" class="mt-20" />
+                </div>
+
+                <div class="form-group">
+                    <label>Priority</label>
+                    <input placeholder="Enter Priority" class="mt-20" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <mat-slide-toggle formControlName="status" color="primary" class="pl-10"></mat-slide-toggle>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" mat-raised-button color="primary" class="btn-cancel"
+                    (click)="closeForm()">Discard</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
