@@ -362,6 +362,12 @@ export class Dashboard {
       this.isSubmenu = event.isSubmenu;
       this.mainMenu = 'product-management';
       this.cdr.markForCheck();
+    } else if (event.menu === 'Sub-Product Management') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Work Flow';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'sub-product-management';
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

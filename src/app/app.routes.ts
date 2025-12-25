@@ -69,6 +69,7 @@ import { MasterDataCurrency } from './component/master-data/master-data-currency
 import { WorkFlowDomainManagement } from './component/work-flow/work-flow-domain-management/work-flow-domain-management';
 import { WorkFlowManageUser } from './component/work-flow/work-flow-manage-user/work-flow-manage-user';
 import { WorkFlowProductManagement } from './component/work-flow/work-flow-product-management/work-flow-product-management';
+import { WorkFlowSubProductManagement } from './component/work-flow/work-flow-sub-product-management/work-flow-sub-product-management';
 
 export const routes: Routes = [
   {
@@ -164,7 +165,8 @@ export const routes: Routes = [
     children: [
       { path: 'domain-management', component: WorkFlowDomainManagement },
       { path: 'manage-user', component: WorkFlowManageUser },
-      { path: 'product-management', component: WorkFlowProductManagement }
+      { path: 'product-management', component: WorkFlowProductManagement },
+      { path: 'sub-product-management', component: WorkFlowSubProductManagement }
     ]
   },
 
