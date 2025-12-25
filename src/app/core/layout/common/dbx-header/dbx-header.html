@@ -362,11 +362,8 @@
     <button class="retail_product " (click)="openUserModal()" *ngIf="mainMenu == 'manage-user'">
       <img src="images/plus-mini.png">Add User</button>
 
-    <button class="retail_product " (click)="openUserModal()" *ngIf="mainMenu == 'product-management'">
+    <button class="retail_product " (click)="openWorkFlowProductModal()" *ngIf="mainMenu == 'product-management'">
       <img src="images/plus-mini.png">Add Product</button>
-
-
-
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
