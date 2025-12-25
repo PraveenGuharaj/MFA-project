@@ -33,7 +33,7 @@
 <!-- Bottom Section -->
 <!-- Bottom Section -->
 <div class="header-bottom" *ngIf="subMenuTitle != 'Block/Unblock Users'">
-  <div class="tabs">
+  <div class="tabs d-block">
     <div *ngIf="pageTitle =='Dashboard'" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
         (click)="setActiveTab('all')">
@@ -225,6 +225,15 @@
     <span class="f-15" *ngIf="mainMenu == 'master-currency'">Currency</span>
     <span class="f-15" *ngIf="mainMenu == 'domain-management'">Domain Management</span>
     <span class="f-15" *ngIf="mainMenu == 'manage-user'">User Creation</span>
+    <span class="f-15" *ngIf="mainMenu == 'product-management'">Product Management</span>
+    <div class="custom-dropdown" *ngIf="mainMenu == 'product-management'">
+      <select>
+        <option selected disabled>Select Domain</option>
+        <option>Domain 1</option>
+        <option>Domain 2</option>
+        <option>Domain 3</option>
+      </select>
+    </div>
   </div>
 
 
@@ -236,10 +245,11 @@
   </div>
 
   <!-- admin center otp adn atm -->
-  <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
+  <div class="actions"
+    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
      subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'
       || subMenuTitle == 'Partner Onboarding' || mainMenu == 'Offer Management' || subMenuTitle == 'Master Data' ||  mainMenu == 'Discount Management' || mainMenu == 'master-country'
-      || mainMenu == 'master-language' || mainMenu == 'domain-management' || mainMenu == 'manage-user'"
+      || mainMenu == 'master-language' || mainMenu == 'domain-management' || mainMenu == 'manage-user' || mainMenu == 'product-management'"
     [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
@@ -351,6 +361,11 @@
 
     <button class="retail_product " (click)="openUserModal()" *ngIf="mainMenu == 'manage-user'">
       <img src="images/plus-mini.png">Add User</button>
+
+    <button class="retail_product " (click)="openUserModal()" *ngIf="mainMenu == 'product-management'">
+      <img src="images/plus-mini.png">Add Product</button>
+
+
 
 
     <!-- admin center manage License filter and search bar -->

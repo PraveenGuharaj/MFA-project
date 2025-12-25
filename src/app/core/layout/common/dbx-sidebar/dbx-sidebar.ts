@@ -104,6 +104,7 @@ export class DbxSidebar {
       subMenu: [
         { name: 'Domain Management', link: 'work-flow/domain-management', submenuTitle: 'Domain Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
         { name: 'Manage User', link: 'work-flow/manage-user', submenuTitle: 'Manage User', isSubmenuTitle: true, mainMenuTitle: 'manage-user' },
+        { name: 'Product Management', link: 'work-flow/product-management', submenuTitle: 'Product Management', isSubmenuTitle: true, mainMenuTitle: 'product-management' },
       ],
       expanded: false
     },

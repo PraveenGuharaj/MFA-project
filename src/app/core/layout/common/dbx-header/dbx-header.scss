@@ -172,7 +172,7 @@
 
 .f-15 {
     font-size: 14px;
-    font-weight: 400 !important;
+    font-weight: 500 !important;
     color: #221340;
 }
 
@@ -314,4 +314,45 @@
     color: #202020;
     font-size: 20px;
     font-weight: 600;
+}
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 6px;
+}
+
+.custom-dropdown select {
+    width: 200px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid #CCCCCC;
+    padding: 0 40px 0 14px;
+    /* space for arrow */
+    outline: none;
+    background: #fff;
+    font-size: 14px;
+    color: #666;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.custom-dropdown::after {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+
+    background: url("/images/down_arrow.png") no-repeat center;
+    background-size: contain;
+    pointer-events: none;
+}
+
+.d-block {
+    display: block;
 }
