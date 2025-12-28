@@ -369,11 +369,16 @@ export class Dashboard {
       this.mainMenu = 'sub-product-management';
       this.cdr.markForCheck();
     } else if (event.menu === 'Child Product Management') {
-      console.log('child')
       this.headerTitle = 'Admin Center';
       this.subMenuTitle = 'Work Flow';
       this.isSubmenu = event.isSubmenu;
       this.mainMenu = 'child-product-management';
+      this.cdr.markForCheck();
+    } else if (event.menu === 'Access Permission Management') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Work Flow';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'access-permission-management';
       this.cdr.markForCheck();
     }
     else {
