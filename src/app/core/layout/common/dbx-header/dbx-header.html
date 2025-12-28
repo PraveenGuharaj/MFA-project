@@ -388,8 +388,8 @@
       *ngIf="mainMenu == 'sub-product-management'">
       <img src="images/plus-mini.png">Add Sub-Product</button>
 
-    <button class="retail_product " (click)="openLicenseModal()" *ngIf="mainMenu == 'child-product-management'"> <img
-        src="images/plus-mini.png">Add Child Product</button>
+    <button class="retail_product " (click)="openChildProductModal()" *ngIf="mainMenu == 'child-product-management'">
+      <img src="images/plus-mini.png">Add Child Product</button>
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
