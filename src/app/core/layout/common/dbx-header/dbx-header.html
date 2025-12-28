@@ -235,7 +235,17 @@
       </select>
     </div>
     <span class="f-15" *ngIf="mainMenu == 'sub-product-management'">Sub-Product Management</span>
+    <span class="f-15" *ngIf="mainMenu == 'child-product-management'">Child Product Management</span>
     <div class="custom-dropdown" *ngIf="mainMenu == 'sub-product-management'">
+      <select>
+        <option selected disabled>Select Domain</option>
+        <option>Domain 1</option>
+        <option>Domain 2</option>
+        <option>Domain 3</option>
+      </select>
+    </div>
+
+    <div class="custom-dropdown" *ngIf="mainMenu == 'child-product-management'">
       <select>
         <option selected disabled>Select Domain</option>
         <option>Domain 1</option>
@@ -258,7 +268,8 @@
      subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'
       || subMenuTitle == 'Partner Onboarding' || mainMenu == 'Offer Management' || subMenuTitle == 'Master Data' ||  mainMenu == 'Discount Management' || mainMenu == 'master-country'
       || mainMenu == 'master-language' || mainMenu == 'domain-management' || mainMenu == 'manage-user' || mainMenu == 'product-management'
-      || mainMenu == 'sub-product-management'" [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
+      || mainMenu == 'sub-product-management' || mainMenu == 'child-product-management'"
+    [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
@@ -377,6 +388,9 @@
       *ngIf="mainMenu == 'sub-product-management'">
       <img src="images/plus-mini.png">Add Sub-Product</button>
 
+    <button class="retail_product " (click)="openLicenseModal()" *ngIf="mainMenu == 'child-product-management'"> <img
+        src="images/plus-mini.png">Add Child Product</button>
+
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">
       <div class="search-box">
@@ -391,5 +405,7 @@
 
     <button class="retail_product " (click)="openLicenseModal()" *ngIf="subMenuTitle == 'Manage License'"> <img
         src="images/plus-mini.png">Add License</button>
+
+
   </div>
 </div>

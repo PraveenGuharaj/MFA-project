@@ -106,6 +106,7 @@ export class DbxSidebar {
         { name: 'Manage User', link: 'work-flow/manage-user', submenuTitle: 'Manage User', isSubmenuTitle: true, mainMenuTitle: 'manage-user' },
         { name: 'Product Management', link: 'work-flow/product-management', submenuTitle: 'Product Management', isSubmenuTitle: true, mainMenuTitle: 'product-management' },
         { name: 'Sub-Product Management', link: 'work-flow/sub-product-management', submenuTitle: 'Sub-Product Management', isSubmenuTitle: true, mainMenuTitle: 'sub-product-management' },
+        { name: 'Child Product Management', link: 'work-flow/child-product-management', submenuTitle: 'Child Product Management', isSubmenuTitle: true, mainMenuTitle: 'child-product-management' },
       ],
       expanded: false
     },
