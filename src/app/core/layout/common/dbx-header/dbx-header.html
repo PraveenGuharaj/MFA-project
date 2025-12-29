@@ -238,6 +238,7 @@
     <span class="f-15" *ngIf="mainMenu == 'child-product-management'">Child Product Management</span>
     <span class="f-15" *ngIf="mainMenu == 'access-permission-management'">Access Management</span>
     <span class="f-15" *ngIf="mainMenu == 'role-management'">Role Management</span>
+    <span class="f-15" *ngIf="mainMenu == 'user-management'">Password Policy</span>
 
     <div class="custom-dropdown" *ngIf="mainMenu == 'sub-product-management'">
       <select>
@@ -285,13 +286,12 @@
   </div>
 
   <!-- admin center otp adn atm -->
-  <div class="actions"
-    *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
+  <div class="actions" *ngIf="subMenuTitle == 'OTP Management' || subMenuTitle == 'Manage Locators' || subMenuTitle == 'Manage License' || subMenuTitle == 'Manage MFA' ||
      subMenuTitle == 'Manage Notification' || subMenuTitle == 'Manage Content' || subMenuTitle == 'Manage Parameters' || subMenuTitle == 'Force Update'
       || subMenuTitle == 'Partner Onboarding' || mainMenu == 'Offer Management' || subMenuTitle == 'Master Data' ||  mainMenu == 'Discount Management' || mainMenu == 'master-country'
       || mainMenu == 'master-language' || mainMenu == 'domain-management' || mainMenu == 'manage-user' || mainMenu == 'product-management'
-      || mainMenu == 'sub-product-management' || mainMenu == 'child-product-management' || mainMenu == 'access-permission-management' || mainMenu == 'role-management'"
-    [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
+      || mainMenu == 'sub-product-management' || mainMenu == 'child-product-management' || mainMenu == 'access-permission-management' || mainMenu == 'role-management'
+      || mainMenu == 'user-management'" [ngClass]="{'w-70': subMenuTitle == 'Manage License'}">
 
     <button class="retail_product" (click)="openConfigurationModal()" *ngIf="subMenuTitle == 'OTP Management'"> <img
         src="images/plus-mini.png">Add Configuration</button>
@@ -433,5 +433,8 @@
 
     <button class="retail_product " (click)="openRoleManagementModal()" *ngIf="mainMenu == 'role-management'">
       <img src="images/plus-mini.png">Add Role Management</button>
+
+    <button class="retail_product " (click)="openRoleManagementModal()" *ngIf="mainMenu == 'user-management'">
+      <img src="images/plus-mini.png">Add Password Policy</button>
   </div>
 </div>

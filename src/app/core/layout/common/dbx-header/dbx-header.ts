@@ -72,6 +72,8 @@ export class DbxHeader {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('mainMenu', this.mainMenu);
+
     // Log to track changes in input properties
     if (changes['pageTitle']) {
     }

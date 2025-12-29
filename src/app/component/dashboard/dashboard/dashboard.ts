@@ -386,6 +386,12 @@ export class Dashboard {
       this.isSubmenu = event.isSubmenu;
       this.mainMenu = 'role-management';
       this.cdr.markForCheck();
+    } else if (event.menu === 'Password Policy') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'User Management';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'user-management';
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

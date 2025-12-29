@@ -74,6 +74,7 @@ import { WorkFlowChildProductManangement } from './component/work-flow/work-flow
 import { WorkFlowAddAccess } from './component/work-flow/work-flow-add-access/work-flow-add-access';
 import { WorkFlowAccessPermissionManagement } from './component/work-flow/work-flow-access-permission-management/work-flow-access-permission-management';
 import { WorkFlowRoleManagement } from './component/work-flow/work-flow-role-management/work-flow-role-management';
+import { UserManagementPasswordPolicy } from './component/user-management/user-management-password-policy/user-management-password-policy';
 
 export const routes: Routes = [
   {
@@ -175,6 +176,14 @@ export const routes: Routes = [
       { path: 'access-permission-management', component: WorkFlowAccessPermissionManagement },
       // { path: 'access-permission-management', component: WorkFlowAddAccess },
       { path: 'role-management', component: WorkFlowRoleManagement }
+    ]
+  },
+
+  {
+    path: 'user-management',
+    component: Dashboard,
+    children: [
+      { path: 'password-policy', component: UserManagementPasswordPolicy }
     ]
   },
 

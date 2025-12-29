@@ -112,6 +112,13 @@ export class DbxSidebar {
       ],
       expanded: false
     },
+    {
+      name: 'User Management',
+      isSubmenuTitle: true,
+      subMenu: [
+        { name: 'Password Policy', link: 'user-management/password-policy', submenuTitle: 'Password Policy', isSubmenuTitle: true, mainMenuTitle: 'password-policy' }
+      ]
+    }
 
 
   ]
