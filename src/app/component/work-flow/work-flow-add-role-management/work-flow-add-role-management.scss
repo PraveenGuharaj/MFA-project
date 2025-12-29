@@ -1,0 +1,193 @@
+@use '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product.scss';
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+::ng-deep .mdc-switch__icons {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.p-10 {
+    padding-right: 10px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.fs-20 {
+    font-size: 20px;
+    color: #6017EB;
+    font-weight: 600;
+    margin: 0;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.progress-container {
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.step-text {
+    font-size: 16px;
+    color: #030303;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10px;
+    // background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.progress-step {
+    width: 95%;
+    height: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    border-radius: 8px;
+    height: 6px;
+}
+
+.progress-gap {
+    width: 5%;
+    height: 100%;
+    // background-color: #e0e0e0;
+}
+
+.progress-step.active {
+    background-color: #6017EB;
+    border-radius: 8px;
+    height: 6px;
+}
+
+mat-select {
+    width: 97%;
+    padding: 20px 10px 20px 14px;
+}
+
+input {
+    width: 97%;
+    padding: 20px 10px 20px 14px;
+}
+
+.m-0 {
+    margin-top: 0px;
+}
+
+.bottom-btn {
+    position: absolute;
+    bottom: 0 !important;
+    width: -webkit-fill-available;
+}
+
+.pl-10 {
+    padding-left: 10px;
+}
+
+.d-block {
+    display: block;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    border-radius: 12px;
+    margin-top: 10px;
+    // width: 98%;
+
+}
+
+::ng-deep .mdc-radio__outer-circle {
+    background-color: white !important;
+}
+
+::ng-deep .mdc-radio__inner-circle {
+    background-color: #030303 !important;
+}
+
+::ng-deep .mdc-radio__outer-circle {
+    border-color: #030303 !important;
+}
+
+::ng-deep .mdc-checkbox__checkmark {
+    background-color: #030303 !important;
+}
+
+::ng-deep .mdc-checkbox__background {
+    border-color: #030303 !important
+}
+
+.role-header-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    margin: 20px 0 10px;
+    font-weight: 600;
+    color: #0D0B17;
+}
+
+.h-title {
+    //   padding-left: 5px;
+}
+
+.role-wrapper {
+    background: #F6F6F7;
+    border-radius: 16px;
+    padding: 20px 25px;
+    width: 100%;
+}
+
+.role-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    //   margin-bottom:18px;
+}
+
+.h-number {
+    font-size: 16px;
+    color: #6b6b6b;
+}
+
+.role-input {
+    //   width:100%;
+    border-radius: 12px;
+    border: 1px solid #E7E7E8;
+    padding: 14px;
+    outline: none;
+    font-size: 14px;
+}
+
+.role-input::placeholder {
+    color: #B6B6B7;
+}
+
+.retail_product {
+    border-radius: 10px;
+    padding: 10px 16px;
+    background-color: #6017EB;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 15px;
+    border: none;
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.btn-header {
+    flex-direction: row-reverse;
+    display: flex;
+}

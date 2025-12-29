@@ -39,6 +39,7 @@ import { WorkFlowAddProduct } from '../../../../component/work-flow/work-flow-ad
 import { WorkFlowAddSubproudct } from '../../../../component/work-flow/work-flow-add-subproudct/work-flow-add-subproudct';
 import { WorkFlowAddChildProduct } from '../../../../component/work-flow/work-flow-add-child-product/work-flow-add-child-product';
 import { WorkFlowAddAccess } from '../../../../component/work-flow/work-flow-add-access/work-flow-add-access';
+import { WorkFlowAddRoleManagement } from '../../../../component/work-flow/work-flow-add-role-management/work-flow-add-role-management';
 
 @Component({
   selector: 'app-dbx-header',
@@ -445,6 +446,16 @@ export class DbxHeader {
 
   openDiscountManagementModal() {
     this.dialog.open(OfferDiscountAddDiscountManagement, {
+      width: '60%',
+      height: 'auto',
+      position: {
+        right: '0',
+      },
+    });
+  }
+
+  openRoleManagementModal() {
+    this.dialog.open(WorkFlowAddRoleManagement, {
       width: '60%',
       height: 'auto',
       position: {
