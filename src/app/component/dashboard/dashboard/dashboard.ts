@@ -380,6 +380,12 @@ export class Dashboard {
       this.isSubmenu = event.isSubmenu;
       this.mainMenu = 'access-permission-management';
       this.cdr.markForCheck();
+    } else if (event.menu === 'Role Management') {
+      this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'Work Flow';
+      this.isSubmenu = event.isSubmenu;
+      this.mainMenu = 'role-management';
+      this.cdr.markForCheck();
     }
     else {
       // this.headerTitle = 'Dashboard'; // Fallback title

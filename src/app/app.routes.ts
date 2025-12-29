@@ -73,6 +73,7 @@ import { WorkFlowSubProductManagement } from './component/work-flow/work-flow-su
 import { WorkFlowChildProductManangement } from './component/work-flow/work-flow-child-product-manangement/work-flow-child-product-manangement';
 import { WorkFlowAddAccess } from './component/work-flow/work-flow-add-access/work-flow-add-access';
 import { WorkFlowAccessPermissionManagement } from './component/work-flow/work-flow-access-permission-management/work-flow-access-permission-management';
+import { WorkFlowRoleManagement } from './component/work-flow/work-flow-role-management/work-flow-role-management';
 
 export const routes: Routes = [
   {
@@ -172,7 +173,8 @@ export const routes: Routes = [
       { path: 'sub-product-management', component: WorkFlowSubProductManagement },
       { path: 'child-product-management', component: WorkFlowChildProductManangement },
       { path: 'access-permission-management', component: WorkFlowAccessPermissionManagement },
-      { path: 'access-permission-management', component: WorkFlowAddAccess }
+      // { path: 'access-permission-management', component: WorkFlowAddAccess },
+      { path: 'role-management', component: WorkFlowRoleManagement }
     ]
   },
 
