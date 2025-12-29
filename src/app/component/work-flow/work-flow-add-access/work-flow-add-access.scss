@@ -1,237 +1,135 @@
-@use '../../admin-center/admin-center-manage-otp/admin-center-manage-otp.scss';
+@use '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product.scss';
 
-body {
-    font-family: Arial, sans-serif;
+.mt-0 {
+    margin-top: 0 !important;
 }
 
-.dropdown-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.dropdown {
-    font-size: 14px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    background-color: #F2F2F2;
-    padding: 10px;
-    font-weight: 600;
-    color: #221340;
-    margin-right: 10px;
-}
-
-.reset-button {
-    background-color: white;
-    /* color: white; */
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 1px solid #D6CFE5;
-    font-weight: 400;
-}
-
-.reset-button:hover {
-    background-color: #0056b3;
-}
-
-.dropdown-container .dropdown:focus,
-.reset-button:focus {
-    outline: none;
-    border-color: #007bff;
-}
-
-.manage-content-header {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    background: #FFFFFF;
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.f-14 {
-    font-size: 14px;
-    font-weight: 500;
-    color: #CC0A0D;
-    padding-left: 10px;
+::ng-deep .mdc-switch__icons {
+    display: none;
 }
 
 .d-flex {
     display: flex;
+    align-items: center;
 }
 
-.notification-template {
-    width: 180px;
-    max-width: 180px;
-    word-wrap: break-word;
-    white-space: normal;
+.p-10 {
+    padding-right: 10px;
 }
 
-.search-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
+.form-actions {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.redirectUrl {
-    width: 180px;
-    max-width: 180px;
-    word-wrap: break-word;
-    white-space: normal;
-}
-
-.search-box {
-    margin-bottom: 20px;
-}
-
-.w-180 {
-    width: 180px;
-    max-width: 180px;
-    word-wrap: break-word;
-    white-space: normal;
-
-}
-
-.stats-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 10px
-}
-
-.stat-card-newusers {
-    background: linear-gradient(90deg, #ffffff, #FAF2D4);
-    /* Left to right gradient */
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    /* Set the width to match "Daily Logins Trend" */
-    max-width: 100%;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-
-.stat-card-newusers:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.stat-title {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-}
-
-.card-title {
-    font-size: 16px;
-    font-weight: 400;
-    color: #687380;
-    line-height: 20px;
-}
-
-.stat-value {
-    font-size: 32px;
+.fs-20 {
+    font-size: 20px;
+    color: #6017EB;
     font-weight: 600;
-    color: #221340;
-    margin-top: 24px;
-    text-align: start;
+    margin: 0;
 }
 
-.stat-change {
+.mt-20 {
+    margin-top: 20px;
+}
+
+.progress-container {
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.step-text {
+    font-size: 16px;
+    color: #030303;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.progress-bar {
     display: flex;
-    justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 10px;
+    // background-color: #e0e0e0;
+    border-radius: 5px;
     margin-top: 10px;
-    font-size: 14px;
-    border: 1px solid #ACE5BE;
-    border-radius: 20px;
-    background: white;
-    padding: 6px 10px;
 }
 
-.stat-change mat-icon {
-    color: green;
-    /* default color */
-    margin-right: 5px;
+.progress-step {
+    width: 95%;
+    height: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    border-radius: 8px;
+    height: 6px;
 }
 
-.stat-change span {
-    font-weight: bold;
+.progress-gap {
+    width: 5%;
+    height: 100%;
+    // background-color: #e0e0e0;
 }
 
-.stat-change.negative mat-icon {
-    color: red;
+.progress-step.active {
+    background-color: #6017EB;
+    border-radius: 8px;
+    height: 6px;
 }
 
-
-.stat-card {
-    background: linear-gradient(90deg, #ffffff, #e0d4fa);
-    /* Left to right gradient */
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    /* Set the width to match "Users Over Time" */
-    max-width: 100%;
-    text-align: center;
-    transition: all 0.3s ease;
+mat-select {
+    width: 97%;
+    padding: 20px 10px 20px 14px;
 }
 
-.stat-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+input {
+    width: 97%;
+    padding: 20px 10px 20px 14px;
 }
 
-.stat-card-activeusers {
-    background: linear-gradient(90deg, #ffffff, #CEF2D9);
-    /* Left to right gradient */
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    /* Set the width to match "Login Success vs Failed" */
-    max-width: 100%;
-    text-align: center;
-    transition: all 0.3s ease;
+.m-0 {
+    margin-top: 0px;
 }
 
-.stat-card-activeusers:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+.bottom-btn {
+    position: absolute;
+    bottom: 0 !important;
+    width: -webkit-fill-available;
 }
 
-.stat-change {
-    padding: 10px 15px;
+.pl-10 {
+    padding-left: 10px;
 }
 
-.stat-title {
-    align-items: center;
+.d-block {
+    display: block;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    border-radius: 12px;
+    margin-top: 10px;
+    // width: 98%;
+
 }
 
-.sub-product-header {
-    color: #14CC4C;
-    font-size: 14px;
-    font-weight: 400;
+::ng-deep .mdc-radio__outer-circle {
+    background-color: white !important;
 }
 
-.sub-product-month {
-    font-size: 14px;
-    color: #687380;
-    font-weight: 400;
+::ng-deep .mdc-radio__inner-circle {
+    background-color: #030303 !important;
 }
 
-.mr-12 {
-    margin-right: 12px;
+::ng-deep .mdc-radio__outer-circle {
+    border-color: #030303 !important;
 }
 
-.product-table-container {
-    margin-top: 7px;
+::ng-deep .mdc-checkbox__checkmark {
+    background-color: #030303 !important;
 }
 
-.bg-grey {
-    background-color: #FAFAFB !important;
+::ng-deep .mdc-checkbox__background {
+    border-color: #030303 !important
+}
+
+.ml-10 {
+    margin-left: 10px;
 }

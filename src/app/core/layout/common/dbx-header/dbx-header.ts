@@ -38,6 +38,7 @@ import { WorkFlowAddUser } from '../../../../component/work-flow/work-flow-add-u
 import { WorkFlowAddProduct } from '../../../../component/work-flow/work-flow-add-product/work-flow-add-product';
 import { WorkFlowAddSubproudct } from '../../../../component/work-flow/work-flow-add-subproudct/work-flow-add-subproudct';
 import { WorkFlowAddChildProduct } from '../../../../component/work-flow/work-flow-add-child-product/work-flow-add-child-product';
+import { WorkFlowAddAccess } from '../../../../component/work-flow/work-flow-add-access/work-flow-add-access';
 
 @Component({
   selector: 'app-dbx-header',
@@ -325,6 +326,16 @@ export class DbxHeader {
 
   openChildProductModal() {
     this.dialog.open(WorkFlowAddChildProduct, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+    });
+  }
+
+  openAddAccessModal() {
+    this.dialog.open(WorkFlowAddAccess, {
       width: '60%',  // Adjust width as needed
       height: 'auto',
       position: {

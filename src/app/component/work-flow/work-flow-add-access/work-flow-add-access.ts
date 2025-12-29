@@ -1,84 +1,64 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-work-flow-add-access',
   imports: [
     CommonModule,
-    MatIconModule
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatRadioModule
   ],
   templateUrl: './work-flow-add-access.html',
   styleUrl: './work-flow-add-access.scss',
 })
 export class WorkFlowAddAccess {
-  @Input() subProduct: boolean = false;
+  productForm!: FormGroup;
 
-  products = [
-    {
-      domain: 'BO',
-      product: 'USER_MANAGEMENT_CONFIG',
-      subProductCode: 'USER_MANAGEMENT_CONFIG',
-      accessCode: 'SUMMARY',
-      accessDescription: 'MODIFY',
-      priority: 1,
-      actionsType: 'image'
+  // Dropdown Options
+  channels = ["SMS", "Email", "App", "Web"];
+  categories = ["Login", "Transaction", "Reset", "Verification"];
+  domains = ["Banking", "Insurance", "Fintech", "Wallet"];
+  blockDurations = ["30 Sec", "1 Min", "2 Min", "5 Min"];
+  types = ["Primary", "Secondary", "Backup"];
+  deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
 
-    },
-    {
-      domain: 'BO',
-      product: 'PARTNER_ONBOARDING_CONFIG',
-      subProductCode: 'PARTNER_ONBOARDING_CONFIG',
-      accessCode: 'ADD',
-      accessDescription: 'MODIFY',
-      priority: 1,
-      actionsType: 'image'
+  constructor(private fb: FormBuilder) {
+    this.productForm = this.fb.group({
+      productName: ['', Validators.required],
+      channel: ['', Validators.required],
+      category: ['', Validators.required],
 
-    },
-    {
-      domain: 'BO',
-      product: 'CUSTOMER_SERVICE_CONFIG',
-      subProductCode: 'CUSTOMER_SERVICE_CONFIG',
-      accessCode: 'MODIFY',
-      accessDescription: 'MODIFY',
-      priority: 1,
-      actionsType: 'image'
+      // Newly mapped fields
+      otpLength: ['', Validators.required],
+      maxAttempts: ['', Validators.required],
+      otpExpiry: ['', Validators.required],
+      blockDuration: ['', Validators.required],
+      domain: ['', Validators.required],
+      deliveryModes: [[], Validators.required], // Multiple select
 
-    },
-    {
-      domain: 'BO',
-      product: 'NOTIFICATIONS_MANAGEMENT_CONFIG',
-      subProductCode: 'NOTIFICATIONS_MANAGEMENT_CONFIG',
-      accessCode: 'ADD',
-      accessDescription: 'MODIFY',
-      priority: 1,
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'BO',
-      product: 'LICENSE_CONFIG',
-      subProductCode: 'LICENSE_CONFIG',
-      accessCode: 'SUMMARY',
-      accessDescription: 'MODIFY',
-      priority: 1,
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'BO',
-      product: 'OTP_BIO_CONFIGURATION',
-      subProductCode: 'OTP_BIO_CONFIGURATION',
-      accessCode: 'MODIFY',
-      accessDescription: 'MODIFY',
-      priority: 1,
-      actionsType: 'image'
-
-    }
-  ];
-
-
-  onProductTypeChanged(subProduct: boolean) {
-    this.subProduct = subProduct;
+      type: ['', Validators.required],
+      status: [true]
+    });
   }
+
+  submitForm() {
+    if (this.productForm.valid) {
+    } else {
+      this.productForm.markAllAsTouched();
+    }
+  }
+
+  closeForm() { }
 }
