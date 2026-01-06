@@ -1,0 +1,64 @@
+<div class="chart-container-wrapper">
+    <mat-card class="chart-card">
+        <mat-card-header>
+            <div class="mat-header">
+                <mat-card-title>
+                    Users Logged-in by Region</mat-card-title>
+
+                <mat-card-title>
+                    <div class="right-side-img">
+                        <img src="images/dashboar_mobile.png" class="notification_icon">
+                        <span class="header_title">Mobile</span>
+
+                        <img src="images/dashboard_web.png" class="notification_icon">
+                        <span class="header_title">Web</span>
+
+                        <select class="status-dropdown">
+                            <option value="completed">Middle East</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                        </select>
+                    </div>
+                </mat-card-title>
+            </div>
+
+        </mat-card-header>
+        <mat-card-content>
+            <!-- <canvas #myLineChart></canvas> -->
+            <canvas baseChart [data]="barChartData" [options]="barChartOptions" chartType="bar">
+            </canvas>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card">
+        <mat-card-header>
+            <div class="mat-header">
+                <mat-card-title>
+                    Peak Users by Region</mat-card-title>
+
+                <mat-card-title>
+                    <div class="right-side-img">
+                        <img src="images/dashboar_mobile.png" class="notification_icon">
+                        <span class="header_title">Mobile</span>
+
+                        <img src="images/dashboard_web.png" class="notification_icon">
+                        <span class="header_title">Web</span>
+
+                        <select class="status-dropdown">
+                            <option value="completed">Middle East</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                        </select>
+                    </div>
+                </mat-card-title>
+            </div>
+
+        </mat-card-header>
+        <mat-card-content>
+            <!-- <canvas #myLineChart></canvas> -->
+            <canvas baseChart [data]="barChartData" [options]="barChartOptions" chartType="bar">
+            </canvas>
+        </mat-card-content>
+    </mat-card>
+
+</div>
