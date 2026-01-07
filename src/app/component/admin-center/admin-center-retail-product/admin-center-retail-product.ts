@@ -3,21 +3,21 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-admin-center-sub-product',
+  selector: 'app-admin-center-retail-product',
   imports: [
     CommonModule,
     MatIconModule
   ],
-  templateUrl: './admin-center-sub-product.html',
-  styleUrl: './admin-center-sub-product.scss',
+  templateUrl: './admin-center-retail-product.html',
+  styleUrl: './admin-center-retail-product.scss',
 })
-export class AdminCenterSubProduct {
+export class AdminCenterRetailProduct {
   @Input() subProduct: boolean = false;
 
   products = [
     {
       subProductId: 'Gold Savings Account',
-      subProductType: 'Gold Savings Account',
+
       subProductNameEnglish: [
         'High interest savings',
         'High interest savings',
@@ -33,7 +33,7 @@ export class AdminCenterSubProduct {
     },
     {
       subProductId: 'Standard Current Account',
-      subProductType: 'Standard Current Account',
+
       subProductNameEnglish: [
         'High interest savings',
         'High interest savings',
@@ -49,7 +49,7 @@ export class AdminCenterSubProduct {
     },
     {
       subProductId: 'Personal Loan',
-      subProductType: 'Personal Loan',
+
       subProductNameEnglish: [
         'High interest savings',
         'High interest savings',
@@ -65,7 +65,7 @@ export class AdminCenterSubProduct {
     },
     {
       subProductId: 'Platinum Credit Card',
-      subProductType: 'Platinum Credit Card',
+
       subProductNameEnglish: [
         'High interest savings',
         'High interest savings',
@@ -81,7 +81,7 @@ export class AdminCenterSubProduct {
     },
     {
       subProductId: 'Fixed Deposit',
-      subProductType: 'Fixed Deposit',
+
       subProductNameEnglish: [
         'High interest savings',
         'High interest savings',
@@ -97,7 +97,7 @@ export class AdminCenterSubProduct {
     },
     {
       subProductId: 'Gold Savings Account',
-      subProductType: 'Gold Savings Account',
+
       subProductNameEnglish: [
         'High interest savings',
         'High interest savings',
@@ -113,7 +113,7 @@ export class AdminCenterSubProduct {
     },
     {
       subProductId: 'Gold Savings Account',
-      subProductType: 'Gold Savings Account',
+
       subProductNameEnglish: [
         'High interest savings',
         'High interest savings',

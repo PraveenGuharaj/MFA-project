@@ -34,6 +34,7 @@ export class Dashboard {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         const url = this.router.url;
+        console.log('url', url)
         if (url.includes('user-overview')) {
           this.currentPage = 'user-overview';
           this.cdr.markForCheck();
@@ -400,6 +401,7 @@ export class Dashboard {
   }
 
   setActiveTab(tab: string) {
+    console.log('tab', tab)
     this.activeTab = tab;
   }
 
@@ -485,7 +487,9 @@ export class Dashboard {
       }
     } else if (this.currentPage == 'manage-content') {
       console.log('activeTab', this.activeTab);
-
+      if (this.activeTab === 'retailProduct') {
+        this.router.navigate(['/dashboard/retail-product']);
+      }
       if (this.activeTab === 'Content Management') {
         this.router.navigate(['/dashboard/content-management']);
       } else if (this.activeTab === 'CFMS Parameters') {

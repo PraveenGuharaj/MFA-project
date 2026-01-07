@@ -71,6 +71,20 @@
       </div>
     </div>
 
+    <!-- product -->
+    <div *ngIf="isProductHub" class="d-flex">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retailProduct'}"
+        *ngIf="!subProduct" (click)="setActiveTab('retailProduct')" (click)="atmLocator(false)">
+        <img src="images/retail_product.png" class="pr-10">Retail Product
+      </button>
+
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'subProduct'}" *ngIf="!subProduct"
+        (click)="setActiveTab('subProduct')" (click)="branchLocator(true)">
+        <img src="images/sub_product.png" class="pr-10">Sub-Product
+      </button>
+    </div>
+
+
 
 
     <!-- manage locators -->
@@ -282,9 +296,11 @@
 
 
   <div class="actions" *ngIf="isProductHub">
-    <button class="retail_product " *ngIf="!subProduct" (click)="openModal()"> <img src="images/plus-mini.png">Add
+    <button class="retail_product " *ngIf="activeTab == 'retailProduct'" (click)="openModal()"> <img
+        src="images/plus-mini.png">Add
       Retail Product</button>
-    <button class="retail_product " *ngIf="subProduct" (click)="openSubModal()"> <img src="images/plus-mini.png">Add Sub
+    <button class="retail_product " *ngIf="activeTab == 'subProduct'" (click)="openSubModal()"> <img
+        src="images/plus-mini.png">Add Sub
       Product</button>
   </div>
 
@@ -415,6 +431,8 @@
 
     <button class="retail_product " (click)="openChildProductModal()" *ngIf="mainMenu == 'child-product-management'">
       <img src="images/plus-mini.png">Add Child Product</button>
+
+
 
     <!-- admin center manage License filter and search bar -->
     <div class="search-wrapper" *ngIf=" subMenuTitle == 'Manage License'">

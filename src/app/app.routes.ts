@@ -75,6 +75,7 @@ import { WorkFlowAddAccess } from './component/work-flow/work-flow-add-access/wo
 import { WorkFlowAccessPermissionManagement } from './component/work-flow/work-flow-access-permission-management/work-flow-access-permission-management';
 import { WorkFlowRoleManagement } from './component/work-flow/work-flow-role-management/work-flow-role-management';
 import { UserManagementPasswordPolicy } from './component/user-management/user-management-password-policy/user-management-password-policy';
+import { AdminCenterRetailProduct } from './component/admin-center/admin-center-retail-product/admin-center-retail-product';
 
 export const routes: Routes = [
   {
@@ -131,6 +132,7 @@ export const routes: Routes = [
       { path: 'product', component: AdminCenterProduct },
       { path: 'databaseConfiguration', component: AdminCenterDatabaseConfiguration },
       { path: 'subProduct', component: AdminCenterSubProduct },
+      { path: 'retail-product', component: AdminCenterRetailProduct },
       { path: 'readyToSync', component: AdminCenterReadyToSync },
       { path: 'linkConfiguration', component: AdminCenterLinkConfiguration },
       { path: 'faqManagement', component: AdminCenterFaqManagement },
