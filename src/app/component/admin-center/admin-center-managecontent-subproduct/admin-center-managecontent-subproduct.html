@@ -1,0 +1,102 @@
+<div class="stats-container">
+    <div class="stat-card">
+        <div class="stat-title">
+            <span class="card-title">Total Products</span>
+            <div class="stat-change">
+                <img src="images/sub_product.png" class="notification_icon">
+            </div>
+        </div>
+        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-header">+100% </span><span
+                class="sub-product-month">from last month</span></div>
+    </div>
+
+    <div class="stat-card-newusers">
+        <div class="stat-title">
+            <span class="card-title">Active Products</span>
+            <div class="stat-change">
+                <img src="images/copy-success.png" class="notification_icon">
+            </div>
+        </div>
+        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-header">+100% </span><span
+                class="sub-product-month">of total</span></div>
+
+    </div>
+
+    <div class="stat-card-activeusers">
+        <div class="stat-title">
+            <span class="card-title">Inctive Products</span>
+            <div class="stat-change">
+                <img src="images/copy.png" class="notification_icon">
+            </div>
+        </div>
+        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-month">Pending review and
+                activation</span></div>
+    </div>
+</div>
+
+<div class="product-table-container">
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input type="text" placeholder="Search" />
+            <img src="images/admin_search.png" class="notification_icon">
+        </div>
+
+        <button class="filter-btn mr-10">
+            <img src="images/admin_filter.png" class="notification_icon">
+        </button>
+    </div>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th *ngIf="!subProduct">Sub Product ID</th>
+                <th *ngIf="!subProduct">Sub Product Type</th>
+                <th *ngIf="!subProduct">Sub Product Name (English)</th>
+                <th *ngIf="!subProduct">Sub Product Name (Arabic)</th>
+                <th *ngIf="!subProduct">Sub Product Description (English)</th>
+                <th *ngIf="!subProduct">Sub Product Description (Arabic)</th>
+                <th *ngIf="!subProduct">Status</th>
+
+                <th *ngIf="subProduct">Sub-Product Name</th>
+                <th *ngIf="subProduct">Parent Product</th>
+                <th *ngIf="subProduct">Features</th>
+                <th *ngIf="subProduct">Channel</th>
+                <th *ngIf="subProduct">Screen</th>
+                <th *ngIf="subProduct">Status</th>
+                <th *ngIf="subProduct">Priority</th>
+                <th *ngIf="subProduct">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let p of products; let i = index">
+                <td>{{ p.subProductId }}</td>
+                <td>{{ p.subProductType }}</td>
+                <td>{{ p.subProductNameEnglish }}</td>
+                <td>{{ p.subProductNameArabic }}</td>
+                <td>{{ p.subProductDescriptionEnglish }}</td>
+                <td>
+                    <span class="status" [ngClass]="{
+          'active': p.status === 'Active',
+          'inactive': p.status === 'Inactive'
+        }">
+                        {{ p.status }}
+                    </span>
+                </td>
+                <td>{{p.priority}}</td>
+           
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>&lt;</button>
+        <button class="active-page">1</button>
+        <button>2</button>
+        <button>3</button>
+        <span>…</span>
+        <button>10</button>
+        <button>&gt;</button>
+    </div>
+
+</div>

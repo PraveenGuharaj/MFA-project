@@ -504,8 +504,14 @@ export class Dashboard {
       } else if (this.activeTab === 'databaseConfiguration') {
         this.router.navigate(['/dashboard/databaseConfiguration']);
       } else if (this.activeTab === 'subProduct') {
+        console.log('ggg')
         this.router.navigate(['/dashboard/subProduct']);
-      } else if (this.activeTab === 'readyToSync') {
+      }  
+      else if (this.activeTab === 'subProductContent') {
+        console.log('lll')
+        this.router.navigate(['/dashboard/subProductContent']);
+      }
+      else if (this.activeTab === 'readyToSync') {
         this.router.navigate(['/dashboard/readyToSync']);
       } else if (this.activeTab === 'linkConfiguration') {
         this.router.navigate(['/dashboard/linkConfiguration']);

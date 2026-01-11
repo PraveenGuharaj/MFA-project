@@ -74,11 +74,11 @@
     <!-- product -->
     <div *ngIf="isProductHub" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retailProduct'}"
-        *ngIf="!subProduct" (click)="setActiveTab('retailProduct')" (click)="atmLocator(false)">
+         (click)="setActiveTab('retailProduct')" (click)="atmLocator(false)">
         <img src="images/retail_product.png" class="pr-10">Retail Product
       </button>
 
-      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'subProduct'}" *ngIf="!subProduct"
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'subProduct'}" 
         (click)="setActiveTab('subProduct')" (click)="branchLocator(true)">
         <img src="images/sub_product.png" class="pr-10">Sub-Product
       </button>
@@ -189,8 +189,8 @@
         Database Configuration
       </button>
 
-      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'subProduct'}"
-        (click)="setActiveTab('subProduct')" (click)="subProductModel(true)">
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'subProductContent'}"
+        (click)="setActiveTab('subProductContent')" (click)="subProductModel(true)">
         Sub Product
       </button>
 

@@ -38,6 +38,8 @@ export class Login {
 
 
  onSubmit() {
+  console.log('login');
+  
     // After successful login, show OTP screen
     this.isOtpScreen = true;
     this.startOtpTimer();
@@ -57,7 +59,7 @@ export class Login {
 
   verifyOtp() {
     // Add OTP verification logic here
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard/user-overview']);
     
     // Assuming OTP is valid, reset or handle further
   }

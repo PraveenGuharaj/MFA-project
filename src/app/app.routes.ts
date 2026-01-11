@@ -76,6 +76,7 @@ import { WorkFlowAccessPermissionManagement } from './component/work-flow/work-f
 import { WorkFlowRoleManagement } from './component/work-flow/work-flow-role-management/work-flow-role-management';
 import { UserManagementPasswordPolicy } from './component/user-management/user-management-password-policy/user-management-password-policy';
 import { AdminCenterRetailProduct } from './component/admin-center/admin-center-retail-product/admin-center-retail-product';
+import { AdminCenterManagecontentSubproduct } from './component/admin-center/admin-center-managecontent-subproduct/admin-center-managecontent-subproduct';
 
 export const routes: Routes = [
   {
@@ -140,6 +141,7 @@ export const routes: Routes = [
       { path: 'manageParameter', component: ManageParameter },
       { path: 'forceUpdate', component: AdminCenterForceUpdate },
       { path: 'partnerOnboarding', component: AdminCenterPartnerOnboarding },
+      { path: 'subProductContent', component: AdminCenterManagecontentSubproduct },
       { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
     ]
   },
