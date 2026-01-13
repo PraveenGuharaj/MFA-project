@@ -142,7 +142,64 @@ export const routes: Routes = [
       { path: 'forceUpdate', component: AdminCenterForceUpdate },
       { path: 'partnerOnboarding', component: AdminCenterPartnerOnboarding },
       { path: 'subProductContent', component: AdminCenterManagecontentSubproduct },
-      { path: '', redirectTo: 'user-overview', pathMatch: 'full' }  // Default route
+      { path: '', redirectTo: 'user-overview', pathMatch: 'full' }, // Default route
+
+
+
+      // sample work
+      { path: 'offer-management', component: OfferDiscountOfferManagement },
+      { path: 'discount-management', component: OfferDiscountDiscountManagement },
+      { path: 'country', component: MasterDataCountry },
+      { path: 'channel', component: MasterDataChannel },
+      { path: 'language', component: MasterDataLanguage },
+      { path: 'unit', component: MasterDataUnit },
+      { path: 'currency', component: MasterDataCurrency },
+      { path: 'domain-management', component: WorkFlowDomainManagement },
+      { path: 'manage-user', component: WorkFlowManageUser },
+      { path: 'product-management', component: WorkFlowProductManagement },
+      { path: 'sub-product-management', component: WorkFlowSubProductManagement },
+      { path: 'child-product-management', component: WorkFlowChildProductManangement },
+      { path: 'access-permission-management', component: WorkFlowAccessPermissionManagement },
+      // { path: 'access-permission-management', component: WorkFlowAddAccess },
+      { path: 'role-management', component: WorkFlowRoleManagement },
+      { path: 'password-policy', component: UserManagementPasswordPolicy },
+      {
+        path: 'mfa_management',
+        component: MfaList,
+        data: {
+          parent: 'MFA Management',
+          title: 'MFA Management'
+        }
+      },
+      {
+        path: 'offer_management',
+        component: MfaOfferManagement,
+        data: {
+          parent: 'Offer and Discount Management',
+          title: 'Offer Management'
+        }
+      },
+      {
+        path: 'discount_management',
+        component: MfaDiscountManagement,
+        data: {
+          parent: 'Offer and Discount Management',
+          title: 'Discount Management'
+        }
+      },
+
+
+      { path: 'merchants', component: MerchantList },
+      { path: 'categories', component: MerchantCategories },
+      { path: 'offers', component: MerchantOfferManagement },
+      { path: 'setting', component: MerchantSetting },
+      { path: 'product', component: MerchantProduct },
+
+      { path: '', redirectTo: 'merchants', pathMatch: 'full' }
+
+
+
+      // sample work
     ]
   },
 

@@ -81,8 +81,8 @@ export class DbxSidebar {
       name: 'Offers & Discounts',
       isSubmenuTitle: true,
       subMenu: [
-        { name: 'Offer Management', link: 'offer-discount/offer-management', submenuTitle: 'Offer Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
-        { name: 'Discount Management', link: 'offer-discount/discount-management', submenuTitle: 'Discount Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
+        { name: 'Offer Management', link: 'dashboard/offer-management', submenuTitle: 'Offer Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
+        { name: 'Discount Management', link: 'dashboard/discount-management', submenuTitle: 'Discount Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
       ],
       expanded: false
     },
@@ -90,11 +90,11 @@ export class DbxSidebar {
       name: 'Master Data',
       isSubmenuTitle: true,
       subMenu: [
-        { name: 'Country', link: 'master-data/country', submenuTitle: 'Country', isSubmenuTitle: true, mainMenuTitle: 'master-country' },
-        { name: 'Channel', link: 'master-data/channel', submenuTitle: 'Channel', isSubmenuTitle: true, mainMenuTitle: 'master-channel' },
-        { name: 'Language', link: 'master-data/language', submenuTitle: 'Language', isSubmenuTitle: true, mainMenuTitle: 'master-language' },
-        { name: 'Unit', link: 'master-data/unit', submenuTitle: 'Unit', isSubmenuTitle: true, mainMenuTitle: 'master-unit' },
-        { name: 'Currency', link: 'master-data/currency', submenuTitle: 'Currency', isSubmenuTitle: true, mainMenuTitle: 'master-currency' }
+        { name: 'Country', link: 'dashboard/country', submenuTitle: 'Country', isSubmenuTitle: true, mainMenuTitle: 'master-country' },
+        { name: 'Channel', link: 'dashboard/channel', submenuTitle: 'Channel', isSubmenuTitle: true, mainMenuTitle: 'master-channel' },
+        { name: 'Language', link: 'dashboard/language', submenuTitle: 'Language', isSubmenuTitle: true, mainMenuTitle: 'master-language' },
+        { name: 'Unit', link: 'dashboard/unit', submenuTitle: 'Unit', isSubmenuTitle: true, mainMenuTitle: 'master-unit' },
+        { name: 'Currency', link: 'dashboard/currency', submenuTitle: 'Currency', isSubmenuTitle: true, mainMenuTitle: 'master-currency' }
       ],
       expanded: false
     },
@@ -102,13 +102,13 @@ export class DbxSidebar {
       name: 'WorkFlow',
       isSubmenuTitle: true,
       subMenu: [
-        { name: 'Domain Management', link: 'work-flow/domain-management', submenuTitle: 'Domain Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
-        { name: 'Manage User', link: 'work-flow/manage-user', submenuTitle: 'Manage User', isSubmenuTitle: true, mainMenuTitle: 'manage-user' },
-        { name: 'Product Management', link: 'work-flow/product-management', submenuTitle: 'Product Management', isSubmenuTitle: true, mainMenuTitle: 'product-management' },
-        { name: 'Sub-Product Management', link: 'work-flow/sub-product-management', submenuTitle: 'Sub-Product Management', isSubmenuTitle: true, mainMenuTitle: 'sub-product-management' },
-        { name: 'Child Product Management', link: 'work-flow/child-product-management', submenuTitle: 'Child Product Management', isSubmenuTitle: true, mainMenuTitle: 'child-product-management' },
-        { name: 'Access Permission Management', link: 'work-flow/access-permission-management', submenuTitle: 'Access Permission Management', isSubmenuTitle: true, mainMenuTitle: 'access-permission-management' },
-        { name: 'Role Management', link: 'work-flow/role-management', submenuTitle: 'Role Management', isSubmenuTitle: true, mainMenuTitle: 'role-management' },
+        { name: 'Domain Management', link: 'dashboard/domain-management', submenuTitle: 'Domain Management', isSubmenuTitle: true, mainMenuTitle: 'offer-discount' },
+        { name: 'Manage User', link: 'dashboard/manage-user', submenuTitle: 'Manage User', isSubmenuTitle: true, mainMenuTitle: 'manage-user' },
+        { name: 'Product Management', link: 'dashboard/product-management', submenuTitle: 'Product Management', isSubmenuTitle: true, mainMenuTitle: 'product-management' },
+        { name: 'Sub-Product Management', link: 'dashboard/sub-product-management', submenuTitle: 'Sub-Product Management', isSubmenuTitle: true, mainMenuTitle: 'sub-product-management' },
+        { name: 'Child Product Management', link: 'dashboard/child-product-management', submenuTitle: 'Child Product Management', isSubmenuTitle: true, mainMenuTitle: 'child-product-management' },
+        { name: 'Access Permission Management', link: 'dashboard/access-permission-management', submenuTitle: 'Access Permission Management', isSubmenuTitle: true, mainMenuTitle: 'access-permission-management' },
+        { name: 'Role Management', link: 'dashboard/role-management', submenuTitle: 'Role Management', isSubmenuTitle: true, mainMenuTitle: 'role-management' },
       ],
       expanded: false
     },
@@ -116,7 +116,7 @@ export class DbxSidebar {
       name: 'User Management',
       isSubmenuTitle: true,
       subMenu: [
-        { name: 'Password Policy', link: 'user-management/password-policy', submenuTitle: 'Password Policy', isSubmenuTitle: true, mainMenuTitle: 'password-policy' }
+        { name: 'Password Policy', link: 'dashboard/password-policy', submenuTitle: 'Password Policy', isSubmenuTitle: true, mainMenuTitle: 'password-policy' }
       ]
     }
   ]

@@ -1,18 +1,44 @@
 <mat-card class="login-card">
   <!-- Left side: Image and description -->
-  <div class="left-side">
+  <!-- <div class="left-side">
     <div class="image-container">
-      <img src="images/empowering.png" alt="Graph" class="graph-image" />
+       <img src="images/daily-active-users.png" alt="Graph" class="graph-image" />
+       <img src="images/mobile-application-status.png" alt="Graph" class="graph-image-mobile" />
+    </div>
+    <div>
+    </div>
+    <p>Empowering Administrators to Manage Banking Smarter</p>
+  </div> -->
+
+  <div class="left-side">
+    <div class="content-wrapper">
+
+      <div class="image-container">
+        <img src="images/daily-active-users.png" alt="Graph" class="graph-image" />
+
+        <!-- NEW: Success Count -->
+        <img src="images/success-count.png" alt="Success Count" class="success-count" />
+
+        <img src="images/mobile-application-status.png" alt="Graph" class="graph-image-mobile" />
+      </div>
+
+      <p class="empower-text">
+        Empowering <br> Administrators to <br>Manage Banking Smarter
+      </p>
+
     </div>
   </div>
 
+
+
   <!-- Right side: Login form -->
   <div class="right-side">
-    <mat-card-content *ngIf="!isOtpScreen && !isQrScreen">
+    <mat-card-content *ngIf="!isOtpScreen && !isQrScreen" class="mt-26">
       <div>
         <img src="images/omnicor_logo.png" class="image_logo" alt="Logo" />
       </div>
       <h3 class="login-heading">Login to DBX Admin Portal</h3>
+      <p class="sub-header">Please enter the user name and password.</p>
 
       <form class="login-form" (ngSubmit)="onSubmit()">
         <!-- User name label and input -->
@@ -41,18 +67,25 @@
 
         <!-- QR Login -->
         <div class="qr-login">
-          <p>or</p>
-          <button mat-button class="qr-code" (click)="showQrCode()">Login with QR code</button>
+          <div class="or-divider">
+            <span>or</span>
+          </div>
+          <!-- <p>or</p> -->
+          <button mat-button class="qr-code" (click)="showQrCode()">
+            <img src="images/scan-barcode.png" alt="Logo" class="p-relative" />
+            Login with QR code</button>
         </div>
       </form>
     </mat-card-content>
 
     <!-- OTP Screen -->
     <mat-card-content *ngIf="isOtpScreen && !isQrScreen">
-      <div>
+      <div class="d-flex">
+        <img src="images/left-arrow.png" alt="Logo" class="left-arrow">
         <img src="images/omnicor_logo.png" class="image_logo" alt="Logo" />
       </div>
       <h3 class="login-heading">Enter the One-Time Password (OTP) sent to your email.</h3>
+      <p class="sub-header mb-70">Please enter the 4- or 5-digit code below to complete your login.</p>
 
       <form class="otp-form">
         <div class="otp-input">
@@ -66,17 +99,22 @@
         <p class="resend-otp">Didn't receive the code? <a href="#" (click)="resendOtp()">Resend code</a></p>
         <p class="invalid-otp">Invalid OTP. You have 1 attempt remaining.</p>
         <div class="continue-btn">
-          <button mat-raised-button color="primary" class="login-btn" type="button" (click)="verifyOtp()">Continue</button>
+          <button mat-raised-button color="primary" class="login-btn" type="button"
+            (click)="verifyOtp()">Continue</button>
         </div>
       </form>
     </mat-card-content>
 
     <!-- QR Code Screen -->
     <mat-card-content *ngIf="isQrScreen">
-      <div class="image_logo_qr">
+      <!-- <div class="image_logo_qr">
+        <img src="images/omnicor_logo.png" class="image_logo" alt="Logo" />
+      </div> -->
+      <div class="d-flex">
+        <img src="images/left-arrow.png" alt="Logo" class="left-arrow">
         <img src="images/omnicor_logo.png" class="image_logo" alt="Logo" />
       </div>
-        <!-- QR Code Image -->
+      <!-- QR Code Image -->
       <div class="qr-code-container">
         <img src="images/qrcode.png" alt="QR Code" class="qr-image" />
       </div>
@@ -84,12 +122,13 @@
       <h3 class="login-heading">Scan the QR code to verify your phone number</h3>
       <p>Please enter the 4- or 5-digit code below to complete your login.</p>
 
-    
+
       <!-- OTP Input for QR Code -->
       <form class="otp-form">
-    
+
         <div class="continue-btn">
-          <button mat-raised-button color="primary" class="login-btn" type="button" (click)="verifyOtp()">Continue</button>
+          <button mat-raised-button color="primary" class="login-btn" type="button"
+            (click)="verifyOtp()">Continue</button>
         </div>
       </form>
     </mat-card-content>

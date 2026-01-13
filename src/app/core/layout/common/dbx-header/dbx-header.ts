@@ -68,11 +68,14 @@ export class DbxHeader {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+    console.log('pageTitle', this.pageTitle);
 
   }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('mainMenu', this.mainMenu);
+    console.log('pageTitle', this.pageTitle);
+
 
     // Log to track changes in input properties
     if (changes['pageTitle']) {
@@ -468,6 +471,8 @@ export class DbxHeader {
 
   // Method to change active tab for User Overview
   setActiveTab(tab: string) {
+    console.log('tab', tab);
+
     this.activeTab = tab;
     this.tabChanged.emit(tab);
   }

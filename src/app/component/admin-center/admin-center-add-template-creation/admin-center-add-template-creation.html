@@ -9,28 +9,28 @@
             <div class="p-10">
                 <div class="form-group">
                     <label>Domain</label>
-                    <mat-select formControlName="country" placeholder="Select Domain">
+                    <mat-select formControlName="country" placeholder="Select Domain" class="mt-10">
                         <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group mt-20">
                     <label>Unit</label>
-                    <mat-select formControlName="city" placeholder="Select Unit ID">
+                    <mat-select formControlName="city" placeholder="Select Unit ID" class="mt-10">
                         <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group mt-20">
                     <label>Channel</label>
-                    <mat-select formControlName="city" placeholder="Select Channel ID">
+                    <mat-select formControlName="city" placeholder="Select Channel ID" class="mt-10">
                         <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group mt-20">
                     <label>Category</label>
-                    <mat-select formControlName="city" placeholder="Select Category">
+                    <mat-select formControlName="city" placeholder="Select Category" class="mt-10">
                         <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
                     </mat-select>
                 </div>
@@ -38,7 +38,7 @@
 
             <div class="full-width mt-20">
                 <label>Template Name</label>
-                <input formControlName="atmCode" placeholder="Enter Template Name" />
+                <input formControlName="atmCode" placeholder="Enter Template Name" class="mt-10" />
             </div>
 
             <h3>Notification Delivery Type</h3>
@@ -51,14 +51,14 @@
             <div class="p-10">
                 <div class="form-group">
                     <label>Language</label>
-                    <mat-select formControlName="country" placeholder="Select Language">
+                    <mat-select formControlName="country" placeholder="Select Language" class="mt-10">
                         <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group p-10">
                     <label>Template</label>
-                    <mat-select formControlName="city" placeholder="Input Variable">
+                    <mat-select formControlName="city" placeholder="Input Variable" class="mt-10">
                         <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
                     </mat-select>
                 </div>
@@ -66,7 +66,7 @@
 
             <div class="p-10 full-width">
                 <label>Deep Link URL</label>
-                <input formControlName="latitude" placeholder="Add Deep Link URL" />
+                <input formControlName="latitude" placeholder="Add Deep Link URL" class="mt-10" />
             </div>
 
             <div class="upload-wrapper mt-20">
@@ -83,7 +83,7 @@
 
             <div class="p-10 full-width">
                 <label>Remarks</label>
-                <input formControlName="latitude" placeholder="Enter Remarks" />
+                <input formControlName="latitude" placeholder="Enter Remarks" class="mt-10" />
             </div>
 
             <div class="form-actions p-10">

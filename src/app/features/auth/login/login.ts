@@ -24,22 +24,20 @@ import { Router } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
-    constructor(private router: Router) {}  // Inject Router
+  constructor(private router: Router) { }  // Inject Router
 
- userName: string = '';
+  userName: string = '';
   password: string = '';
-  passwordVisible: boolean = false;  
-  isOtpScreen: boolean = false;      
-    isQrScreen: boolean = false;      // To toggle between login and QR code screen
-     isSidebarOpen: boolean = false;
+  passwordVisible: boolean = false;
+  isOtpScreen: boolean = false;
+  isQrScreen: boolean = false;      // To toggle between login and QR code screen
+  isSidebarOpen: boolean = false;
 
-  otp: string[] = ['', '', '', '', '']; 
-  otpTimer: number = 60;  
+  otp: string[] = ['', '', '', '', ''];
+  otpTimer: number = 60;
 
 
- onSubmit() {
-  console.log('login');
-  
+  onSubmit() {
     // After successful login, show OTP screen
     this.isOtpScreen = true;
     this.startOtpTimer();
@@ -47,7 +45,7 @@ export class Login {
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
   }
-   startOtpTimer() {
+  startOtpTimer() {
     const interval = setInterval(() => {
       if (this.otpTimer > 0) {
         this.otpTimer--;
@@ -59,20 +57,22 @@ export class Login {
 
   verifyOtp() {
     // Add OTP verification logic here
-      this.router.navigate(['/dashboard/user-overview']);
-    
+    console.log('111');
+
+    this.router.navigate(['/dashboard']);
+
     // Assuming OTP is valid, reset or handle further
   }
 
-   resendOtp() {
+  resendOtp() {
     this.otpTimer = 60; // Reset timer
     this.startOtpTimer();
   }
 
-   // Show QR code screen
+  // Show QR code screen
   showQrCode() {
     this.isQrScreen = true;
     this.isOtpScreen = false;  // Hide OTP screen
-    
+
   }
 }

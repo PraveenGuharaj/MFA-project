@@ -49,8 +49,8 @@ h3 {
 
 .center-text {
     position: absolute;
-    top: 56%;
-    left: 50%;
+    top: 47%;
+    left: 78%;
     transform: translate(-50%, -50%);
     font-size: 32px;
     font-weight: bold;
@@ -244,6 +244,9 @@ h3 {
 
 .left-side-img {
     display: flex;
+    position: relative;
+    top: 106px;
+    right: 214px;
 }
 
 .chart-container-wrapper {
@@ -294,4 +297,10 @@ canvas {
         font-size: 14px;
         font-weight: 400;
     }
+}
+
+.donut-chart {
+    position: relative;
+    left: 65px;
+    bottom: 18px;
 }

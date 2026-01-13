@@ -20,7 +20,7 @@ export class Dashboard {
   headerTitle!: string;
   headerTabs: any[] = [];
   activeTab: string = '';
-  currentPage: string = '';
+  currentPage: string = 'user-overview';
   subProduct: boolean = false;
   isProductHub: boolean = false; // Track if we are in 'Product Hub'
   subMenuTitle: any;
@@ -30,6 +30,14 @@ export class Dashboard {
   constructor(private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+    console.log('coming');
+
+    this.onMenuChanged({
+      menu: 'User Overview',
+      isSubmenu: false
+    });
+
+
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -148,6 +156,7 @@ export class Dashboard {
           this.currentPage = 'user-overview';
         }
       });
+
   }
 
   onProductTypeChanged(subProduct: boolean) {
@@ -163,6 +172,8 @@ export class Dashboard {
       this.activeTab = 'all';
       this.subMenuTitle = '';
       this.isSubmenu = false;
+      this.mainMenu = '';
+
       this.cdr.markForCheck();
     } else if (event.menu === 'Login Activity') {
       this.isProductHub = false;
@@ -250,6 +261,8 @@ export class Dashboard {
       this.cdr.markForCheck();
     } else if (event.menu == 'Admin Center') {
       this.headerTitle = 'Admin Center';
+      this.subMenuTitle = 'OTP Management'
+
       this.isProductHub = false
 
       this.cdr.markForCheck();
@@ -411,6 +424,7 @@ export class Dashboard {
   }
 
   onTabChanged(tab: string) {
+    console.log('tab', tab);
     this.activeTab = tab;
     this.navigateBasedOnTab();
   }
@@ -506,7 +520,7 @@ export class Dashboard {
       } else if (this.activeTab === 'subProduct') {
         console.log('ggg')
         this.router.navigate(['/dashboard/subProduct']);
-      }  
+      }
       else if (this.activeTab === 'subProductContent') {
         console.log('lll')
         this.router.navigate(['/dashboard/subProductContent']);

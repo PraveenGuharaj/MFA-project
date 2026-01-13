@@ -39,17 +39,20 @@
       <div *ngIf="pageTitle =='Dashboard'" class="d-flex">
         <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'all'}" *ngIf="!isProductHub"
           (click)="setActiveTab('all')">
-          <img src="images/retail_product.png" class="pr-10">ALL
+          <!-- <img src="images/retail_product.png" class="pr-10"> -->
+          ALL
         </button>
 
         <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'web'}" *ngIf="!isProductHub"
           (click)="setActiveTab('web')">
-          <img src="images/sub_product.png" class="pr-10">Web
+          <!-- <img src="images/sub_product.png" class="pr-10"> -->
+          Web
         </button>
 
         <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'mobile'}" *ngIf="!isProductHub"
           (click)="setActiveTab('mobile')">
-          <img src="images/sub_product.png" class="pr-10">Mobile
+          <!-- <img src="images/sub_product.png" class="pr-10"> -->
+          Mobile
         </button>
       </div>
 
@@ -74,11 +77,11 @@
     <!-- product -->
     <div *ngIf="isProductHub" class="d-flex">
       <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'retailProduct'}"
-         (click)="setActiveTab('retailProduct')" (click)="atmLocator(false)">
+        (click)="setActiveTab('retailProduct')" (click)="atmLocator(false)">
         <img src="images/retail_product.png" class="pr-10">Retail Product
       </button>
 
-      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'subProduct'}" 
+      <button class="tab-sub-product" [ngClass]="{'tab-button active': activeTab === 'subProduct'}"
         (click)="setActiveTab('subProduct')" (click)="branchLocator(true)">
         <img src="images/sub_product.png" class="pr-10">Sub-Product
       </button>
@@ -232,8 +235,10 @@
 
     <span class="f-15" *ngIf="subMenuTitle == 'Force Update'">Force Update Configuration</span>
 
-    <span class="f-15" *ngIf="mainMenu == 'Offer Management'">Offer Management</span>
-    <span class="f-15" *ngIf="mainMenu == 'Discount Management'">Discount Management</span>
+    <span class="f-15" *ngIf="mainMenu == 'Offer Management' && subMenuTitle == 'Manage Content'">Offer
+      Management</span>
+    <span class="f-15" *ngIf="mainMenu == 'Discount Management' && subMenuTitle == 'Manage Content'">Discount
+      Management</span>
 
     <span class="f-15" *ngIf="mainMenu == 'master-country'">Country</span>
     <span class="f-15" *ngIf="mainMenu == 'master-channel'">Channel</span>
@@ -394,11 +399,13 @@
     <button class="retail_product " (click)="openRegisterPartnerModal()" *ngIf="subMenuTitle == 'Partner Onboarding'">
       <img src="images/plus-mini.png">Register Partner</button>
 
-    <button class="retail_product " (click)="openOfferManagementModal()" *ngIf="mainMenu == 'Offer Management'">
+    <button class="retail_product " (click)="openOfferManagementModal()"
+      *ngIf="mainMenu == 'Offer Management' && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Offer</button>
 
 
-    <button class="retail_product " (click)="openDiscountManagementModal()" *ngIf="mainMenu == 'Discount Management'">
+    <button class="retail_product " (click)="openDiscountManagementModal()"
+      *ngIf="mainMenu == 'Discount Management'  && subMenuTitle == 'Manage Content'">
       <img src="images/plus-mini.png">Add Discount</button>
 
     <button class="retail_product " (click)="openCountryModal()" *ngIf="mainMenu == 'master-country'">

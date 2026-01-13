@@ -8,6 +8,7 @@
     background-color: #f8f8f8;
     width: fit-content;
     border: 1px solid #ddd;
+    padding-right: 14px;
 }
 
 /* Toggle button style */
@@ -28,7 +29,7 @@
 
 /* Active button style */
 .toggle-button.active {
-        background-color: #221340;
+    background-color: #221340;
     color: #fff;
     box-shadow: none;
     border-radius: 10px;
