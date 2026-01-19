@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AdminCenterService } from '../../../component/admin-center/admin-center-service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
-  constructor(private router: Router) { }  // Inject Router
+  constructor(private router: Router, private adminCenterService: AdminCenterService) { }  // Inject Router
 
   userName: string = '';
   password: string = '';
@@ -41,6 +42,10 @@ export class Login {
     // After successful login, show OTP screen
     this.isOtpScreen = true;
     this.startOtpTimer();
+    this.adminCenterService.authServerLogin().subscribe((res) => {
+      console.log('resssssss', res);
+
+    })
   }
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;

@@ -1,0 +1,19 @@
+<div class="confirm-overlay" *ngIf="visible">
+  <div class="confirm-modal">
+    <h2 class="confirm-title">{{ title }}</h2>
+
+    <p class="confirm-message">
+      {{ message }}
+    </p>
+
+    <div class="confirm-actions">
+      <button class="btn-cancel" (click)="onCancel()">
+        Cancel
+      </button>
+
+      <button class="btn-delete" (click)="onConfirm()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

@@ -6,8 +6,8 @@
                 <img src="images/sub_product_blue.png" class="notification_icon">
             </div>
         </div>
-        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-header">+100% </span><span
-                class="sub-product-month">from last month</span></div>
+        <div class="stat-value"><span class="mr-12">{{products.data.length}}</span><span
+                class="sub-product-header">+100% </span><span class="sub-product-month">from last month</span></div>
     </div>
 
     <div class="stat-card-newusers">
@@ -17,8 +17,8 @@
                 <img src="images/copy_success_yellow.png" class="notification_icon">
             </div>
         </div>
-        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-header">+100% </span><span
-                class="sub-product-month">of total</span></div>
+        <div class="stat-value"><span class="mr-12">{{activeProduct.length}}</span><span
+                class="sub-product-header">+100% </span><span class="sub-product-month">of total</span></div>
 
     </div>
 
@@ -29,7 +29,8 @@
                 <img src="images/copy_green.png" class="notification_icon">
             </div>
         </div>
-        <div class="stat-value"><span class="mr-12">11</span><span class="sub-product-month">Pending review and
+        <div class="stat-value"><span class="mr-12">{{inActiveProduct.length}}</span><span
+                class="sub-product-month">Pending review and
                 activation</span></div>
     </div>
 </div>
@@ -68,13 +69,13 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
+            <tr *ngFor="let p of products?.data">
                 <td>{{ p.countryCode }}</td>
-                <td>{{ p.countryDescription }}</td>
+                <td>{{ p.countryDesc }}</td>
                 <td>{{ p.isoCountryCode }}</td>
-                <td class="w-180">{{ p.countryCodeISO3a }}</td>
-                <td>{{ p.colour }}</td>
-                <td>{{ p.unitDescription }}</td>
+                <td>{{ p.countryCodeIso3a}}</td>
+                <td>{{ p.color }}</td>
+                <td>{{ p.unitDesc }}</td>
                 <td>{{ p.baseCurrency }}</td>
             </tr>
         </tbody>

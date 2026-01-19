@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 
 @Component({
   selector: 'app-admin-center-sub-product',
@@ -13,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterSubProduct {
   @Input() subProduct: boolean = false;
-
+  // products: any;
   products = [
     {
       subProductId: 'Gold Savings Account',
@@ -129,6 +130,24 @@ export class AdminCenterSubProduct {
     }
   ];
 
+  constructor(private adminCenterService: AdminCenterService) { }
+  ngOnInit(): void {
+    console.log('getproduct');
+
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.adminCenterService.getAllSubProducts().subscribe({
+      next: (res) => {
+        console.log('res', res);
+        // this.products = res;
+      },
+      error: (err) => {
+        console.error('API Error:', err);
+      }
+    });
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;

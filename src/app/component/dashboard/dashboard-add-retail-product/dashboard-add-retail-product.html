@@ -102,7 +102,7 @@
       <div class="form-actions">
         <button type="submit" mat-raised-button color="primary" class="btn-cancel" [disabled]="productForm.invalid"
           (click)="closeForm()">Cancel</button>
-        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save" (click)="submitForm()">Save</button>
       </div>
     </form>
   </div>
