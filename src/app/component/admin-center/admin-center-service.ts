@@ -25,7 +25,9 @@ export class AdminCenterService {
 
   getAllSubProducts() {
     return this.http.post(
-      'http://34.1.33.119:8443/backoffice-service/api/rchannel/getall',
+      // 'http://34.1.33.119:8443/backoffice-service/api/rchannel/getall',
+      'http://34.18.92.50:8443/backoffice-service/rsubproduct/getall',
+
       {}
     );
   }
@@ -91,6 +93,13 @@ export class AdminCenterService {
   updateRetailProduct(payload: any) {
     return this.http.post(
       'http://34.1.33.119:8443/backoffice-service/rproducts/update',
+      payload
+    );
+  }
+
+  createSubProduct(payload: any) {
+    return this.http.post(
+      ' http://34.1.33.119:8443/backoffice-service/rsubproduct/save',
       payload
     );
   }

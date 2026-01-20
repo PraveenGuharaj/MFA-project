@@ -3,7 +3,8 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DashboardAddRetailProduct } from '../../dashboard/dashboard-add-retail-product/dashboard-add-retail-product';
 
 @Component({
   selector: 'app-admin-center-retail-product',
@@ -20,9 +21,7 @@ export class AdminCenterRetailProduct {
   products: any;
   showDeleteConfirm: boolean = false;
   selectedProduct: any;
-  productForm!: FormGroup;
-  editIndex: number | null = null;
-  constructor(private adminCenterService: AdminCenterService, private fb: FormBuilder) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
 
 
   // products = [
@@ -146,12 +145,18 @@ export class AdminCenterRetailProduct {
     this.getProducts();
   }
 
-  initForm(p: any) {
-    this.productForm = this.fb.group({
-      name: [p.name],
-      description: [p.description],
-      status: [p.status],
-      priority: [p.priority]
+  openModal(product: any) {
+    console.log('product', product);
+
+    this.dialog.open(DashboardAddRetailProduct, {
+      width: '60%',  // Adjust width as needed
+      height: 'auto',
+      position: {
+        right: '0',  // Ensure it opens on the right
+      },
+      data: {
+        editData: product
+      }
     });
   }
 
@@ -206,57 +211,5 @@ export class AdminCenterRetailProduct {
 
     })
   }
-
-  editProduct(product: any, index: number) {
-    this.editIndex = index;
-    this.productForm = this.fb.group({
-      name: [product.name],
-      description: [product.description],
-      status: [product.status],
-      priority: [product.priority]
-    });
-  }
-
-  cancelEdit() {
-    this.editIndex = null;
-  }
-
-  updateProduct(product: any) {
-    const updatedFields = this.getChangedValues(this.productForm, product);
-
-    if (Object.keys(updatedFields).length === 0) {
-      this.cancelEdit();
-      return;
-    }
-
-    const payload = {
-      id: product.id,
-      ...updatedFields
-    };
-
-    console.log('UPDATE PAYLOAD:', payload);
-
-    // 🔴 Call update API here
-    // this.productService.updateProduct(payload).subscribe(() => {
-    //   Object.assign(product, updatedFields);
-    //   this.cancelEdit();
-    // });
-
-    // Simulate success
-    Object.assign(product, updatedFields);
-    this.cancelEdit();
-  }
-
-  private getChangedValues(form: FormGroup, original: any) {
-    const changed: any = {};
-    Object.keys(form.controls).forEach(key => {
-      if (form.value[key] !== original[key]) {
-        changed[key] = form.value[key];
-      }
-    });
-    return changed;
-  }
-
-
 
 }

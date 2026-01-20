@@ -33,31 +33,27 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products; let i = index">
-                <td>{{ p.subProductId }}</td>
-                <td>{{ p.subProductType }}</td>
+            <tr *ngFor="let p of products.data; let i = index">
+                <td>{{ p.name }}</td>
+                <td>{{ p.productName }}</td>
                 <!-- <td>{{ p.subProductNameEnglish }}</td> -->
-                <td>
-                    <div *ngFor="let name of p.subProductNameEnglish; let i = index">
-                        {{ i + 1 }}. {{ name }}
-                    </div>
-                </td>
-                <td>{{ p.subProductNameArabic }}</td>
-                <td>{{ p.subProductDescriptionEnglish }}</td>
+                <td class="w-180">{{p.specificFeatures}}</td>
+                <td *ngFor="let data of p.channels">{{ data.name }}</td>
+                <td>{{ p.screenId }}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'INA'
         }">
-                        {{ p.status }}
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'INA' ? 'Inactive' : p.status }}
                     </span>
                 </td>
                 <td>{{p.priority}}</td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
-                        <img src="images/edit.png" />
+                        <img src="images/edit.png">
                         <img src="images/trash_red.png" />
                     </ng-container>
 
