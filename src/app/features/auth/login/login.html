@@ -40,42 +40,72 @@
       <h3 class="login-heading">Login to DBX Admin Portal</h3>
       <p class="sub-header">Please enter the user name and password.</p>
 
-      <form class="login-form" (ngSubmit)="onSubmit()">
-        <!-- User name label and input -->
+      <!-- <form class="login-form" (ngSubmit)="onSubmit()">
         <label for="userName">User name</label>
         <mat-form-field appearance="outline" class="password-field">
-          <input matInput placeholder="Enter user name" [(ngModel)]="userName" name="userName" required id="userName" />
+          <input matInput placeholder="Enter user name"  name="userName" required id="userName" formControlName="userName"/>
         </mat-form-field>
 
-        <!-- Password label and input -->
         <label for="password">Password</label>
         <mat-form-field appearance="outline" class="password-field">
           <input matInput [type]="passwordVisible ? 'text' : 'password'" placeholder="Enter password"
-            [(ngModel)]="password" name="password" required id="password" />
+             name="password" required id="password" formControlName="password" />
           <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
             <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
 
-        <!-- Forgot Password Link -->
         <p class="forgot-password">Forgot Password?</p>
 
-        <!-- Submit button -->
         <div class="login-header">
           <button mat-raised-button color="primary" class="login-btn" type="submit">Login</button>
         </div>
 
-        <!-- QR Login -->
         <div class="qr-login">
           <div class="or-divider">
             <span>or</span>
           </div>
-          <!-- <p>or</p> -->
+          <button mat-button class="qr-code" (click)="showQrCode()">
+            <img src="images/scan-barcode.png" alt="Logo" class="p-relative" />
+            Login with QR code</button>
+        </div>
+      </form> -->
+
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <label for="userName">User name</label>
+        <mat-form-field appearance="outline" class="password-field">
+          <input matInput placeholder="Enter user name" id="userName" formControlName="userName" />
+        </mat-form-field>
+
+        <label for="password">Password</label>
+        <mat-form-field appearance="outline" class="password-field">
+          <input matInput [type]="passwordVisible ? 'text' : 'password'" placeholder="Enter password" id="password"
+            formControlName="password" />
+
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+            <mat-icon>
+              {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <p class="forgot-password">Forgot Password?</p>
+
+        <div class="login-header">
+          <button mat-raised-button color="primary" class="login-btn" type="submit">Login</button>
+        </div>
+
+        <div class="qr-login">
+          <div class="or-divider">
+            <span>or</span>
+          </div>
           <button mat-button class="qr-code" (click)="showQrCode()">
             <img src="images/scan-barcode.png" alt="Logo" class="p-relative" />
             Login with QR code</button>
         </div>
       </form>
+
     </mat-card-content>
 
     <!-- OTP Screen -->

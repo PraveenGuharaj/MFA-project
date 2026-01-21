@@ -4,11 +4,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdminCenterService } from '../../../component/admin-center/admin-center-service';
+
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,17 @@ import { AdminCenterService } from '../../../component/admin-center/admin-center
     MatFormFieldModule,
     FormsModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
-  constructor(private router: Router, private adminCenterService: AdminCenterService) { }  // Inject Router
+  loginForm!: FormGroup;
+  constructor(private router: Router, private adminCenterService: AdminCenterService,
+    private fb: FormBuilder
+  ) { }  // Inject Router
 
   userName: string = '';
   password: string = '';
@@ -38,11 +43,21 @@ export class Login {
   otpTimer: number = 60;
 
 
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+
   onSubmit() {
+    console.log('loginform', this.loginForm);
+
     // After successful login, show OTP screen
     this.isOtpScreen = true;
     this.startOtpTimer();
-    this.adminCenterService.authServerLogin().subscribe((res) => {
+    this.adminCenterService.authServerLogin(this.loginForm.value).subscribe((res) => {
       console.log('resssssss', res);
 
     })

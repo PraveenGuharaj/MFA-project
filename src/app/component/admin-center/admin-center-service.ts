@@ -8,7 +8,7 @@ import { RsaEncryptionUtil } from '../../shared/utils/encryption.util';
 })
 export class AdminCenterService {
   private baseUrl = 'http://34.1.33.119:8443/backoffice-service/rproducts';
-
+  privateSubProduct = 'http://34.18.92.50:8443/backoffice-service/rsubproduct';
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
@@ -40,6 +40,18 @@ export class AdminCenterService {
     return this.http.post(`${this.baseUrl}/delete`, body);
   }
 
+  deleteSubProduct(productId: number): Observable<any> {
+    const body = {
+      modifiedBy: "admin",
+      subProductId: productId
+    };
+
+    return this.http.post(`${this.privateSubProduct}/delete`, body);
+  }
+
+
+
+
   getAllCountry() {
     return this.http.post(
       'http://34.1.33.119:8443/bko-country/fetchAll',
@@ -67,12 +79,14 @@ export class AdminCenterService {
   // }
 
 
-  authServerLogin() {
-    const encryptedPs = RsaEncryptionUtil.encrypt('sysadmin123');
+  authServerLogin(data: any) {
+    console.log('data', data);
+
+    const encryptedPs = RsaEncryptionUtil.encrypt(data.password);
 
     const body = {
       ps: encryptedPs,
-      un: 'ram123'
+      un: data.userName
     };
 
     const headers = {
@@ -100,6 +114,13 @@ export class AdminCenterService {
   createSubProduct(payload: any) {
     return this.http.post(
       ' http://34.1.33.119:8443/backoffice-service/rsubproduct/save',
+      payload
+    );
+  }
+
+  updateSubProduct(payload: any) {
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/rsubproduct/update',
       payload
     );
   }

@@ -2,12 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddSubProduct } from '../admin-center-add-sub-product/admin-center-add-sub-product';
+import { DashboardSubProduct } from '../../dashboard/dashboard-sub-product/dashboard-sub-product';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 
 @Component({
   selector: 'app-admin-center-sub-product',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-sub-product.html',
   styleUrl: './admin-center-sub-product.scss',
@@ -15,126 +20,65 @@ import { AdminCenterService } from '../admin-center-service';
 export class AdminCenterSubProduct {
   @Input() subProduct: boolean = false;
   products: any;
-  // products = [
-  //   {
-  //     subProductId: 'Gold Savings Account',
-  //     subProductType: 'Gold Savings Account',
-  //     subProductNameEnglish: [
-  //       'High interest savings',
-  //       'High interest savings',
-  //       'High interest savings'
-  //     ],
-  //     subProductNameArabic: 'All',
-  //     subProductDescriptionEnglish: 'SAV-001',
-  //     subProductDescriptionArabic: 'منتج بطاقة ائتمان للعملاء المميز',
-  //     status: 'Active',
-  //     actionsType: 'image',
-  //     priority: 1
+  selectedProduct: any;
+  showDeleteConfirm: boolean = false;
 
-  //   },
-  //   {
-  //     subProductId: 'Standard Current Account',
-  //     subProductType: 'Standard Current Account',
-  //     subProductNameEnglish: [
-  //       'High interest savings',
-  //       'High interest savings',
-  //       'High interest savings'
-  //     ],
-  //     subProductNameArabic: 'Web',
-  //     subProductDescriptionEnglish: 'CUR-002',
-  //     subProductDescriptionArabic: 'منتج بطاقة ائتمان للعملاء المميز',
-  //     status: 'Active',
-  //     actionsType: 'image',
-  //     priority: 1
-
-  //   },
-  //   {
-  //     subProductId: 'Personal Loan',
-  //     subProductType: 'Personal Loan',
-  //     subProductNameEnglish: [
-  //       'High interest savings',
-  //       'High interest savings',
-  //       'High interest savings'
-  //     ],
-  //     subProductNameArabic: 'Mobile',
-  //     subProductDescriptionEnglish: 'LON-003',
-  //     subProductDescriptionArabic: 'منتج بطاقة ائتمان للعملاء المميز',
-  //     status: 'Active',
-  //     actionsType: 'image',
-  //     priority: 1
-
-  //   },
-  //   {
-  //     subProductId: 'Platinum Credit Card',
-  //     subProductType: 'Platinum Credit Card',
-  //     subProductNameEnglish: [
-  //       'High interest savings',
-  //       'High interest savings',
-  //       'High interest savings'
-  //     ],
-  //     subProductNameArabic: 'All',
-  //     subProductDescriptionEnglish: 'CRD-004',
-  //     subProductDescriptionArabic: 'منتج بطاقة ائتمان للعملاء المميز',
-  //     status: 'Active',
-  //     actionsType: 'image',
-  //     priority: 1
-
-  //   },
-  //   {
-  //     subProductId: 'Fixed Deposit',
-  //     subProductType: 'Fixed Deposit',
-  //     subProductNameEnglish: [
-  //       'High interest savings',
-  //       'High interest savings',
-  //       'High interest savings'
-  //     ],
-  //     subProductNameArabic: 'All',
-  //     subProductDescriptionEnglish: 'SAV-001',
-  //     subProductDescriptionArabic: 'منتج بطاقة ائتمان للعملاء المميز',
-  //     status: 'Active',
-  //     actionsType: 'image',
-  //     priority: 1
-
-  //   },
-  //   {
-  //     subProductId: 'Gold Savings Account',
-  //     subProductType: 'Gold Savings Account',
-  //     subProductNameEnglish: [
-  //       'High interest savings',
-  //       'High interest savings',
-  //       'High interest savings'
-  //     ],
-  //     subProductNameArabic: 'All',
-  //     subProductDescriptionEnglish: 'SAV-001',
-  //     subProductDescriptionArabic: 'منتج بطاقة ائتمان للعملاء المميز',
-  //     status: 'Active',
-  //     actionsType: 'image',
-  //     priority: 1
-
-  //   },
-  //   {
-  //     subProductId: 'Gold Savings Account',
-  //     subProductType: 'Gold Savings Account',
-  //     subProductNameEnglish: [
-  //       'High interest savings',
-  //       'High interest savings',
-  //       'High interest savings'
-  //     ],
-  //     subProductNameArabic: 'All',
-  //     subProductDescriptionEnglish: 'SAV-001',
-  //     subProductDescriptionArabic: 'منتج بطاقة ائتمان للعملاء المميز',
-  //     status: 'Active',
-  //     actionsType: 'image',
-  //     priority: 1
-
-  //   }
-  // ];
-
-  constructor(private adminCenterService: AdminCenterService) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
   ngOnInit(): void {
     console.log('getproduct');
 
     this.getProducts();
+  }
+
+
+
+  //  openModal(product: any) {
+  //     console.log('product', product);
+
+  //     this.dialog.open(DashboardSubProduct, {
+  //       width: '60%',  // Adjust width as needed
+  //       height: 'auto',
+  //       position: {
+  //         right: '0',  // Ensure it opens on the right
+  //       },
+  //       data: {
+  //         editData: product,
+  //         isEdit: true
+  //       },
+  //     });
+
+  //   }
+
+
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(DashboardSubProduct, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'SUCCESS') {
+        console.log('success');
+        this.getProducts();
+        // this.loadSubProducts(); // 🔥 refresh list / API call
+      }
+    });
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
   }
 
   getProducts() {
@@ -151,5 +95,23 @@ export class AdminCenterSubProduct {
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+    const deleteString = this.selectedProduct.subProductId.toString();
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteSubProduct(deleteString).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == '000000') {
+        this.getProducts();
+      }
+    })
   }
 }
