@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, Subject, switchMap } from 'rxjs';
 import { RsaEncryptionUtil } from '../../shared/utils/encryption.util';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminCenterService {
+  private refreshSource = new Subject<void>();
+  refresh$ = this.refreshSource.asObservable();
+
   private baseUrl = 'http://34.1.33.119:8443/backoffice-service/rproducts';
   privateSubProduct = 'http://34.18.92.50:8443/backoffice-service/rsubproduct';
   constructor(private http: HttpClient) { }
@@ -94,7 +97,10 @@ export class AdminCenterService {
     };
 
     return this.http.post(
-      'http://34.1.33.119:8443/backoffice-service/auth-server/login',
+      // 'http://34.1.33.119:8443/backoffice-service/auth-server/login',
+      "http://34.18.92.50:8443/backoffice-service/auth-server/login",
+
+      // http://34.1.33.119:8443/backoffice-service/auth-server/login
       body,
       { headers }
     );
@@ -125,4 +131,7 @@ export class AdminCenterService {
     );
   }
 
+  trigger() {
+    this.refreshSource.next();
+  }
 }

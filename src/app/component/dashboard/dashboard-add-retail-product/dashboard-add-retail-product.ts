@@ -44,11 +44,6 @@ export class DashboardAddRetailProduct {
       status: [''],
     });
   }
-  // submitForm() {
-  //   if (this.productForm.valid) {
-  //   } else {
-  //   }
-  // }
 
   closeForm() {
   }
@@ -99,124 +94,52 @@ export class DashboardAddRetailProduct {
   }
 
 
-
-  // submitForm() {
-  //   // if (this.productForm.invalid) return;
-
-  //   const v = this.productForm.value;
-
-  //   const payload = {
-  //     categoryId: Number(v.category),
-  //     code: `PROD${Date.now()}`,
-  //     name: v.productName,
-  //     description: v.description,
-  //     priority: Number(v.priority),
-  //     status: v.status ? 'ACT' : 'INACT',
-  //     segmentId: v.segmentCode ? Number(v.segmentCode) : null,
-  //     screenId: v.screenName || '',
-  //     eligibilityCriteria: v.eligibility || '',
-  //     feesCharges: v.fees || '',
-  //     channelIds: [Number(v.channel)],
-  //     images: [
-  //       {
-  //         imageType: v.imageType || 'Image',
-  //         filePath: v.imageURL,
-  //         channelSpecific: 'N',
-  //         priority: 1,
-  //         activeFlag: 'Y'
-  //       }
-  //     ]
-  //   };
-
-  //   console.log('CREATE PAYLOAD ', payload);
-
-  //   this.adminCenterService.createProduct(payload).subscribe({
-  //     next: res => {
-  //       console.log('SUCCESS', res);
-  //       this.closeForm();
-  //     },
-  //     error: err => {
-  //       console.error('BACKEND ERROR ', err.error);
-  //     }
-  //   });
-  // }
-
-
-  //   submitForm() {
-  //   if (this.productForm.invalid) return;
-
-  //   const v = this.productForm.value;
-
-  //   const payload:any = {
-  //     categoryId: (v.category),
-  //     name: v.productName,
-  //     description: v.description,
-  //     priority: (v.priority),
-  //     status: v.status ? 'ACT' : 'INACT',
-  //     segmentId: (v.segmentCode),
-  //     screenId: v.screenName,
-  //     eligibilityCriteria: v.eligibility,
-  //     feesCharges: v.fees,
-  //     channelIds: [(v.channel)],
-  //     images: [{
-  //       imageType: v.imageType,
-  //       filePath: v.imageURL,
-  //       channelSpecific: 'N',
-  //       priority: 1,
-  //       activeFlag: 'Y'
-  //     }]
-  //   };
-
-  //   if (this.isEditMode) {
-  //     this.adminCenterService
-  //       .updateRetailProduct(this.data.editData.productId, payload)
-  //       .subscribe(() => this.dialogRef.close(true));
-  //   } else {
-  //     payload['code'] = `PROD${Date.now()}`;
-  //     this.adminCenterService
-  //       .createProduct(payload)
-  //       .subscribe(() => this.dialogRef.close(true));
-  //   }
-  // }
-
-
   submitForm() {
-    if (this.productForm.invalid) return;
-
+    // if (this.productForm.invalid) return;
     const v = this.productForm.value;
+    console.log('data', v)
 
     const payload = {
-      productId: this.isEditMode,
-      categoryId: Number(v.category),
-      name: v.productName,
+      categoryId: Number(21),
+      channelIds: [Number(3)],
+      code: this.data?.editData?.code,
+      createdBy: '',
       description: v.description,
-      priority: Number(v.priority),
-      status: v.status ? 'ACT' : 'INACT',
-      segmentId: Number(v.segmentCode),
-      screenId: v.screenName,
       eligibilityCriteria: v.eligibility,
       feesCharges: v.fees,
-      channelIds: [Number(v.channel)],
       images: [{
         imageType: v.imageType,
         filePath: v.imageURL,
         channelSpecific: 'N',
         priority: 1,
         activeFlag: 'Y'
-      }]
+      }],
+      name: v.productName,
+      priority: Number(v.priority),
+      productId: this.data?.editData?.productId,
+      screenId: v.screenName,
+      segmentId: Number(v.segmentCode),
+      status: v.status ? 'ACT' : 'INACT',
     };
 
     if (this.isEditMode) {
-      this.adminCenterService
-        .updateRetailProduct(payload)
-        .subscribe(() => this.dialogRef.close(true));
+      this.adminCenterService.updateRetailProduct(payload).subscribe((res: any) => {
+        console.log('ressss', res);
+
+        if (res?.status.code == "SUCCESS") {
+          this.dialogRef.close('retaiClose');
+        }
+      })
+    } else {
+      this.adminCenterService.createProduct(payload).subscribe((res: any) => {
+        console.log('create', res);
+        if (res?.status.code == "SUCCESS") {
+          this.dialogRef.close('retaiClose');
+          this.adminCenterService.trigger(); // 🔥 notify table
+        }
+
+      })
     }
-    // else {
-    //   payload['code'] = `PROD${Date.now()}`;
-    //   this.adminCenterService
-    //     .createProduct(payload)
-    //     .subscribe(() => this.dialogRef.close(true));
-    // }
   }
 
 

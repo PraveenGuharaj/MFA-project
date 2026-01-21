@@ -141,21 +141,51 @@ export class AdminCenterRetailProduct {
 
   ngOnInit(): void {
     console.log('getproduct');
-
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getProducts(); // 🔥 refresh API call
+    });
     this.getProducts();
   }
+
+  // openModal(product: any) {
+  //   console.log('product', product);
+
+  //   this.dialog.open(DashboardAddRetailProduct, {
+  //     width: '60%',  // Adjust width as needed
+  //     height: 'auto',
+  //     position: {
+  //       right: '0',  // Ensure it opens on the right
+  //     },
+  //     data: {
+  //       editData: product
+  //     }
+  //   });
+
+  // }
+
 
   openModal(product: any) {
     console.log('product', product);
 
-    this.dialog.open(DashboardAddRetailProduct, {
-      width: '60%',  // Adjust width as needed
+    const dialogRef = this.dialog.open(DashboardAddRetailProduct, {
+      width: '60%',
       height: 'auto',
-      position: {
-        right: '0',  // Ensure it opens on the right
-      },
+      position: { right: '0' },
       data: {
-        editData: product
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getProducts();
+        // this.loadSubProducts(); // 🔥 refresh list / API call
       }
     });
   }
@@ -208,6 +238,9 @@ export class AdminCenterRetailProduct {
     // this.selectedProduct = null;
     this.adminCenterService.deleteRetailProduct(this.selectedProduct.productId).subscribe((res) => {
       console.log('res', res);
+      if (res.status.code == "SUCCESS") {
+        this.getProducts();
+      }
 
     })
   }
