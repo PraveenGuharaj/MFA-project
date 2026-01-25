@@ -135,3 +135,13 @@
   ::ng-deep .mdc-switch__icons {
     display: none !important;
   }
+
+  .toast-success {
+    background: #2e7d32;
+    color: #fff;
+  }
+
+  .toast-error {
+    background: #c62828;
+    color: #fff;
+  }

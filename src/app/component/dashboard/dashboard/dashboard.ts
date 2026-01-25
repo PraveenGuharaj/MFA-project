@@ -4,6 +4,7 @@ import { DbxSidebar } from '../../../core/layout/common/dbx-sidebar/dbx-sidebar'
 import { DbxHeader } from '../../../core/layout/common/dbx-header/dbx-header';
 import { NavigationEnd, Router, RouterModule } from '@angular/router'; // Import RouterModule
 import { filter } from 'rxjs';
+import { CommonToasterComponent } from '../../common-toaster/common-toaster-component/common-toaster-component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,8 @@ import { filter } from 'rxjs';
     CommonModule,
     DbxSidebar,
     DbxHeader,
-    RouterModule
+    RouterModule,
+    CommonToasterComponent
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
@@ -481,10 +483,12 @@ export class Dashboard {
         this.router.navigate(['/dashboard/service-request-web']);
       }
     } else if (this.currentPage == 'manage-locators') {
+      console.log('this.activetab', this.activeTab);
+
       if (this.activeTab === 'ATM Locator') {
-        this.router.navigate(['/admin-center/manage-locators']);
+        this.router.navigate(['/dashboard/manage-locators']);
       } else if (this.activeTab === 'Branch Locator') {
-        this.router.navigate(['/admin-center/branch-locators']);
+        this.router.navigate(['/dashboard/branch-locators']);
       }
     } else if (this.currentPage == 'device-management') {
       if (this.activeTab === 'Device Management') {

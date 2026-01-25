@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 
 @Component({
   selector: 'app-admin-center-manage-locators',
@@ -13,7 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterManageLocators {
   @Input() subProduct: boolean = false;
- 
+
+  constructor(private adminCenterService: AdminCenterService) { }
+
   products = [
     {
       name: 'ATM 01',
@@ -127,6 +130,16 @@ export class AdminCenterManageLocators {
     }
   ];
 
+  ngOnInit() {
+    // this.getBranchLoactors();
+  }
+
+  getBranchLoactors() {
+    this.adminCenterService.getBranchLocator().subscribe((res) => {
+      console.log('getBranch', res);
+
+    })
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;

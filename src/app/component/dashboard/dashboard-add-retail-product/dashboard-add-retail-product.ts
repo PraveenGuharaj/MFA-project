@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import n
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CommonToaster } from '../../../shared/services/common-toaster'
 
 @Component({
   selector: 'app-dashboard-add-retail-product',
@@ -27,7 +28,7 @@ export class DashboardAddRetailProduct {
   isEditMode = false;
 
   constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService, @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<DashboardAddRetailProduct>,
+    private dialogRef: MatDialogRef<DashboardAddRetailProduct>, private commonToaster: CommonToaster
   ) {
     this.productForm = this.fb.group({
       productName: ['', [Validators.required]],
@@ -127,13 +128,17 @@ export class DashboardAddRetailProduct {
         console.log('ressss', res);
 
         if (res?.status.code == "SUCCESS") {
+          this.commonToaster.showSuccess('Product created successfully');
           this.dialogRef.close('retaiClose');
+        } else {
+
         }
       })
     } else {
       this.adminCenterService.createProduct(payload).subscribe((res: any) => {
         console.log('create', res);
         if (res?.status.code == "SUCCESS") {
+          this.commonToaster.showSuccess('Product created successfully');
           this.dialogRef.close('retaiClose');
           this.adminCenterService.trigger(); // 🔥 notify table
         }

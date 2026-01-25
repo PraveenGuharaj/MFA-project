@@ -119,4 +119,11 @@ export class AdminCenterService {
   trigger() {
     this.refreshSource.next();
   }
+
+  getBranchLocator() {
+    return this.http.post(
+      'http://34.1.33.119:8443/backoffice-service/branch-locator/getall',
+      {}
+    );
+  }
 }

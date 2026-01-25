@@ -41,26 +41,26 @@
         <tbody>
 
             <tr *ngFor="let p of products">
-                <td>{{ p.name }}</td>
-                <td>{{ p.atmCode}}</td>
-                <td>{{ p.city}}</td>
-                <td>{{ p.country}}</td>
-                <td>{{ p.atmType}}</td>
-                <td>{{ p.coordinates}}</td>
+                <td>{{ p.branchNameEn }}</td>
+                <td>{{ p.branchCode}}</td>
+                <td>{{ p.cityEn}}</td>
+                <td>{{ p.cityAr}}</td>
+                <td>{{ p.branchNameEn}}</td>
+                <td>{{ p.latitude }}, {{ p.longitude }}</td>
                 <!-- <td>{{ p.status}}</td> -->
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.isActive === 'Y',
+          'inactive': p.isActive === 'YES'
         }">
-                        {{ p.status }}
+                        {{ p.isActive === 'Y' ? 'Active' : 'Inactive' }}
                     </span>
                 </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
-                        <img src="images/edit.png" />
+                        <img src="images/edit.png">
                         <img src="images/trash_red.png" />
                     </ng-container>
 
