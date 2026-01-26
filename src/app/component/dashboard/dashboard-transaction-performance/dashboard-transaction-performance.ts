@@ -1,19 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ChartData, ChartOptions, CategoryScale, LinearScale, BarController, BarElement, DoughnutController, ArcElement, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, Chart, ScriptableContext, registerables } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';  // Importing BaseChartDirective for standalone components
-import { Chart as ChartJS } from 'chart.js';
-import { MatIconModule } from '@angular/material/icon';
+import { CategoryScale, LinearScale, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, Chart, ChartOptions, registerables } from 'chart.js';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
+import { MatIconModule } from '@angular/material/icon';
 
-ChartJS.register(
+Chart.register(
   CategoryScale,
   LinearScale,
-  BarController,
-  BarElement,
-  DoughnutController,
-  ArcElement,
   LineController,
   PointElement,
   LineElement,
@@ -25,229 +19,71 @@ ChartJS.register(
 
 @Component({
   selector: 'app-dashboard-transaction-performance',
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatIconModule
-  ],
+  imports: [CommonModule, MatCardModule, MatIconModule],
   templateUrl: './dashboard-transaction-performance.html',
-  styleUrl: './dashboard-transaction-performance.scss',
+  styleUrls: ['./dashboard-transaction-performance.scss'],
 })
-export class DashboardTransactionPerformance {
+export class DashboardTransactionPerformance implements AfterViewInit {
   @ViewChild('myLineChart', { static: false }) myLineChartElement!: ElementRef;
   lineChart!: Chart;
+  categories: any[] = [];  // To hold category data from API
+  selectedCategoryData: any = {};  // To hold the selected category data
+
   constructor(private adminCenterService: AdminCenterService) { }
+
   ngOnInit() {
     this.getTransferViewCount();
   }
 
   ngAfterViewInit() {
+    // Make sure the chart is initialized after the view is initialized
     this.initializeLineChart();
   }
 
-  // getTransferViewCount() {
-  //   this.adminCenterService.getTransferViewCount().subscribe((res: any)=> {
-  //     console.log('transfer', res);
-
-  //   })
-  // }
-
   getTransferViewCount() {
     this.adminCenterService.getTransferViewCount().subscribe((res: any) => {
-      const categories = res?.data?.categoryCodes?.[0]?.data || [];
+      this.categories = res?.data?.categoryCodes?.[0]?.data || [];
 
-      // Collect success & failure per date
-      const dateMap: Record<string, { success: number; failure: number }> = {};
-
-      categories.forEach((cat: any) => {
-        cat.categoryCodeData.dates.forEach((d: any) => {
-          if (!dateMap[d.date]) {
-            dateMap[d.date] = { success: 0, failure: 0 };
-          }
-          dateMap[d.date].success += d.successCount;
-          dateMap[d.date].failure += d.failureCount;
-        });
-      });
-
-      // Month mapping for correct sorting
-      const monthMap: any = {
-        Jan: 0, Feb: 1, Mar: 2, Apr: 3,
-        May: 4, Jun: 5, Jul: 6, Aug: 7,
-        Sep: 8, Oct: 9, Nov: 10, Dec: 11
-      };
-
-      // Sort dates (11-Jan → 12-Jan)
-      const labels = Object.keys(dateMap).sort((a, b) => {
-        const [dayA, monA] = a.split('-');
-        const [dayB, monB] = b.split('-');
-
-        const dateA = new Date(2025, monthMap[monA], +dayA);
-        const dateB = new Date(2025, monthMap[monB], +dayB);
-
-        return dateA.getTime() - dateB.getTime();
-      });
-
-      // Build datasets in sorted order
-      const successData = labels.map(d => dateMap[d].success);
-      const failureData = labels.map(d => dateMap[d].failure);
-
-      // Update chart
-      this.updateLineChart(labels, successData, failureData);
+      if (this.categories.length) {
+        // Set default category (e.g., "Ooredoo")
+        this.selectedCategoryData = this.categories.find(
+          (category: any) => category.categoryCodeDesc === 'Ooredoo'
+        );
+        this.updateChartForSelectedCategory();
+      }
     });
   }
 
+  // This function is triggered when the dropdown selection changes
+  onCategoryChange(event: any) {
+    const selectedCategoryCode = event.target.value;
+    this.selectedCategoryData = this.categories.find(
+      (category: any) => category.categoryCode === selectedCategoryCode
+    );
+    this.updateChartForSelectedCategory();
+  }
 
+  updateChartForSelectedCategory() {
+    const dates = this.selectedCategoryData?.categoryCodeData?.dates || [];
+    const labels = dates.map((d: any) => d.date);
+    const successData = dates.map((d: any) => d.successCount);
+    const failureData = dates.map((d: any) => d.failureCount);
 
-  // initializeLineChart() {
-  //   if (this.myLineChartElement && this.myLineChartElement.nativeElement) {
-  //     const ctxLineChart = this.myLineChartElement.nativeElement.getContext('2d');
-  //     Chart.register(...registerables);
-
-  //     // Gradient fill for the mobile and web lines
-  //     const mobileGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
-  //     mobileGradient.addColorStop(0, '#EF4444');
-  //     mobileGradient.addColorStop(1, '#FFFFFF');
-
-  //     const webGradient = ctxLineChart.createLinearGradient(0, 0, 0, 400);
-  //     webGradient.addColorStop(0, '#29CC5A');
-  //     webGradient.addColorStop(1, '#FFFFFF');
-
-  //     // Create the line chart
-  //     const lineChart: any = new Chart(ctxLineChart, {
-  //       type: 'line',
-  //       data: {
-  //         labels: ['Nov 21', 'Nov 22', 'Nov 23', 'Nov 24', 'Nov 25', 'Nov 26', 'Nov 27'],
-  //         datasets: [
-  //           {
-  //             data: [100, 300, 200, 50, 100, 150, 200],  // 7 values for Mobile
-  //             borderColor: '#EF444499',
-  //             backgroundColor: mobileGradient,
-  //             fill: true,
-  //             tension: 0.4,
-  //             pointRadius: 0,
-  //             borderWidth: 2,
-  //           },
-  //           {
-  //             data: [650, 500, 670, 550, 350, 600, 500],  // 7 values for Web
-  //             borderColor: '#29CC5A99',
-  //             backgroundColor: webGradient,
-  //             fill: true,
-  //             tension: 0.4,
-  //             pointRadius: 0,
-  //             borderWidth: 2,
-  //           }
-  //         ]
-  //       },
-
-  //       options: {
-  //         responsive: true,
-  //         plugins: {
-  //           tooltip: {
-  //             enabled: true,
-  //             callbacks: {
-  //               title: function () { return ''; },
-  //               label: function (tooltipItem) { return `${tooltipItem.raw}`; }
-  //             }
-  //           },
-  //           legend: { display: false }
-  //         },
-
-  //         scales: {
-  //           x: {
-  //             ticks: {
-  //               font: {
-  //                 size: 14,
-  //                 weight: 'normal',
-  //                 family: 'Arial',
-  //               },
-  //               color: '#A2A3A5',
-  //             },
-  //             grid: { color: '#E6E6E6', display: false }
-  //           },
-
-  //           y: {
-  //             min: 0,
-  //             max: 1000,           // New max value
-  //             ticks: {
-  //               stepSize: 250,     // 0, 250, 500, 750, 1000
-  //               font: {
-  //                 size: 14,
-  //                 weight: 'normal',
-  //                 family: 'Arial',
-  //               },
-  //               color: '#A2A3A5',
-  //               callback: function (value) { return value; }
-  //             },
-  //             grid: { color: '#E6E6E6' }
-  //           }
-
-  //         },
-
-  //         onClick: (event: any) => {
-  //           const activePoints = lineChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
-  //           if (activePoints.length > 0) {
-  //             const firstPoint = activePoints[0];
-  //             this.showDottedLine(firstPoint, event);
-  //           }
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
-
-
-  //   updateLineChart(labels: string[], success: number[], failure: number[]) {
-  //   if (!this.lineChart) return;
-
-  //   this.lineChart.data.labels = labels;
-  //   this.lineChart.data.datasets[0].data = failure;
-  //   this.lineChart.data.datasets[1].data = success;
-
-  //   this.lineChart.update();
-  // }
-
-  updateLineChart(labels: string[], success: number[], failure: number[]) {
-    if (!this.lineChart) return;
-
-    const allValues = [...success, ...failure];
-    const rawMax = Math.max(...allValues);
-
-    // Round max to nearest clean number
-    const roundedMax =
-      rawMax <= 10 ? 10 :
-        rawMax <= 50 ? 50 :
-          rawMax <= 100 ? 100 :
-            rawMax <= 250 ? 250 :
-              rawMax <= 500 ? 500 :
-                Math.ceil(rawMax / 500) * 500;
-
-    const stepSize = roundedMax / 5;
-
-    this.lineChart.data.labels = labels;
-    this.lineChart.data.datasets[0].data = failure;
-    this.lineChart.data.datasets[1].data = success;
-
-    const yScale = (this.lineChart.options.scales as any)['y'];
-
-    yScale.min = 0;
-    yScale.max = roundedMax;
-    yScale.ticks.stepSize = stepSize;
-    yScale.ticks.precision = 0;
-
-    this.lineChart.update();
+    this.updateLineChart(labels, successData, failureData);
   }
 
   initializeLineChart() {
     const ctx = this.myLineChartElement.nativeElement.getContext('2d');
 
     const successGradient = ctx.createLinearGradient(0, 0, 0, 400);
-    successGradient.addColorStop(0, '#29CC5A');
-    successGradient.addColorStop(1, '#FFFFFF');
+    successGradient.addColorStop(0, 'rgba(41,204,90,0.35)');
+    successGradient.addColorStop(1, 'rgba(41,204,90,0.02)');
 
     const failureGradient = ctx.createLinearGradient(0, 0, 0, 400);
-    failureGradient.addColorStop(0, '#EF4444');
-    failureGradient.addColorStop(1, '#FFFFFF');
+    failureGradient.addColorStop(0, 'rgba(239,68,68,0.35)');
+    failureGradient.addColorStop(1, 'rgba(239,68,68,0.02)');
 
+    // Create the chart with empty data
     this.lineChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -256,20 +92,20 @@ export class DashboardTransactionPerformance {
           {
             label: 'Failure',
             data: [],
-            borderColor: '#EF444499',
+            borderColor: '#EF4444',
             backgroundColor: failureGradient,
             fill: true,
-            tension: 0.4,
+            tension: 0.4,  // Set tension for curviness (for the failure line)
             pointRadius: 0,
             borderWidth: 2,
           },
           {
             label: 'Success',
             data: [],
-            borderColor: '#29CC5A99',
+            borderColor: '#29CC5A',
             backgroundColor: successGradient,
             fill: true,
-            tension: 0.4,
+            tension: 0.4,  // Set tension for curviness (for the success line)
             pointRadius: 0,
             borderWidth: 2,
           }
@@ -278,7 +114,26 @@ export class DashboardTransactionPerformance {
       options: {
         responsive: true,
         plugins: {
-          legend: { display: false }
+          legend: { display: false },
+          tooltip: {
+            enabled: true,
+            backgroundColor: '#ffffff',
+            titleColor: '#000000',
+            bodyColor: '#000000',
+            borderColor: '#E0E0E0',
+            borderWidth: 1,
+            padding: 12,
+            displayColors: true,
+            callbacks: {
+              title: (items) => {
+                return items[0].label; // Display the date
+              },
+              label: (context) => {
+                // Display Failure and Success count in tooltip
+                return `${context.dataset.label} count: ${context.raw}`;
+              }
+            }
+          }
         },
         scales: {
           x: {
@@ -286,27 +141,38 @@ export class DashboardTransactionPerformance {
             grid: { display: false }
           },
           y: {
-            beginAtZero: true,
-            ticks: { color: '#A2A3A5' }
+            min: 0,
+            ticks: {
+              color: '#A2A3A5'
+            },
+            grid: { color: '#E6E6E6' }
           }
         }
       }
     });
   }
 
+  updateLineChart(labels: string[], success: number[], failure: number[]) {
+    if (!this.lineChart) return;
 
-  showDottedLine(firstPoint: any, event: any) {
-    const ctx = this.myLineChartElement.nativeElement.getContext('2d');
-    const x = event.offsetX;
-    const y = event.offsetY;
-    ctx.clearRect(0, 0, this.myLineChartElement.nativeElement.width, this.myLineChartElement.nativeElement.height); // Clear previous dotted lines
-    ctx.beginPath();
-    ctx.setLineDash([5, 5]); // Dotted line
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, this.myLineChartElement.nativeElement.height);
-    ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-    ctx.stroke();
-    ctx.setLineDash([]); // Reset line style
+    const allValues = [...success, ...failure];
+    const minValue = Math.min(...allValues);
+    const maxValue = Math.max(...allValues);
+    const range = maxValue - minValue || 1;
+
+    // Update chart with new data
+    this.lineChart.data.labels = labels;
+    this.lineChart.data.datasets[0].data = failure;
+    this.lineChart.data.datasets[1].data = success;
+
+    // Dynamically adjust y-axis min and max values based on data
+    const yScale: any = this.lineChart.options.scales!['y'];
+    yScale.min = minValue - 1; // Slightly reduce to ensure space on the bottom
+    yScale.max = maxValue + 1; // Slightly increase to ensure space on the top
+    yScale.ticks.stepSize = Math.ceil(range / 4);
+    yScale.ticks.precision = 0;
+
+    // Update the chart after changing data
+    this.lineChart.update();
   }
-
 }
