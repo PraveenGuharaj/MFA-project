@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, switchMap } from 'rxjs';
 import { RsaEncryptionUtil } from '../../shared/utils/encryption.util';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -123,6 +124,28 @@ export class AdminCenterService {
   getBranchLocator() {
     return this.http.post(
       'http://34.1.33.119:8443/backoffice-service/branch-locator/getall',
+      {}
+    );
+  }
+
+  getChannelList() {
+    return this.http.post(
+      'http://34.1.33.119:8443/backoffice-service/features/list?channelId=ALL',
+      {}
+    );
+  }
+
+  getUserCount() {
+    return this.http.get(
+      '    http://34.1.33.119:8443/backoffice-service/login/user-count',
+      {}
+    );
+
+  }
+
+  getTransferViewCount() {
+    return this.http.get(
+      'http://34.1.33.119:8443/backoffice-service/transfer/viewCount',
       {}
     );
   }

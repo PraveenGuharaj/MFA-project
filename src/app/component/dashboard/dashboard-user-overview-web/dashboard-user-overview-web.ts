@@ -6,7 +6,7 @@ import { Chart as ChartJS } from 'chart.js';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
-
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -39,6 +39,10 @@ ChartJS.register(
 export class DashboarUserOverviewWeb {
   @ViewChild('myLineChart', { static: false }) myLineChartElement!: ElementRef;
   @ViewChild('myBarChart', { static: false }) myBarChartElement!: ElementRef;
+  androidVersionCount: any;
+  iosVersionCount: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
 
   public barChartData: ChartData<'bar'> = {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -98,6 +102,19 @@ export class DashboarUserOverviewWeb {
       }
     }
   };
+
+  ngOnInit() {
+    this.getUserCountValue();
+  }
+
+  getUserCountValue() {
+    this.adminCenterService.getUserCount().subscribe((res: any) => {
+      console.log('res-value', res);
+      this.androidVersionCount = res.data.androidVersionCount;
+      this.iosVersionCount = res.data.iosVersionCount;
+    })
+  }
+
   ngAfterViewInit() {
     this.initializeLineChart();
     this.initBarChart()

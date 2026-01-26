@@ -6,6 +6,7 @@ import { CategoryScale, LinearScale, LineController, PointElement, LineElement, 
 import { Chart as ChartJS } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import 'chartjs-plugin-datalabels';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 ChartJS.register(
   CategoryScale,
@@ -39,12 +40,20 @@ export class DashboardTransactionMix {
   public barChartData: any;
   public barChartOptions: any;
   selectedText: any;
-  constructor(private cdr: ChangeDetectorRef) { }
+  creditCard: any;
+  constructor(private cdr: ChangeDetectorRef, private adminCenterService: AdminCenterService) { }
 
   ngAfterViewInit() {
     this.initChart();
     this.initPieChart();
     this.cdr.detectChanges();
+  }
+
+  ngOnInit() {
+    this.adminCenterService.getChannelList().subscribe((res: any) => {
+      console.log('res', res);
+      this.creditCard = res.data[0].percentage;
+    })
   }
 
   createPattern(color: string) {
