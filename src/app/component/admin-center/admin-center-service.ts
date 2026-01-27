@@ -149,4 +149,18 @@ export class AdminCenterService {
       {}
     );
   }
+
+  getUniqueLogins() {
+    return this.http.get(
+      'http://34.1.33.119:8443/backoffice-service/login/unique-logins',
+      {}
+    );
+  }
+
+  createTopFiveTxn(payload: any) {
+    return this.http.post(
+      'http://34.1.33.119:8443/backoffice-service/transfer/topFiveTransactions?channelId=ALL',
+      payload
+    );
+  }
 }

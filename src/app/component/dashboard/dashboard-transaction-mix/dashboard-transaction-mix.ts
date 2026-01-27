@@ -41,11 +41,25 @@ export class DashboardTransactionMix {
   public barChartOptions: any;
   selectedText: any;
   creditCard: any;
+  topFiveTransactions: any[] = [];
+  legendData: any;
   constructor(private cdr: ChangeDetectorRef, private adminCenterService: AdminCenterService) { }
+  legendIconMap: Record<string, string> = {
+    'To My Own DB A/C': 'images/yellow_pending.png',
+    'To DB A/C-Bulk': 'images/red_failure.png',
+    'Debit Payment': 'images/completed.png',
+    'Credit Card Payment': 'images/dashboard_purple.png',
+    'International Fund Transfer': 'images/pink_pending_approved.png',
+    'Ooredoo': 'images/dashboar_violet.png',
+    'Tax': 'images/dashboard_lightgreen.png',
+    'To Staff  A/C - DB': 'images/dashboard_navy.png',
+    'To Another Local Bank - BULK': 'images/dashboard_ash.png',
+    'DEFAULT': 'images/green_success.png'
+  };
 
   ngAfterViewInit() {
     this.initChart();
-    this.initPieChart();
+    // this.initPieChart();
     this.cdr.detectChanges();
   }
 
@@ -54,6 +68,7 @@ export class DashboardTransactionMix {
       console.log('res', res);
       this.creditCard = res.data[0].percentage;
     })
+    this.createTopFiveTxn();
   }
 
   createPattern(color: string) {
@@ -351,5 +366,287 @@ export class DashboardTransactionMix {
   segmentSelection(event: string) {
     this.selectedText = event;
   }
+
+  createTopFiveTxn() {
+    const payload = {
+      functionalId: 'BESTPERTXN'
+    };
+
+    this.adminCenterService.createTopFiveTxn(payload).subscribe((res: any) => {
+      console.log('top5', res);
+
+      const apiData = res.data.topFiveTransactions || [];
+      console.log('apiData', apiData);
+
+
+      if (apiData.length) {
+        this.buildDonutFromApi(apiData);
+        this.legendData = apiData.map((item: any) => ({
+          label: item.transferDesc,
+          icon: this.legendIconMap[item.transferDesc] || this.legendIconMap['DEFAULT']
+        }));
+      }
+    });
+  }
+
+  private normalizeData(apiData: any[]) {
+    const total = apiData.reduce(
+      (sum, item) => sum + Number(item.count),
+      0
+    );
+
+    return apiData.map(item => ({
+      label: item.transferDesc,
+      value: total > 0
+        ? +(Number(item.count) / total * 100).toFixed(2)
+        : 0
+    }));
+  }
+
+  buildDonutFromApi(apiData: any[]) {
+    const canvas: HTMLCanvasElement = this.myDonutChartElement.nativeElement;
+    const ctx = canvas.getContext('2d')!;
+
+    const processed = this.normalizeData(apiData);
+
+    const labels = processed.map(i => i.label);
+    const values = processed.map(i => i.value);
+
+    console.log('labels', labels);
+    console.log('values', values);
+
+
+    // destroy old chart
+    if ((this as any).donutChart) {
+      (this as any).donutChart.destroy();
+    }
+
+    (this as any).donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels,
+        datasets: [{
+          data: values,
+          backgroundColor: this.getGradients(values.length),
+          borderColor: '#FFFFFF',
+          borderWidth: 5,
+          spacing: 3
+        }]
+      },
+      options: {
+        cutout: '70%',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx: any) => `${ctx.raw}%`
+            }
+          }
+        }
+      },
+      plugins: [
+        this.donutPatternPlugin(),
+        this.centerTextPlugin()
+      ]
+    });
+  }
+
+  donutPatternPlugin() {
+    return {
+      id: 'donutPatternPlugin',
+      afterDatasetDraw(chart: any) {
+        const { ctx } = chart;
+        const meta = chart.getDatasetMeta(0);
+
+        const patternCanvas = document.createElement('canvas');
+        patternCanvas.width = 12;
+        patternCanvas.height = 12;
+        const pctx = patternCanvas.getContext('2d')!;
+        pctx.strokeStyle = 'rgba(255,255,255,0.35)';
+        pctx.lineWidth = 2;
+        pctx.beginPath();
+        pctx.moveTo(0, 12);
+        pctx.lineTo(12, 0);
+        pctx.stroke();
+
+        const pattern = pctx.createPattern(patternCanvas, 'repeat')!;
+
+        meta.data.forEach((segment: any) => {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(segment.x, segment.y, segment.outerRadius,
+            segment.startAngle, segment.endAngle);
+          ctx.arc(segment.x, segment.y, segment.innerRadius,
+            segment.endAngle, segment.startAngle, true);
+          ctx.closePath();
+          ctx.clip();
+
+          ctx.fillStyle = pattern;
+          ctx.fillRect(
+            segment.x - segment.outerRadius,
+            segment.y - segment.outerRadius,
+            segment.outerRadius * 2,
+            segment.outerRadius * 2
+          );
+          ctx.restore();
+        });
+      }
+    };
+  }
+
+  centerTextPlugin() {
+    return {
+      id: 'centerText',
+      afterDraw(chart: any) {
+        const { ctx, width, height } = chart;
+        ctx.save();
+        ctx.font = 'bold 22px Poppins';
+        ctx.fillStyle = '#16003A';
+        ctx.textAlign = 'center';
+        // ctx.fillText('Transactions', width / 2, height / 2);
+        ctx.restore();
+      }
+    };
+  }
+
+
+  private calculatePercentages(data: any[]) {
+    const total = data.reduce(
+      (sum, item) => sum + Number(item.count),
+      0
+    );
+
+    return data.map(item => ({
+      label: item.transferDesc,
+      percentage: total > 0
+        ? +(Number(item.count) / total * 100).toFixed(2)
+        : 0
+    }));
+  }
+
+  // updateDonutChart(apiData: any[]) {
+  //   if (!apiData?.length) return;
+
+  //   const processed = this.calculatePercentages(apiData);
+
+  //   const labels = processed.map(i => i.label);
+  //   const data = processed.map(i => i.percentage);
+
+  //   // destroy old chart if exists
+  //   if ((this as any).donutChart) {
+  //     (this as any).donutChart.destroy();
+  //     (this as any).donutChart = null;
+  //   }
+
+  //   const canvas: HTMLCanvasElement = this.myDonutChartElement.nativeElement;
+  //   const ctx: any = canvas.getContext('2d');
+
+  //   (this as any).donutChart = new Chart(ctx, {
+  //     type: 'doughnut',
+  //     data: {
+  //       labels: labels,
+  //       datasets: [{
+  //         data: data,
+  //         backgroundColor: this.getGradients(data.length),
+  //         borderWidth: 5,
+  //         borderColor: '#FFFFFF',
+  //         spacing: 3
+  //       }]
+  //     },
+  //     options: {
+  //       cutout: '70%',
+  //       responsive: true,
+  //       plugins: {
+  //         legend: { display: false },
+  //         tooltip: {
+  //           callbacks: {
+  //             label: (ctx: any) => `${ctx.raw}%`
+  //           }
+  //         }
+  //       }
+  //     },
+  //     plugins: [(this as any).donutPatternPlugin, (this as any).centerTextPlugin]
+  //   });
+  // }
+
+  updateDonutChart(apiData: any[]) {
+    if (!apiData?.length) return;
+
+    const processed = this.calculatePercentages(apiData);
+
+    const labels = processed.map(i => i.label);
+    const data = processed.map(i => i.percentage);
+
+    // destroy old chart if exists
+    if ((this as any).donutChart) {
+      (this as any).donutChart.destroy();
+      (this as any).donutChart = null;
+    }
+
+    const canvas: HTMLCanvasElement = this.myDonutChartElement.nativeElement;
+    const ctx: any = canvas.getContext('2d');
+
+    (this as any).donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: this.getGradients(data.length),
+          borderWidth: 5,
+          borderColor: '#FFFFFF',
+          spacing: 3
+        }]
+      },
+      options: {
+        cutout: '70%',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx: any) => `${ctx.raw}%`
+            }
+          }
+        }
+      },
+      plugins: [(this as any).donutPatternPlugin, (this as any).centerTextPlugin]
+    });
+  }
+
+  getGradients(count: number) {
+    const baseColors = [
+      ['#6366F1', '#8DAAEB'],
+      ['#F97316', '#EBA78D'],
+      ['#14CC4C', '#14CC4C'],
+      ['#C08DEB', '#8B5CF6'],
+      ['#EF3838', '#EB8D8D'],
+      ['#14B0B8', '#8DE3EB'],
+      ['#EC4899', '#F2C2CE'],
+      ['#F0CB43', '#F0DB90'],
+      ['#8A8A8A', '#C1C1C1'],
+      ['#93EB17', '#DBEB8D']
+    ];
+
+    return Array.from({ length: count }, (_, i) => {
+      const [c1, c2] = baseColors[i % baseColors.length];
+      return this.makeGradient(c1, c2);
+    });
+  }
+
+  makeGradient(color1: string, color2: string) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 10;
+    canvas.height = 300;
+
+    const ctx = canvas.getContext('2d')!;
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, color1);
+    gradient.addColorStop(1, color2);
+
+    return gradient;
+  }
+
 
 }

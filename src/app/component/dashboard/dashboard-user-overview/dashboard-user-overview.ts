@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChartData, ChartOptions, CategoryScale, LinearScale, BarController, BarElement, DoughnutController, ArcElement, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, Chart, registerables } from 'chart.js';
 import { CommonModule } from '@angular/common';
-import { BaseChartDirective } from 'ng2-charts';
 import { Chart as ChartJS } from 'chart.js';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { AdminCenterService } from '../../admin-center/admin-center-service'
 
 // Register necessary components
 ChartJS.register(
@@ -228,9 +228,10 @@ export class DashboardUserOverview implements OnInit {
       }
     }
   };
+  getUniqueLogins: any;
 
 
-  constructor() { }
+  constructor(private adminCenterService: AdminCenterService) { }
 
   ngOnInit(): void {
     const ctx = document.getElementById('myDoughnutChart') as HTMLCanvasElement;
@@ -243,6 +244,7 @@ export class DashboardUserOverview implements OnInit {
     this.doughnutChartData.datasets[0].backgroundColor = [gradientMobile, gradientWeb];
     this.barChartData.datasets[0].backgroundColor = gradientMobile;
     this.barChartData.datasets[1].backgroundColor = gradientWeb;
+    this.uniqueLogins();
   }
 
   ngAfterViewInit() {
@@ -677,5 +679,14 @@ export class DashboardUserOverview implements OnInit {
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
     ctx.stroke();
     ctx.setLineDash([]); // Reset line style
+  }
+
+  uniqueLogins() {
+    this.adminCenterService.getUniqueLogins().subscribe((res: any) => {
+      // console.log('unique',res);
+      if (res.status.description == "SUCCESS") {
+        this.getUniqueLogins = res.data;
+      }
+    })
   }
 }

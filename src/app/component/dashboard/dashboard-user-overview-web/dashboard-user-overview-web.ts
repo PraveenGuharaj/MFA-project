@@ -41,6 +41,9 @@ export class DashboarUserOverviewWeb {
   @ViewChild('myBarChart', { static: false }) myBarChartElement!: ElementRef;
   androidVersionCount: any;
   iosVersionCount: any;
+  getUniqueLogins: any;
+  totalMobileCount = 0;
+  totalInternetCount = 0;
 
   constructor(private adminCenterService: AdminCenterService) { }
 
@@ -105,6 +108,7 @@ export class DashboarUserOverviewWeb {
 
   ngOnInit() {
     this.getUserCountValue();
+    this.uniqueLogins();
   }
 
   getUserCountValue() {
@@ -326,5 +330,27 @@ export class DashboarUserOverviewWeb {
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
     ctx.stroke();
     ctx.setLineDash([]); // Reset line style
+  }
+
+  uniqueLogins() {
+    this.adminCenterService.getUniqueLogins().subscribe((res: any) => {
+      if (res.status.description == "SUCCESS") {
+        this.getUniqueLogins = res.data;
+        console.log('unique', this.getUniqueLogins);
+
+
+        // this.totalMobileCount = this.getUniqueLogins.reduce((sum: any, item: any) => {
+        //   return sum + (item.mobile_banking?.count || 0);
+        // }, 0);
+
+
+        this.totalInternetCount = this.getUniqueLogins.reduce((sum: any, item: any) => {
+          return sum + (item.internet_banking?.count || 0);
+        }, 0);
+
+        console.log('totalInternetCount', this.totalInternetCount);
+
+      }
+    })
   }
 }

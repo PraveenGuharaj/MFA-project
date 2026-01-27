@@ -11,7 +11,7 @@
           <span>12%</span>
         </div>
       </div>
-      <div class="stat-value">245,890</div>
+      <div class="stat-value">{{totalInternetCount}}</div>
 
     </div>
 
@@ -32,10 +32,10 @@
         <span class="card-title">Active Users</span>
         <div class="stat-change">
           <img src="images/arrow-growth.png" class="notification_icon">
-          <span>12%</span>
+          <span>{{ getUniqueLogins?.[0]?.internet_banking?.percentage }}</span>
         </div>
       </div>
-      <div class="stat-value">8943</div>
+      <div class="stat-value">{{ getUniqueLogins?.[0]?.internet_banking?.count }}</div>
 
     </div>
   </div>
