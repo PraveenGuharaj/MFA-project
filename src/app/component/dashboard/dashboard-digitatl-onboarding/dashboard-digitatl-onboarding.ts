@@ -41,6 +41,14 @@ export class DashboardDigitatlOnboarding {
   public barChartData: any;
   public barChartOptions: any;
 
+  // Top-5 Failure chart ONLY
+  public top5ChartData: any;
+  public top5ChartOptions: any;
+
+  // Dynamic percentage labels
+  public top5Left: any[] = [];
+  public top5Right: any[] = [];
+
 
   public barChartOptionsSet: any = {
     responsive: true,
@@ -101,10 +109,12 @@ export class DashboardDigitatlOnboarding {
     labels: [],
     datasets: []
   };
+
+
   constructor(private cdr: ChangeDetectorRef, private adminCenterService: AdminCenterService) { }
 
   ngAfterViewInit() {
-    this.initChart();
+    // this.initChart();
     this.cdr.detectChanges();
   }
 
@@ -248,6 +258,7 @@ export class DashboardDigitatlOnboarding {
 
         // 👇 THIS is what actually updates the chart
         this.patchServiceFailureLatencyChart(res.data);
+        this.patchTop5FailureChart(res.data);
       });
   }
 
@@ -328,5 +339,92 @@ export class DashboardDigitatlOnboarding {
 
     this.cdr.detectChanges();
   }
+
+  patchTop5FailureChart(res: any) {
+    const list =
+      res?.serviceFailureAndLatency?.failedTransactionRate || [];
+
+    // Remove duplicates
+    const map = new Map<string, any>();
+    list.forEach((item: any) => {
+      if (!map.has(item.categoryDesc)) {
+        map.set(item.categoryDesc, item);
+      }
+    });
+
+    // Sort by failurePercentage DESC
+    const sorted = Array.from(map.values()).sort(
+      (a, b) =>
+        parseFloat(b.failurePercentage) -
+        parseFloat(a.failurePercentage)
+    );
+
+    // Take Top 5
+    const top5 = sorted.slice(0, 5);
+
+    // Split labels (2 left, 3 right)
+    this.top5Left = top5.slice(0, 2);
+    this.top5Right = top5.slice(2);
+
+    // Chart data (BAR = failurePercentage)
+
+    const colors = [
+      ['#14CC4C', '#8DEBA9'], // green
+      ['#F0CB43', '#F0D77A'], // yellow
+      ['#EE595A', '#EB8C8E'], // red
+      ['#6017EB', '#AD8DEB'], // purple
+      ['#F043D3', '#EB8DDB']  // pink
+    ];
+
+    this.top5ChartData = {
+      labels: top5.map(d => d.categoryDesc),
+      datasets: [
+        {
+          data: top5.map(d => parseFloat(d.failurePercentage)),
+          backgroundColor: top5.map((_, i) =>
+            this.createStripedGradient(
+              colors[i][0],
+              colors[i][1]
+            )
+          ),
+          borderRadius: 8
+        }
+      ]
+    };
+
+
+    this.top5ChartOptions = {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', // position at end of bar
+          align: 'right', // right side of bar
+          color: '#000',  // text color
+          font: { weight: '600', size: 12 },
+          formatter: (value: any) => `${value}% failures` // show value on bar
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx: any) => `${ctx.raw}% failures`
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: 0,
+          max: 100,
+          ticks: { callback: (v: any) => `${v}%` },
+          grid: { display: false }
+        },
+        y: { grid: { display: false } }
+      }
+    };
+
+
+    this.cdr.detectChanges();
+  }
+
 
 }
