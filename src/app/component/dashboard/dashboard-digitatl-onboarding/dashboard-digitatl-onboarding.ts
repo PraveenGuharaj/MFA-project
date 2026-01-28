@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CategoryScale, LinearScale, LineController, PointElement, LineElement, Title, Tooltip, Legend, Filler, BarController, BarElement, DoughnutController, ArcElement, Chart, registerables } from 'chart.js';
 import { Chart as ChartJS } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 ChartJS.register(
   CategoryScale,
@@ -44,30 +45,40 @@ export class DashboardDigitatlOnboarding {
   public barChartOptionsSet: any = {
     responsive: true,
     maintainAspectRatio: false,
-    indexAxis: 'x',    // VERTICAL BARS like the screenshot
+    indexAxis: 'x',   // vertical bars
     scales: {
       x: {
         stacked: true,
         grid: {
-          display: false               // screenshot has NO vertical grid lines
+          display: false
         },
         ticks: {
+          maxRotation: 0,
+          minRotation: 0,
+          autoSkip: false,
+          callback: (value: any, index: number) => {
+            const label = this.barChartDataSet.labels[index];
+
+            if (label && label.length > 12) {
+              return label.split(' ');
+            }
+            return label;
+          },
           font: { size: 14 },
-          color: "#444"                // same color style
+          color: '#444'
         }
       },
-
       y: {
         stacked: true,
         min: 0,
-        max: 12000,
+        max: 30,
         ticks: {
-          stepSize: 3000,              // 0, 3000, 6000, 9000, 12000
+          stepSize: 2, // optional but clean: 0,2,4...18
           font: { size: 14 },
           color: "#777"
         },
         grid: {
-          color: "#e5e5e5",            // light gray gridlines like screenshot
+          color: "#e5e5e5",
           drawBorder: false
         }
       }
@@ -75,66 +86,30 @@ export class DashboardDigitatlOnboarding {
 
     plugins: {
       legend: {
-        display: false                 // screenshot shows no legend
+        display: false
       }
     },
     elements: {
       line: {
-        tension: 0.4                  // Slight curve for the line
+        tension: 0.4
       }
     }
   };
 
- public barChartDataSet: any = {
-  labels: ['Kahramaa', "Int'l Transfer", 'Debit Payment', 'Credit Card', 'Bill Payment'],  // X-axis labels
-  datasets: [
-    {
-      label: 'Mobile',
-      data: [5900, 1500, 4500, 5600, 3900],       // purple bottom
-      backgroundColor: () =>
-        this.createStripedGradient('rgba(240, 219, 144, 1)', 'rgba(240, 203, 67, 1)'),
-      borderRadius: 4,
-      order: 2  // Bars first
-    },
-    {
-      label: 'Web',
-      data: [1500, 3000, 1800, 3100, 3500],       // green top
-      backgroundColor: () =>
-        this.createStripedGradient('rgba(235, 141, 143, 1)', 'rgba(239, 68, 68, 1)'),
-      borderRadius: 4,
-      order: 2  // Bars first
-    },
-    {
-      label: 'Mobile',
-      data: [2200, 1500, 2500, 2600, 3300],       // green bottom
-      backgroundColor: () =>
-        this.createStripedGradient('rgba(20, 204, 76, 1)', 'rgba(141, 235, 169, 1)'),
-      borderRadius: 4,
-      order: 2 // Bars first
-    },
-    // Line chart dataset (above the bars)
-    {
-      label: 'Avg Latency ms',
-      data: [9000, 11500, 8500, 11600, 9500],  // Latency data for the line
-      type: 'line', // Line chart type
-      fill: false,   // Line shouldn't fill under the graph
-      borderColor: 'rgba(96, 23, 235, 1)', // Line color
-      borderWidth: 2, // Line thickness
-      pointBackgroundColor: 'rgba(96, 23, 235, 1)', // Point color (circle markers)
-      pointRadius: 4,  // Point size (smaller)
-      tension: 0.4,    // Slight curve for the line
-      order: 1  // Line above the bars
-    }
-  ]
-};
 
-
-
-  constructor(private cdr: ChangeDetectorRef) { }
+  public barChartDataSet: any = {
+    labels: [],
+    datasets: []
+  };
+  constructor(private cdr: ChangeDetectorRef, private adminCenterService: AdminCenterService) { }
 
   ngAfterViewInit() {
     this.initChart();
     this.cdr.detectChanges();
+  }
+
+  ngOnInit() {
+    this.getFailureTranaction();
   }
 
   initChart() {
@@ -145,31 +120,36 @@ export class DashboardDigitatlOnboarding {
           label: "Int'l Transfer",
           data: [22, 0, 0, 0, 0], // Ooredoo data
           backgroundColor: this.createStripedGradient('#14CC4C', '#8DEBA9'),
-          borderRadius: 10
+          borderRadius: 10,
+          order: 2
         },
         {
           label: 'Kahramaa',
           data: [0, 15, 0, 0, 0], // Debit Payment data
           backgroundColor: this.createStripedGradient('#F0CB43', '#F0D77A'),
-          borderRadius: 10
+          borderRadius: 10,
+          order: 2
         },
         {
           label: 'Credit Card',
           data: [0, 0, 12, 0, 0], // To Another DB data
           backgroundColor: this.createStripedGradient('#EE595A', '#EB8C8E'),
-          borderRadius: 10
+          borderRadius: 10,
+          order: 2
         },
         {
           label: 'Debit Payment',
           data: [0, 0, 0, 17, 0], // Credit Card data
           backgroundColor: this.createStripedGradient('#6017EB', '#AD8DEB'),
-          borderRadius: 10
+          borderRadius: 10,
+          order: 2
         },
         {
           label: 'Bill Payment',
           data: [0, 0, 0, 0, 7], // To Own A/C data
           backgroundColor: this.createStripedGradient('#F043D3', '#EB8DDB'),
-          borderRadius: 10
+          borderRadius: 10,
+          order: 2
         }
       ]
     };
@@ -253,4 +233,100 @@ export class DashboardDigitatlOnboarding {
     // --- 3) Create Pattern ---
     return ctx.createPattern(canvas, 'repeat')!;
   }
+
+  getFailureTranaction() {
+    const payload = {
+      endDate: '2026-01-28',
+      startDate: '2024-12-18',
+      unit: 'PRD'
+    };
+
+    this.adminCenterService
+      .getTopFailureTransaction(payload)
+      .subscribe((res: any) => {
+        console.log('failurlatency', res);
+
+        // 👇 THIS is what actually updates the chart
+        this.patchServiceFailureLatencyChart(res.data);
+      });
+  }
+
+  patchServiceFailureLatencyChart(res: any) {
+    const list = res?.serviceFailureAndLatency?.failedTransactionRate || [];
+
+    // Remove duplicate categories
+    const map = new Map<string, any>();
+    list.forEach((item: any) => {
+      if (!map.has(item.categoryDesc)) {
+        map.set(item.categoryDesc, item);
+      }
+    });
+
+    const data = Array.from(map.values());
+
+    this.barChartDataSet = {
+      labels: data.map(d => d.categoryDesc),
+      datasets: [
+
+        // 🟡 1️⃣ WARNING → bottom
+        {
+          label: 'Warning',
+          data: data.map(d => +d.warning),
+          backgroundColor: () =>
+            this.createStripedGradient(
+              'rgba(240, 219, 144, 1)',
+              'rgba(240, 203, 67, 1)'
+            ),
+          borderRadius: 4,
+          stack: 'failure',
+          order: 2
+        },
+
+        // 🔴 2️⃣ ERROR → middle
+        {
+          label: 'Error',
+          data: data.map(d => +d.error),
+          backgroundColor: () =>
+            this.createStripedGradient(
+              'rgba(235, 141, 143, 1)',
+              'rgba(239, 68, 68, 1)'
+            ),
+          borderRadius: 4,
+          stack: 'failure',
+          order: 2
+        },
+
+        // 🟢 3️⃣ INFO → top
+        {
+          label: 'Info',
+          data: data.map(d => +d.info),
+          backgroundColor: () =>
+            this.createStripedGradient(
+              'rgba(20, 204, 76, 1)',
+              'rgba(141, 235, 169, 1)'
+            ),
+          borderRadius: 4,
+          stack: 'failure',
+          order: 2
+        },
+
+        // 🔵 Line stays last
+        {
+          label: 'Avg Latency ms',
+          type: 'line',
+          data: data.map(d => +d.total),
+          borderColor: 'rgba(96, 23, 235, 1)',
+          pointBackgroundColor: 'rgba(96, 23, 235, 1)',
+          pointRadius: 4,
+          tension: 0.4,
+          fill: false,
+          order: 0
+        }
+      ]
+    };
+
+
+    this.cdr.detectChanges();
+  }
+
 }
