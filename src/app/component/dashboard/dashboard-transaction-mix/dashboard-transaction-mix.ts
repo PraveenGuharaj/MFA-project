@@ -45,16 +45,17 @@ export class DashboardTransactionMix {
   legendData: any;
   constructor(private cdr: ChangeDetectorRef, private adminCenterService: AdminCenterService) { }
   legendIconMap: Record<string, string> = {
-    'To My Own DB A/C': 'images/yellow_pending.png',
-    'To DB A/C-Bulk': 'images/red_failure.png',
-    'Debit Payment': 'images/completed.png',
+    'To My Own DB A/C': 'images/dashboard_purple.png',
+    'To DB A/C-Bulk': 'images/yellow_pending.png',
+    'Debit Payment': 'images/green_success.png',
     'Credit Card Payment': 'images/dashboard_purple.png',
-    'International Fund Transfer': 'images/pink_pending_approved.png',
-    'Ooredoo': 'images/dashboar_violet.png',
+    'International Fund Transfer': 'images/dashboard_navy.png',
+    'Ooredoo': 'images/yellow_pending.png',
     'Tax': 'images/dashboard_lightgreen.png',
-    'To Staff  A/C - DB': 'images/dashboard_navy.png',
+    'To Staff  A/C - DB': 'images/dashboar_violet.png',
     'To Another Local Bank - BULK': 'images/dashboard_ash.png',
     'DEFAULT': 'images/green_success.png'
+
   };
 
   ngAfterViewInit() {
@@ -385,6 +386,8 @@ export class DashboardTransactionMix {
           label: item.transferDesc,
           icon: this.legendIconMap[item.transferDesc] || this.legendIconMap['DEFAULT']
         }));
+        console.log('legendData', this.legendData);
+
       }
     });
   }
@@ -647,6 +650,4 @@ export class DashboardTransactionMix {
 
     return gradient;
   }
-
-
 }
