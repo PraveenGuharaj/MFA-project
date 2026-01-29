@@ -169,4 +169,11 @@ export class AdminCenterService {
       payload
     );
   }
+
+  getOnboardingCounts() {
+    return this.http.get(
+      'http://34.1.33.119:8443/backoffice-service/onboarding/onboarding-counts',
+      {}
+    );
+  }
 }
