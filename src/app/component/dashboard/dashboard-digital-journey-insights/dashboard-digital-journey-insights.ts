@@ -50,6 +50,7 @@ export class DashboardDigitalJourneyInsights {
 
   barChart!: Chart;
   lineChart!: Chart;
+  onboardingCounts: any;
 
   constructor(private adminCenterService: AdminCenterService) { }
 
@@ -125,10 +126,82 @@ export class DashboardDigitalJourneyInsights {
     });
   }
 
+
+  //   renderLineChart() {
+  //   const ctx = this.journeyChart.nativeElement.getContext('2d')!;
+
+  //   // Fetch dynamic data from the API
+  //   this.adminCenterService.getOnboardingCounts().subscribe((res: any) => {
+  //     const data = res?.data;
+  //     if (!data) return;
+
+  //     // Simulate multiple data points (e.g., repeating 'Today' data multiple times)
+  //     const labels = ['Today', 'Today', 'Today', 'Today']; // Multiple points for the same label to simulate the curve
+  //     const started = [data.startedCount, data.startedCount, data.startedCount, data.startedCount];  // Repeated data
+  //     const completed = [data.completedCount, data.completedCount, data.completedCount, data.completedCount];  // Repeated data
+  //     const broken = [data.brokenCount, data.brokenCount, data.brokenCount, data.brokenCount];  // Repeated data
+
+  //     // Gradients for line chart
+  //     const gradientPurple = this.createGradient(ctx, '#6017EB', '#FFFFFF');
+  //     const gradientGreen = this.createGradient(ctx, '#29CC5A', '#FFFFFF');
+  //     const gradientRed = this.createGradient(ctx, '#EF4444', '#FFFFFF');
+
+  //     // Update the line chart with dynamic data
+  //     this.lineChart = new Chart(ctx, {
+  //       type: 'line',
+  //       data: {
+  //         labels,
+  //         datasets: [
+  //           {
+  //             label: 'Started',
+  //             data: started,
+  //             backgroundColor: gradientPurple,
+  //             borderColor: '#6017EB',
+  //             fill: true,
+  //             tension: 0.4,  // Smooth line
+  //             pointRadius: 5,  // Visible points
+  //           },
+  //           {
+  //             label: 'Completed',
+  //             data: completed,
+  //             backgroundColor: gradientGreen,
+  //             borderColor: '#14CC4C',
+  //             fill: true,
+  //             tension: 0.4,  // Smooth line
+  //             pointRadius: 5,  // Visible points
+  //           },
+  //           {
+  //             label: 'Broken',
+  //             data: broken,
+  //             backgroundColor: gradientRed,
+  //             borderColor: '#EE595A',
+  //             fill: true,
+  //             tension: 0.4,  // Smooth line
+  //             pointRadius: 5,  // Visible points
+  //           },
+  //         ],
+  //       },
+  //       options: {
+  //         responsive: true,
+  //         maintainAspectRatio: false,
+  //         plugins: {
+  //           legend: { display: false },  // Show the legend
+  //         },
+  //         scales: {
+  //           x: { grid: { display: false } },
+  //           y: { beginAtZero: true }
+  //         }
+  //       }
+  //     });
+  //   });
+  // }
+
+
   /* -------------------- BAR CHART (DYNAMIC) -------------------- */
 
   getOnboardingCount() {
     this.adminCenterService.getOnboardingCounts().subscribe((res: any) => {
+      this.onboardingCounts = res?.data;
       const data = res?.data;
       console.log('data', data);
 
@@ -179,7 +252,6 @@ export class DashboardDigitalJourneyInsights {
             borderSkipped: false,
           }
         ]
-
       },
       options: {
         responsive: true,
@@ -213,7 +285,10 @@ export class DashboardDigitalJourneyInsights {
         },
         scales: {
           x: {
-            grid: { display: false },
+            grid: {
+              display: true, // Make the vertical grid lines visible
+              color: '#E6E6E6', // You can customize the color of the vertical grid lines here
+            },
             ticks: {
               color: '#1C174A',
               font: { size: 14, weight: 600 }
@@ -222,7 +297,9 @@ export class DashboardDigitalJourneyInsights {
           y: {
             beginAtZero: true,
             max: yAxisMax, // 🔥 HERE
-            grid: { color: '#E6E6E6' },
+            grid: {
+              display: false,  // Hide the horizontal grid lines
+            },
             ticks: {
               color: '#A2A3A5',
               font: { size: 12 }
@@ -232,6 +309,7 @@ export class DashboardDigitalJourneyInsights {
       }
     });
   }
+
 
 
   /* -------------------- HELPERS -------------------- */

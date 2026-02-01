@@ -132,6 +132,10 @@ export class AdminCenterBranchLocator {
   // ];
 
   ngOnInit() {
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getBranchLoactors(); // 🔥 refresh API call
+    });
     this.getBranchLoactors();
   }
 

@@ -10,12 +10,12 @@
       <!-- Text Inputs -->
       <div class="full-width">
         <label>Branch ID</label>
-        <input formControlName="atmCode" placeholder="Enter branch code" />
+        <input formControlName="branchCode" placeholder="Enter branch code" />
       </div>
 
       <div class="p-10 full-width">
         <label>Branch Name</label>
-        <input formControlName="atmName" placeholder="Enter branch name" />
+        <input formControlName="branchName" placeholder="Enter branch name" />
       </div>
 
       <div class="p-10 full-width">
@@ -39,7 +39,7 @@
           </mat-select>
         </div>
 
-        <div class="form-group p-10">
+        <div class="form-group p-10 pt-1">
           <label>City</label>
           <mat-select formControlName="city" placeholder="Select City">
             <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
@@ -54,7 +54,7 @@
           <input formControlName="latitude" placeholder="Enter Latitude" />
         </div>
 
-        <div class="form-group p-10">
+        <div class="form-group p-10 pt-1">
           <label>Longitude</label>
           <input formControlName="longitude" placeholder="Enter Longitude" />
         </div>
@@ -67,12 +67,12 @@
           <input formControlName="timing" placeholder="Enter timing" />
         </div>
 
-        <div class="form-group p-10">
+        <div class="form-group p-10 pt-1">
           <label>Working Hours</label>
           <mat-select formControlName="workingHours" placeholder="Select Hours">
-            <mat-option value="24x7">24x7</mat-option>
-            <mat-option value="Day">Day</mat-option>
-            <mat-option value="Night">Night</mat-option>
+            <mat-option value="8">8</mat-option>
+            <mat-option value="12">12</mat-option>
+            <mat-option value="16">16</mat-option>
           </mat-select>
         </div>
       </div>
@@ -131,15 +131,15 @@
         <input formControlName="latitude" placeholder="Enter the date" />
       </div>
       <!-- Status -->
-      <!-- <div class="">
-        <label>Status</label>
+      <div class="p-10">
+        <label class="pr-10">Status</label>
         <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
-      </div> -->
+      </div>
 
       <!-- Buttons -->
       <div class="form-actions p-10">
         <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
-        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save" (click)="submitForm()">Save</button>
       </div>
     </form>
   </div>
