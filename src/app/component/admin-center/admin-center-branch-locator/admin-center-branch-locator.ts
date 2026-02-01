@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 
 @Component({
   selector: 'app-admin-center-branch-locator',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-branch-locator.html',
   styleUrl: './admin-center-branch-locator.scss',
@@ -15,6 +17,8 @@ import { AdminCenterService } from '../admin-center-service';
 export class AdminCenterBranchLocator {
   @Input() subProduct: boolean = false;
   products: any;
+  selectedProduct: any;
+  showDeleteConfirm: boolean = false;
 
   constructor(private adminCenterService: AdminCenterService) { }
 
@@ -149,5 +153,33 @@ export class AdminCenterBranchLocator {
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  openDeletePopup(product: any) {
+    console.log('delete');
+
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    // 🔥 CALL DELETE API HERE
+    console.log('Deleting product:', this.selectedProduct);
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteBranchLocator(this.selectedProduct.branchId).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "SUCCESS") {
+        this.getBranchLoactors();
+      }
+
+    })
   }
 }

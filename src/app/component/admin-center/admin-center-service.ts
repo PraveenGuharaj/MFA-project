@@ -13,6 +13,7 @@ export class AdminCenterService {
 
   private baseUrl = 'http://34.1.33.119:8443/backoffice-service/rproducts';
   privateSubProduct = 'http://34.18.92.50:8443/backoffice-service/rsubproduct';
+  private branchLocatorUrl = 'http://34.1.33.119:8443/backoffice-service/branch-locator'
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
@@ -181,5 +182,13 @@ export class AdminCenterService {
     return this.http.post('http://34.1.33.119:8443/backoffice-service/branch-locator/add',
       payload
     );
+  }
+
+  deleteBranchLocator(productId: number): Observable<any> {
+    const body = {
+      branchId: productId
+    };
+
+    return this.http.post(`${this.branchLocatorUrl}/delete`, body);
   }
 }
