@@ -1,87 +1,63 @@
 <div class="product-table-container">
 
-    <div class="search-wrapper">
-        <div class="search-box">
-            <input type="text" placeholder="Search" />
-            <img src="images/admin_search.png" class="notification_icon">
-        </div>
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Branch Code</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Coordinates</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-        <button class="filter-btn">
-            <img src="images/admin_filter.png" class="notification_icon">
-        </button>
-    </div>
+    <tbody>
+      <tr *ngFor="let p of pagedProducts">
+        <td>{{ p.branchNameEn }}</td>
+        <td>{{ p.branchCode }}</td>
+        <td>{{ p.cityEn }}</td>
+        <td>{{ p.cityAr }}</td>
+        <td>{{ p.latitude }}, {{ p.longitude }}</td>
+        <td>
+          <span class="status" [class.active]="p.isActive === 'Y'" [class.inactive]="p.isActive !== 'Y'">
+            {{ p.isActive === 'Y' ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+        <td class="actions">
+          <img src="images/eye.png">
+          <img src="images/edit.png">
+          <img src="images/trash_red.png" (click)="openDeletePopup(p)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">
+      ‹
+    </button>
 
-    <table class="product-table">
-        <thead>
-            <tr>
-                <th *ngIf="!subProduct">Name</th>
-                <th *ngIf="!subProduct">Branch Code</th>
-                <th *ngIf="!subProduct">City</th>
-                <th *ngIf="!subProduct">Country</th>
-                <th *ngIf="!subProduct">Branch Type</th>
-                <th *ngIf="!subProduct">Coordinates</th>
-                <th *ngIf="!subProduct">Status</th>
-                <th *ngIf="!subProduct">Actions</th>
+    <button *ngFor="let page of pages" (click)="setPage(page)" [class.active-page]="page === currentPage">
+      {{ page }}
+    </button>
 
+    <span *ngIf="totalPages > 5">…</span>
 
-                <th *ngIf="subProduct">Sub-Product Name</th>
-                <th *ngIf="subProduct">Parent Product</th>
-                <th *ngIf="subProduct">Features</th>
-                <th *ngIf="subProduct">Channel</th>
-                <th *ngIf="subProduct">Screen</th>
-                <th *ngIf="subProduct">Status</th>
-                <th *ngIf="subProduct">Priority</th>
-                <th *ngIf="subProduct">Actions</th>
-            </tr>
-        </thead>
+    <button *ngIf="totalPages > 3" (click)="setPage(totalPages)">
+      {{ totalPages }}
+    </button>
 
+    <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+      ›
+    </button>
+  </div>
 
+  <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
+    message="Are you sure you want to make changes to the Branch Locator? Click on delete to remove the Branch Locator"
+    (confirm)="confirmDelete()" (cancel)="cancelDelete()">
+  </app-comon-popup>
 
-        <tbody>
-
-            <tr *ngFor="let p of products">
-                <td>{{ p.branchNameEn }}</td>
-                <td>{{ p.branchCode}}</td>
-                <td>{{ p.cityEn}}</td>
-                <td>{{ p.cityAr}}</td>
-                <td>{{ p.branchNameEn}}</td>
-                <td>{{ p.latitude }}, {{ p.longitude }}</td>
-                <!-- <td>{{ p.status}}</td> -->
-                <td>
-                    <span class="status" [ngClass]="{
-          'active': p.isActive === 'Y',
-          'inactive': p.isActive === 'YES'
-        }">
-                        {{ p.isActive === 'Y' ? 'Active' : 'Inactive' }}
-                    </span>
-                </td>
-                <td class="actions">
-                    <!-- Use images -->
-                    <ng-container>
-                        <img src="images/eye.png" />
-                        <img src="images/edit.png">
-                        <img src="images/trash_red.png" (click)="openDeletePopup(p)" />
-                    </ng-container>
-
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- Pagination -->
-    <div class="pagination">
-        <button>&lt;</button>
-        <button class="active-page">1</button>
-        <button>2</button>
-        <button>3</button>
-        <span>…</span>
-        <button>10</button>
-        <button>&gt;</button>
-    </div>
-
-    <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
-        message="Are you sure you want to make changes to the Product? Click on delete to remove the product management"
-        (confirm)="confirmDelete()" (cancel)="cancelDelete()">
-    </app-comon-popup>
 </div>

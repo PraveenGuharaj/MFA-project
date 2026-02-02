@@ -1,167 +1,81 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 
 @Component({
   selector: 'app-admin-center-branch-locator',
-  imports: [
-    CommonModule,
-    MatIconModule,
-    ComonPopup
-  ],
+  standalone: true,
+  imports: [CommonModule, MatIconModule, ComonPopup],
   templateUrl: './admin-center-branch-locator.html',
   styleUrl: './admin-center-branch-locator.scss',
 })
-export class AdminCenterBranchLocator {
-  @Input() subProduct: boolean = false;
-  products: any;
+export class AdminCenterBranchLocator implements OnInit {
+
+  @Input() subProduct = false;
+
+  products: any[] = [];
+  pagedProducts: any[] = [];
+
+  pageSize = 10;
+  currentPage = 1;
+  totalPages = 0;
+
   selectedProduct: any;
-  showDeleteConfirm: boolean = false;
+  showDeleteConfirm = false;
 
   constructor(private adminCenterService: AdminCenterService) { }
 
-  // products = [
-  //   {
-  //     name: 'ATM 01',
-  //     atmCode: '1234',
-  //     city: 'Doha',
-  //     country: 'Qatar',
-  //     atmType:'Branch Type',
-  //     coordinates: '28.6139° N,77.2088° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 02',
-  //     atmCode: '1234',
-  //     city: 'Delhi',
-  //     country: 'India',
-  //     atmType:'Branch Type',
-  //     coordinates: '25.2854° N,51.5310° E',
-  //     deliveryModes: 'PUSH',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 03',
-  //     atmCode: '1234',
-  //     city: 'Doha',
-  //     country: 'Qatar',
-  //     atmType:'Branch Type',
-  //     coordinates: '28.6139° N,77.2088° E',
-  //     deliveryModes: 'PUSH',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 04',
-  //     atmCode: '1234',
-  //     city: 'Dubai',
-  //     country: 'Qatar',
-  //     atmType:'Branch Type',
-  //     coordinates: '25.2854° N,51.5310° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 05',
-  //     atmCode: '1234',
-  //     city: 'Delhi',
-  //     country: 'India',
-  //     atmType:'Branch Type',
-  //     coordinates: '28.6139° N,77.2088° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 06',
-  //     atmCode: '1234',
-  //     city: 'Delhi',
-  //     country: 'India',
-  //     atmType:'Branch Type',
-  //     coordinates: '25.2854° N,51.5310° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 07',
-  //     atmCode: '1234',
-  //     city: 'Doha',
-  //     country: 'Qatar',
-  //     atmType:'Branch Type',
-  //     coordinates: '28.6139° N,77.2088° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 08',
-  //     atmCode: '1234',
-  //     city: 'Delhi',
-  //     country: 'India',
-  //     atmType:'Branch Type',
-  //     coordinates: '25.2854° N,51.5310° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 09',
-  //     atmCode: '1234',
-  //     city: 'Doha',
-  //     country: 'Qatar',
-  //     atmType:'Branch Type',
-  //     coordinates: '28.6139° N,77.2088° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   },
-  //   {
-  //     name: 'ATM 10',
-  //     atmCode: 'Delhi',
-  //     city: 'CRD-004',
-  //     country: 'India',
-  //     atmType:'Branch Type',
-  //     coordinates: '25.2854° N,51.5310° E',
-  //     deliveryModes: 'SMS',
-  //     status: 'Active',
-  //     actionsType: 'image'
-  //   }
-  // ];
-
   ngOnInit() {
-    this.adminCenterService.refresh$.subscribe(() => {
-      console.log('Refreshing table...');
-      this.getBranchLoactors(); // 🔥 refresh API call
-    });
     this.getBranchLoactors();
   }
 
   getBranchLoactors() {
     this.adminCenterService.getBranchLocator().subscribe((res: any) => {
-      console.log('getBranch', res);
-      this.products = res.data;
-    })
+      this.products = res.data || [];
+      this.totalPages = Math.ceil(this.products.length / this.pageSize);
+      this.setPage(1);
+    });
   }
 
+  /* ---------------- Pagination Logic ---------------- */
 
-  onProductTypeChanged(subProduct: boolean) {
-    this.subProduct = subProduct;
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+
+    this.currentPage = page;
+    const start = (page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedProducts = this.products.slice(start, end);
   }
+
+  get pages(): number[] {
+    if (this.totalPages <= 5) {
+      return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    }
+
+    if (this.currentPage <= 3) {
+      return [1, 2, 3];
+    }
+
+    if (this.currentPage >= this.totalPages - 2) {
+      return [this.totalPages - 2, this.totalPages - 1, this.totalPages];
+    }
+
+    return [
+      this.currentPage - 1,
+      this.currentPage,
+      this.currentPage + 1
+    ];
+  }
+
+  /* ---------------- Delete Logic ---------------- */
 
   openDeletePopup(product: any) {
-    console.log('delete');
-
     this.selectedProduct = product;
     this.showDeleteConfirm = true;
   }
-
 
   cancelDelete() {
     this.showDeleteConfirm = false;
@@ -169,17 +83,12 @@ export class AdminCenterBranchLocator {
   }
 
   confirmDelete() {
-    // 🔥 CALL DELETE API HERE
-    console.log('Deleting product:', this.selectedProduct);
-
     this.showDeleteConfirm = false;
-    // this.selectedProduct = null;
-    this.adminCenterService.deleteBranchLocator(this.selectedProduct.branchId).subscribe((res) => {
-      console.log('res', res);
-      if (res.status.code == "SUCCESS") {
-        this.getBranchLoactors();
-      }
 
-    })
+    this.adminCenterService
+      .deleteBranchLocator(this.selectedProduct.branchId)
+      .subscribe(() => {
+        this.getBranchLoactors();
+      });
   }
 }
