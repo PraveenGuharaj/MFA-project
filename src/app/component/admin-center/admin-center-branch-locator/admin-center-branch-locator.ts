@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddBranch } from '../admin-center-add-branch/admin-center-add-branch';
 
 @Component({
   selector: 'app-admin-center-branch-locator',
@@ -25,7 +27,7 @@ export class AdminCenterBranchLocator implements OnInit {
   selectedProduct: any;
   showDeleteConfirm = false;
 
-  constructor(private adminCenterService: AdminCenterService) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getBranchLoactors();
@@ -90,5 +92,30 @@ export class AdminCenterBranchLocator implements OnInit {
       .subscribe(() => {
         this.getBranchLoactors();
       });
+  }
+
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddBranch, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getBranchLoactors();
+      }
+    });
   }
 }

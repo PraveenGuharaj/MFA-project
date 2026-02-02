@@ -191,4 +191,11 @@ export class AdminCenterService {
 
     return this.http.post(`${this.branchLocatorUrl}/delete`, body);
   }
+
+  updateBranchLocator(payload: any) {
+    return this.http.post(
+      'http://34.1.33.119:8443/backoffice-service/branch-locator/update',
+      payload
+    );
+  }
 }

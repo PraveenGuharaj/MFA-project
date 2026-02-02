@@ -15,12 +15,12 @@
 
       <div class="p-10 full-width">
         <label>Branch Name</label>
-        <input formControlName="branchName" placeholder="Enter branch name" />
+        <input formControlName="branchNameEn" placeholder="Enter branch name" />
       </div>
 
       <div class="p-10 full-width">
         <label>Full Address</label>
-        <input formControlName="fullAddress" placeholder="Enter ATM name" />
+        <input formControlName="fullAddressEn" placeholder="Enter ATM name" />
       </div>
 
       <div class="p-10 full-width">
@@ -41,7 +41,7 @@
 
         <div class="form-group p-10 pt-1">
           <label>City</label>
-          <mat-select formControlName="city" placeholder="Select City">
+          <mat-select formControlName="cityEn" placeholder="Select City">
             <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
           </mat-select>
         </div>
