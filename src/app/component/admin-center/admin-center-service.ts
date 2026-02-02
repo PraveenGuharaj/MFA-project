@@ -198,4 +198,11 @@ export class AdminCenterService {
       payload
     );
   }
+
+  getMfa() {
+    return this.http.post(
+      ' http://34.1.33.119:8443/backoffice-service/mfa/getall ',
+      {}
+    );
+  }
 }

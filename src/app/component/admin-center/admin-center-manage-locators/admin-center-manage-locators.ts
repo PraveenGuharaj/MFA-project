@@ -131,17 +131,18 @@ export class AdminCenterManageLocators {
   ];
 
   ngOnInit() {
-    // this.getBranchLoactors();
+    this.getAtmLoactor();
   }
 
-  getBranchLoactors() {
-    this.adminCenterService.getBranchLocator().subscribe((res) => {
-      console.log('getBranch', res);
+  getAtmLoactor() {
+    // this.adminCenterService.getAtmLocator().subscribe((res) => {
+    //   console.log('getAtm', res);
 
-    })
+    // })
   }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
   }
+
 }

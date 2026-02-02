@@ -23,23 +23,23 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.mfaID }}</td>
-                <td>{{ p.name}}</td>
-                <td>{{ p.type}}</td>
-                <td>{{ p.failCount}}</td>
-                <td>{{ p.effectivePeriod}}</td>
+            <tr *ngFor="let item of getMfa">
+                <td>{{ item.mfaId }}</td>
+                <td>{{ item.mfaName}}</td>
+                <td>{{ item.mfaType}}</td>
+                <td>{{ item.mfaFailCount}}</td>
+                <td>{{ item.effectiveFrom }} to {{ item.effectiveTo }}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': item.status === 'ACT',
+          'inactive': item.status === 'Inactive'
         }">
-                        {{ p.status }}
+                        {{ item.status === 'ACT' ? 'Active' : item.status === 'INACT' ? 'Inactive' : item.status }}
                     </span>
                 </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />

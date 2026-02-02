@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 
 @Component({
   selector: 'app-admin-center-manage-mfa',
@@ -13,6 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterManageMfa {
   @Input() subProduct: boolean = false;
+  getMfa: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
+
+  ngOnInit() {
+    this.getMfaData();
+  }
 
   products = [
     {
@@ -110,5 +118,13 @@ export class AdminCenterManageMfa {
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getMfaData() {
+    this.adminCenterService.getMfa().subscribe((res: any) => {
+      console.log('getmfa', res);
+      this.getMfa = res.data;
+
+    })
   }
 }
