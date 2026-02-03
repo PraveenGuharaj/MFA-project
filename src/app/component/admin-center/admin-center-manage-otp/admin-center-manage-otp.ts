@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 @Component({
   selector: 'app-admin-center-manage-otp',
   imports: [
-      CommonModule,
+    CommonModule,
     MatIconModule
   ],
   templateUrl: './admin-center-manage-otp.html',
   styleUrl: './admin-center-manage-otp.scss',
 })
 export class AdminCenterManageOtp {
-   @Input() subProduct: boolean = false;
+  @Input() subProduct: boolean = false;
 
   products = [
     {
@@ -25,7 +26,7 @@ export class AdminCenterManageOtp {
       status: 'Active',
       actionsType: 'image'
     },
-   {
+    {
       domain: 'Domain2',
       channel: 'WebPortal',
       category: 'CUR-002',
@@ -36,7 +37,7 @@ export class AdminCenterManageOtp {
       status: 'Active',
       actionsType: 'image'
     },
-     {
+    {
       domain: 'Domain3',
       channel: 'Mobile App',
       category: 'LON-003',
@@ -47,7 +48,7 @@ export class AdminCenterManageOtp {
       status: 'Active',
       actionsType: 'image'
     },
-     {
+    {
       domain: 'Domain4',
       channel: 'Mobile Banking',
       category: 'CRD-004',
@@ -69,7 +70,7 @@ export class AdminCenterManageOtp {
       status: 'Active',
       actionsType: 'image'
     },
-     {
+    {
       domain: 'Domain4',
       channel: 'Mobile Banking',
       category: 'CRD-004',
@@ -91,7 +92,7 @@ export class AdminCenterManageOtp {
       status: 'Active',
       actionsType: 'image'
     },
-     {
+    {
       domain: 'Domain4',
       channel: 'Mobile Banking',
       category: 'CRD-004',
@@ -113,7 +114,7 @@ export class AdminCenterManageOtp {
       status: 'Active',
       actionsType: 'image'
     },
-     {
+    {
       domain: 'Domain4',
       channel: 'Mobile Banking',
       category: 'CRD-004',
@@ -135,7 +136,7 @@ export class AdminCenterManageOtp {
       status: 'Active',
       actionsType: 'image'
     },
-     {
+    {
       domain: 'Domain4',
       channel: 'Mobile Banking',
       category: 'CRD-004',
@@ -158,9 +159,23 @@ export class AdminCenterManageOtp {
       actionsType: 'image'
     }
   ];
+  getOtp: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
+
+  ngOnInit() {
+    this.getOtpControl();
+  }
 
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getOtpControl() {
+    this.adminCenterService.getOtp().subscribe((res: any) => {
+      console.log('otppppp', res)
+      this.getOtp = res.data;
+    })
   }
 }

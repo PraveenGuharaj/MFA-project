@@ -1,15 +1,15 @@
 <div class="product-table-container">
 
-<div class="search-wrapper">
-  <div class="search-box">
-    <input type="text" placeholder="Search" />
-      <img src="images/admin_search.png" class="notification_icon">
-  </div>
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input type="text" placeholder="Search" />
+            <img src="images/admin_search.png" class="notification_icon">
+        </div>
 
-  <button class="filter-btn">
-      <img src="images/admin_filter.png" class="notification_icon">
-  </button>
-</div>
+        <button class="filter-btn">
+            <img src="images/admin_filter.png" class="notification_icon">
+        </button>
+    </div>
 
 
     <table class="product-table">
@@ -21,6 +21,11 @@
                 <th *ngIf="!subProduct">OTP Length</th>
                 <th *ngIf="!subProduct">OTP Expiry</th>
                 <th *ngIf="!subProduct">Max Attempts</th>
+                <th *ngIf="!subProduct">Max Invalid Session</th>
+                <th *ngIf="!subProduct">Max Invalid User</th>
+                <th *ngIf="!subProduct">Block Duration</th>
+                <!-- <th *ngIf="!subProduct">Max Resend Count</th> -->
+                <th *ngIf="!subProduct">Resend Interval (Sec)</th>
                 <th *ngIf="!subProduct">Delivery Modes</th>
                 <th *ngIf="!subProduct">Status</th>
                 <th *ngIf="!subProduct">Actions</th>
@@ -41,26 +46,33 @@
 
         <tbody>
 
-            <tr *ngFor="let p of products" >
-                <td >{{ p.domain }}</td>
-                <td>{{ p.channel}}</td>
-                <td>{{ p.category}}</td>
-                <td>{{ p.otpLength}}</td>
-                <td>{{ p.otpExpiry}}</td>
-                <td>{{ p.maxAttempts}}</td>
-                <td>{{ p.deliveryModes}}</td>
+            <tr *ngFor="let item of getOtp">
+                <td>{{ item.domainId }}</td>
+                <td>{{ item.channelName}}</td>
+                <td>{{ item.categoryId}}</td>
+                <td>{{ item.otpLength}}</td>
+                <td>{{ item.otpExpirySecond}}</td>
+                <td>{{ item.maxResendCount}}</td>
+                <td> {{item.maxInvalidSession}}</td>
+
+                <td> {{item.maxInvalidUser}}</td>
+                <td> {{item.blockDurationMin}}</td>
+                <td> {{item.resendIntervalSec}}</td>
+
+                <td>{{ item.deliveryMode}}</td>
                 <!-- <td>{{ p.status}}</td> -->
-                  <td>
-          <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+                <td>
+                    <span class="status" [ngClass]="{
+          'active': item.activeFlag === 'Y',
+          'inactive': item.activeFlag === 'N'
         }">
-            {{ p.status }}
-          </span>
-        </td>
+                        {{ item.activeFlag === 'Y' ? 'Active' : item.activeFlag === 'N' ? 'Inactive' : item.activeFlag
+                        }}
+                    </span>
+                </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />

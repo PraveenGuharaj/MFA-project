@@ -43,6 +43,8 @@ export class DashboardTransactionPerformance implements AfterViewInit {
   getTransferViewCount() {
     this.adminCenterService.getTransferViewCount().subscribe((res: any) => {
       this.categories = res?.data?.categoryCodes?.[0]?.data || [];
+      console.log('categories', this.categories);
+
 
       if (this.categories.length) {
         // Set default category (e.g., "Ooredoo")
