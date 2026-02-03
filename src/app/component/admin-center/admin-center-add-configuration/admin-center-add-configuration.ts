@@ -61,7 +61,10 @@ export class AdminCenterAddConfiguration {
       type: ['', Validators.required],
       status: [true],
       templateName: ['', Validators.required],
-      channel: [[]]
+      channel: [[]],
+      mobileOtp: ['', Validators.required],
+      biometric: ['', Validators.required],
+      webOtp: ['', Validators.required]
     });
   }
 
@@ -92,38 +95,16 @@ export class AdminCenterAddConfiguration {
       blockDurationMin: otpForm.blockDuration,
       maxResendCount: 2,
       maxSmsPerDay: 0,
-      deliveryMode: "SMS",
+      deliveryMode: otpForm.deliveryMode,
       resendIntervalSec: 30,
-      activeFlag: "Y",
-      mobileotp: "Y",
-      bioMatrix: "N",
-      webOtp: "N",
+      activeFlag: otpForm.status == true ? 'Y' : 'N',
+      mobileotp: otpForm.mobileOtp === true ? 'Y' : 'N',
+      bioMatrix: otpForm.biometric === true ? 'Y' : 'N',
+      webOtp: otpForm.webOtp === true ? 'Y' : 'N',
       templateName: otpForm.templateName.name
     }
 
-    // const payload = {
-    //     "channelId": [
-    //         3
-    //     ],
-    //     categoryId: 23,
-    //     domainId: "RETAIL",
-    //     channelName: "Mobile Banking",
-    //     templateId: 18,
-    //     otpLength: 5,
-    //     otpExpirySecond: 5,
-    //     maxInvalidSession: 5,
-    //     maxInvalidUser: 5,
-    //     blockDurationMin: 5,
-    //     maxResendCount: 5,
-    //     maxSmsPerDay: 0,
-    //     deliveryMode: "",
-    //     resendIntervalSec: 5,
-    //     activeFlag: "Y",
-    //     mobileotp: "Y",
-    //     bioMatrix: "N",
-    //     webOtp: "N",
-    //     templateName: "abcdef"
-    // }
+
 
     if (this.isEditMode) {
 

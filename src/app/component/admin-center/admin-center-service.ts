@@ -238,7 +238,16 @@ export class AdminCenterService {
 
 
   createOtp(payload: any): Observable<any> {
-    return this.http.post(`${this.otpUrl}/create`, payload);
+    const headers = new HttpHeaders({
+      userid: 'ram123',
+      serviceid: ''
+    });
+
+    return this.http.post(
+      `${this.otpUrl}/create`,
+      payload,
+      { headers }
+    );
   }
 
 
@@ -255,6 +264,22 @@ export class AdminCenterService {
       configId: configId
     };
 
-    return this.http.post(`${this.otpDeleteUrl}/delete`, body);
+    const headers = new HttpHeaders({
+      userid: 'fdf',
+      serviceid: 'dfd'
+    });
+
+    return this.http.post(
+      `${this.otpDeleteUrl}/delete`,
+      body,
+      { headers }
+    );
+  }
+
+  getAtmLocator() {
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/atm/getAll',
+      {}
+    );
   }
 }

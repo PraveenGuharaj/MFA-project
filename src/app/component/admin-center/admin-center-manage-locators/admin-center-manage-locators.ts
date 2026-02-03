@@ -14,6 +14,7 @@ import { AdminCenterService } from '../admin-center-service';
 })
 export class AdminCenterManageLocators {
   @Input() subProduct: boolean = false;
+  getAtm: any;
 
   constructor(private adminCenterService: AdminCenterService) { }
 
@@ -135,10 +136,11 @@ export class AdminCenterManageLocators {
   }
 
   getAtmLoactor() {
-    // this.adminCenterService.getAtmLocator().subscribe((res) => {
-    //   console.log('getAtm', res);
+    this.adminCenterService.getAtmLocator().subscribe((res: any) => {
+      console.log('getAtm', res);
+      this.getAtm = res.data;
 
-    // })
+    })
   }
 
   onProductTypeChanged(subProduct: boolean) {
