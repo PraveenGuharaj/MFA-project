@@ -13,7 +13,9 @@ export class AdminCenterService {
 
   private baseUrl = 'http://34.1.33.119:8443/backoffice-service/rproducts';
   privateSubProduct = 'http://34.18.92.50:8443/backoffice-service/rsubproduct';
-  private branchLocatorUrl = 'http://34.1.33.119:8443/backoffice-service/branch-locator'
+  private branchLocatorUrl = 'http://34.1.33.119:8443/backoffice-service/branch-locator';
+  private otpUrl = 'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig';
+  private otpDeleteUrl = 'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig'
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
@@ -211,5 +213,48 @@ export class AdminCenterService {
       'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig/getall',
       {}
     );
+  }
+
+  getBoDropdown() {
+    return this.http.post(
+      'http://34.18.92.50:8443/bko-domain/fetchAll-DD',
+      {}
+    );
+  }
+
+  getCategory() {
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/api/rcategory/getall',
+      {}
+    );
+  }
+
+  getTemplate() {
+    return this.http.post(
+      'http://34.18.92.50:8443/bko-template/dropdown',
+      {}
+    );
+  }
+
+
+  createOtp(payload: any): Observable<any> {
+    return this.http.post(`${this.otpUrl}/create`, payload);
+  }
+
+
+
+  getChannel() {
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/api/rchannel/getall',
+      {}
+    );
+  }
+
+  deleteOtp(configId: number): Observable<any> {
+    const body = {
+      configId: configId
+    };
+
+    return this.http.post(`${this.otpDeleteUrl}/delete`, body);
   }
 }

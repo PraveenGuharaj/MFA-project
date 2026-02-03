@@ -10,24 +10,29 @@
       <!-- Product Name -->
       <div class="form-row full-width">
         <label>Domain</label>
-          <mat-select formControlName="domain" placeholder="Select Domain">
-            <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-          </mat-select>
+        <mat-select formControlName="domain" placeholder="Select Domain">
+          <mat-option *ngFor="let d of boDropdown" [value]="d">{{ d.desc }}</mat-option>
+        </mat-select>
       </div>
 
       <!-- Channel + Category Dropdown -->
       <div class="form-row">
         <div class="form-group">
           <label>Channel</label>
-          <mat-select formControlName="channel" placeholder="Select Channel">
-            <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+
+          <mat-select formControlName="channel" multiple placeholder="Select Channel">
+            <mat-option *ngFor="let c of channelDropdown" [value]="c">
+              {{ c.name }}
+            </mat-option>
           </mat-select>
+
         </div>
+
 
         <div class="form-group">
           <label>Category</label>
           <mat-select formControlName="category" placeholder="Select Category">
-            <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+            <mat-option *ngFor="let cat of categoryDropdown" [value]="cat">{{ cat.name }}</mat-option>
           </mat-select>
         </div>
       </div>
@@ -85,8 +90,15 @@
 
         <div class="form-group">
           <label>Delivery Modes</label>
-          <mat-select formControlName="blockDuration" placeholder="Select duration">
-            <mat-option *ngFor="let b of blockDurations" [value]="b">{{ b }}</mat-option>
+          <mat-select formControlName="deliveryMode" placeholder="Select duration">
+            <mat-option *ngFor="let b of deliveryModesOptions" [value]="b">{{ b }}</mat-option>
+          </mat-select>
+        </div>
+
+        <div class="form-group">
+          <label>Template Name</label>
+          <mat-select formControlName="templateName" placeholder="Select duration">
+            <mat-option *ngFor="let template of templateDropdown" [value]="template">{{ template.name }}</mat-option>
           </mat-select>
         </div>
       </div>
@@ -101,7 +113,7 @@
       <!-- Buttons -->
       <div class="form-actions">
         <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
-        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save" (click)="submitForm()">Save</button>
       </div>
     </form>
   </div>
