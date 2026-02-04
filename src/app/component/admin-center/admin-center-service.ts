@@ -303,4 +303,17 @@ export class AdminCenterService {
     );
   }
 
+  getLicenseDomain() {
+    return this.http.post(
+      'http://34.18.92.50:8443/bko-domain/fetchAll-DD',
+      {}
+    );
+  }
+
+  createLicense(payload: any) {
+    return this.http.post('http://34.1.33.119:8443/bko-license/post ',
+      payload
+    );
+  }
+
 }

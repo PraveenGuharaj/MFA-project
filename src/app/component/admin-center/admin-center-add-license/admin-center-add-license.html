@@ -10,46 +10,59 @@
       <!-- Text Inputs -->
       <div class="full-width">
         <label>Domain</label>
-        <input formControlName="atmCode" placeholder="Please select a domain." />
+        <mat-select formControlName="atmCode" placeholder="Please select a domain." class="mt-10">
+          <mat-option *ngFor="let cat of getLicenseDomain" [value]="cat">{{ cat.desc }}</mat-option>
+        </mat-select>
       </div>
 
       <h3>Notification Type</h3>
-      <div class="checkbox-group">
-        <mat-checkbox formControlName="ramp"><span class="fs-16">SMS</span></mat-checkbox>
-        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Email</span></mat-checkbox>
-        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Push</span></mat-checkbox>
+      <div class="checkbox-group mb-10">
+        <mat-checkbox formControlName="sms"><span class="fs-16">SMS</span></mat-checkbox>
+        <mat-checkbox formControlName="email" class="fs-16"><span class="fs-16">Email</span></mat-checkbox>
+        <mat-checkbox formControlName="push" class="fs-16"><span class="fs-16">Push</span></mat-checkbox>
       </div>
 
-      <div class="full-width">
-        <input formControlName="atmCode" placeholder="Enter a valid mobile number.." />
+      <!-- SMS Input -->
+      <div class="full-width" *ngIf="productForm.get('sms')?.value">
+        <label>SMS Number</label>
+        <input class="input-small mt-10" type="text" formControlName="smsValue" placeholder="Enter mobile number" />
       </div>
 
-      <div class="form-row p-10">
+      <!-- Email Input -->
+      <div class="full-width" *ngIf="productForm.get('email')?.value">
+        <label>Email Address</label>
+        <input class="input-small mt-10" type="email" formControlName="emailValue" placeholder="Enter email address" />
+      </div>
+
+      <!-- Push Input -->
+      <div class="full-width" *ngIf="productForm.get('push')?.value">
+        <label>Push Token</label>
+        <input class="input-small mt-10" type="text" formControlName="pushValue" placeholder="Enter push token" />
+      </div>
+
+      <div class="form-row p-10 full-width">
         <div class="form-group">
           <label>Effective From Date</label>
-          <input class="input-small" type="date">
+          <input class="input-small mt-10" type="datetime-local" formControlName="effectiveFrom" />
         </div>
 
+
         <div class="form-group">
-          <!-- <label>Warning Status</label>
-          <mat-select placeholder="Select Category">
-            <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
-          </mat-select> -->
         </div>
       </div>
 
       <div class="form-row p-10">
         <div class="form-group">
           <label>Alert Status</label>
-          <mat-select placeholder="Select Channel">
-            <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+          <mat-select placeholder="Select Channel" class="mt-10">
+            <mat-option *ngFor="let c of alertStatus" [value]="c">{{ c }}</mat-option>
           </mat-select>
         </div>
 
         <div class="form-group">
           <label>Warning Status</label>
-          <mat-select placeholder="Select Category">
-            <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+          <mat-select placeholder="Select Category" class="mt-10">
+            <mat-option *ngFor="let cat of warningStatus" [value]="cat">{{ cat }}</mat-option>
           </mat-select>
         </div>
       </div>
@@ -64,7 +77,7 @@
       <!-- Buttons -->
       <div class="form-actions p-10 bottom-btn">
         <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
-        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save" (click)="submitForm()">Save</button>
       </div>
     </form>
   </div>
