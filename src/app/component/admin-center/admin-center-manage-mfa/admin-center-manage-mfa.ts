@@ -4,12 +4,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterAddMfa } from '../admin-center-add-mfa/admin-center-add-mfa';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 
 @Component({
   selector: 'app-admin-center-manage-mfa',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-manage-mfa.html',
   styleUrl: './admin-center-manage-mfa.scss',
@@ -17,8 +20,11 @@ import { AdminCenterAddMfa } from '../admin-center-add-mfa/admin-center-add-mfa'
 export class AdminCenterManageMfa {
   @Input() subProduct: boolean = false;
   getMfa: any;
-
-  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
+  showDeleteConfirm: boolean = false;
+  selectedProduct: any;
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster,
+  ) { }
 
   ngOnInit() {
     this.getMfaData();
@@ -45,13 +51,13 @@ export class AdminCenterManageMfa {
       }
     });
 
-    // 👇 THIS IS THE IMPORTANT PART
+    //  THIS IS THE IMPORTANT PART
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('Dialog closed with:', result);
 
       if (result === 'retaiClose') {
         console.log('success');
-        this.getMfa();
+        this.getMfaData();
         // this.loadSubProducts(); 
       }
     });
@@ -64,4 +70,33 @@ export class AdminCenterManageMfa {
 
     })
   }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+
+    const payload = {
+      mfaId: this.selectedProduct.mfaId,
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteMfa(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('MFA deleted successfully');
+        this.getMfaData();
+      }
+
+    })
+  }
+
 }

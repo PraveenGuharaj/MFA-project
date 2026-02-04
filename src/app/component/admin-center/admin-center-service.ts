@@ -17,7 +17,8 @@ export class AdminCenterService {
   private otpUrl = 'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig';
   private otpDeleteUrl = 'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig';
   private licenseDeleteUrl = 'http://34.1.33.119:8443/bko-license/post';
-  private mfaCreateUrl = 'http://34.18.92.50:8443/backoffice-service/mfa'
+  private mfaCreateUrl = 'http://34.18.92.50:8443/backoffice-service/mfa';
+  private mfaDeleteUrl = 'http://34.1.33.119:8443/backoffice-service/mfa/delete';
 
   constructor(private http: HttpClient) { }
 
@@ -342,4 +343,9 @@ export class AdminCenterService {
       payload
     );
   }
+
+  deleteMfa(productId: any): Observable<any> {
+    return this.http.post(`${this.mfaDeleteUrl}`, productId);
+  }
+
 }

@@ -42,7 +42,7 @@
                     <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" (click)="openModal(item)" />
-                        <img src="images/trash_red.png" />
+                        <img src="images/trash_red.png" (click)="openDeletePopup(item)" />
                     </ng-container>
 
                 </td>
@@ -60,5 +60,9 @@
         <button>10</button>
         <button>&gt;</button>
     </div>
+
+    <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
+        message="Are you sure you want to delete this MFA?" (confirm)="confirmDelete()" (cancel)="cancelDelete()">
+    </app-comon-popup>
 
 </div>
