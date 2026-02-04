@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddMfa } from '../admin-center-add-mfa/admin-center-add-mfa';
 
 @Component({
   selector: 'app-admin-center-manage-mfa',
@@ -16,7 +18,7 @@ export class AdminCenterManageMfa {
   @Input() subProduct: boolean = false;
   getMfa: any;
 
-  constructor(private adminCenterService: AdminCenterService) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getMfaData();
@@ -28,6 +30,31 @@ export class AdminCenterManageMfa {
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddMfa, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getMfa();
+        // this.loadSubProducts(); 
+      }
+    });
   }
 
   getMfaData() {

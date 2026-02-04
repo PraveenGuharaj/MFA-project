@@ -335,4 +335,11 @@ export class AdminCenterService {
   createMfaProduct(payload: any): Observable<any> {
     return this.http.post(`${this.mfaCreateUrl}/save`, payload);
   }
+
+  updateMfaProduct(payload: any) {
+    return this.http.post(
+      'http://34.1.33.119:8443/backoffice-service/mfa/update',
+      payload
+    );
+  }
 }

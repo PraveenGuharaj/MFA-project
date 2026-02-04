@@ -9,6 +9,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../admin-center-service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonToaster } from '../../../shared/services/common-toaster';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -61,8 +62,30 @@ export class AdminCenterAddMfa {
   }
 
   ngOnInit() {
-    this.getMfaData();
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.loadEditData(this.data.editData);
+    } else {
+      this.loadMasterData();
+    }
   }
+
+  loadEditData(editData: any) {
+    forkJoin({
+      mfaList: this.adminCenterService.getMfa()
+    }).subscribe(({ mfaList }: any) => {
+      this.getMfa = mfaList.data;
+      this.patchForm(editData);
+    });
+  }
+
+  loadMasterData() {
+    this.adminCenterService.getMfa().subscribe((res: any) => {
+      this.getMfa = res.data;
+    });
+  }
+
+
 
   getMfaData() {
     this.adminCenterService.getMfa().subscribe((res: any) => {
@@ -88,7 +111,7 @@ export class AdminCenterAddMfa {
     // }
 
     const form = this.productForm.value;
-    console.log('form', form)
+    console.log('form', this.data)
 
     const payload = {
       mfaName: form.mfaName?.mfaName || form.mfaName,
@@ -96,13 +119,20 @@ export class AdminCenterAddMfa {
       mfaFailCount: form.failCount.mfaFailCount,
       effectiveFrom: this.formatDate(form.effectivePeriodFrom),
       effectiveTo: this.formatDate(form.effectivePeriodTo),
-      status: form.status ? 'ACT' : 'INA'
+      status: form.status ? 'ACT' : 'INA',
+      mfaId: this.isEditMode ? this.data?.editData?.mfaId : '',
     };
 
     console.log('FINAL PAYLOAD', payload);
 
     if (this.isEditMode) {
-      this.adminCenterService.updateRetailProduct(payload).subscribe();
+      this.adminCenterService.updateMfaProduct(payload).subscribe((res: any) => {
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess('MFA Saved successfully');
+          this.dialogRef.close('retaiClose');
+          this.adminCenterService.trigger();
+        }
+      });
     } else {
       this.adminCenterService.createMfaProduct(payload).subscribe((res) => {
         if (res?.status.code == "000000") {
@@ -127,6 +157,40 @@ export class AdminCenterAddMfa {
     return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
   }
 
+
+
+
+  patchForm(p: any) {
+    const selectedFailCount = this.getMfa.find(
+      (m: any) => m.mfaFailCount === p.mfaFailCount
+    );
+
+    this.productForm.patchValue({
+      mfaName: p.mfaName,
+
+      sms: p.mfaType === 'SMS',
+      otp: p.mfaType === 'OTP',
+      biometric: p.mfaType === 'BIOMETRIC',
+      secure: p.mfaType === 'SECURE VALUE',
+
+      failCount: selectedFailCount,
+
+      effectivePeriodFrom: this.toDateInput(p.effectiveFrom),
+      effectivePeriodTo: this.toDateInput(p.effectiveTo),
+
+      status: p.status === 'ACT'
+    });
+  }
+
+
+  toDateInput(dateStr: string): string | null {
+    if (!dateStr) return null;
+
+    // Expected: DD/MM/YYYY
+    const [day, month, year] = dateStr.split('/');
+
+    return `${year}-${month}-${day}`;
+  }
 
 
   closeForm() { }
