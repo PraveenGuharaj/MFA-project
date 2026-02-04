@@ -15,7 +15,8 @@ export class AdminCenterService {
   privateSubProduct = 'http://34.18.92.50:8443/backoffice-service/rsubproduct';
   private branchLocatorUrl = 'http://34.1.33.119:8443/backoffice-service/branch-locator';
   private otpUrl = 'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig';
-  private otpDeleteUrl = 'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig'
+  private otpDeleteUrl = 'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig';
+  private licenseDeleteUrl = 'http://34.1.33.119:8443/bko-license/post';
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
@@ -323,4 +324,9 @@ export class AdminCenterService {
     );
   }
 
+
+  deleteLicense(productId: any): Observable<any> {
+
+    return this.http.post(`${this.licenseDeleteUrl}`, productId);
+  }
 }

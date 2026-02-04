@@ -4,11 +4,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterAddLicense } from '../admin-center-add-license/admin-center-add-license';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 @Component({
   selector: 'app-admin-center-manage-license',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-manage-license.html',
   styleUrl: './admin-center-manage-license.scss',
@@ -16,8 +19,11 @@ import { AdminCenterAddLicense } from '../admin-center-add-license/admin-center-
 export class AdminCenterManageLicense {
   @Input() subProduct: boolean = false;
   getLicenseData: any;
-
-  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
+  showDeleteConfirm: boolean = false;
+  selectedProduct: any;
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
 
   ngOnInit() {
     this.getLicense();
@@ -60,6 +66,45 @@ export class AdminCenterManageLicense {
   getLicense() {
     this.adminCenterService.getLicense().subscribe((res: any) => {
       this.getLicenseData = res.data
+    })
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+
+      licenseId: this.selectedProduct.licenseId,
+      domainName: null,
+      expiryDate: null,
+      warningStatus: null,
+      alertStatus: null,
+      status: null,
+      createdBy: null,
+      action: "DELETE",
+      notificationDeliveries: null
+
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteLicense(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('Product License Deleted Successfully');
+        this.getLicense();
+      }
+
     })
   }
 }
