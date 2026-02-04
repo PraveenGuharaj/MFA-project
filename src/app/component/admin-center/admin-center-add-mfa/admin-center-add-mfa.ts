@@ -33,7 +33,7 @@ export class AdminCenterAddMfa {
   // Dropdown Options
   channels = ["SMS", "Email", "App", "Web"];
   categories = ["Login", "Transaction", "Reset", "Verification"];
-  domains = ["Banking", "Insurance", "Fintech", "Wallet"];
+  domains = ["Banking", "Insurance", "Fintech", "Wallet", "test1", "test2", "test3"];
   blockDurations = ["30 Sec", "1 Min", "2 Min", "5 Min"];
   types = ["Primary", "Secondary", "Backup"];
   deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
