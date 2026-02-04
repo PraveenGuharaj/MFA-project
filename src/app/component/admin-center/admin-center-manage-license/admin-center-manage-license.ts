@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 @Component({
   selector: 'app-admin-center-manage-license',
   imports: [
@@ -12,102 +13,21 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterManageLicense {
   @Input() subProduct: boolean = false;
+  getLicenseData: any;
 
-  products = [
-    {
-      domain: 'Domain1',
-      notificationTypes: 'SMS',
-      expiryDate: '01-12-2025',
-      alertStatus: 'False',
-      warningStatus: 'False',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain2',
-      notificationTypes: 'Email',
-      expiryDate: '01-12-2025',
-      alertStatus: 'True',
-      warningStatus: 'True',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain3',
-      notificationTypes: 'Push',
-      expiryDate: '01-12-2025',
-      alertStatus: 'False',
-      warningStatus: 'False',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain4',
-      notificationTypes: 'SMS',
-      expiryDate: '01-12-2025',
-      alertStatus: 'True',
-      warningStatus: 'True',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain5',
-      notificationTypes: 'Email',
-      expiryDate: '01-12-2025',
-      alertStatus: 'False',
-      warningStatus: 'False',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain6',
-      notificationTypes: 'Push',
-      expiryDate: '01-12-2025',
-      alertStatus: 'True',
-      warningStatus: 'True',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain7',
-      notificationTypes: 'SMS',
-      expiryDate: '01-12-2025',
-      alertStatus: 'False',
-      warningStatus: 'False',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain8',
-      notificationTypes: 'Email',
-      expiryDate: '01-12-2025',
-      alertStatus: 'True',
-      warningStatus: 'True',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain9',
-      notificationTypes: 'Push',
-      expiryDate: '01-12-2025',
-      alertStatus: 'False',
-      warningStatus: 'False',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      domain: 'Domain10',
-      notificationTypes: 'SMS',
-      expiryDate: 'CRD-004',
-      alertStatus: 'True',
-      warningStatus: 'True',
-      status: 'Active',
-      actionsType: 'image'
-    }
-  ];
+  constructor(private adminCenterService: AdminCenterService) { }
 
+  ngOnInit() {
+    this.getLicense();
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getLicense() {
+    this.adminCenterService.getLicense().subscribe((res: any) => {
+      this.getLicenseData = res.data
+    })
   }
 }

@@ -21,23 +21,23 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.domain }}</td>
-                <td>{{ p.notificationTypes}}</td>
+            <tr *ngFor="let p of getLicenseData">
+                <td>{{ p.domainName }}</td>
+                <td>{{ p.notificationDeliveries[0].deliveryType}}</td>
                 <td>{{ p.expiryDate}}</td>
                 <td>{{ p.alertStatus}}</td>
                 <td>{{ p.warningStatus}}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IAC'
         }">
-                        {{ p.status }}
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }}
                     </span>
                 </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />

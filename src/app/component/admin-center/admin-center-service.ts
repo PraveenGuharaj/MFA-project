@@ -295,4 +295,12 @@ export class AdminCenterService {
       { headers }
     );
   }
+
+  getLicense() {
+    return this.http.post(
+      'http://34.1.33.119:8443/bko-license/fetchAll',
+      {}
+    );
+  }
+
 }
