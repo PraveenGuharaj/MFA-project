@@ -282,4 +282,17 @@ export class AdminCenterService {
       {}
     );
   }
+
+  updateOtp(payload: any) {
+    const headers = new HttpHeaders({
+      userid: 'fdf',
+      serviceid: 'dfd'
+    });
+
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/api/otpControlConfig/update',
+      payload,
+      { headers }
+    );
+  }
 }

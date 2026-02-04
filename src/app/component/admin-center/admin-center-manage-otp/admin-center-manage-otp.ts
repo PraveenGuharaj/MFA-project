@@ -3,6 +3,8 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddConfiguration } from '../admin-center-add-configuration/admin-center-add-configuration';
 @Component({
   selector: 'app-admin-center-manage-otp',
   imports: [
@@ -166,10 +168,14 @@ export class AdminCenterManageOtp {
   showDeleteConfirm: boolean = false;
 
 
-  constructor(private adminCenterService: AdminCenterService) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getOtpControl();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getOtpControl(); //  refresh API call
+    });
   }
 
 
@@ -209,5 +215,30 @@ export class AdminCenterManageOtp {
       }
 
     })
+  }
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddConfiguration, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        // this.getProducts();
+        // this.loadSubProducts(); // 🔥 refresh list / API call
+      }
+    });
   }
 }

@@ -74,7 +74,7 @@
                     <!-- Use images -->
                     <ng-container>
                         <img src="images/eye.png" />
-                        <img src="images/edit.png" />
+                        <img src="images/edit.png" (click)="openModal(item)" />
                         <img src="images/trash_red.png" (click)="openDeletePopup(item)" />
                     </ng-container>
 
