@@ -10,31 +10,38 @@
       <!-- Text Inputs -->
       <div class="full-width">
         <label>MFA Name</label>
-        <mat-select formControlName="country" placeholder="Enter Name">
-          <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+        <mat-select formControlName="mfaName" placeholder="Enter Name">
+          <mat-option *ngFor="let c of domains" [value]="c">{{ c }}</mat-option>
         </mat-select>
       </div>
 
       <h3>Type</h3>
       <div class="checkbox-group">
-        <mat-checkbox formControlName="ramp"><span class="fs-16">SMS</span></mat-checkbox>
-        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">OTP</span></mat-checkbox>
-        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Biometric</span></mat-checkbox>
-        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Secure</span></mat-checkbox>
+        <mat-checkbox formControlName="sms"><span class="fs-16">SMS</span></mat-checkbox>
+        <mat-checkbox formControlName="otp" class="fs-16"><span class="fs-16">OTP</span></mat-checkbox>
+        <mat-checkbox formControlName="biometric" class="fs-16"><span class="fs-16">Biometric</span></mat-checkbox>
+        <mat-checkbox formControlName="secure" class="fs-16"><span class="fs-16">Secure</span></mat-checkbox>
       </div>
 
       <div class="full-width mt-24">
         <label>Fail Count</label>
         <!-- <input formControlName="atmCode" placeholder="Enter a valid mobile number.." /> -->
-        <mat-select formControlName="country" placeholder="Enter Name">
-          <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+        <mat-select formControlName="failCount" placeholder="Enter Name">
+          <mat-option *ngFor="let c of getMfa" [value]="c">{{ c.mfaFailCount }}</mat-option>
         </mat-select>
       </div>
 
       <div class="form-row mt-24">
         <div class="form-group">
-          <label>Effective Period</label>
-          <input class="input-small" type="date">
+          <label>Effective Period From</label>
+          <input class="input-small" type="date" formControlName="effectivePeriodFrom">
+        </div>
+      </div>
+
+      <div class="form-row mt-24">
+        <div class="form-group">
+          <label>Effective Period To</label>
+          <input class="input-small" type="date" formControlName="effectivePeriodTo">
         </div>
       </div>
       <!-- Status -->
@@ -46,7 +53,7 @@
       <!-- Buttons -->
       <div class="form-actions p-10 bottom-btn">
         <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
-        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save" (click)="submitForm()">Save</button>
       </div>
     </form>
   </div>

@@ -20,6 +20,10 @@ export class AdminCenterManageMfa {
 
   ngOnInit() {
     this.getMfaData();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getMfaData();
+    });
   }
 
   onProductTypeChanged(subProduct: boolean) {
