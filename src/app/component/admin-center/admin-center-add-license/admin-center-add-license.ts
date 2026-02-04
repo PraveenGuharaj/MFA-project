@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -9,7 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../admin-center-service';
 import { CommonToaster } from '../../../shared/services/common-toaster';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -40,19 +41,19 @@ export class AdminCenterAddLicense {
   deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
   countries = ['India', 'UAE', 'Qatar'];
   cities = ['Delhi', 'Mumbai', 'Dubai', 'Doha'];
-  warningStatus = ['True', 'False'];
-  alertStatus = ['True', 'False'];
+  warningStatus = [true, false];
+  alertStatus = [true, false];
   getLicenseDomain: any;
-  isEditMode: any;
+  isEditMode = false;
 
 
 
-  constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService, private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddLicense>) {
+  constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService, private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddLicense>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     this.productForm = this.fb.group({
 
-      atmCode: [''],
-      atmName: [''],
-
+      domainName: [''],
       smsValue: [''],
       emailValue: [''],
       pushValue: [''],
@@ -60,6 +61,8 @@ export class AdminCenterAddLicense {
       sms: [false],
       email: [false],
       push: [false],
+      warningStatus: [''],
+      alertStatus: [''],
       status: [true]
     });
 
@@ -67,7 +70,32 @@ export class AdminCenterAddLicense {
 
   ngOnInit() {
     this.getDomainLicense();
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.loadEditData(this.data.editData);
+    }
   }
+
+  loadEditData(editData: any) {
+    forkJoin({
+      domains: this.adminCenterService.getLicenseDomain()
+    }).subscribe(({ domains }: any) => {
+      this.getLicenseDomain = domains.data;
+      this.patchForm(editData);
+    });
+  }
+
+  getSelectedDomain(domainName: string) {
+    if (!this.getLicenseDomain || !domainName) return null;
+
+    return this.getLicenseDomain.find(
+      (d: any) =>
+        d.code === domainName ||
+        d.desc === domainName
+    );
+  }
+
+
 
   submitForm() {
     if (!this.productForm.valid) {
@@ -106,26 +134,29 @@ export class AdminCenterAddLicense {
       });
     }
 
+    console.log('form', form);
+
+
     const payload = {
-      licenseId: null,
-      domainName: form.atmCode?.desc || null,
+      domainName: form.domainName?.desc || null,
       expiryDate: this.formatDate(form.effectiveFrom),
-      warningStatus: form.warningStatus === 'True',
-      alertStatus: form.alertStatus === 'True',
+      warningStatus: form.warningStatus,
+      alertStatus: form.alertStatus,
       status: form.status ? 'ACT' : 'INA',
-      createdBy: null,
-      action: 'ADD',
+      createdBy: '',
+      action: this.isEditMode ? 'UPDATE' : 'ADD',
+      licenseId: this.isEditMode ? this.data?.editData?.licenseId : '',
       notificationDeliveries
     };
 
 
     if (this.isEditMode) {
-      this.adminCenterService.updateRetailProduct(payload).subscribe((res: any) => {
+      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
-        if (res?.status.code == "SUCCESS") {
-          // this.commonToaster.showSuccess('Product created successfully');
-          // this.dialogRef.close('retaiClose');
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess('Product created successfully');
+          this.dialogRef.close('retaiClose');
         } else {
 
         }
@@ -159,6 +190,46 @@ export class AdminCenterAddLicense {
     return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ` +
       `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
   }
+
+  patchForm(p: any) {
+    const deliveries = p.notificationDeliveries || [];
+
+    const smsDelivery = deliveries.find((d: any) => d.deliveryType === 'SMS');
+    const emailDelivery = deliveries.find((d: any) => d.deliveryType === 'EMAIL');
+    const pushDelivery = deliveries.find((d: any) => d.deliveryType === 'PUSH');
+
+    this.productForm.patchValue({
+      domainName: this.getSelectedDomain(p.domainName),
+
+      sms: !!smsDelivery,
+      email: !!emailDelivery,
+      push: !!pushDelivery,
+
+      smsValue: smsDelivery?.phoneNumbers?.[0] || '',
+      emailValue: emailDelivery?.emails?.[0] || '',
+      pushValue: pushDelivery?.userIds?.[0] || '',
+
+      effectiveFrom: this.toDatetimeLocal(p.expiryDate),
+      status: p.status === 'ACT',
+      alertStatus: p.alertStatus,
+      warningStatus: p.warningStatus
+    });
+  }
+
+  toDatetimeLocal(dateStr: string): string | null {
+    if (!dateStr) return null;
+
+    // Expected input: DD/MM/YYYY HH:mm:ss
+    const [datePart, timePart] = dateStr.split(' ');
+    const [day, month, year] = datePart.split('/');
+    const [hour, minute] = timePart.split(':');
+
+    return `${year}-${month}-${day}T${hour}:${minute}`;
+  }
+
+
+
+
 
 
 

@@ -10,7 +10,7 @@
       <!-- Text Inputs -->
       <div class="full-width">
         <label>Domain</label>
-        <mat-select formControlName="atmCode" placeholder="Please select a domain." class="mt-10">
+        <mat-select formControlName="domainName" placeholder="Please select a domain." class="mt-10">
           <mat-option *ngFor="let cat of getLicenseDomain" [value]="cat">{{ cat.desc }}</mat-option>
         </mat-select>
       </div>
@@ -54,16 +54,17 @@
       <div class="form-row p-10">
         <div class="form-group">
           <label>Alert Status</label>
-          <mat-select placeholder="Select Channel" class="mt-10">
-            <mat-option *ngFor="let c of alertStatus" [value]="c">{{ c }}</mat-option>
+          <mat-select placeholder="Select Channel" class="mt-10" formControlName="alertStatus">
+            <mat-option *ngFor="let c of alertStatus" [value]="c"> {{ c === true ? 'True' : 'False' }}</mat-option>
           </mat-select>
         </div>
 
         <div class="form-group">
           <label>Warning Status</label>
-          <mat-select placeholder="Select Category" class="mt-10">
-            <mat-option *ngFor="let cat of warningStatus" [value]="cat">{{ cat }}</mat-option>
-          </mat-select>
+          <mat-select placeholder="Select Category" class="mt-10" formControlName="warningStatus">
+            <mat-option *ngFor="let cat of warningStatus" [value]="cat">
+              {{ cat === true ? 'True' : 'False' }}
+            </mat-option> </mat-select>
         </div>
       </div>
 

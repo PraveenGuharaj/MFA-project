@@ -148,22 +148,6 @@ export class AdminCenterRetailProduct {
     this.getProducts();
   }
 
-  // openModal(product: any) {
-  //   console.log('product', product);
-
-  //   this.dialog.open(DashboardAddRetailProduct, {
-  //     width: '60%',  // Adjust width as needed
-  //     height: 'auto',
-  //     position: {
-  //       right: '0',  // Ensure it opens on the right
-  //     },
-  //     data: {
-  //       editData: product
-  //     }
-  //   });
-
-  // }
-
 
   openModal(product: any) {
     console.log('product', product);
