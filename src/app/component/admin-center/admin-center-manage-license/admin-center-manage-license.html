@@ -21,7 +21,7 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of getLicenseData">
+            <tr *ngFor="let p of pagedProducts">
                 <td>{{ p.domainName }}</td>
                 <td>{{ p.notificationDeliveries[0].deliveryType}}</td>
                 <td>{{ p.expiryDate}}</td>
@@ -50,14 +50,26 @@
 
     <!-- Pagination -->
     <div class="pagination">
-        <button>&lt;</button>
-        <button class="active-page">1</button>
-        <button>2</button>
-        <button>3</button>
-        <span>…</span>
-        <button>10</button>
-        <button>&gt;</button>
+        <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">
+            ‹
+        </button>
+
+        <button *ngFor="let page of pages" (click)="setPage(page)" [class.active-page]="page === currentPage">
+            {{ page }}
+        </button>
+
+        <span *ngIf="totalPages > 5">…</span>
+
+        <button *ngIf="totalPages > 3" (click)="setPage(totalPages)">
+            {{ totalPages }}
+        </button>
+
+        <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+            ›
+        </button>
     </div>
+
+
     <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
         message="Are you sure you want to make changes to the License? Click on delete to remove the license"
         (confirm)="confirmDelete()" (cancel)="cancelDelete()">
