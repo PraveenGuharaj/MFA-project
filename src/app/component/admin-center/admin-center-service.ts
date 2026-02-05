@@ -20,6 +20,7 @@ export class AdminCenterService {
   private mfaCreateUrl = 'http://34.18.92.50:8443/backoffice-service/mfa';
   private mfaDeleteUrl = 'http://34.1.33.119:8443/backoffice-service/mfa/delete';
   private noficationCreateUrl = 'http://34.18.92.50:8443/bko-template';
+  private templateDeleteUrl = 'http://34.18.92.50:8443/bko-template/post';
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
@@ -378,5 +379,10 @@ export class AdminCenterService {
 
   createNotification(payload: any) {
     return this.http.post(`${this.noficationCreateUrl}/post`, payload);
+  }
+
+  deleteTemplate(productId: any): Observable<any> {
+
+    return this.http.post(`${this.templateDeleteUrl}`, productId);
   }
 }

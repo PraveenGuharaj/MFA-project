@@ -4,12 +4,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterAddTemplateCreation } from '../admin-center-add-template-creation/admin-center-add-template-creation';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 
 @Component({
   selector: 'app-admin-center-template-creation',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-template-creation.html',
   styleUrl: './admin-center-template-creation.scss',
@@ -17,9 +20,11 @@ import { AdminCenterAddTemplateCreation } from '../admin-center-add-template-cre
 export class AdminCenterTemplateCreation {
   @Input() subProduct: boolean = false;
   getTemplateCreationData: any;
+  showDeleteConfirm: boolean = false;
+  selectedProduct: any;
 
   constructor(private adminCenterService: AdminCenterService,
-    public dialog: MatDialog
+    public dialog: MatDialog, private commonToaster: CommonToaster
   ) { }
 
   ngOnInit() {
@@ -64,4 +69,48 @@ export class AdminCenterTemplateCreation {
       }
     });
   }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+
+
+      templateId: this.selectedProduct.templateId,
+      domainId: null,
+      categoryId: null,
+      unitId: null,
+      channelId: null,
+      notificationType: null,
+      remarks: null,
+      templateName: null,
+      deepLink: null,
+      notificationTemplate: null,
+      action: "DELETE"
+
+
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteTemplate(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('Template Deleted Successfully');
+        this.getTemplateCreation();
+      }
+
+    })
+  }
+
 }
