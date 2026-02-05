@@ -63,7 +63,7 @@
                 <!-- Actions -->
                 <td *ngIf="!subProduct" class="actions">
                     <img src="images/eye.png" />
-                    <img src="images/edit.png" />
+                    <img src="images/edit.png" (click)="openModal(p)" />
                     <img src="images/trash_red.png" />
                 </td>
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../admin-center-service';
 import { CommonToaster } from '../../../shared/services/common-toaster';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-admin-center-add-template-creation',
@@ -46,7 +47,8 @@ export class AdminCenterAddTemplateCreation {
 
 
   constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService, private commonToaster: CommonToaster,
-    private dialogRef: MatDialogRef<AdminCenterAddTemplateCreation>
+    private dialogRef: MatDialogRef<AdminCenterAddTemplateCreation>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.productForm = this.fb.group({
 
@@ -70,13 +72,69 @@ export class AdminCenterAddTemplateCreation {
 
   }
 
+  // ngOnInit() {
+  //   this.getDomainApi();
+  //   this.getUnitApi();
+  //   this.getChannelApi();
+  //   this.getCategoryApi();
+  //   this.getLanguageApi();
+  //       this.isEditMode = !!this.data?.editData;
+
+  //    if (this.isEditMode) {
+  //       console.log('data', this.data);
+
+  //       this.patchForm(this.data.editData);
+  //     }
+
+  // }
+
   ngOnInit() {
-    this.getDomainApi();
-    this.getUnitApi();
-    this.getChannelApi();
-    this.getCategoryApi();
-    this.getLanguageApi();
+    this.isEditMode = !!this.data?.editData;
+
+    if (this.isEditMode) {
+      this.loadEditData(this.data.editData);
+    } else {
+      this.loadDropdowns();
+    }
   }
+
+  loadDropdowns() {
+    forkJoin({
+      domains: this.adminCenterService.getLicenseDomain(),
+      units: this.adminCenterService.getUnits(),
+      channels: this.adminCenterService.getTemplateChannel(),
+      categories: this.adminCenterService.getCategory(),
+      languages: this.adminCenterService.getLanguage()
+    }).subscribe((res: any) => {
+      this.getDomainData = res.domains.data;
+      this.getUnitsData = res.units.data.units;
+      this.getChannelData = res.channels.data.channels;
+      this.getCategoryData = res.categories.data;
+      this.getLanguageData = res.languages.data;
+    });
+  }
+
+
+  loadEditData(editData: any) {
+    forkJoin({
+      domains: this.adminCenterService.getLicenseDomain(),
+      units: this.adminCenterService.getUnits(),
+      channels: this.adminCenterService.getTemplateChannel(),
+      categories: this.adminCenterService.getCategory(),
+      languages: this.adminCenterService.getLanguage()
+    }).subscribe((res: any) => {
+
+      this.getDomainData = res.domains.data;
+      this.getUnitsData = res.units.data.units;
+      this.getChannelData = res.channels.data.channels;
+      this.getCategoryData = res.categories.data;
+      this.getLanguageData = res.languages.data;
+
+      // ✅ PATCH ONLY AFTER DATA IS READY
+      this.patchForm(editData);
+    });
+  }
+
 
   submitForm() {
     // if (!this.productForm.valid) {
@@ -214,6 +272,34 @@ export class AdminCenterAddTemplateCreation {
     // this.adminCenterService.addLicense(payload).subscribe(...)
   }
 
+  patchForm(p: any) {
+    console.log('edit data', p);
+
+    const template = p.notificationTemplate?.[0];
+
+    this.productForm.patchValue({
+      DomainName: this.getSelectedDomain(p.domainId),
+      unitName: this.getSelectedUnit(p.unitId),
+      channelName: this.getSelectedChannel(p.channelId),
+      categoryName: this.getSelectedCategory(p.categoryId),
+      languageName: this.getSelectedLanguage(template?.langCode),
+
+      deepLinkUrl: p.deepLink || '',
+      remarks: p.remarks || '',
+      templateName: p.templateName || '',
+      status: true,
+
+      sms: p.notificationType === 'SMS',
+      email: p.notificationType === 'EMAIL',
+      push: p.notificationType === 'PUSH',
+
+      smsValue: p.notificationType === 'SMS' ? template?.templateContent : '',
+      emailValue: p.notificationType === 'EMAIL' ? template?.templateContent : '',
+      pushValue: p.notificationType === 'PUSH' ? template?.templateContent : ''
+    });
+  }
+
+
   closeForm() { }
 
   getDomainApi() {
@@ -245,4 +331,56 @@ export class AdminCenterAddTemplateCreation {
       this.getLanguageData = res.data;
     })
   }
+
+  getSelectedDomain(domainId: any) {
+    if (!this.getDomainData || !domainId) return null;
+
+    return this.getDomainData.find((d: any) =>
+      d.name === domainId ||
+      d.desc === domainId ||
+      d.name === domainId?.name ||
+      d.desc === domainId?.desc
+    ) || null;
+  }
+
+  getSelectedUnit(unitId: any) {
+    if (!this.getUnitsData || !unitId) return null;
+
+    return this.getUnitsData.find((u: any) =>
+      u.unitCode === unitId ||
+      u.unitDesc === unitId ||
+      u.unitCode === unitId?.unitCode
+    ) || null;
+  }
+
+  getSelectedChannel(channelId: any) {
+    if (!this.getChannelData || !channelId) return null;
+
+    return this.getChannelData.find((c: any) =>
+      c.channelId === channelId ||
+      c.channelDesc === channelId ||
+      c.channelId === channelId?.channelId
+    ) || null;
+  }
+
+  getSelectedCategory(categoryId: any) {
+    if (!this.getCategoryData || !categoryId) return null;
+
+    return this.getCategoryData.find((c: any) =>
+      c.categoryId == categoryId ||
+      c.name === categoryId ||
+      c.categoryId === categoryId?.categoryId
+    ) || null;
+  }
+
+  getSelectedLanguage(langCode: any) {
+    if (!this.getLanguageData || !langCode) return null;
+
+    return this.getLanguageData.find((l: any) =>
+      l.langCode === langCode ||
+      l.langDesc === langCode ||
+      l.langCode === langCode?.langCode
+    ) || null;
+  }
+
 }
