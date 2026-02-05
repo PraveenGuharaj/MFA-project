@@ -9,64 +9,90 @@
             <div class="p-10">
                 <div class="form-group">
                     <label>Domain</label>
-                    <mat-select formControlName="country" placeholder="Select Domain" class="mt-10">
-                        <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="DomainName" placeholder="Select Domain" class="mt-10">
+                        <mat-option *ngFor="let c of getDomainData" [value]="c">{{ c.desc }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group mt-20">
                     <label>Unit</label>
-                    <mat-select formControlName="city" placeholder="Select Unit ID" class="mt-10">
-                        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                    <mat-select formControlName="unitName" placeholder="Select Unit ID" class="mt-10">
+                        <mat-option *ngFor="let item of getUnitsData" [value]="item">{{ item.unitCode }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group mt-20">
                     <label>Channel</label>
-                    <mat-select formControlName="city" placeholder="Select Channel ID" class="mt-10">
-                        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                    <mat-select formControlName="channelName" placeholder="Select Channel ID" class="mt-10">
+                        <mat-option *ngFor="let item of getChannelData" [value]="item">{{ item.channelDesc
+                            }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group mt-20">
                     <label>Category</label>
-                    <mat-select formControlName="city" placeholder="Select Category" class="mt-10">
-                        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                    <mat-select formControlName="categoryName" placeholder="Select Category" class="mt-10">
+                        <mat-option *ngFor="let item of getCategoryData" [value]="item">{{ item.name }}</mat-option>
                     </mat-select>
                 </div>
             </div>
 
             <div class="full-width mt-20">
                 <label>Template Name</label>
-                <input formControlName="atmCode" placeholder="Enter Template Name" class="mt-10" />
+                <input formControlName="templateName" placeholder="Enter Template Name" class="mt-10" />
             </div>
 
             <h3>Notification Delivery Type</h3>
             <div class="checkbox-group">
-                <mat-checkbox formControlName="cashDispenser"><span class="fs-16">SMS</span></mat-checkbox>
-                <mat-checkbox formControlName="recycler"><span class="fs-16">Email</span></mat-checkbox>
-                <mat-checkbox formControlName="cdm"><span class="fs-16">Push</span></mat-checkbox>
+                <mat-checkbox formControlName="sms"><span class="fs-16">SMS</span></mat-checkbox>
+                <mat-checkbox formControlName="email"><span class="fs-16">Email</span></mat-checkbox>
+                <mat-checkbox formControlName="push"><span class="fs-16">Push</span></mat-checkbox>
             </div>
+
+            <!-- SMS Input -->
+            <div class="full-width" *ngIf="productForm.get('sms')?.value">
+                <label>SMS Number</label>
+                <input class="input-small mt-10" type="text" formControlName="smsValue"
+                    placeholder="Enter mobile number" />
+            </div>
+
+            <!-- Email Input -->
+            <div class="full-width" *ngIf="productForm.get('email')?.value">
+                <label>Email Address</label>
+                <input class="input-small mt-10" type="email" formControlName="emailValue"
+                    placeholder="Enter email address" />
+            </div>
+
+            <!-- Push Input -->
+            <div class="full-width" *ngIf="productForm.get('push')?.value">
+                <label>Push Token</label>
+                <input class="input-small mt-10" type="text" formControlName="pushValue"
+                    placeholder="Enter push token" />
+            </div>
+
 
             <div class="p-10">
                 <div class="form-group">
                     <label>Language</label>
-                    <mat-select formControlName="country" placeholder="Select Language" class="mt-10">
-                        <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="languageName" placeholder="Select Language" class="mt-10">
+                        <mat-option *ngFor="let item of getLanguageData" [value]="item">{{ item.langDesc }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group p-10">
                     <label>Template</label>
-                    <mat-select formControlName="city" placeholder="Input Variable" class="mt-10">
+                    <!-- <mat-select formControlName="city" placeholder="Input Variable" class="mt-10">
                         <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input formControlName="templateName" placeholder="Input Variable" class="mt-10" />
+
+
                 </div>
             </div>
 
             <div class="p-10 full-width">
                 <label>Deep Link URL</label>
-                <input formControlName="latitude" placeholder="Add Deep Link URL" class="mt-10" />
+                <input formControlName="deepLinkUrl" placeholder="Add Deep Link URL" class="mt-10" />
             </div>
 
             <div class="upload-wrapper mt-20">
@@ -83,13 +109,14 @@
 
             <div class="p-10 full-width">
                 <label>Remarks</label>
-                <input formControlName="latitude" placeholder="Enter Remarks" class="mt-10" />
+                <input formControlName="remarks" placeholder="Enter Remarks" class="mt-10" />
             </div>
 
             <div class="form-actions p-10">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>

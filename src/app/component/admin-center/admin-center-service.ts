@@ -19,7 +19,7 @@ export class AdminCenterService {
   private licenseDeleteUrl = 'http://34.1.33.119:8443/bko-license/post';
   private mfaCreateUrl = 'http://34.18.92.50:8443/backoffice-service/mfa';
   private mfaDeleteUrl = 'http://34.1.33.119:8443/backoffice-service/mfa/delete';
-
+  private noficationCreateUrl = 'http://34.18.92.50:8443/bko-template';
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
@@ -355,4 +355,28 @@ export class AdminCenterService {
     );
   }
 
+  getUnits() {
+    return this.http.get(
+      'http://34.18.92.50:8443/backoffice-service/units/all',
+      {}
+    );
+  }
+
+  getTemplateChannel() {
+    return this.http.get(
+      'http://34.18.92.50:8443/backoffice-service/channel/list',
+      {}
+    );
+  }
+
+  getLanguage() {
+    return this.http.get(
+      'http://34.18.92.50:8443/backoffice-service/language/summary',
+      {}
+    );
+  }
+
+  createNotification(payload: any) {
+    return this.http.post(`${this.noficationCreateUrl}/post`, payload);
+  }
 }

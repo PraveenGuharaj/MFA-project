@@ -20,6 +20,10 @@ export class AdminCenterTemplateCreation {
 
   ngOnInit() {
     this.getTemplateCreation();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getTemplateCreation();
+    });
   }
 
   onProductTypeChanged(subProduct: boolean) {
