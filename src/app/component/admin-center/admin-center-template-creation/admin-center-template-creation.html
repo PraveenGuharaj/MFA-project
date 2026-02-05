@@ -20,6 +20,7 @@
                 <th *ngIf="!subProduct">Notification Type</th>
                 <th *ngIf="!subProduct">Language</th>
                 <th *ngIf="!subProduct">Notification Template</th>
+                <th *ngIf="!subProduct">Actions</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -32,18 +33,43 @@
             </tr>
         </thead>
         <tbody>
+            <tr *ngFor="let p of getTemplateCreationData">
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.templateId }}</td>
-                <td>{{ p.domainId }}</td>
-                <td>{{ p.unitId }}</td>
-                <td>{{ p.channelId }}</td>
-                <td>{{ p.templateName }}</td>
-                <td>{{ p.notificationType }}</td>
-                <td>{{ p.language }}</td>
-                <td class="notification-template">{{ p.notificationTemplate }}</td>
+                <td *ngIf="!subProduct">{{ p.templateId }}</td>
+                <td *ngIf="!subProduct">{{ p.domainId }}</td>
+                <td *ngIf="!subProduct">{{ p.unitId }}</td>
+                <td *ngIf="!subProduct">{{ p.channelId }}</td>
+                <td *ngIf="!subProduct">{{ p.templateName }}</td>
+
+                <!--  Missing column FIXED -->
+                <td *ngIf="!subProduct">{{ p.notificationType }}</td>
+
+                <!-- Language -->
+                <td *ngIf="!subProduct">
+                    <div *ngFor="let item of p.notificationTemplate">
+                        {{ item.langDesc }}
+                    </div>
+                    <span *ngIf="!p.notificationTemplate?.length">—</span>
+                </td>
+
+                <!-- Notification Template -->
+                <td *ngIf="!subProduct" class="notification-template">
+                    <div *ngFor="let item of p.notificationTemplate">
+                        {{ item.templateContent }}
+                    </div>
+                    <span *ngIf="!p.notificationTemplate?.length">—</span>
+                </td>
+
+                <!-- Actions -->
+                <td *ngIf="!subProduct" class="actions">
+                    <img src="images/eye.png" />
+                    <img src="images/edit.png" />
+                    <img src="images/trash_red.png" />
+                </td>
+
             </tr>
         </tbody>
+
     </table>
 
     <!-- Pagination -->

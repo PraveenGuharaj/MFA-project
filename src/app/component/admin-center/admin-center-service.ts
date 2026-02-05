@@ -348,4 +348,11 @@ export class AdminCenterService {
     return this.http.post(`${this.mfaDeleteUrl}`, productId);
   }
 
+  getTemplateCreation() {
+    return this.http.post(
+      'http://34.18.92.50:8443/bko-template/fetchAll',
+      {}
+    );
+  }
+
 }
