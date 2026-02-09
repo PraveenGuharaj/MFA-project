@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../admin-center-service';
 import { CommonToaster } from '../../../shared/services/common-toaster';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-admin-center-add-product',
   imports: [
@@ -38,7 +38,8 @@ export class AdminCenterAddProduct {
   imageArFileName: any;
 
   constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService,
-    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddProduct>
+    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddProduct>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.productForm = this.fb.group({
 
@@ -48,9 +49,16 @@ export class AdminCenterAddProduct {
       productDescriptionAr: ['', Validators.required],
       imageEn: ['', Validators.required],
       imageAr: ['', Validators.required],
-      priority: ['', Validators.required],
+      priorityOrder: ['', Validators.required],
       enable: ['', Validators.required]
     });
+  }
+
+  ngOnInit() {
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
   }
 
   submitForm() {
@@ -64,7 +72,7 @@ export class AdminCenterAddProduct {
     const notificationDeliveries: any[] = [];
 
 
-    console.log('form', form);
+    console.log('form', this.data);
     const payload = {
       productNameEn: form.productNameEn,
       productNameAr: form.productNameAr,
@@ -72,14 +80,18 @@ export class AdminCenterAddProduct {
       productDescriptionAr: form.productDescriptionAr,
       imageEn: this.imageEnBase64,
       imageAr: this.imageArBase64,
-      enabled: form.enable,
-      priorityOrder: form.priority,
-      action: 'Add'
+      enabled: form.enable ? 'Y' : 'N',
+      priorityOrder: form.priorityOrder,
+      action: this.isEditMode ? 'Update' : 'Add',
+      id: this.data.editData.id
+
+
     };
 
 
+
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.updateProduct(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
@@ -130,6 +142,25 @@ export class AdminCenterAddProduct {
     reader.readAsDataURL(file);
   }
 
+  patchForm(form: any) {
+    console.log('form', form)
+    this.productForm.patchValue({
+      productNameEn: form.productNameEn,
+      productNameAr: form.productNameAr,
+      productDescriptionEn: form.productDescriptionEn,
+      productDescriptionAr: form.productDescriptionAr,
+      priorityOrder: form.priorityOrder,
+      enable: form.enabled === 'Y'
+    });
+
+    // show existing image names
+    this.imageEnFileName = form.productImageEn || 'Existing image';
+    this.imageArFileName = form.productImageAr || 'Existing image';
+
+    // keep existing base64 (or URL if backend sends it)
+    this.imageEnBase64 = form.imageEn;
+    this.imageArBase64 = form.imageAr;
+  }
 
 
   closeForm() { }

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddProduct } from '../admin-center-add-product/admin-center-add-product';
 
 @Component({
   selector: 'app-admin-center-product',
@@ -16,7 +18,7 @@ export class AdminCenterProduct {
   @Input() subProduct: boolean = false;
   getProductData: any;
 
-  constructor(private adminCenterService: AdminCenterService) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
 
   products = [
     {
@@ -93,6 +95,10 @@ export class AdminCenterProduct {
 
   ngOnInit() {
     this.getProductApi();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getProductApi();
+    });
   }
 
   onProductTypeChanged(subProduct: boolean) {
@@ -104,5 +110,30 @@ export class AdminCenterProduct {
       console.log('getproduct', res);
       this.getProductData = res.data;
     })
+  }
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddProduct, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getProductApi();
+        // this.loadSubProducts(); //  refresh list / API call
+      }
+    });
   }
 }

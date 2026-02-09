@@ -99,7 +99,8 @@
                         Upload
                     </button>
 
-                    <input type="file" class="file-input" accept="image/*" (change)="onImageSelect($event, 'AR')" />
+                    <input type="file" class="file-input" accept="image/*" (change)="onImageSelect($event, 'AR')"
+                        formControlName='imageAr' />
                 </div>
             </div>
 
@@ -109,7 +110,8 @@
                 <!-- <mat-select formControlName="priority" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
                 </mat-select> -->
-                <input class="input-small mt-10" type="text" formControlName="priority" placeholder="Enter Priority" />
+                <input class="input-small mt-10" type="text" formControlName="priorityOrder"
+                    placeholder="Enter Priority" />
             </div>
 
             <!-- Status -->
