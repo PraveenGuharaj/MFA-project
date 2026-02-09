@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 
 @Component({
   selector: 'app-admin-center-product',
@@ -13,6 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterProduct {
   @Input() subProduct: boolean = false;
+  getProductData: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
 
   products = [
     {
@@ -87,8 +91,18 @@ export class AdminCenterProduct {
     }
   ];
 
+  ngOnInit() {
+    this.getProductApi();
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getProductApi() {
+    this.adminCenterService.getProduct().subscribe((res: any) => {
+      console.log('getproduct', res);
+      this.getProductData = res.data;
+    })
   }
 }

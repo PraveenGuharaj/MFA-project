@@ -55,6 +55,7 @@
                 <th *ngIf="!subProduct">Product Description (Arabic)</th>
                 <th *ngIf="!subProduct">Status</th>
                 <th *ngIf="!subProduct">Priority</th>
+                <th *ngIf="!subProduct"> Actions </th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -68,14 +69,28 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
+            <tr *ngFor="let p of getProductData">
                 <td>{{ p.productCode }}</td>
-                <td>{{ p.productNameEnglish }}</td>
-                <td>{{ p.productNameArabic }}</td>
-                <td class="w-180">{{ p.productDescriptionEnglish }}</td>
-                <td>{{ p.productDescriptionArabic }}</td>
-                <td>{{ p.status }}</td>
-                <td>{{ p.priority }}</td>
+                <td>{{ p.productNameEn }}</td>
+                <td>{{ p.productNameAr }}</td>
+                <td class="w-180">{{ p.productDescriptionEn }}</td>
+                <td class="w-180">{{ p.productDescriptionAr }}</td>
+                <td> <span class="status" [ngClass]="{
+          'active': p.enabled === 'Y',
+          'inactive': p.enabled === 'N'
+        }">
+                        {{ p.enabled === 'Y' ? 'Active' : p.enabled === 'N' ? 'Inactive' : p.enabled }}
+                    </span></td>
+                <td>{{ p.priorityOrder }}</td>
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container>
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" />
+                        <img src="images/trash_red.png" />
+                    </ng-container>
+
+                </td>
             </tr>
         </tbody>
     </table>

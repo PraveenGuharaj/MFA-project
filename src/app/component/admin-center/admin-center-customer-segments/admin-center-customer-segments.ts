@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 @Component({
   selector: 'app-admin-center-customer-segments',
   imports: [
@@ -13,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class AdminCenterCustomerSegments {
   @Input() subProduct: boolean = false;
 
+  constructor(private adminCenterService: AdminCenterService) { }
 
   products = [
     {
@@ -107,8 +109,12 @@ export class AdminCenterCustomerSegments {
     }
   ];
 
+  ngOnInit() {
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
   }
+
+
 }
