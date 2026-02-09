@@ -2,7 +2,8 @@
     <div class="modal-container" (click)="$event.stopPropagation()">
 
         <div class="modal-header">
-            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add Product </h2>
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add
+                Product </h2>
         </div>
 
         <form [formGroup]="productForm" (ngSubmit)="submitForm()">
@@ -11,61 +12,110 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Product Name (English)</label>
-                    <mat-select formControlName="channel" placeholder="True">
+                    <!-- <mat-select formControlName="productNameEn" placeholder="True">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input class="input-small mt-10" type="text" formControlName="productNameEn"
+                        placeholder="Enter product name" />
                 </div>
 
                 <div class="form-group">
                     <label>Product Name (Arabic)</label>
-                    <mat-select formControlName="category" placeholder="False">
+                    <!-- <mat-select formControlName="productNameAr" placeholder="False">
                         <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input class="input-small mt-10" type="text" formControlName="productNameAr"
+                        placeholder="Enter Product Name Arabic" />
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label>Product Description (English)</label>
-                    <mat-select formControlName="channel" placeholder="True">
+                    <!-- <mat-select formControlName="productDescriptionEn" placeholder="True">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input class="input-small mt-10" type="text" formControlName="productDescriptionEn"
+                        placeholder="Enter Product Description English" />
                 </div>
 
                 <div class="form-group">
                     <label>Product Description (Arabic)</label>
-                    <mat-select formControlName="category" placeholder="False">
+                    <!-- <mat-select formControlName="productDescriptionAr" placeholder="False">
                         <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input class="input-small mt-10" type="text" formControlName="productDescriptionAr"
+                        placeholder="Enter Product Description Arabic" />
                 </div>
             </div>
 
-            <div class="form-row full-width">
+            <!-- <div class="form-row full-width">
                 <label>Image (English)</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                <mat-select formControlName="imageEn" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
                 </mat-select>
+                <input class="input-small mt-10" type="file" formControlName="imageEn" placeholder="Upload" />
+            </div> -->
+
+
+
+            <div class="upload-wrapper mt-24">
+                <label>Image (English)</label>
+
+                <div class="upload-box">
+                    <span class="placeholder-text">
+                        {{ imageEnFileName }}
+                    </span>
+
+                    <button type="button" class="upload-btn">
+                        <mat-icon>upload</mat-icon>
+                        Upload
+                    </button>
+
+                    <input type="file" class="file-input" accept="image/*" (change)="onImageSelect($event, 'EN')" />
+                </div>
             </div>
 
 
-            <div class="form-row full-width">
+
+            <!-- <div class="form-row full-width">
                 <label>Image (Arabic)</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                <mat-select formControlName="imageAr" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
                 </mat-select>
+                <input class="input-small mt-10" type="file" formControlName="imageAr" placeholder="Upload" />
+            </div> -->
+
+            <div class="upload-wrapper mt-24">
+                <label>Image (Arabic)</label>
+
+                <div class="upload-box">
+                    <span class="placeholder-text">
+                        {{ imageArFileName }}
+                    </span>
+
+                    <button type="button" class="upload-btn">
+                        <mat-icon>upload</mat-icon>
+                        Upload
+                    </button>
+
+                    <input type="file" class="file-input" accept="image/*" (change)="onImageSelect($event, 'AR')" />
+                </div>
             </div>
+
 
             <div class="form-row full-width">
                 <label>Priority</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                <!-- <mat-select formControlName="priority" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
+                </mat-select> -->
+                <input class="input-small mt-10" type="text" formControlName="priority" placeholder="Enter Priority" />
             </div>
 
             <!-- Status -->
             <div class="form-row">
                 <div class="form-group">
-                    Enable <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
+                    Enable <mat-slide-toggle formControlName="enable" color="primary"></mat-slide-toggle>
                 </div>
             </div>
 
@@ -73,7 +123,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>
