@@ -8,12 +8,12 @@
 
             <div class="form-row full-width">
                 <label>Sync Table</label>
-                <input placeholder="Enter Sync Table" />
+                <input placeholder="Enter Sync Table" formControlName="syncTable" />
             </div>
 
             <div class="form-row full-width">
                 <label>Sync/Migration</label>
-                <mat-select formControlName="domain" placeholder="Select Sync/Migration" class="mt-0">
+                <mat-select placeholder="Select Sync/Migration" class="mt-0" formControlName="syncMigration">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
                 </mat-select>
             </div>
@@ -22,7 +22,8 @@
             <div class="form-actions bottom-btn">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Discard</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>
