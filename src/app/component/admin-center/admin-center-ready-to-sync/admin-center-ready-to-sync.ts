@@ -3,6 +3,8 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddTableMigration } from '../admin-center-add-table-migration/admin-center-add-table-migration';
 
 @Component({
   selector: 'app-admin-center-ready-to-sync',
@@ -18,7 +20,7 @@ export class AdminCenterReadyToSync {
   @Input() subProduct: boolean = false;
   getReadyToSyncApi: any;
 
-  constructor(private adminCenterService: AdminCenterService) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
 
   products = [
     {
@@ -156,5 +158,30 @@ export class AdminCenterReadyToSync {
     this.adminCenterService.getReadyToSync().subscribe((res: any) => {
       this.getReadyToSyncApi = res.data.tablesData;
     })
+  }
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddTableMigration, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getReadyToSyncApi();
+        // this.loadSubProducts(); // 🔥 refresh list / API call
+      }
+    });
   }
 }

@@ -438,4 +438,11 @@ export class AdminCenterService {
       payload
     );
   }
+
+  updateReadyToSync(payload: any) {
+    return this.http.post(
+      'http://34.1.33.119:8443/backoffice-service/migration/saveOrUpdate',
+      payload
+    );
+  }
 }

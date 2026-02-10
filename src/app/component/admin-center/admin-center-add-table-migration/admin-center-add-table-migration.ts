@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../admin-center-service';
 import { CommonToaster } from '../../../shared/services/common-toaster';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin-center-add-table-migration',
@@ -35,13 +35,20 @@ export class AdminCenterAddTableMigration {
   isEditMode = false;
 
   constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService,
-    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddTableMigration>
+    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddTableMigration>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.productForm = this.fb.group({
       syncTable: ['', Validators.required],
       syncMigration: ['', Validators.required]
     });
   }
+
+  ngOnInit() {
+
+    this.patchForm(this.data.editData)
+  }
+
 
   submitForm() {
     // if (this.productForm.valid) {
@@ -57,16 +64,16 @@ export class AdminCenterAddTableMigration {
       syncMigration: readyToSyncForm.syncMigration,
       migrationStatus: "N",
       synStatus: "Y",
-      action: "ADD",
-      id: 0
+      action: this.isEditMode ? "ADD" : 'UPDATE',
+      id: this.data.editData.id
     }
 
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.updateReadyToSync(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Product created successfully');
+          this.commonToaster.showSuccess('Sync Table updated successfully');
           this.dialogRef.close('retaiClose');
         } else {
 
@@ -76,7 +83,7 @@ export class AdminCenterAddTableMigration {
       this.adminCenterService.createReadyToSync(payload).subscribe((res: any) => {
         console.log('create', res);
         if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Ready to sync created successfully');
+          this.commonToaster.showSuccess('Sync table created successfully');
           this.dialogRef.close('retaiClose');
           this.adminCenterService.trigger();
         }
@@ -86,4 +93,13 @@ export class AdminCenterAddTableMigration {
   }
 
   closeForm() { }
+
+  patchForm(form: any) {
+
+    console.log('p', this.data.editData)
+    this.productForm.patchValue({
+      syncTable: form.synTable,
+      syncMigration: form.syncmigration
+    });
+  }
 }
