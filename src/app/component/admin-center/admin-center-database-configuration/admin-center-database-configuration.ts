@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 @Component({
   selector: 'app-admin-center-database-configuration',
   imports: [
@@ -13,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class AdminCenterDatabaseConfiguration {
   @Input() subProduct: boolean = false;
 
+  constructor(private adminCenterService: AdminCenterService) { }
   products = [
     {
       databaseType: 'PR0014',
@@ -86,8 +88,18 @@ export class AdminCenterDatabaseConfiguration {
     }
   ];
 
+  ngOnInit() {
+    this.getDataBaseConfig();
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
   }
+
+  getDataBaseConfig() {
+    this.adminCenterService.getReadyToSync().subscribe((res: any) => {
+      console.log('resssss', res)
+    })
+  }
+
 }

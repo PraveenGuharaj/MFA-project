@@ -412,4 +412,24 @@ export class AdminCenterService {
 
     return this.http.post(`${this.productDeleteUrl}`, productId);
   }
+
+  getDatabaseConfig() {
+    const headers = new HttpHeaders({
+      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJJU1NVRVJfVEVTVCIsInN1YiI6IjVkNjE2NGJmLTBiMjAtNDI1MC1hMjAyLTZhYzExZGE5ZmJmYiIsImF1ZCI6IkFVRF9URVNUIiwiZXhwIjoxNzY4OTkxMjkxLCJpYXQiOjE3Njg5ODc2MzEsInNjb3BlIjoicmVhZCIsImFsbG93ZWRQcm9kdWN0IjoiV29ya2Zsb3cgQ29uZmlndXJhdGlvbiIsImFsbG93ZWRTdWJQcm9kdWN0cyI6WyJwcm9kdWN0NCIsIkNISUxEX1BST0RVQ1RfTUFOQUdFTUVOVCIsImJhbmsiLCJwcm9kdWN0IiwiTUFOQUdFX1VTRVJfQ09ORklHIiwiUFJPRFVDVF9NQU5BR0VNRU5UX0NPTkZJRyIsIlNVQl9QUk9EVUNUX01BTkFHRU1FTlRfQ09ORklHIiwiQUNDRVNTX1BFUk1JU1NJT05fTUFOQUdFTUVOVF9DT05GSUciLCJST0xFX01BTkFHRU1FTlRfQ09ORklHIiwiVVNFUl9HUk9VUF9NQU5BR0VNRU5UX0NPTkZJRyIsInByb2R1Y3QyIiwiUlVMRV9NQU5BR0VNRU5UX0NPTkZJRyIsInByb2R1Y3QzIiwic3ViIHByb2R1Y3QgY29kZSJdLCJhbGxvd2VkRmVhdHVyZXMiOlsiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIl19.EsyWIM-ktTY1z7SsugsWg9AY_KcShc_w-v3igTjx9SD-UWoob3cxuDm0RSl0y6XC_Zr1KNa5DEoAuvs7Xc9lijyI4cTBs1bK88iTEJ4xccUC7_Tliv0dGvOO2LZKUoYJFcqAec8rdcw_y3ora8rXkJuz2VwlzHrmg8FWhoPhbypXxrHAGAGjBnCu4Ono0fuM1ieMvZ3cYx-EkoMeDW7V97XvPIK-2aLl_GOWouWVloNPUYThYzqe_yvfTHw9kUDZJ1FJBUB9FeHiUXamSeTd9tR2cbwV3ohgAoFFWj8hSJW3kW8D3a0MsUwCJryAiHInr4feXZN7TufEn-Gki89MLQ',
+    });
+
+    return this.http.post(
+      'http://34.1.33.119:8443/backoffice-service/dbconfig/getDbConfig ',
+      {},               // request body (empty if you don’t have one)
+      { headers }       // options
+    );
+
+  }
+
+  getReadyToSync() {
+    return this.http.post(
+      ' http://34.1.33.119:8443/backoffice-service/migration/table-list',
+      {}
+    );
+  }
 }

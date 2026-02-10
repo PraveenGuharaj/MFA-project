@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 
 @Component({
   selector: 'app-admin-center-ready-to-sync',
@@ -15,6 +16,10 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterReadyToSync {
   @Input() subProduct: boolean = false;
+  getReadyToSyncApi: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
+
   products = [
     {
       syncTable: 'PR0014',
@@ -100,6 +105,10 @@ export class AdminCenterReadyToSync {
   filteredProducts = this.products;
   sortAscending: boolean = true;
 
+  ngOnInit() {
+    this.getReadyToSync();
+  }
+
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
   }
@@ -141,5 +150,11 @@ export class AdminCenterReadyToSync {
       }
       return 0;
     });
+  }
+
+  getReadyToSync() {
+    this.adminCenterService.getReadyToSync().subscribe((res: any) => {
+      this.getReadyToSyncApi = res.data.tablesData;
+    })
   }
 }

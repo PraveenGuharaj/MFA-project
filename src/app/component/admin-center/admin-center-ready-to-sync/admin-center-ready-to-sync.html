@@ -49,13 +49,13 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of filteredProducts">
-                <td>{{ p.syncTable }}</td>
-                <td>{{ p.syncMigration }}</td>
+            <tr *ngFor="let p of getReadyToSyncApi">
+                <td>{{ p.synTable }}</td>
+                <td>{{ p.syncmigration }}</td>
                 <td>{{ p.migrationDate }}</td>
                 <td>{{ p.migrationStatus }}</td>
-                <td class="w-180">{{ p.syncDate }}</td>
-                <td>{{ p.syncStatus }}</td>
+                <td class="w-180">{{ p.synDate }}</td>
+                <td>{{ p.synStatus }}</td>
                 <td>{{ p.id }}</td>
             </tr>
         </tbody>
