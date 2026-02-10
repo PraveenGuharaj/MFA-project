@@ -5,13 +5,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterAddTableMigration } from '../admin-center-add-table-migration/admin-center-add-table-migration';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 
 @Component({
   selector: 'app-admin-center-ready-to-sync',
   imports: [
     CommonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-ready-to-sync.html',
   styleUrl: './admin-center-ready-to-sync.scss',
@@ -19,8 +22,12 @@ import { AdminCenterAddTableMigration } from '../admin-center-add-table-migratio
 export class AdminCenterReadyToSync {
   @Input() subProduct: boolean = false;
   getReadyToSyncApi: any;
+  selectedProduct: any;
+  showDeleteConfirm: boolean = false;
 
-  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
 
   products = [
     {
@@ -109,6 +116,10 @@ export class AdminCenterReadyToSync {
 
   ngOnInit() {
     this.getReadyToSync();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getReadyToSync();
+    });
   }
 
   onProductTypeChanged(subProduct: boolean) {
@@ -183,5 +194,39 @@ export class AdminCenterReadyToSync {
         // this.loadSubProducts(); // 🔥 refresh list / API call
       }
     });
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+      tableName: this.selectedProduct.synTable,
+      syncMigration: this.selectedProduct.syncmigration,
+      migrationStatus: '',
+      synStatus: '',
+      action: "DELETE",
+      id: this.selectedProduct.id
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteReadyToSync(payload).subscribe((res: any) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('Sync Table Deleted Successfully');
+        this.getReadyToSync();
+      }
+
+    })
   }
 }
