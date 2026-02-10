@@ -205,7 +205,7 @@ export class AdminCenterAddTemplateCreation {
 
 
     const payload = {
-      templateId: null,
+      templateId: this.data.editData.templateId,
 
       domainId: form.DomainName?.name || null,
       categoryId: form.categoryName?.categoryId?.toString() || null,
@@ -274,6 +274,8 @@ export class AdminCenterAddTemplateCreation {
 
   patchForm(p: any) {
     console.log('edit data', p);
+    console.log('data', this.data.editData);
+
 
     const template = p.notificationTemplate?.[0];
 

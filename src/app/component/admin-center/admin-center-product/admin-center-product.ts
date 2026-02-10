@@ -4,12 +4,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterAddProduct } from '../admin-center-add-product/admin-center-add-product';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 
 @Component({
   selector: 'app-admin-center-product',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-product.html',
   styleUrl: './admin-center-product.scss',
@@ -17,8 +20,12 @@ import { AdminCenterAddProduct } from '../admin-center-add-product/admin-center-
 export class AdminCenterProduct {
   @Input() subProduct: boolean = false;
   getProductData: any;
+  selectedProduct: any;
+  showDeleteConfirm: boolean = false;
 
-  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
 
   products = [
     {
@@ -135,5 +142,37 @@ export class AdminCenterProduct {
         // this.loadSubProducts(); //  refresh list / API call
       }
     });
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+
+      id: this.selectedProduct.id,
+      action: "DELETE",
+
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteProduct(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('Product License Deleted Successfully');
+        this.getProductApi();
+      }
+
+    })
   }
 }
