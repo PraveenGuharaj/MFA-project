@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../admin-center-service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonToaster } from '../../../shared/services/common-toaster';
 
 @Component({
@@ -40,7 +40,8 @@ export class AdminCenterAddSubProduct {
   imageArBase64: any;
 
   constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService,
-    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddSubProduct>
+    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddSubProduct>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.productForm = this.fb.group({
       product: ['', Validators.required],
@@ -60,8 +61,13 @@ export class AdminCenterAddSubProduct {
     });
   }
 
+
   ngOnInit() {
     this.getSubProductAPi();
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
   }
 
   onImageSelect(event: any, type: 'EN' | 'AR') {
@@ -88,12 +94,37 @@ export class AdminCenterAddSubProduct {
     reader.readAsDataURL(file);
   }
 
+  patchForm(form: any) {
+    console.log('form', this.data)
+    this.productForm.patchValue({
+      product: form.productName,
+      subProductType: form.subProductType,
+      subProductNameEn: form.nameEn,
+      subProductNameAr: form.nameAr,
+      subProductDescriptionAr: form.descriptionAr,
+      subProductDescriptionEn: form.descriptionEn,
+      imageEn: form.imageEnNAME,
+      imageAr: form.imageArNAME,
+      priority: form.priority,
+
+    });
+
+    // show existing image names
+    this.imageEnFileName = form.imageEnNAME || 'Existing image';
+    this.imageArFileName = form.imageArNAME || 'Existing image';
+
+    // keep existing base64 (or URL if backend sends it)
+    this.imageEnBase64 = form.imageEn;
+    this.imageArBase64 = form.imageAr;
+  }
+
   submitForm() {
 
     const form = this.productForm.value;
     console.log('form', form)
 
     const payload = {
+      subProductId: this.data.isEdit.subProductId,
       productId: form.product.id,
       subProductType: form.subProductType,
       nameEn: form.subProductNameEn,
@@ -119,7 +150,7 @@ export class AdminCenterAddSubProduct {
 
 
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.updateAdmincenterSubProduct(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {

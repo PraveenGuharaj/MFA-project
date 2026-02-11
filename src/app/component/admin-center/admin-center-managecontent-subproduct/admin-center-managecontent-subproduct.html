@@ -55,6 +55,7 @@
                 <th *ngIf="!subProduct">Sub Product Description (English)</th>
                 <th *ngIf="!subProduct">Sub Product Description (Arabic)</th>
                 <th *ngIf="!subProduct">Status</th>
+                <th *ngIf="!subProduct">Actions</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -83,7 +84,15 @@
                     </span>
                 </td>
                 <td>{{p.priority}}</td>
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container>
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" (click)="openModal(p)" />
+                        <img src="images/trash_red.png" (click)="openDeletePopup(p)" />
+                    </ng-container>
 
+                </td>
             </tr>
         </tbody>
     </table>
@@ -98,5 +107,10 @@
         <button>10</button>
         <button>&gt;</button>
     </div>
+
+    <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
+        message="Are you sure you want to make changes to the SUb Product? Click on delete to remove the Sub Product"
+        (confirm)="confirmDelete()" (cancel)="cancelDelete()">
+    </app-comon-popup>
 
 </div>

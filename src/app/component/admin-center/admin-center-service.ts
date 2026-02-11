@@ -23,6 +23,7 @@ export class AdminCenterService {
   private templateDeleteUrl = 'http://34.18.92.50:8443/bko-template/post';
   private productDeleteUrl = 'http://34.18.92.50:8443/backoffice-service/cproduct/action';
   private readyToSynceDeleteUrl = 'http://34.1.33.119:8443/backoffice-service/migration/saveOrUpdate'
+  private deleteSubProductUrl = 'http://34.1.33.119:8443/bko-subProduct/delete';
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
@@ -484,4 +485,22 @@ export class AdminCenterService {
       payload
     );
   }
+
+  updateAdmincenterSubProduct(payload: any) {
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/csubproduct/update',
+      payload
+    );
+  }
+
+
+
+  deleteAdminCenterSubProduct(productId: any): Observable<any> {
+
+
+    return this.http.post(`${this.deleteSubProductUrl}`, productId);
+  }
+
+
+
 }
