@@ -68,22 +68,22 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products; let i = index">
+            <tr *ngFor="let p of subProductApi; let i = index">
                 <td>{{ p.subProductId }}</td>
                 <td>{{ p.subProductType }}</td>
-                <td>{{ p.subProductNameEnglish }}</td>
-                <td>{{ p.subProductNameArabic }}</td>
-                <td>{{ p.subProductDescriptionEnglish }}</td>
+                <td>{{ p.nameEn }}</td>
+                <td>{{ p.nameAr }}</td>
+                <td class="w-180">{{ p.descriptionEn }}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.enableFlag === 'Y',
+          'inactive': p.enableFlag === 'N'
         }">
-                        {{ p.status }}
+                        {{ p.enableFlag === 'Y' ? 'Active' : p.enableFlag === 'N' ? 'Inactive' : p.enableFlag }}
                     </span>
                 </td>
                 <td>{{p.priority}}</td>
-           
+
             </tr>
         </tbody>
     </table>
