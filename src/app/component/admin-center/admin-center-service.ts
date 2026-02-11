@@ -471,4 +471,17 @@ export class AdminCenterService {
       {}
     );
   }
+
+  getProductApi() {
+    return this.http.post(
+      ' http://34.18.92.50:8443/backoffice-service/cproduct/fetchAll ',
+      {}
+    );
+  }
+
+  createAdminSubProduct(payload: any) {
+    return this.http.post('http://34.18.92.50:8443/backoffice-service/csubproduct/create ',
+      payload
+    );
+  }
 }

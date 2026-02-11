@@ -2,7 +2,8 @@
     <div class="modal-container" (click)="$event.stopPropagation()">
 
         <div class="modal-header">
-            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add Sub-Product </h2>
+            <h2 class="d-flex"><img class="eye-icon p-10" src="images/left-arrow.png" alt="toggle visibility" />Add
+                Sub-Product </h2>
         </div>
 
         <form [formGroup]="productForm" (ngSubmit)="submitForm()">
@@ -11,8 +12,8 @@
             <div class="form-row full-width ">
                 <div class="form-group">
                     <label>Product </label>
-                    <mat-select formControlName="channel" placeholder="Select">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="product" placeholder="Select">
+                        <mat-option *ngFor="let c of getProductApi" [value]="c">{{ c.productNameEn }}</mat-option>
                     </mat-select>
                 </div>
 
@@ -21,67 +22,110 @@
             <div class="form-row full-width">
                 <div class="form-group">
                     <label>Sub Product Type</label>
-                    <mat-select formControlName="channel" placeholder="Select">
+                    <!-- <mat-select formControlName="subProductType" placeholder="Select">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input class="input-small mt-10" type="text" formControlName="subProductType"
+                        placeholder="Select" />
                 </div>
 
                 <div class="form-group">
                     <label>Sub Product Name (English)</label>
-                    <mat-select formControlName="category" placeholder="Select">
+                    <!-- <mat-select formControlName="subProductNameEn" placeholder="Select">
                         <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input class="input-small mt-10" type="text" formControlName="subProductNameEn"
+                        placeholder="Select" />
                 </div>
             </div>
 
             <div class="form-row full-width">
                 <label>Sub Product Name (Arabic)</label>
-                <mat-select formControlName="domain" placeholder="Select" class="mt-0">
+                <!-- <mat-select formControlName="subProductNameAr" placeholder="Select" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
+                </mat-select> -->
+                <input class="input-small mt-10" type="text" formControlName="subProductNameAr" placeholder="Select" />
             </div>
 
+            <div class="form-row full-width">
+                <label>Sub Product Description (English)</label>
+                <!-- <mat-select formControlName="subProductDescriptionAr" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select> -->
+                <input class="input-small mt-10" type="text" formControlName="subProductDescriptionEn"
+                    placeholder="Select" />
+            </div>
 
             <div class="form-row full-width">
                 <label>Sub Product Description (Arabic)</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                <!-- <mat-select formControlName="subProductDescriptionAr" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
+                </mat-select> -->
+                <input class="input-small mt-10" type="text" formControlName="subProductDescriptionAr"
+                    placeholder="Select" />
             </div>
 
-            <div class="form-row full-width">
+            <!-- <div class="form-row full-width">
                 <label>Image (English)</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                <mat-select formControlName="imageEn" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div> -->
+
+            <div class="upload-wrapper mt-20">
+                <label>Image (English)</label>
+                <div class="upload-box">
+                    <span class="placeholder-text">{{imageEnFileName}}</span>
+                    <button type="button" class="upload-btn">
+                        <mat-icon>upload</mat-icon>
+                        Upload
+                    </button>
+                    <input type="file" class="file-input" formControlName="imageEn"
+                        (change)="onImageSelect($event, 'EN')">
+                </div>
+            </div>
+
+            <!-- <div class="form-row full-width">
+                <label>Image (Arabic)</label>
+                <mat-select formControlName="imageAr" placeholder="Enter Name" class="mt-0">
+                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                </mat-select>
+            </div> -->
+
+            <div class="upload-wrapper mt-20">
+                <label>Image (Arabic)</label>
+                <div class="upload-box">
+                    <span class="placeholder-text">{{imageArFileName}}</span>
+                    <button type="button" class="upload-btn">
+                        <mat-icon>upload</mat-icon>
+                        Upload
+                    </button>
+                    <input type="file" class="file-input" formControlName="imageAr"
+                        (change)="onImageSelect($event, 'AR')">
+                </div>
+            </div>
+
+
+            <div class="form-row full-width">
+                <label>Confirm Image (English)</label>
+                <mat-select formControlName="confirmImageEn" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
                 </mat-select>
             </div>
 
             <div class="form-row full-width">
-                <label>Image (Arabic)</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
-                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
-            </div>
-
-              <div class="form-row full-width">
-                <label>Confirm Image (English)</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
-                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
-            </div>
-
-              <div class="form-row full-width">
                 <label>Confirm Image (Arabic)</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                <mat-select formControlName="confirmImageAr" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
                 </mat-select>
             </div>
 
-              <div class="form-row full-width">
+            <div class="form-row full-width">
                 <label>Priority</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0">
+                <!-- <mat-select formControlName="priority" placeholder="Enter Name" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
+                </mat-select> -->
+                <input class="input-small mt-10" type="text" formControlName="priority" placeholder="Select" />
             </div>
             <!-- Status -->
             <div class="form-row">
@@ -94,7 +138,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>

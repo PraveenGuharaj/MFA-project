@@ -84,8 +84,6 @@ export class AdminCenterAddProduct {
       priorityOrder: form.priorityOrder,
       action: this.isEditMode ? 'Update' : 'Add',
       id: this.data.editData.id
-
-
     };
 
 
