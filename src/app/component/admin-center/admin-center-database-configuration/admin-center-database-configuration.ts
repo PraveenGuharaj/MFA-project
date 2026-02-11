@@ -5,11 +5,14 @@ import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterReadyToSync } from '../admin-center-ready-to-sync/admin-center-ready-to-sync';
 import { AdminCenterAddDatabase } from '../admin-center-add-database/admin-center-add-database';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 @Component({
   selector: 'app-admin-center-database-configuration',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-database-configuration.html',
   styleUrl: './admin-center-database-configuration.scss',
@@ -17,8 +20,12 @@ import { AdminCenterAddDatabase } from '../admin-center-add-database/admin-cente
 export class AdminCenterDatabaseConfiguration {
   @Input() subProduct: boolean = false;
   getDataBaseConfigApi: any;
+  showDeleteConfirm: boolean = false;
+  selectedProduct: any;
 
-  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
   products = [
     {
       databaseType: 'PR0014',
@@ -134,6 +141,37 @@ export class AdminCenterDatabaseConfiguration {
         // this.loadSubProducts(); // 🔥 refresh list / API call
       }
     });
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+
+      id: this.selectedProduct.id,
+      action: "DELETE",
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.createDataBase(payload).subscribe((res: any) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('Database Deleted Successfully');
+        this.getDataBaseConfig();
+      }
+
+    })
   }
 
 }
