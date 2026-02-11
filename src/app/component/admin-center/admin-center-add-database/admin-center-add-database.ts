@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../admin-center-service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonToaster } from '../../../shared/services/common-toaster';
 import * as CryptoJS from 'crypto-js';
 
@@ -34,7 +34,8 @@ export class AdminCenterAddDatabase {
   isEditMode = false;
 
   constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService,
-    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddDatabase>
+    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddDatabase>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.productForm = this.fb.group({
       dataBaseType: ['', Validators.required],
@@ -45,6 +46,13 @@ export class AdminCenterAddDatabase {
       encryptedPassword: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+
+  ngOnInit() {
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
   }
 
   encryptPassword(password: string): string {
@@ -60,7 +68,7 @@ export class AdminCenterAddDatabase {
     const isEncrypted = dataBaseForm.encryptedPassword === 'Yes';
 
     const payload = {
-      id: null,
+      id: this.data.editData.id,
       dbType: dataBaseForm.dataBaseType,
       hostName: dataBaseForm.hostName,
       port: Number(dataBaseForm.portName),
@@ -70,10 +78,10 @@ export class AdminCenterAddDatabase {
         ? encryptedPwd
         : dataBaseForm.password,
       encryptedPassword: dataBaseForm.encryptedPassword,
-      action: "ADD"
+      action: this.isEditMode ? 'UPDATE' : 'ADD',
     }
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.createDataBase(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
@@ -100,5 +108,18 @@ export class AdminCenterAddDatabase {
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  patchForm(dbForm: any) {
+    console.log('patch', this.data)
+    this.productForm.patchValue({
+      dataBaseType: dbForm.dbType,
+      portName: dbForm.port,
+      hostName: dbForm.hostName,
+      datBase: dbForm.database,
+      userName: dbForm.username,
+      encryptedPassword: dbForm.encryptedPassword,
+      password: dbForm.password
+    });
   }
 }

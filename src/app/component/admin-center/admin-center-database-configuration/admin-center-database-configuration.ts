@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterReadyToSync } from '../admin-center-ready-to-sync/admin-center-ready-to-sync';
+import { AdminCenterAddDatabase } from '../admin-center-add-database/admin-center-add-database';
 @Component({
   selector: 'app-admin-center-database-configuration',
   imports: [
@@ -113,7 +114,7 @@ export class AdminCenterDatabaseConfiguration {
   openModal(product: any) {
     console.log('product', product);
 
-    const dialogRef = this.dialog.open(AdminCenterReadyToSync, {
+    const dialogRef = this.dialog.open(AdminCenterAddDatabase, {
       width: '60%',
       height: 'auto',
       position: { right: '0' },
