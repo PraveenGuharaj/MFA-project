@@ -5,11 +5,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AdminCenterService } from '../admin-center-service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-admin-center-add-database',
   imports: [
-     CommonModule,
+    CommonModule,
     MatSelectModule,
     MatInputModule,
     MatIconModule,
@@ -23,43 +28,77 @@ export class AdminCenterAddDatabase {
   productForm!: FormGroup;
 
   // Dropdown Options
-  channels = ["SMS", "Email", "App", "Web"];
-  categories = ["Login", "Transaction", "Reset", "Verification"];
-  domains = ["Banking", "Insurance", "Fintech", "Wallet"];
-  blockDurations = ["30 Sec", "1 Min", "2 Min", "5 Min"];
-  types = ["Primary", "Secondary", "Backup"];
-  deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
+  domains = ["Oracle", "PostgraSQL"];
+  encryptedPswd = ['Yes', 'No']
   showPassword: boolean = false;
+  isEditMode = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService,
+    private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AdminCenterAddDatabase>
+  ) {
     this.productForm = this.fb.group({
-      productName: ['', Validators.required],
-      channel: ['', Validators.required],
-      category: ['', Validators.required],
-
-      // Newly mapped fields
-      otpLength: ['', Validators.required],
-      maxAttempts: ['', Validators.required],
-      otpExpiry: ['', Validators.required],
-      blockDuration: ['', Validators.required],
-      domain: ['', Validators.required],
-      deliveryModes: [[], Validators.required], // Multiple select
-
-      type: ['', Validators.required],
-      status: [true]
+      dataBaseType: ['', Validators.required],
+      portName: ['', Validators.required],
+      hostName: ['', Validators.required],
+      datBase: ['', Validators.required],
+      userName: ['', Validators.required],
+      encryptedPassword: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
+  encryptPassword(password: string): string {
+    const secretKey = 'your-secret-key'; // Must match backend key
+    return CryptoJS.AES.encrypt(password, secretKey).toString();
+  }
+
+
   submitForm() {
-    if (this.productForm.valid) {
+    const dataBaseForm = this.productForm.value;
+    console.log('dataBaseForm', dataBaseForm)
+    const encryptedPwd = this.encryptPassword(dataBaseForm.password);
+    const isEncrypted = dataBaseForm.encryptedPassword === 'Yes';
+
+    const payload = {
+      id: null,
+      dbType: dataBaseForm.dataBaseType,
+      hostName: dataBaseForm.hostName,
+      port: Number(dataBaseForm.portName),
+      database: dataBaseForm.datBase,
+      username: dataBaseForm.userName,
+      password: isEncrypted
+        ? encryptedPwd
+        : dataBaseForm.password,
+      encryptedPassword: dataBaseForm.encryptedPassword,
+      action: "ADD"
+    }
+    if (this.isEditMode) {
+      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+        console.log('ressss', res);
+
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess('Database created successfully');
+          this.dialogRef.close('retaiClose');
+        } else {
+
+        }
+      })
     } else {
-      this.productForm.markAllAsTouched();
+      this.adminCenterService.createDataBase(payload).subscribe((res: any) => {
+        console.log('create', res);
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess('Database created successfully');
+          this.dialogRef.close('retaiClose');
+          this.adminCenterService.trigger();
+        }
+
+      })
     }
   }
 
   closeForm() { }
 
-    togglePassword() {
+  togglePassword() {
     this.showPassword = !this.showPassword;
   }
 }

@@ -10,35 +10,35 @@
 
             <div class="form-row full-width">
                 <label>Database Type</label>
-                <mat-select formControlName="domain" placeholder="Select Database" class="mt-0">
+                <mat-select formControlName="dataBaseType" placeholder="Select Database" class="mt-0">
                     <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
                 </mat-select>
             </div>
 
             <div class="form-row full-width">
                 <label>Port Name</label>
-                <input placeholder="Enter Port Name" />
+                <input placeholder="Enter Port Name" formControlName="portName" />
             </div>
 
             <div class="form-row full-width">
                 <label>Host Name</label>
-                <input placeholder="Enter Port Name" />
+                <input placeholder="Enter Port Name" formControlName="hostName" />
             </div>
 
             <div class="form-row full-width">
                 <label>Data Base</label>
-                <input placeholder="Enter Database" />
+                <input placeholder="Enter Database" formControlName="datBase" />
             </div>
 
             <div class="form-row full-width">
                 <label>User Name</label>
-                <input placeholder="Enter Username" />
+                <input placeholder="Enter Username" formControlName="userName" />
             </div>
 
             <div class="form-row full-width">
                 <label>Encrypted Password</label>
-                <mat-select formControlName="domain" placeholder="Select Encryption" class="mt-0">
-                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                <mat-select formControlName="encryptedPassword" placeholder="Select Encryption" class="mt-0">
+                    <mat-option *ngFor="let d of encryptedPswd" [value]="d">{{ d }}</mat-option>
                 </mat-select>
             </div>
 
@@ -46,7 +46,8 @@
                 <label class="w-100">Password</label>
 
                 <div class="password-box">
-                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password" />
+                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password"
+                        formControlName="password" />
 
                     <!-- Replace mat-icon with img -->
 
@@ -58,7 +59,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>

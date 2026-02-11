@@ -458,4 +458,10 @@ export class AdminCenterService {
 
     return this.http.post(`${this.readyToSynceDeleteUrl}`, productId);
   }
+
+  createDataBase(payload: any) {
+    return this.http.post('http://34.1.33.119:8443/backoffice-service/dbconfig/createDbConfig',
+      payload
+    );
+  }
 }
