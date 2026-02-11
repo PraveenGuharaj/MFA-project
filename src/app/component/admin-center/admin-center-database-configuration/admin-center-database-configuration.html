@@ -19,6 +19,7 @@
                 <th *ngIf="!subProduct">Username</th>
                 <th *ngIf="!subProduct">Password</th>
                 <th *ngIf="!subProduct">Encrypted</th>
+                <th *ngIf="!subProduct">Action</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -32,14 +33,14 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.databaseType }}</td>
+            <tr *ngFor="let p of getDataBaseConfigApi">
+                <td>{{ p.dbType }}</td>
                 <td>{{ p.hostName }}</td>
                 <td>{{ p.port }}</td>
-                <td class="redirectUrl">{{ p.databaseName }}</td>
-                <td class="redirectUrl">{{ p.userName }}</td>
-                <td>{{ p.password }}</td>
-                <td>{{ p.encrypted }}</td>
+                <td class="redirectUrl">{{ p.database }}</td>
+                <td class="redirectUrl">{{ p.username }}</td>
+                <td class="w-180">{{ p.password }}</td>
+                <td>{{ p.encryptedPassword }}</td>
                 <td class="actions">
                     <!-- Use images -->
                     <ng-container>

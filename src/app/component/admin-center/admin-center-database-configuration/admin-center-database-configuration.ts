@@ -15,6 +15,7 @@ import { AdminCenterReadyToSync } from '../admin-center-ready-to-sync/admin-cent
 })
 export class AdminCenterDatabaseConfiguration {
   @Input() subProduct: boolean = false;
+  getDataBaseConfigApi: any;
 
   constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog) { }
   products = [
@@ -103,8 +104,9 @@ export class AdminCenterDatabaseConfiguration {
   }
 
   getDataBaseConfig() {
-    this.adminCenterService.getReadyToSync().subscribe((res: any) => {
+    this.adminCenterService.getDatabaseConfig().subscribe((res: any) => {
       console.log('resssss', res)
+      this.getDataBaseConfigApi = res.data;
     })
   }
 
