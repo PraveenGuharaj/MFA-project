@@ -10,54 +10,54 @@
 
             <div class="form-row full-width">
                 <label>Row Number</label>
-                <input placeholder="Enter Row Number" />
+                <input placeholder="Enter Row Number" formControlName="rowNumber" />
             </div>
 
             <div class="form-row full-width">
                 <label>Channel</label>
-                <input placeholder="Select Channel" />
+                <mat-select formControlName="channel" multiple placeholder="Select Channel">
+                    <mat-option *ngFor="let c of getChannelData" [value]="c">
+                        {{ c.name }}
+                    </mat-option>
+                </mat-select>
             </div>
 
             <div class="form-row full-width">
                 <label>Category</label>
-                <input placeholder="Enter Row Number" />
+                <mat-select formControlName="category" placeholder="Please select a domain." class="mt-10">
+                    <mat-option *ngFor="let cat of getCategoryData" [value]="cat">{{ cat.name }}</mat-option>
+                </mat-select>
             </div>
 
             <div class="form-row full-width">
                 <label>English Question</label>
-                <input placeholder="Enter" />
+                <input placeholder="Enter" formControlName="englishQuestion" />
             </div>
 
             <div class="form-row full-width">
                 <label>English Response</label>
-                <input placeholder="Enter Group Name in Arabic" />
+                <input placeholder="Enter Group Name in Arabic" formControlName="englishResponse" />
             </div>
 
             <div class="form-row full-width">
                 <label>Arabic Question</label>
-                <input placeholder="Enter" />
+                <input placeholder="Enter" formControlName="addQuestion" />
             </div>
 
             <div class="form-row full-width">
                 <label>Arabic Response</label>
-                <mat-select formControlName="domain" placeholder="Enter Group Name in Arabic" class="mt-0">
-                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
+                <input placeholder="Enter Arabic Response" formControlName="ArabicResponse" />
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label>Start Date</label>
-                    <mat-select formControlName="channel" placeholder="True">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
-                    </mat-select>
+                    <input class="input-small mt-10" type="datetime-local" formControlName="startDate" />
                 </div>
 
                 <div class="form-group">
                     <label>End Date</label>
-                    <mat-select formControlName="category" placeholder="False">
-                        <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
-                    </mat-select>
+                    <input class="input-small mt-10" type="datetime-local" formControlName="endDate" />
                 </div>
             </div>
 
@@ -70,7 +70,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>
