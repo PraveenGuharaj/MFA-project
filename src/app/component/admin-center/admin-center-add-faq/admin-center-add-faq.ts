@@ -61,6 +61,21 @@ export class AdminCenterAddFaq {
   ngOnInit() {
     this.getCategoryApi();
     this.getChannelApi();
+    //    if (this.data?.editData) {
+    //   this.isEditMode = true;
+    //   this.patchForm(this.data.editData);
+    // }
+  }
+
+  tryPatch() {
+    if (
+      this.data?.editData &&
+      this.getChannelData?.length &&
+      this.getCategoryData?.length
+    ) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
   }
 
   submitForm() {
@@ -72,14 +87,14 @@ export class AdminCenterAddFaq {
     const payload = {
       englishQuestion: form.englishQuestion,
       englishResponse: form.englishResponse,
-      arabicQuestion: form.addQuestion,          // renamed
-      arabicResponse: form.ArabicResponse,       // renamed
+      arabicQuestion: form.addQuestion,
+      arabicResponse: form.ArabicResponse,
 
       startDate: this.formatDate(form.startDate),
       endDate: this.formatDate(form.endDate),
 
       status: form.status ? 'Y' : 'N',
-      faqId: 0,
+      faqId: this.data.editData.faqId,
 
       channelId: form.channel.map((c: any) => c.channelId),
 
@@ -96,11 +111,11 @@ export class AdminCenterAddFaq {
 
 
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.updateFaq(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Product created successfully');
+          this.commonToaster.showSuccess(res.status.description);
           this.dialogRef.close('retaiClose');
         } else {
 
@@ -142,12 +157,49 @@ export class AdminCenterAddFaq {
   getCategoryApi() {
     this.adminCenterService.getCategory().subscribe((res: any) => {
       this.getCategoryData = res.data;
+      this.tryPatch();
+
     })
   }
 
   getChannelApi() {
     this.adminCenterService.getChannel().subscribe((res: any) => {
       this.getChannelData = res.data;
+      this.tryPatch();
+
     })
   }
+
+  patchForm(faqForm: any) {
+    console.log('edit data', this.data.editData);
+
+    const formatForInput = (dateString: string) => {
+      const [datePart, timePart] = dateString.split(' ');
+      const [day, month, year] = datePart.split('/');
+      const [hours, minutes] = timePart.split(':');
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };
+
+    const selectedChannels = this.getChannelData?.filter((ch: any) =>
+      faqForm.channelId.includes(ch.channelId)
+    );
+
+    const selectedCategory = this.getCategoryData?.find(
+      (cat: any) => cat.categoryId === faqForm.categoryId
+    );
+
+    this.productForm.patchValue({
+      rowNumber: faqForm.rowNumber,
+      channel: selectedChannels,
+      category: selectedCategory,
+      englishQuestion: faqForm.englishQuestion,
+      englishResponse: faqForm.englishResponse,
+      addQuestion: faqForm.arabicQuestion,
+      ArabicResponse: faqForm.arabicResponse,
+      startDate: formatForInput(faqForm.startDate),
+      endDate: formatForInput(faqForm.endDate),
+      status: faqForm.status === 'Y'
+    });
+  }
+
 }

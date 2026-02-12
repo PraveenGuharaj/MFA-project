@@ -31,6 +31,7 @@
                 <th *ngIf="!subProduct">English Response</th>
                 <th *ngIf="!subProduct">Arabic Question</th>
                 <th *ngIf="!subProduct">Arabic Response</th>
+                <th *ngIf="!subProduct">Status</th>
                 <th *ngIf="!subProduct">Actions</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
@@ -60,6 +61,15 @@
         }">
                         {{ p.status === 'Y' ? 'Active' : p.status === 'N' ? 'Inactive' : p.status }}
                     </span>
+                </td>
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container>
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" (click)="openModal(p)" />
+                        <img src="images/trash_red.png" />
+                    </ng-container>
+
                 </td>
             </tr>
         </tbody>
