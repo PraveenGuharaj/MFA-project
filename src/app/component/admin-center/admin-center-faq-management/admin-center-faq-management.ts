@@ -4,11 +4,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminCenterAddFaq } from '../admin-center-add-faq/admin-center-add-faq';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 @Component({
   selector: 'app-admin-center-faq-management',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-faq-management.html',
   styleUrl: './admin-center-faq-management.scss',
@@ -16,8 +19,13 @@ import { AdminCenterAddFaq } from '../admin-center-add-faq/admin-center-add-faq'
 export class AdminCenterFaqManagement {
   @Input() subProduct: boolean = false;
   getFaqManagement: any;
+  selectedProduct: any;
+  showDeleteConfirm: boolean = false;
 
-  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,) { }
+
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
 
   products = [
     {
@@ -135,5 +143,34 @@ export class AdminCenterFaqManagement {
         // this.loadSubProducts(); // 🔥 refresh list / API call
       }
     });
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+      faqId: this.selectedProduct.faqId
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteFaq(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess(res.status.description);
+        this.getFaqManagementApi();
+      }
+
+    })
   }
 }
