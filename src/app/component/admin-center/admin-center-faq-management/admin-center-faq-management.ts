@@ -21,6 +21,11 @@ export class AdminCenterFaqManagement {
   getFaqManagement: any;
   selectedProduct: any;
   showDeleteConfirm: boolean = false;
+  currentPage = 1;
+  totalPages = 0;
+  pageSize = 10;
+  pagedProducts: any[] = [];
+
 
 
   constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
@@ -116,6 +121,8 @@ export class AdminCenterFaqManagement {
     this.adminCenterService.getFaqManagement().subscribe((res: any) => {
       this.getFaqManagement = res.data;
       console.log('getFaqManagement', this.getFaqManagement);
+      this.totalPages = Math.ceil(this.getFaqManagement.length / this.pageSize);
+      this.setPage(1);
 
     })
   }
@@ -172,5 +179,34 @@ export class AdminCenterFaqManagement {
       }
 
     })
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+
+    this.currentPage = page;
+    const start = (page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedProducts = this.getFaqManagement.slice(start, end);
+  }
+
+  get pages(): number[] {
+    if (this.totalPages <= 5) {
+      return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    }
+
+    if (this.currentPage <= 3) {
+      return [1, 2, 3];
+    }
+
+    if (this.currentPage >= this.totalPages - 2) {
+      return [this.totalPages - 2, this.totalPages - 1, this.totalPages];
+    }
+
+    return [
+      this.currentPage - 1,
+      this.currentPage,
+      this.currentPage + 1
+    ];
   }
 }
