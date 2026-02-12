@@ -23,7 +23,7 @@
 
             <tr *ngFor="let p of pagedProducts">
                 <td>{{ p.domainName }}</td>
-                <td>{{ p.notificationDeliveries[0].deliveryType}}</td>
+                <td>{{ p.notificationDeliveries[0]?.deliveryType}}</td>
                 <td>{{ p.expiryDate}}</td>
                 <td>{{ p.alertStatus}}</td>
                 <td>{{ p.warningStatus}}</td>

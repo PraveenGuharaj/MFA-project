@@ -205,7 +205,7 @@ export class AdminCenterAddTemplateCreation {
 
 
     const payload = {
-      templateId: this.data.editData.templateId,
+      templateId: this.data?.editData?.templateId,
 
       domainId: form.DomainName?.name || null,
       categoryId: form.categoryName?.categoryId?.toString() || null,

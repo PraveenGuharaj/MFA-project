@@ -83,7 +83,7 @@ export class AdminCenterAddProduct {
       enabled: form.enable ? 'Y' : 'N',
       priorityOrder: form.priorityOrder,
       action: this.isEditMode ? 'Update' : 'Add',
-      id: this.data.editData.id
+      id: this.data?.editData?.id
     };
 
 

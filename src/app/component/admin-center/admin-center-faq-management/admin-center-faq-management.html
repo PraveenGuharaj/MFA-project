@@ -31,6 +31,7 @@
                 <th *ngIf="!subProduct">English Response</th>
                 <th *ngIf="!subProduct">Arabic Question</th>
                 <th *ngIf="!subProduct">Arabic Response</th>
+                <th *ngIf="!subProduct">Actions</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -44,14 +45,22 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
+            <tr *ngFor="let p of getFaqManagement">
                 <td>{{ p.rowNumber }}</td>
-                <td>{{ p.channel }}</td>
-                <td>{{ p.category }}</td>
+                <td>{{ p.channelName }}</td>
+                <td>{{ p.categoryName }}</td>
                 <td>{{ p.englishQuestion }}</td>
                 <td class="w-180">{{ p.englishResponse }}</td>
                 <td>{{ p.arabicQuestion }}</td>
                 <td>{{ p.arabicResponse }}</td>
+                <td>
+                    <span class="status" [ngClass]="{
+          'active': p.status === 'Y',
+          'inactive': p.status === 'N'
+        }">
+                        {{ p.status === 'Y' ? 'Active' : p.status === 'N' ? 'Inactive' : p.status }}
+                    </span>
+                </td>
             </tr>
         </tbody>
     </table>

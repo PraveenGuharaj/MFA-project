@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 @Component({
   selector: 'app-admin-center-faq-management',
   imports: [
@@ -12,6 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterFaqManagement {
   @Input() subProduct: boolean = false;
+  getFaqManagement: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
 
   products = [
     {
@@ -86,8 +90,19 @@ export class AdminCenterFaqManagement {
     }
   ];
 
+  ngOnInit() {
+    this.getFaqManagementApi();
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getFaqManagementApi() {
+    this.adminCenterService.getFaqManagement().subscribe((res: any) => {
+      this.getFaqManagement = res.data;
+      console.log('getFaqManagement', this.getFaqManagement);
+
+    })
   }
 }
