@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 
 @Component({
   selector: 'app-admin-center-device-management',
@@ -12,8 +13,13 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './admin-center-device-management.scss',
 })
 export class AdminCenterDeviceManagement {
-   @Input() subProduct: boolean = false;
-   
+  @Input() subProduct: boolean = false;
+  getDeviceMgmtApi: any;
+
+  constructor(private adminCenterService: AdminCenterService) {
+
+  }
+
   products = [
     {
       id: 73,
@@ -108,7 +114,19 @@ export class AdminCenterDeviceManagement {
   ];
 
 
+  ngOnInit() {
+    this.getDeviceMgmt();
+  }
+
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getDeviceMgmt() {
+    this.adminCenterService.getDeviceManagement().subscribe((res: any) => {
+      console.log('ressss', res);
+      this.getDeviceMgmtApi = res.data;
+
+    })
   }
 }

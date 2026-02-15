@@ -542,4 +542,11 @@ export class AdminCenterService {
     });
     return this.http.post(`${'http://34.1.33.119:8443/backoffice-service/faq/delete'}`, productId, { headers });
   }
+
+  getDeviceManagement() {
+    return this.http.post(
+      ' http://34.1.33.119:8443/backoffice-service/apple-config/list ',
+      {}
+    );
+  }
 }

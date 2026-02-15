@@ -47,23 +47,30 @@
             </thead>
             <tbody>
 
-                <tr *ngFor="let p of products">
+                <tr *ngFor="let p of getDeviceMgmtApi">
                     <td>{{ p.id }}</td>
                     <td>{{ p.applicationMode}}</td>
-                    <td>{{ p.bundleidentifier}}</td>
-                    <td>{{ p.iPhoneCertPassword}}</td>
-                    <td>{{ p.iPadCertUploaded}}</td>
+                    <td>{{ p.bundleIdentifier}}</td>
+                    <td class="w-180">{{ p.iphoneCertPassword}}</td>
+                    <td>
+                        {{
+                        p.isIpadCertUploaded?.toString().toLowerCase() === 'y' ||
+                        p.isIpadCertUploaded?.toString().toLowerCase() === 'true'
+                        ? 'Yes'
+                        : 'No'
+                        }}
+                    </td>
                     <td>
                         <span class="status" [ngClass]="{
-                          'active': p.status === 'Active',
-                          'inactive': p.status === 'Inactive'
+                          'active': p.status === 'ACT',
+                          'inactive': p.status === 'IAC'
                         }">
-                            {{ p.status }}
+                            {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }}
                         </span>
                     </td>
                     <td class="actions">
                         <!-- Use images -->
-                        <ng-container *ngIf="p.actionsType === 'image'">
+                        <ng-container>
                             <img src="images/eye.png" />
                             <img src="images/edit.png" />
                             <img src="images/trash_red.png" />
