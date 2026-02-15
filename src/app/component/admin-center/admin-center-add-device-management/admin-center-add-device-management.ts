@@ -108,7 +108,7 @@ export class AdminCenterAddDeviceManagement {
     const encryptedPwd = this.encryptPassword(form.certificatePassword);
 
 
-    const payload = {
+    const payload = [{
       action: 'Add',
       id: null,
       applicationMode: applicationMode[0],
@@ -117,7 +117,7 @@ export class AdminCenterAddDeviceManagement {
       iphoneCertFile: this.iphoneCertBase64,
       isIpadCertUploaded: form.pushCertificateYes ? 'Y' : 'N',
       status: form.status ? 'ACT' : 'IAC'
-    };
+    }];
 
     if (this.isEditMode) {
       this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
@@ -133,8 +133,8 @@ export class AdminCenterAddDeviceManagement {
     } else {
       this.adminCenterService.createDeviceMgmt(payload).subscribe((res: any) => {
         console.log('create', res);
-        if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess(res.data.status);
+        if (res?.result.code == "000000") {
+          this.commonToaster.showSuccess('Added Successfully');
           this.dialogRef.close('retaiClose');
           this.adminCenterService.trigger();
         }

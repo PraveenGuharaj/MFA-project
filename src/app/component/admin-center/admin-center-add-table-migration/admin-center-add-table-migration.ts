@@ -46,7 +46,7 @@ export class AdminCenterAddTableMigration {
 
   ngOnInit() {
 
-    this.patchForm(this.data.editData)
+    this.patchForm(this.data?.editData)
   }
 
 
@@ -65,7 +65,7 @@ export class AdminCenterAddTableMigration {
       migrationStatus: "N",
       synStatus: "Y",
       action: this.isEditMode ? "ADD" : 'UPDATE',
-      id: this.data.editData.id
+      id: this.data?.editData?.id
     }
 
     if (this.isEditMode) {
@@ -96,10 +96,10 @@ export class AdminCenterAddTableMigration {
 
   patchForm(form: any) {
 
-    console.log('p', this.data.editData)
+    // console.log('p', this.data.editData)
     this.productForm.patchValue({
-      syncTable: form.synTable,
-      syncMigration: form.syncmigration
+      syncTable: form?.synTable,
+      syncMigration: form?.syncmigration
     });
   }
 }
