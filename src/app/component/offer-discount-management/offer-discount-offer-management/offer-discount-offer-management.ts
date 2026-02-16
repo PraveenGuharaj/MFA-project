@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 @Component({
   selector: 'app-offer-discount-offer-management',
   imports: [
-      CommonModule,
+    CommonModule,
     MatIconModule
   ],
   templateUrl: './offer-discount-offer-management.html',
@@ -13,6 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class OfferDiscountOfferManagement {
   @Input() subProduct: boolean = false;
+  getOfferMgmt: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
 
   products = [
     {
@@ -23,7 +27,7 @@ export class OfferDiscountOfferManagement {
       rewardType: 'Points',
       validFrom: '29/10/2025 13:14:00',
       validTo: '29/10/2025 13:14:00',
-       status: 'Active',
+      status: 'Active',
       actionsType: 'image'
 
     },
@@ -35,7 +39,7 @@ export class OfferDiscountOfferManagement {
       rewardType: 'Voucher',
       validFrom: '29/10/2025 13:14:00',
       validTo: '29/10/2025 13:14:00',
-       status: 'Active',
+      status: 'Active',
       actionsType: 'image'
 
     },
@@ -47,7 +51,7 @@ export class OfferDiscountOfferManagement {
       rewardType: 'Cashback',
       validFrom: '29/10/2025 13:14:00',
       validTo: '29/10/2025 13:14:00',
-       status: 'Active',
+      status: 'Active',
       actionsType: 'image'
 
     },
@@ -59,7 +63,7 @@ export class OfferDiscountOfferManagement {
       rewardType: 'Points',
       validFrom: '29/10/2025 13:14:00',
       validTo: '29/10/2025 13:14:00',
-       status: 'Active',
+      status: 'Active',
       actionsType: 'image'
 
     },
@@ -71,7 +75,7 @@ export class OfferDiscountOfferManagement {
       rewardType: 'Points',
       validFrom: '29/10/2025 13:14:00',
       validTo: '29/10/2025 13:14:00',
-       status: 'Active',
+      status: 'Active',
       actionsType: 'image'
 
     },
@@ -83,7 +87,7 @@ export class OfferDiscountOfferManagement {
       rewardType: 'Points',
       validFrom: '29/10/2025 13:14:00',
       validTo: '29/10/2025 13:14:00',
-       status: 'Active',
+      status: 'Active',
       actionsType: 'image'
 
     },
@@ -95,14 +99,23 @@ export class OfferDiscountOfferManagement {
       rewardType: 'Points',
       validFrom: '29/10/2025 13:14:00',
       validTo: '29/10/2025 13:14:00',
-       status: 'Active',
+      status: 'Active',
       actionsType: 'image'
 
     }
   ];
 
+  ngOnInit() {
+    this.getOfferMgmtApi();
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getOfferMgmtApi() {
+    this.adminCenterService.getOfferMgmt().subscribe((res: any) => {
+      this.getOfferMgmt = res.data;
+    })
   }
 }

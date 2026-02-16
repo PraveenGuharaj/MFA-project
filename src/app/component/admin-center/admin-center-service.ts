@@ -562,4 +562,11 @@ export class AdminCenterService {
     );
   }
 
+  getOfferMgmt() {
+    return this.http.post(
+      ' http://34.1.33.119:8443/backoffice-service/offer/getAll',
+      {}
+    );
+  }
+
 }

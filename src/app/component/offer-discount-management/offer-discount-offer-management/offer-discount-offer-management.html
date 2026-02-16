@@ -70,25 +70,25 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.offerId }}</td>
-                <td>{{ p.partnerName }}</td>
-                <td>{{ p.offerTitle }}</td>
-                <td>{{ p.offerType }}</td>
-                <td>{{ p.rewardType }}</td>
-                <td>{{p.validFrom}}</td>
-                <td>{{p.validTo}}</td>
+            <tr *ngFor="let offer of getOfferMgmt">
+                <td>{{ offer.offerId }}</td>
+                <td>{{ offer.partnerName }}</td>
+                <td class="w-180">{{ offer.offerTitle }}</td>
+                <td>{{ offer.offerType }}</td>
+                <td>{{ offer.rewardType }}</td>
+                <td>{{offer.validFrom}}</td>
+                <td>{{offer.validTo}}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': offer.offerStatus === 'Active',
+          'inactive': offer.offerStatus === 'Inactive'
         }">
-                        {{ p.status }}
+                        {{ offer.offerStatus }}
                     </span>
                 </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />
