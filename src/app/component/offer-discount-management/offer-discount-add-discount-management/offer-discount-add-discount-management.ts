@@ -67,79 +67,64 @@ export class OfferDiscountAddDiscountManagement {
     });
   }
 
-  //     ngOnInit() {
-
-  //       forkJoin({
-  //         partner: this.adminCenterService.getPartnerName(),
-  //         discountType: this.adminCenterService.getDiscountType(),
-  //         customerSegment: this.adminCenterService.getCustomerSegement()
-  //       }).subscribe((res: any) => {
-
-  //         // Assign dropdown data
-  //     this.getPartnerName = res.partner;
-  // this.getdiscountType = res.discountType.data;
-  // this.getcustomerSegment = res.customerSegment.data;
-
-
-  //         // 🔥 PATCH ONLY AFTER EVERYTHING LOADED
-  //         if (this.data?.editData) {
-  //           this.isEditMode = true;
-  //           this.patchForm(this.data.editData);
-  //         }
-  //       });
-
-  //     }
 
   ngOnInit() {
-    this.adminCenterService.getPartnerName().subscribe((res: any) => {
-      this.getPartnerName = res;
-    })
+    forkJoin({
+      partners: this.adminCenterService.getPartnerName(),
+      discountTypes: this.adminCenterService.getDiscountType(),
+      segments: this.adminCenterService.getCustomerSegement()
+    }).subscribe((res: any) => {
 
-    this.adminCenterService.getDiscountType().subscribe((res: any) => {
-      this.getDiscountType = res.data;
-    })
+      this.getPartnerName = res.partners;
+      this.getDiscountType = res.discountTypes.data;
+      this.getCustomerSegement = res.segments.data;
 
-    this.adminCenterService.getCustomerSegement().subscribe((res: any) => {
-      this.getCustomerSegement = res.data;
-    })
+      if (this.data?.editData) {
+        this.isEditMode = true;
+        this.patchForm(this.data.editData);
+      }
+    });
   }
 
-  patchForm(offerForm: any) {
 
-    console.log('data', this.data);
+  patchForm(offerForm: any) {
 
     const selectedPartner = this.getPartnerName?.find(
       (p: any) => p.companyName === offerForm.partnerName
     );
 
+    const selectedDiscountType = this.getDiscountType?.find(
+      (d: any) => d.categoryCode === offerForm.discountType
+    );
 
-
-
-    const selectedRedemption = this.getdiscountType?.find(
-      (r: any) => r.categoryCode === offerForm.redemptionMethod
+    const selectedSegment = this.getCustomerSegement?.find(
+      (s: any) => s.segmentNameEN === offerForm.customerSegment
     );
 
     this.productForm.patchValue({
-      parnterName: selectedPartner,
+      partnerName: selectedPartner,
       productName: offerForm.productName,
-      offerTitle: offerForm.offerTitle,
-      offerTag: offerForm.offerTag,
-      offerDescription: offerForm.offerDescription,
+      discountTitle: offerForm.discountTitle,
+      discountDescription: offerForm.discountDescription,
+      discountType: selectedDiscountType,
+      discountValue: offerForm.discountValue,
       termsAndCondition: offerForm.termsAndConditions,
-      rewardVaue: offerForm.rewardValue,
-      redemptionMethod: selectedRedemption,
-      redemptionLimitPerUser: offerForm.redemptionLimitPerUser,
-      totalRedemptionAllowed: offerForm.totalRedemptionsAllowed,
-      validFrom: this.convertToDate(offerForm.validFrom),
-      validTo: this.convertToDate(offerForm.validTo),
-      customerSegment: offerForm.customerSegment,
-      status: offerForm.offerStatus === 'Active',
+      usageLimitPerUser: offerForm.usageLimitPerUser,
+      totalUsageLimit: offerForm.totalUsageLimit,
+
+      startDate: this.convertToDate(offerForm.startDate),
+      endDate: this.convertToDate(offerForm.endDate),
+
+      customerSegment: selectedSegment,
+
+      status: offerForm.isActive === 'Y',
 
       mobile: offerForm.applicableChannels === 'Mobile',
       web: offerForm.applicableChannels === 'Web',
       all: offerForm.applicableChannels === 'All'
     });
   }
+
 
   convertToDate(dateString: string): string | null {
     if (!dateString) return null;
@@ -189,9 +174,29 @@ export class OfferDiscountAddDiscountManagement {
     };
 
     console.log('payload', payload);
-    this.adminCenterService.createDiscountMmt(payload).subscribe((res: any) => {
 
-    })
+    if (this.isEditMode) {
+      this.adminCenterService.updateDiscountMgmt(payload).subscribe((res: any) => {
+        console.log('ressss', res);
+
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess(res.status.description);
+          this.dialogRef.close('retaiClose');
+        } else {
+
+        }
+      })
+    } else {
+      this.adminCenterService.createDiscountMmt(payload).subscribe((res: any) => {
+        console.log('create', res);
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess(res.status.description);
+          this.dialogRef.close('retaiClose');
+          this.adminCenterService.trigger();
+        }
+
+      })
+    }
   }
 
 
