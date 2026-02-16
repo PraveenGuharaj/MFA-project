@@ -12,8 +12,8 @@
             <div class="form-row full-width mt-20">
                 <div class="form-group">
                     <label>Partner Name </label>
-                    <mat-select formControlName="channel" placeholder="Select Partner Name" class="mt-20">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="partnerName" placeholder="Select Partner Name" class="mt-20">
+                        <mat-option *ngFor="let c of getPartnerName" [value]="c">{{ c.companyName }}</mat-option>
                     </mat-select>
                 </div>
 
@@ -22,20 +22,20 @@
             <div class="form-row full-width">
                 <div class="form-group">
                     <label>Product Name</label>
-                    <input placeholder="Enter Product Name" />
+                    <input placeholder="Enter Product Name" formControlName="productName" />
                 </div>
 
                 <div class="form-group">
                     <label>Discount Title</label>
-                    <input placeholder="Enter Discount Title" />
+                    <input placeholder="Enter Discount Title" formControlName="discountTitle" />
                 </div>
             </div>
 
             <div class="form-row full-width mt-20">
                 <div class="form-group">
                     <label>Discount Type </label>
-                    <mat-select formControlName="channel" placeholder="Select Offer Type" class="mt-20">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="discountType" placeholder="Select Offer Type" class="mt-20">
+                        <mat-option *ngFor="let c of getDiscountType" [value]="c">{{ c.categoryCode }}</mat-option>
                     </mat-select>
                 </div>
 
@@ -43,33 +43,33 @@
 
             <div class="form-row full-width">
                 <label>Discount Description</label>
-                <input placeholder="Enter Discount Description" class="mt-0" />
+                <input placeholder="Enter Discount Description" class="mt-0" formControlName="discountDescription" />
             </div>
 
 
             <div class="form-row full-width">
                 <label>Discount Value</label>
-                <input placeholder="Enter Discount Value" class="mt-0" />
+                <input placeholder="Enter Discount Value" class="mt-0" formControlName="discountValue" />
             </div>
 
 
             <div class="form-row full-width">
                 <label>Terms & Conditions</label>
-                <input placeholder="Enter Terms & Condition" class="mt-0" />
+                <input placeholder="Enter Terms & Condition" class="mt-0" formControlName="termsAndCondition" />
             </div>
 
             <h3>Applicable Channels</h3>
             <div class="checkbox-group">
-                <mat-checkbox><span class="fs-16">Mobile</span></mat-checkbox>
-                <mat-checkbox><span class="fs-16">Web</span></mat-checkbox>
-                <mat-checkbox><span class="fs-16">All</span></mat-checkbox>
+                <mat-checkbox formControlName="mobile"><span class="fs-16">Mobile</span></mat-checkbox>
+                <mat-checkbox formControlName="web"><span class="fs-16">Web</span></mat-checkbox>
+                <mat-checkbox formControlName="all"><span class="fs-16">All</span></mat-checkbox>
             </div>
 
             <div class="form-row full-width mt-20">
                 <div class="form-group">
                     <label>Customer Segment </label>
-                    <mat-select formControlName="channel" placeholder="Select Customer Segment" class="mt-20">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="customerSegment" placeholder="Select Customer Segment" class="mt-20">
+                        <mat-option *ngFor="let c of getCustomerSegement" [value]="c">{{ c.segmentNameEN }}</mat-option>
                     </mat-select>
                 </div>
 
@@ -78,24 +78,24 @@
 
             <div class="form-row full-width">
                 <label>Start Date</label>
-                <input placeholder="Select Offer Type" type="date" class="mt-0" />
+                <input placeholder="Select Offer Type" type="date" class="mt-0" formControlName="startDate" />
             </div>
 
             <div class="form-row full-width">
                 <label>End Date</label>
-                <input placeholder="Select Reward Type" type="date" class="mt-0" />
+                <input placeholder="Select Reward Type" type="date" class="mt-0" formControlName="endDate" />
             </div>
 
             <div class="form-row full-width">
                 <label>Usage Limit per User</label>
-                <input placeholder="Enter Usage Limit per User" class="mt-0" />
+                <input placeholder="Enter Usage Limit per User" class="mt-0" formControlName="usageLimitPerUser" />
             </div>
 
 
 
             <div class="form-row full-width">
                 <label>Total Usage Limit</label>
-                <input placeholder="Enter total usage limit" class="mt-0" />
+                <input placeholder="Enter total usage limit" class="mt-0" formControlName="totalUsageLimit" />
             </div>
 
             <!-- Status -->
@@ -109,7 +109,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>
