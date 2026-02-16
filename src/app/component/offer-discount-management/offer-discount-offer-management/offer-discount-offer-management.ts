@@ -5,12 +5,14 @@ import { AdminCenterService } from '../../admin-center/admin-center-service';
 import { OfferDiscountAddOfferManagement } from '../offer-discount-add-offer-management/offer-discount-add-offer-management';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonToaster } from '../../../shared/services/common-toaster';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
 
 @Component({
   selector: 'app-offer-discount-offer-management',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './offer-discount-offer-management.html',
   styleUrl: './offer-discount-offer-management.scss',
@@ -18,6 +20,8 @@ import { CommonToaster } from '../../../shared/services/common-toaster';
 export class OfferDiscountOfferManagement {
   @Input() subProduct: boolean = false;
   getOfferMgmt: any;
+  showDeleteConfirm: boolean = false;
+  selectedProduct: any;
 
   constructor(private adminCenterService: AdminCenterService,
     public dialog: MatDialog,
@@ -65,5 +69,37 @@ export class OfferDiscountOfferManagement {
         // this.loadSubProducts(); // refresh list / API call
       }
     });
+  }
+
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+
+      offerId: this.selectedProduct.offerId
+
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteOfferMgmt(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess(res.status.description);
+        this.getOfferMgmtApi();
+      }
+
+    })
   }
 }
