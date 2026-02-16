@@ -12,8 +12,8 @@
             <div class="form-row full-width mt-20">
                 <div class="form-group">
                     <label>Partner Name </label>
-                    <mat-select formControlName="channel" placeholder="Select Partner Name" class="mt-20">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="parnterName" placeholder="Select Partner Name" class="mt-20">
+                        <mat-option *ngFor="let c of getPartnerName" [value]="c">{{ c.companyName }}</mat-option>
                     </mat-select>
                 </div>
 
@@ -22,60 +22,64 @@
             <div class="form-row full-width">
                 <div class="form-group">
                     <label>Product Name</label>
-                    <input placeholder="Enter Product Name" class="mt-20"/>
+                    <input placeholder="Enter Product Name" class="mt-20" formControlName="productName" />
                 </div>
 
                 <div class="form-group">
                     <label>Offer Title</label>
-                    <input placeholder="Enter Offer Title" class="mt-20" />
+                    <input placeholder="Enter Offer Title" class="mt-20" formControlName="offerTitle" />
                 </div>
             </div>
 
             <div class="form-group full-width mb-20">
                 <label>Offer Tag</label>
-                <input placeholder="Enter Offer Description" class="mt-20"/>
+                <input placeholder="Enter Offer Description" class="mt-20" formControlName="offerTag" />
             </div>
 
 
             <div class="form-group full-width mb-20">
                 <label>Offer Description</label>
-                <input placeholder="Enter Offer Description" class="mt-20"/>
+                <input placeholder="Enter Offer Description" class="mt-20" formControlName="offerDescription" />
             </div>
 
 
             <div class="form-group full-width mb-20">
                 <label>Terms & Conditions</label>
-                <input placeholder="Enter Terms & Condition" class="mt-20"/>
+                <input placeholder="Enter Terms & Condition" class="mt-20" formControlName="termsAndCondition" />
             </div>
 
 
             <div class="form-group full-width mb-20">
                 <label>Offer Type</label>
-                <input placeholder="Select Offer Type" class="mt-20"/>
+                <mat-select formControlName="offerType" placeholder="Select Partner Name" class="mt-20">
+                    <mat-option *ngFor="let c of getOfferType" [value]="c">{{ c.categoryCode }}</mat-option>
+                </mat-select>
             </div>
 
             <div class="form-group full-width">
                 <label>Reward Type</label>
-                <input placeholder="Select Reward Type" class="mt-20"/>
+                <mat-select formControlName="rewardType" placeholder="Select Partner Name" class="mt-20">
+                    <mat-option *ngFor="let c of getRewardType" [value]="c">{{ c.categoryCode }}</mat-option>
+                </mat-select>
             </div>
 
             <h3>Applicable Channels</h3>
             <div class="checkbox-group mb-20">
-                <mat-checkbox><span class="fs-16">Mobile</span></mat-checkbox>
-                <mat-checkbox><span class="fs-16">Web</span></mat-checkbox>
-                <mat-checkbox><span class="fs-16">All</span></mat-checkbox>
+                <mat-checkbox formControlName="mobile"><span class="fs-16">Mobile</span></mat-checkbox>
+                <mat-checkbox formControlName="web"><span class="fs-16">Web</span></mat-checkbox>
+                <mat-checkbox formControlName="all"><span class="fs-16">All</span></mat-checkbox>
             </div>
 
             <div class="form-group full-width">
                 <label>Reward Value</label>
-                <input placeholder="Select Reward Value" />
+                <input placeholder="Select Reward Value" formControlName="rewardVaue" />
             </div>
 
             <div class="form-group full-width mt-20 mb-20">
                 <div class="form-group">
                     <label>Redemption Method </label>
-                    <mat-select formControlName="channel" placeholder="Select Redemption Methos">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="redemptionMethod" placeholder="Select Redemption Methos">
+                        <mat-option *ngFor="let c of getRedemption" [value]="c">{{ c.categoryCode }}</mat-option>
                     </mat-select>
                 </div>
 
@@ -83,29 +87,29 @@
 
             <div class="form-group full-width mb-20">
                 <label>Redemption Limit per User</label>
-                <input placeholder="Enter Redemption Limit per User" />
+                <input placeholder="Enter Redemption Limit per User" formControlName="redemptionLimitPerUser" />
             </div>
 
             <div class="form-group full-width mb-20">
                 <label>Total Redemption Allowed</label>
-                <input placeholder="Enter Total Redemption Allowed" />
+                <input placeholder="Enter Total Redemption Allowed" formControlName="totalRedemptionAllowed" />
             </div>
 
 
             <div class="form-group full-width">
                 <label>Valid From</label>
-                <input placeholder="Enter Total Redemption Allowed" type="date" />
+                <input placeholder="Enter Total Redemption Allowed" type="date" formControlName="validFrom" />
             </div>
 
             <div class="form-group full-width">
                 <label>Valid To</label>
-                <input placeholder="Enter Total Redemption Allowed" type="date" />
+                <input placeholder="Enter Total Redemption Allowed" type="date" formControlName="validTo" />
             </div>
 
             <div class="form-group full-width mt-20 mb-20">
                 <div class="form-group">
                     <label>Customer Segment </label>
-                    <mat-select formControlName="channel" placeholder="Select Customer Segment">
+                    <mat-select formControlName="customerSegment" placeholder="Select Customer Segment">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
                     </mat-select>
                 </div>
@@ -123,7 +127,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>

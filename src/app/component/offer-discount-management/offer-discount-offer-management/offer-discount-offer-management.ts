@@ -107,6 +107,10 @@ export class OfferDiscountOfferManagement {
 
   ngOnInit() {
     this.getOfferMgmtApi();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getOfferMgmtApi();
+    });
   }
 
   onProductTypeChanged(subProduct: boolean) {
