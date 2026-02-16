@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
+import { OfferDiscountAddOfferManagement } from '../offer-discount-add-offer-management/offer-discount-add-offer-management';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 
 @Component({
   selector: 'app-offer-discount-offer-management',
@@ -16,94 +19,10 @@ export class OfferDiscountOfferManagement {
   @Input() subProduct: boolean = false;
   getOfferMgmt: any;
 
-  constructor(private adminCenterService: AdminCenterService) { }
-
-  products = [
-    {
-      offerId: 98,
-      partnerName: 'Amazon',
-      offerTitle: '10% Off',
-      offerType: 'Welcome',
-      rewardType: 'Points',
-      validFrom: '29/10/2025 13:14:00',
-      validTo: '29/10/2025 13:14:00',
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      offerId: 98,
-      partnerName: 'Flipkart',
-      offerTitle: 'WER',
-      offerType: 'Referral',
-      rewardType: 'Voucher',
-      validFrom: '29/10/2025 13:14:00',
-      validTo: '29/10/2025 13:14:00',
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      offerId: 98,
-      partnerName: 'Amazon',
-      offerTitle: 'Product 4',
-      offerType: 'Welcome',
-      rewardType: 'Cashback',
-      validFrom: '29/10/2025 13:14:00',
-      validTo: '29/10/2025 13:14:00',
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      offerId: 98,
-      partnerName: 'PARTNER_DKB',
-      offerTitle: 'Zoho',
-      offerType: 'Referral',
-      rewardType: 'Points',
-      validFrom: '29/10/2025 13:14:00',
-      validTo: '29/10/2025 13:14:00',
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      offerId: 98,
-      partnerName: 'Amazon',
-      offerTitle: 'New Year',
-      offerType: 'Welcome',
-      rewardType: 'Points',
-      validFrom: '29/10/2025 13:14:00',
-      validTo: '29/10/2025 13:14:00',
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      offerId: 98,
-      partnerName: 'Amazon',
-      offerTitle: '10% Off',
-      offerType: 'Referral',
-      rewardType: 'Points',
-      validFrom: '29/10/2025 13:14:00',
-      validTo: '29/10/2025 13:14:00',
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      offerId: 98,
-      partnerName: 'Amazon',
-      offerTitle: '10% Off',
-      offerType: 'Welcome',
-      rewardType: 'Points',
-      validFrom: '29/10/2025 13:14:00',
-      validTo: '29/10/2025 13:14:00',
-      status: 'Active',
-      actionsType: 'image'
-
-    }
-  ];
+  constructor(private adminCenterService: AdminCenterService,
+    public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
 
   ngOnInit() {
     this.getOfferMgmtApi();
@@ -121,5 +40,30 @@ export class OfferDiscountOfferManagement {
     this.adminCenterService.getOfferMgmt().subscribe((res: any) => {
       this.getOfferMgmt = res.data;
     })
+  }
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(OfferDiscountAddOfferManagement, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getOfferMgmtApi();
+        // this.loadSubProducts(); // refresh list / API call
+      }
+    });
   }
 }

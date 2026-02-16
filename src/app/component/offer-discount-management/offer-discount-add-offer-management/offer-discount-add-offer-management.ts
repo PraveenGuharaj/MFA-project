@@ -9,6 +9,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonToaster } from '../../../shared/services/common-toaster';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-offer-discount-add-offer-management',
@@ -68,11 +69,29 @@ export class OfferDiscountAddOfferManagement {
 
 
   ngOnInit() {
-    this.getRedemptionApi();
-    this.getRewardTypeApi();
-    this.getOfferTypeApi();
-    this.getParnterNameApi();
+
+    forkJoin({
+      partner: this.adminCenterService.getPartnerName(),
+      offerType: this.adminCenterService.getOfferType(),
+      rewardType: this.adminCenterService.getRewardType(),
+      redemption: this.adminCenterService.getRedemption()
+    }).subscribe((res: any) => {
+
+      // Assign dropdown data
+      this.getPartnerName = res.partner;
+      this.getOfferType = res.offerType.data;
+      this.getRewardType = res.rewardType.data;
+      this.getRedemption = res.redemption.data;
+
+      // 🔥 PATCH ONLY AFTER EVERYTHING LOADED
+      if (this.data?.editData) {
+        this.isEditMode = true;
+        this.patchForm(this.data.editData);
+      }
+    });
+
   }
+
 
   submitForm() {
     console.log('submitForm', this.productForm.value)
@@ -100,16 +119,17 @@ export class OfferDiscountAddOfferManagement {
       validTo: this.formatDateTime(form.validTo),
       customerSegment: form.customerSegment,
       applicableChannels: applicableChannels,
-      offerStatus: form.status ? 'Active' : 'Inactive'
+      offerStatus: form.status ? 'Active' : 'Inactive',
+      offerId: this.isEditMode ? this.data.editData.offerId : ''
     };
 
     console.log('payload', payload);
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.updateOfferMgmt(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Product created successfully');
+          this.commonToaster.showSuccess(res.status.description);
           this.dialogRef.close('retaiClose');
         } else {
 
@@ -168,6 +188,67 @@ export class OfferDiscountAddOfferManagement {
   getRedemptionApi() {
     this.adminCenterService.getRedemption().subscribe((res: any) => {
       this.getRedemption = res.data;
+      if (this.data?.editData) {
+        this.isEditMode = true;
+        this.patchForm(this.data.editData);
+      }
     })
   }
+
+  patchForm(offerForm: any) {
+
+    console.log('data', this.data);
+
+    const selectedPartner = this.getPartnerName?.find(
+      (p: any) => p.companyName === offerForm.partnerName
+    );
+
+    const selectedOfferType = this.getOfferType?.find(
+      (o: any) => o.categoryCode === offerForm.offerType
+    );
+
+    const selectedRewardType = this.getRewardType?.find(
+      (r: any) => r.categoryCode === offerForm.rewardType
+    );
+
+    const selectedRedemption = this.getRedemption?.find(
+      (r: any) => r.categoryCode === offerForm.redemptionMethod
+    );
+
+    this.productForm.patchValue({
+      parnterName: selectedPartner,
+      productName: offerForm.productName,
+      offerTitle: offerForm.offerTitle,
+      offerTag: offerForm.offerTag,
+      offerDescription: offerForm.offerDescription,
+      termsAndCondition: offerForm.termsAndConditions,
+      offerType: selectedOfferType,
+      rewardType: selectedRewardType,
+      rewardVaue: offerForm.rewardValue,
+      redemptionMethod: selectedRedemption,
+      redemptionLimitPerUser: offerForm.redemptionLimitPerUser,
+      totalRedemptionAllowed: offerForm.totalRedemptionsAllowed,
+      validFrom: this.convertToDate(offerForm.validFrom),
+      validTo: this.convertToDate(offerForm.validTo),
+      customerSegment: offerForm.customerSegment,
+      status: offerForm.offerStatus === 'Active',
+
+      mobile: offerForm.applicableChannels === 'Mobile',
+      web: offerForm.applicableChannels === 'Web',
+      all: offerForm.applicableChannels === 'All'
+    });
+  }
+
+
+
+  convertToDate(dateString: string): string | null {
+    if (!dateString) return null;
+
+    const [datePart] = dateString.split(' ');
+    const [day, month, year] = datePart.split('/');
+
+    return `${year}-${month}-${day}`;
+  }
+
+
 }
