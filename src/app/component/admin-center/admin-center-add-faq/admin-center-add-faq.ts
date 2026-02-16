@@ -94,7 +94,7 @@ export class AdminCenterAddFaq {
       endDate: this.formatDate(form.endDate),
 
       status: form.status ? 'Y' : 'N',
-      faqId: this.data.editData.faqId,
+      faqId: this.data?.editData?.faqId,
 
       channelId: form.channel.map((c: any) => c.channelId),
 

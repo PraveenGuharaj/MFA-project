@@ -72,8 +72,8 @@
                         <!-- Use images -->
                         <ng-container>
                             <img src="images/eye.png" />
-                            <img src="images/edit.png" />
-                            <img src="images/trash_red.png" />
+                            <img src="images/edit.png" (click)="openModal(p)" />
+                            <img src="images/trash_red.png" (click)="openDeletePopup(p)" />
                         </ng-container>
 
                     </td>
@@ -83,13 +83,28 @@
 
         <!-- Pagination -->
         <div class="pagination">
-            <button>&lt;</button>
-            <button class="active-page">1</button>
-            <button>2</button>
-            <button>3</button>
-            <span>…</span>
-            <button>10</button>
-            <button>&gt;</button>
+            <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">
+                ‹
+            </button>
+
+            <button *ngFor="let page of pages" (click)="setPage(page)" [class.active-page]="page === currentPage">
+                {{ page }}
+            </button>
+
+            <span *ngIf="totalPages > 5">…</span>
+
+            <button *ngIf="totalPages > 3" (click)="setPage(totalPages)">
+                {{ totalPages }}
+            </button>
+
+            <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+                ›
+            </button>
         </div>
+
+        <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
+            message="Are you sure you want to delete this Apple Device?" (confirm)="confirmDelete()"
+            (cancel)="cancelDelete()">
+        </app-comon-popup>
 
     </div>

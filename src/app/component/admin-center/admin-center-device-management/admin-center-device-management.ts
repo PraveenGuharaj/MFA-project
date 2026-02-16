@@ -2,12 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddDeviceManagement } from '../admin-center-add-device-management/admin-center-add-device-management';
 
 @Component({
   selector: 'app-admin-center-device-management',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-device-management.html',
   styleUrl: './admin-center-device-management.scss',
@@ -15,107 +20,23 @@ import { AdminCenterService } from '../admin-center-service';
 export class AdminCenterDeviceManagement {
   @Input() subProduct: boolean = false;
   getDeviceMgmtApi: any;
-
-  constructor(private adminCenterService: AdminCenterService) {
+  pageSize = 10;
+  currentPage = 1;
+  totalPages = 0;
+  pagedProducts: any[] = [];
+  showDeleteConfirm: boolean = false;
+  selectedProduct: any;
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster) {
 
   }
 
-  products = [
-    {
-      id: 73,
-      applicationMode: 'Production',
-      bundleidentifier: 'com.pro',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 101,
-      applicationMode: 'Production',
-      bundleidentifier: 'com.pro',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 52,
-      applicationMode: 'Production',
-      bundleidentifier: 'bundle',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 111,
-      applicationMode: 'Production',
-      bundleidentifier: 'com.bankapp.ios.dev',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 134,
-      applicationMode: 'Production',
-      bundleidentifier: 'com.proi',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 34,
-      applicationMode: 'Production',
-      bundleidentifier: 'Security Question',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 46,
-      applicationMode: 'Production',
-      bundleidentifier: 'bundle',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 121,
-      applicationMode: 'Production',
-      bundleidentifier: 'com.bankapp.ios.dev',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 122,
-      applicationMode: 'Production',
-      bundleidentifier: 'bundle',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      id: 133,
-      applicationMode: 'Production',
-      bundleidentifier: 'com.bankapp.ios.dev',
-      iPhoneCertPassword: 'sysadmin123',
-      iPadCertUploaded: 'Yes',
-      status: 'Active',
-      actionsType: 'image'
-    }
-  ];
-
-
   ngOnInit() {
     this.getDeviceMgmt();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getDeviceMgmt();
+    });
   }
 
   onProductTypeChanged(subProduct: boolean) {
@@ -124,8 +45,93 @@ export class AdminCenterDeviceManagement {
 
   getDeviceMgmt() {
     this.adminCenterService.getDeviceManagement().subscribe((res: any) => {
-      console.log('ressss', res);
       this.getDeviceMgmtApi = res.data;
+      this.totalPages = Math.ceil(this.getDeviceMgmtApi.length / this.pageSize);
+      this.setPage(1);
+
+    })
+  }
+
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddDeviceManagement, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getDeviceMgmt();
+        // this.loadSubProducts(); //  refresh list / API call
+      }
+    });
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+
+    this.currentPage = page;
+    const start = (page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedProducts = this.getDeviceMgmtApi.slice(start, end);
+  }
+
+  get pages(): number[] {
+    if (this.totalPages <= 5) {
+      return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    }
+
+    if (this.currentPage <= 3) {
+      return [1, 2, 3];
+    }
+
+    if (this.currentPage >= this.totalPages - 2) {
+      return [this.totalPages - 2, this.totalPages - 1, this.totalPages];
+    }
+
+    return [
+      this.currentPage - 1,
+      this.currentPage,
+      this.currentPage + 1
+    ];
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = [{
+      id: this.selectedProduct.id,
+      action: "DELETE",
+    }]
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.createDeviceMgmt(payload).subscribe((res: any) => {
+      console.log('res', res);
+      if (res.result.code == "000000") {
+        this.getDeviceMgmt();
+        this.commonToaster.showSuccess('  Deleted Successfully');
+      }
 
     })
   }

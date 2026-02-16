@@ -59,6 +59,14 @@ export class AdminCenterAddDeviceManagement {
 
   }
 
+  ngOnInit() {
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
+  }
+
+
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -109,8 +117,8 @@ export class AdminCenterAddDeviceManagement {
 
 
     const payload = [{
-      action: 'Add',
-      id: null,
+      action: this.isEditMode ? 'UPDATE' : 'ADD',
+      id: this.data.editData.id,
       applicationMode: applicationMode[0],
       bundleIdentifier: form.bundleIdentifier,
       iphoneCertPassword: encryptedPwd,
@@ -120,11 +128,11 @@ export class AdminCenterAddDeviceManagement {
     }];
 
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.createDeviceMgmt(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
-        if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Product created successfully');
+        if (res?.result.code == "000000") {
+          this.commonToaster.showSuccess('Updated successfully');
           this.dialogRef.close('retaiClose');
         } else {
 
@@ -150,5 +158,34 @@ export class AdminCenterAddDeviceManagement {
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  patchForm(form: any) {
+    console.log('form', form)
+    console.log('data', this.data);
+    this.productForm.patchValue({
+
+      // Application Mode Mapping
+      production: form.applicationMode === 'Production',
+      development: form.applicationMode === 'Development',
+      appleCertificateWizard: form.applicationMode === 'Apple Certificate Wizard',
+
+      // Certificate
+      iphonePushCertificate: form.iphoneCertFile,
+      certificatePassword: form.iphoneCertPassword,
+      bundleIdentifier: form.bundleIdentifier,
+
+      // iPad Cert Uploaded (Y/N to Yes/No checkbox)
+      pushCertificateYes:
+        form.isIpadCertUploaded?.toString().toLowerCase() === 'y' ||
+        form.isIpadCertUploaded?.toString().toLowerCase() === 'true',
+
+      pushCertificateNo:
+        !(form.isIpadCertUploaded?.toString().toLowerCase() === 'y' ||
+          form.isIpadCertUploaded?.toString().toLowerCase() === 'true'),
+
+      // Status Mapping
+      status: form.status === 'ACT' ? 'Active' : 'Inactive'
+    });
   }
 }
