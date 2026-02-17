@@ -722,27 +722,67 @@ export class AdminCenterService {
     );
   }
 
+  // createCountry(payload: any) {
+  //   const headers = new HttpHeaders({
+  //   token: localStorage.getItem('token') || '',
+  //   authorization: localStorage.getItem('authorization') || '',
+  //     'channel': "BO",
+  //     'partnerid': 1,
+  //     'unit': 'PRD',
+  //     'cookie': 'JSESSIONID=MWQ4YmY0M2UtZGMzMy00ZjMxLWFkOWItNTY4M2I0ZTcxMTI1'
+
+
+  //     // 'userid': 'ram123'
+  //   });
+  //   return this.http.post('  http://34.18.92.50:8443/graphql',
+  //     payload,
+  //     {
+  //       headers,
+  //       withCredentials: true
+
+  //     }
+  //   );
+  // }
+
   createCountry(payload: any) {
+
+    const token = localStorage.getItem('token');
+    const auth = localStorage.getItem('authorization');
+
     const headers = new HttpHeaders({
-      "token": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJJU1NVRVJfVEVTVCIsInN1YiI6IjVkNjE2NGJmLTBiMjAtNDI1MC1hMjAyLTZhYzExZGE5ZmJmYiIsImF1ZCI6IkFVRF9URVNUIiwiZXhwIjoxNzcxMzMwMjA1LCJpYXQiOjE3NzEzMjY1NDUsInNjb3BlIjoicmVhZCIsImFsbG93ZWRQcm9kdWN0IjoiV29ya2Zsb3cgQ29uZmlndXJhdGlvbiIsImFsbG93ZWRTdWJQcm9kdWN0cyI6WyJiYW5rIiwiQ0hJTERfUFJPRFVDVF9NQU5BR0VNRU5UIiwicHJvZHVjdCIsInByb2R1Y3Q0IiwiTUFOQUdFX1VTRVJfQ09ORklHIiwiUk9MRV9NQU5BR0VNRU5UX0NPTkZJRyIsIlVTRVJfR1JPVVBfTUFOQUdFTUVOVF9DT05GSUciLCJwcm9kdWN0MiIsIlJVTEVfTUFOQUdFTUVOVF9DT05GSUciLCJQUk9EVUNUX01BTkFHRU1FTlRfQ09ORklHIiwiU1VCX1BST0RVQ1RfTUFOQUdFTUVOVF9DT05GSUciLCJBQ0NFU1NfUEVSTUlTU0lPTl9NQU5BR0VNRU5UX0NPTkZJRyIsInByb2R1Y3QzIiwic3ViIHByb2R1Y3QgY29kZSJdLCJhbGxvd2VkRmVhdHVyZXMiOlsiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIiwiQWRkIl19.NvYbcVteR3GZMOl1aVWcN5Bb8LFYqpEqHtMdXed-ZsqeZIt9-nwOg61WnlQYlvcG5Vvqq9b-GyoN2ZgX8dUE5Gb8VRpg9PWXrUSfpb7HmOLUaEDYHEa4iLszW0-cu-Hh_fRgIE36EAniNuYYVHtSVCiKi-WAy4cdOX4gi4T-wgAg_Ymb8jR3QD8qSjhRx5lXydSFzaQ36TSNiA7gJe0wSUAoKDK4JWfZjYamrKqUoiZZYYS6HBEVNQEP3Rdg-sr6E7gfMUhILJpfffWvht6ysbl-NV_iMf0ypI4FEGqKHFEGCOSdcAT5Wwaidwj-P7TyBap0kn6I0EIwvE6YQQ0Rew",
-      'authorization': "Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJyYW0xMjMiLCJpYXQiOjE3NzEzMjY2MDAsImV4cCI6MTc3MTMyNjkwMCwiaXNzIjoiaHR0cHM6Ly9tYW5uYWkuY29tIiwianRpIjoiODdmYTVmM2YtMTk4MS00OTQ2LWJjY2EtNTk5MDY1NTExZTI4In0.TVBndfHiP3p5jrfK8fldwgavfk3P58kJcXAcnCT9zunBs9I5tmSwlLsoGg-2MpbZhqLFt5WUwxSkm1WijqKXNW-AdYW9b-rYdLXR5AY-DJGt6_TBsOjnxbKZzzjvu_Fma87DZzsWgkB_nusrewPTOA4CbG3MXPOvXJ8RkHydDMrWFdX5i0HAoLcgKgbmCHuOmHrzfWOz1eQ4ExfGBMnnFBFpmKK5HKNd9khAAnjuvqnZD2SCMQd_dNboSfa3ZdevNUSSIx_x2Jc51Th_byKenN6IXiYUXXlvPTodFXOyqiE1LHSUiu2Q89zX2G5GCuSh0EYzKpG0anjfB7x6IOmHHw",
-      'channel': "BO",
-      'partnerid': 1,
-      'unit': 'PRD',
-      'cookie': 'JSESSIONID=MWQ4YmY0M2UtZGMzMy00ZjMxLWFkOWItNTY4M2I0ZTcxMTI1'
+      token: token ? `Bearer ${token}` : '',
+      authorization: auth ? `Bearer ${auth}` : '',
+      // channel: 'BO',
+      partnerid: '',
+      screenId: '',
+      userId: 'ram123',
+      userType: 'SYSADMIN',
+      domainId: 'BO',
+      userLevel: 'DEFAULT',
+      // unit: 'PRD',
+      serviceId: 'GRAPHQL',
 
-
-      // 'userid': 'ram123'
     });
-    return this.http.post('  http://34.18.92.50:8443/graphql',
+
+    return this.http.post(
+      'http://34.18.92.50:8443/graphql',
       payload,
       {
         headers,
         withCredentials: true
-
       }
     );
   }
+
+
+
+  getMasterChannel() {
+    return this.http.post(
+      'http://34.1.33.119:8443/bko-channel/fetchAll',
+      {}
+    );
+  }
+
 
 
 }

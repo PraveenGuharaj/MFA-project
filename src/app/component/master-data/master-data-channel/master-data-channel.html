@@ -66,14 +66,20 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
+            <tr *ngFor="let p of getChannelData;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
                 <td>{{ p.channelId }}</td>
-                <td>{{ p.countryDescription }}</td>
+                <td>{{ p.channelDesc }}</td>
                 <td>{{ p.description }}</td>
-                <td>{{ p.status }}</td>
+                <td> <span class="status" [ngClass]="{
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IAC'
+        }">
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }}
+                    </span></td>
+
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" />
                         <img src="images/referesh_admin.png" />

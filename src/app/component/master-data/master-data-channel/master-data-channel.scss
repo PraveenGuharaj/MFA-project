@@ -243,3 +243,20 @@ body {
 .bg-grey {
     background-color: #FAFAFB !important;
 }
+
+.status.active {
+    background: #E0FFEA;
+    color: #06802B;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.status.inactive {
+    background: #FFE0E1;
+    color: #800608;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 20px;
+}

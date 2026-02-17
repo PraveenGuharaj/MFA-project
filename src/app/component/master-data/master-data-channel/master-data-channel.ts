@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 @Component({
   selector: 'app-master-data-channel',
@@ -13,6 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class MasterDataChannel {
   @Input() subProduct: boolean = false;
+  getChannelData: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
+
+  ngOnInit() {
+    this.getChannelApi();
+  }
 
   products = [
     {
@@ -58,6 +66,12 @@ export class MasterDataChannel {
       actionsType: 'image'
     }
   ];
+
+  getChannelApi() {
+    this.adminCenterService.getMasterChannel().subscribe((res: any) => {
+      this.getChannelData = res.data;
+    })
+  }
 
 
   onProductTypeChanged(subProduct: boolean) {
