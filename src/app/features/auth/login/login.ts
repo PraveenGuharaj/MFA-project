@@ -48,6 +48,7 @@ export class Login {
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.generateApi();
   }
 
 
@@ -55,11 +56,17 @@ export class Login {
     console.log('loginform', this.loginForm);
 
     // After successful login, show OTP screen
-    this.isOtpScreen = true;
+    // this.isOtpScreen = true;
     this.startOtpTimer();
-    this.adminCenterService.authServerLogin(this.loginForm.value).subscribe((res) => {
+    this.adminCenterService.authServerLogin(this.loginForm.value).subscribe((res: any) => {
       console.log('resssssss', res);
-
+      if (res?.authStatus === 'LOGIN SUCCESS') {
+        localStorage.setItem('authorization', res.token);
+        console.log('Navigating to dashboard...');
+        this.router.navigate(['/dashboard']).then(r => {
+          console.log('Navigation result:', r);
+        });
+      }
     })
   }
   togglePasswordVisibility() {
@@ -94,5 +101,12 @@ export class Login {
     this.isQrScreen = true;
     this.isOtpScreen = false;  // Hide OTP screen
 
+  }
+
+  generateApi() {
+    this.adminCenterService.createGenerateToken().subscribe((res: any) => {
+      const token = res?.data.token;   // adjust according to response
+      localStorage.setItem('token', token);
+    })
   }
 }

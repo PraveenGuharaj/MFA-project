@@ -80,10 +80,11 @@ import { AdminCenterManagecontentSubproduct } from './component/admin-center/adm
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'backoffice',
     loadChildren: () =>
       import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
+
   {
     path: 'dashboard',
     component: Dashboard,
@@ -248,6 +249,11 @@ export const routes: Routes = [
     ]
   },
 
+  {
+    path: '**',
+    redirectTo: 'backoffice'
+  },
+
   // {
   //   path: 'admin-center',
   //   component:Dashboard,
@@ -310,4 +316,5 @@ export const routes: Routes = [
       { path: '', redirectTo: 'merchants', pathMatch: 'full' }
     ]
   },
+
 ];
