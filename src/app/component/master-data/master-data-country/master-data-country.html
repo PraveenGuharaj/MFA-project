@@ -57,6 +57,20 @@
                 <th *ngIf="!subProduct">Unit Description</th>
                 <th *ngIf="!subProduct">Base Currency</th>
 
+                <th *ngIf="!subProduct">Eurozone Flag</th>
+                <th *ngIf="!subProduct">Remarks</th>
+                <th *ngIf="!subProduct">Mobile Number Prefix</th>
+                <th *ngIf="!subProduct">Nationality</th>
+                <th *ngIf="!subProduct">Language EN</th>
+                <th *ngIf="!subProduct">Language AR</th>
+                <th *ngIf="!subProduct">Language FR</th>
+                <th *ngIf="!subProduct">Swift Name</th>
+                <th *ngIf="!subProduct">Transfer Remitter/Benef Address</th>
+                <th *ngIf="!subProduct">Beneficiary Address Field(POB/DOB)</th>
+                <th *ngIf="!subProduct">Digital Onboarding Eligibility</th>
+                <th *ngIf="!subProduct">Status</th>
+                <th *ngIf="!subProduct">Action</th>
+
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
                 <th *ngIf="subProduct">Features</th>
@@ -71,12 +85,39 @@
 
             <tr *ngFor="let p of products?.data">
                 <td>{{ p.countryCode }}</td>
-                <td>{{ p.countryDesc }}</td>
+                <td class="w-180">{{ p.countryDesc }}</td>
                 <td>{{ p.isoCountryCode }}</td>
                 <td>{{ p.countryCodeIso3a}}</td>
                 <td>{{ p.color }}</td>
                 <td>{{ p.unitDesc }}</td>
                 <td>{{ p.baseCurrency }}</td>
+
+                <td>{{ p.eurozoneFlag }}</td>
+                <td>{{ p.remarks }}</td>
+                <td>{{ p.mobNoPrefix }}</td>
+                <td>{{ p.nationality }}</td>
+                <td>{{ p.langEn }}</td>
+                <td>{{ p.langAr }}</td>
+                <td>{{ p.langFr }}</td>
+                <td>{{ p.baseCurrency }}</td>
+                <td>{{ p.transferBenefAddress }}</td>
+                <td>{{ p.benefAddress }}</td>
+                <td>{{ p.digitalOnboardingEligibility }}</td>
+                <td> <span class="status" [ngClass]="{
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IACT'
+        }">
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IACT' ? 'Inactive' : p.status }}
+                    </span></td>
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container>
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" />
+                        <img src="images/trash_red.png" />
+                    </ng-container>
+
+                </td>
             </tr>
         </tbody>
     </table>
