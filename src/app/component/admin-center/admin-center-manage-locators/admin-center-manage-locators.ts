@@ -90,26 +90,16 @@ export class AdminCenterManageLocators {
     console.log('Deleting product:', this.selectedProduct);
 
     const payload = {
-
-      licenseId: this.selectedProduct.licenseId,
-      domainName: null,
-      expiryDate: null,
-      warningStatus: null,
-      alertStatus: null,
-      status: null,
-      createdBy: null,
-      action: "DELETE",
-      notificationDeliveries: null
-
+      locatorId: this.selectedProduct.locatorId,
     }
 
     this.showDeleteConfirm = false;
     // this.selectedProduct = null;
-    this.adminCenterService.deleteLicense(payload).subscribe((res) => {
+    this.adminCenterService.deleteAtmLocator(payload).subscribe((res) => {
       console.log('res', res);
       if (res.status.code == "000000") {
-        this.commonToaster.showSuccess('Product License Deleted Successfully');
-        this.getAtm();
+        this.commonToaster.showSuccess(res.status.description);
+        this.getAtmLoactor();
       }
 
     })

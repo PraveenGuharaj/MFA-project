@@ -26,6 +26,8 @@ export class AdminCenterService {
   private deleteSubProductUrl = 'http://34.1.33.119:8443/bko-subProduct/delete';
   private deleteOfferMgmtUrl = 'http://34.1.33.119:8443/backoffice-service/offer/delete';
   private deleteDiscountMgmtUrl = 'http://34.1.33.119:8443/backoffice-service/discount/delete';
+  private atmLocatorDeleteUrl = 'http://34.18.92.50:8443/backoffice-service/atm/delete'
+
 
 
   constructor(private http: HttpClient) { }
@@ -825,5 +827,11 @@ export class AdminCenterService {
       payload
     );
   }
+
+  deleteAtmLocator(productId: any): Observable<any> {
+
+    return this.http.post(`${this.atmLocatorDeleteUrl}`, productId);
+  }
+
 
 }
