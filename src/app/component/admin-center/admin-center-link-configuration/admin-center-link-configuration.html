@@ -47,7 +47,7 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of getLinkConfig">
+            <tr *ngFor="let p of pagedProducts">
                 <td>{{ p.rowNumber }}</td>
                 <td>{{ p.englishName }}</td>
                 <td>{{ p.groupInEnglish }}</td>
@@ -63,8 +63,8 @@
                         {{ p.status === 'Y' ? 'Active' : p.status === 'N' ? 'Inactive' : 'Active' }}
                     </span>
                 </td>
-                <td class="w-180">
-                    <img *ngIf="p.imageBase64" [src]="'data:image/png;base64,' + p.imageBase64" width="50" height="50"
+                <td class="w-180 p-20">
+                    <img *ngIf="p.imageBase64" [src]="'data:image/png;base64,' + p.imageBase64" width="84" height="50"
                         alt="image" />
                 </td>
 
@@ -82,18 +82,39 @@
     </table>
 
     <!-- Pagination -->
+    <!-- Pagination -->
     <div class="pagination">
-        <button>&lt;</button>
-        <button class="active-page">1</button>
-        <button>2</button>
-        <button>3</button>
-        <span>…</span>
-        <button>10</button>
-        <button>&gt;</button>
+
+        <!-- Previous -->
+        <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">
+            ‹
+        </button>
+
+        <!-- Page Numbers -->
+        <ng-container *ngFor="let page of pages; let i = index">
+
+            <!-- Ellipsis -->
+            <span *ngIf="i > 0 && page - pages[i - 1] > 1">
+                ...
+            </span>
+
+            <!-- Page Button -->
+            <button (click)="setPage(page)" [class.active-page]="page === currentPage">
+                {{ page }}
+            </button>
+
+        </ng-container>
+
+        <!-- Next -->
+        <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+            ›
+        </button>
+
     </div>
 
-    <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
-        message="Are you sure you want to make changes to the License? Click on delete to remove the license"
+
+    <app-comon-popup [visible]="showDeleteConfirm" title="Delete Link"
+        message="Are you sure you want to make changes to the Link Configuration? Click on delete to remove the Link Configuration"
         (confirm)="confirmDelete()" (cancel)="cancelDelete()">
     </app-comon-popup>
 

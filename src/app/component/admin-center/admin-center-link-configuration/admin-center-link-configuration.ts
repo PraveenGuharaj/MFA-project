@@ -173,6 +173,8 @@ export class AdminCenterLinkConfiguration {
   getLinkConfigApi() {
     this.adminCenterService.getLinkConfig().subscribe((res: any) => {
       this.getLinkConfig = res.data;
+      this.totalPages = Math.ceil(this.getLinkConfig.length / this.pageSize);
+      this.setPage(1)
     })
   }
 
@@ -219,29 +221,53 @@ export class AdminCenterLinkConfiguration {
     console.log('Deleting product:', this.selectedProduct);
 
     const payload = {
-
-      licenseId: this.selectedProduct.licenseId,
-      domainName: null,
-      expiryDate: null,
-      warningStatus: null,
-      alertStatus: null,
-      status: null,
-      createdBy: null,
-      action: "DELETE",
-      notificationDeliveries: null
-
+      followUsId: this.selectedProduct.followUsId
     }
 
     this.showDeleteConfirm = false;
     // this.selectedProduct = null;
-    this.adminCenterService.deleteLicense(payload).subscribe((res) => {
+    this.adminCenterService.deleteLinkConfig(payload).subscribe((res) => {
       console.log('res', res);
       if (res.status.code == "000000") {
-        this.commonToaster.showSuccess('Product License Deleted Successfully');
+        this.commonToaster.showSuccess(res.status.description);
         this.getLinkConfigApi();
       }
 
     })
   }
 
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+
+    this.currentPage = page;
+    const start = (page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedProducts = this.getLinkConfig.slice(start, end);
+  }
+
+  get pages(): number[] {
+    const total = this.totalPages;
+    const current = this.currentPage;
+
+    if (total <= 5) {
+      return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    const pages = new Set<number>();
+
+    // Always include first and last
+    pages.add(1);
+    pages.add(total);
+
+    // Include current and neighbors
+    pages.add(current);
+    pages.add(current - 1);
+    pages.add(current + 1);
+
+    // Remove invalid numbers
+    return Array.from(pages)
+      .filter(p => p > 0 && p <= total)
+      .sort((a, b) => a - b);
+  }
 }
