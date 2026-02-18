@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../admin-center-service';
 
 @Component({
   selector: 'app-admin-center-link-configuration',
@@ -15,6 +16,14 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminCenterLinkConfiguration {
   @Input() subProduct: boolean = false;
+  getLinkConfig: any;
+  baseImageUrl = 'https://yourdomain.com/uploads/';
+
+  constructor(private adminCenterService: AdminCenterService) { }
+
+  ngOnInit() {
+    this.getLinkConfigApi();
+  }
 
   products = [
     {
@@ -143,5 +152,16 @@ export class AdminCenterLinkConfiguration {
       return 0;
     });
   }
+
+  getLinkConfigApi() {
+    this.adminCenterService.getLinkConfig().subscribe((res: any) => {
+      this.getLinkConfig = res.data;
+    })
+  }
+
+  getImageUrl(imageName: string): string {
+    return this.baseImageUrl + imageName;
+  }
+
 
 }

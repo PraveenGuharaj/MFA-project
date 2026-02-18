@@ -92,7 +92,7 @@ body {
     width: 180px;
     max-width: 180px;
     word-wrap: break-word;
-    white-space: normal;
+    white-space: normal !important;
 
 }
 
@@ -235,4 +235,20 @@ body {
 .sync-dropdown {
     padding: 15px;
     border: none;
+}
+
+
+.product-table-container {
+    overflow-x: auto;
+}
+
+.product-table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    white-space: nowrap;
 }

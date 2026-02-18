@@ -24,13 +24,16 @@
     <table class="product-table">
         <thead>
             <tr>
-                <th *ngIf="!subProduct">Sync Table</th>
-                <th *ngIf="!subProduct">Sync/ Migration</th>
-                <th *ngIf="!subProduct">Migration Date</th>
-                <th *ngIf="!subProduct">Migration Status</th>
-                <th *ngIf="!subProduct">Sync Date</th>
-                <th *ngIf="!subProduct">Sync Status</th>
-                <th *ngIf="!subProduct">ID</th>
+                <th *ngIf="!subProduct">Row Number</th>
+                <th *ngIf="!subProduct">English Name</th>
+                <th *ngIf="!subProduct">Group Name(English)</th>
+                <th *ngIf="!subProduct">English Link</th>
+                <th *ngIf="!subProduct">Group Name(Arabic)</th>
+                <th *ngIf="!subProduct">Arabic Name</th>
+                <th *ngIf="!subProduct">Arabic Link</th>
+                <th *ngIf="!subProduct">Status</th>
+                <th *ngIf="!subProduct">Image</th>
+                <th *ngIf="!subProduct">Action</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -44,14 +47,36 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of filteredProducts">
-                <td>{{ p.syncTable }}</td>
-                <td>{{ p.syncMigration }}</td>
-                <td>{{ p.migrationDate }}</td>
-                <td>{{ p.migrationStatus }}</td>
-                <td class="w-180">{{ p.syncDate }}</td>
-                <td>{{ p.syncStatus }}</td>
-                <td>{{ p.id }}</td>
+            <tr *ngFor="let p of getLinkConfig">
+                <td class="w-180">{{ p.rowNumber }}</td>
+                <td class="w-180">{{ p.englishName }}</td>
+                <td class="w-180">{{ p.groupInEnglish }}</td>
+                <td class="w-180">{{ p.englishLink }}</td>
+                <td class="w-180">{{ p.groupInArabic }}</td>
+                <td class="w-180">{{ p.arabicName }}</td>
+                <td class="w-180">{{ p.arabicLink }}</td>
+                <td class="w-180">
+                    <span class="status" [ngClass]="{
+          'active': p.status === 'Y',
+          'inactive': p.status === 'N'
+        }">
+                        {{ p.status === 'Y' ? 'Active' : p.status === 'N' ? 'Inactive' : 'Active' }}
+                    </span>
+                </td>
+                <td class="w-180">
+                    <img *ngIf="p.imageBase64" [src]="'data:image/png;base64,' + p.imageBase64" width="50" height="50"
+                        alt="image" />
+                </td>
+
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container>
+                        <img src="images/eye.png" />
+                        <img src="images/edit.png" />
+                        <img src="images/trash_red.png" />
+                    </ng-container>
+
+                </td>
             </tr>
         </tbody>
     </table>
