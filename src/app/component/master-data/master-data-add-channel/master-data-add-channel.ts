@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 @Component({
   selector: 'app-master-data-add-channel',
@@ -32,30 +33,41 @@ export class MasterDataAddChannel {
   types = ["Primary", "Secondary", "Backup"];
   deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService) {
     this.productForm = this.fb.group({
-      productName: ['', Validators.required],
-      channel: ['', Validators.required],
-      category: ['', Validators.required],
-
-      // Newly mapped fields
-      otpLength: ['', Validators.required],
-      maxAttempts: ['', Validators.required],
-      otpExpiry: ['', Validators.required],
-      blockDuration: ['', Validators.required],
-      domain: ['', Validators.required],
-      deliveryModes: [[], Validators.required], // Multiple select
-
-      type: ['', Validators.required],
+      channelId: ['', Validators.required],
+      channelDescription: ['', Validators.required],
+      description: ['', Validators.required],
       status: [true]
     });
   }
 
   submitForm() {
-    if (this.productForm.valid) {
-    } else {
-      this.productForm.markAllAsTouched();
-    }
+    console.log('form', this.productForm.value);
+    const formValue = this.productForm.value;
+
+    const payload = {
+      serviceName: "startWorkflow",
+      processName: "CHANNEL",
+      action: "ADD",
+      product: "MASTER",
+      subProduct: "CHANNEL_CONFIG",
+      requestData: [
+        {
+          channelId: formValue.channelId,
+          channelDesc: formValue.channelDescription,
+          description: formValue.description,
+          status: formValue.status ? "ACT" : "INA"
+        }
+      ]
+    };
+
+    console.log("Final Payload:", payload);
+
+    this.adminCenterService.createChannel(payload).subscribe((res: any) => {
+
+    })
+
   }
 
   closeForm() { }

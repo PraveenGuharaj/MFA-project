@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdminCenterService } from '../../../component/admin-center/admin-center-service';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 
 
 @Component({
@@ -29,7 +30,7 @@ import { AdminCenterService } from '../../../component/admin-center/admin-center
 export class Login {
   loginForm!: FormGroup;
   constructor(private router: Router, private adminCenterService: AdminCenterService,
-    private fb: FormBuilder
+    private fb: FormBuilder, private commonToaster: CommonToaster
   ) { }  // Inject Router
 
   userName: string = '';
@@ -63,9 +64,14 @@ export class Login {
       if (res?.authStatus === 'LOGIN SUCCESS') {
         localStorage.setItem('authorization', res.token);
         console.log('Navigating to dashboard...');
+        this.commonToaster.showSuccess(res.authStatus);
         this.router.navigate(['/dashboard']).then(r => {
           console.log('Navigation result:', r);
         });
+      } else {
+        console.log('invalid');
+
+        this.commonToaster.showError(res.authStatus)
       }
     })
   }

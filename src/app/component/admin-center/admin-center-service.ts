@@ -783,6 +783,34 @@ export class AdminCenterService {
     );
   }
 
+  createChannel(payload: any) {
 
+    const token = localStorage.getItem('token');
+    const auth = localStorage.getItem('authorization');
+
+    const headers = new HttpHeaders({
+      token: token ? `Bearer ${token}` : '',
+      authorization: auth ? `Bearer ${auth}` : '',
+      // channel: 'BO',
+      partnerid: '',
+      screenId: '',
+      userId: 'ram123',
+      userType: 'SYSADMIN',
+      domainId: 'BO',
+      userLevel: 'DEFAULT',
+      // unit: 'PRD',
+      serviceId: 'GRAPHQL',
+
+    });
+
+    return this.http.post(
+      'http://34.18.92.50:8443/graphql',
+      payload,
+      {
+        headers,
+        withCredentials: true
+      }
+    );
+  }
 
 }

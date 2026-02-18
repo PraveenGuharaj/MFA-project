@@ -46,7 +46,7 @@
 
         <tbody>
 
-            <tr *ngFor="let item of getOtp">
+            <tr *ngFor="let item of pagedProducts">
                 <td>{{ item.domainId }}</td>
                 <td>{{ item.channelName}}</td>
                 <td>{{ item.categoryId}}</td>
@@ -85,14 +85,34 @@
 
     <!-- Pagination -->
     <div class="pagination">
-        <button>&lt;</button>
-        <button class="active-page">1</button>
-        <button>2</button>
-        <button>3</button>
-        <span>…</span>
-        <button>10</button>
-        <button>&gt;</button>
+
+        <!-- Previous -->
+        <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">
+            ‹
+        </button>
+
+        <!-- Page Numbers -->
+        <ng-container *ngFor="let page of pages; let i = index">
+
+            <!-- Ellipsis -->
+            <span *ngIf="i > 0 && page - pages[i - 1] > 1">
+                ...
+            </span>
+
+            <!-- Page Button -->
+            <button (click)="setPage(page)" [class.active-page]="page === currentPage">
+                {{ page }}
+            </button>
+
+        </ng-container>
+
+        <!-- Next -->
+        <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+            ›
+        </button>
+
     </div>
+
 
     <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
         message="Are you sure you want to make changes to the Product? Click on delete to remove the product management"

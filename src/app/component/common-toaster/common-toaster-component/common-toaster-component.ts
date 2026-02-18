@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './common-toaster-component.scss',
 })
 export class CommonToasterComponent {
-    constructor(public toaster: CommonToaster) {}
+  constructor(public toaster: CommonToaster) {
+    console.log('toaster', this.toaster);
+
+  }
 
 }

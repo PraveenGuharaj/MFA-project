@@ -12,7 +12,7 @@
             <div class="form-row full-width mt-20">
                 <div class="form-group">
                     <label>Channel ID </label>
-                    <mat-select formControlName="channel" placeholder="Select Partner Name" class="mt-20">
+                    <mat-select formControlName="channelId" placeholder="Select Partner Name" class="mt-20">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
                     </mat-select>
                 </div>
@@ -22,12 +22,19 @@
             <div class="form-row full-width">
                 <div class="form-group">
                     <label>Channel Description</label>
-                    <input placeholder="Enter Product Name" class="mt-20" />
+                    <input placeholder="Enter Product Name" class="mt-20" formControlName="channelDescription" />
                 </div>
 
                 <div class="form-group">
                     <label>Description</label>
-                    <input placeholder="Enter Offer Title" class="mt-20" />
+                    <input placeholder="Enter Offer Title" class="mt-20" formControlName="description" />
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="form-row">
+                <div class="form-group">
+                    Enable <mat-slide-toggle formControlName="enable" color="primary"></mat-slide-toggle>
                 </div>
             </div>
 
@@ -35,7 +42,8 @@
             <div class="form-actions bottom-btn">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>

@@ -1,7 +1,17 @@
-<div class="toast-container" *ngIf="toaster.toast$ | async as toast">
+<!-- <div class="toast-container" *ngIf="toaster.toast$ | async as toast">
   <div class="toast" [ngClass]="toast.type">
     <span class="icon">✔</span>
     <span class="message">{{ toast.message }}</span>
     <span class="close" (click)="toaster.hide()">✖</span>
+  </div>
+</div> -->
+
+<div class="toast-container" *ngIf="toaster.toast$ | async as toast">
+  <div class="toast" [ngClass]="toast.type">
+    <span class="icon">
+      {{ toast.type === 'success' ? '✔' : '✖' }}
+    </span>
+    <span class="message">{{ toast.message }}</span>
+    <span class="close" (click)="toaster.hide()"></span>
   </div>
 </div>
