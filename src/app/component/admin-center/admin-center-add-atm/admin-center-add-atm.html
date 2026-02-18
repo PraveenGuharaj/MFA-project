@@ -10,64 +10,87 @@
       <!-- Text Inputs -->
       <div class="full-width">
         <label>ATM Code</label>
-        <input formControlName="atmCode" placeholder="Enter ATM code" />
+        <input formControlName="atmCode" placeholder="Enter ATM code" class="mt-20" />
       </div>
 
-      <div class="p-10 full-width">
+      <!-- <div class="p-10 full-width">
         <label>ATM Name</label>
         <input formControlName="atmName" placeholder="Enter ATM name" />
+      </div> -->
+
+      <div class="p-10 full-width mt-10">
+        <label>Full Address (English)</label>
+        <input formControlName="fullAddressEn" placeholder="Enter Full Address English" class="mt-20" />
       </div>
 
-      <div class="p-10 full-width">
-        <label>Full Address</label>
-        <input formControlName="fullAddress" placeholder="Enter full address" />
-      </div>
-
-      <div class="p-10 full-width">
-        <label>Short Address</label>
-        <input formControlName="shortAddress" placeholder="Enter short address" />
+      <div class="p-10 full-width mt-10">
+        <label>Full Address (Arabic)</label>
+        <input formControlName="fullAddressAr" placeholder="Enter Full Address Arabic" class="mt-20" />
       </div>
 
       <!-- Dropdowns -->
-      <div class="p-10">
+      <div class="p-10 mt-10">
         <div class="form-group">
-          <label>Country</label>
-          <mat-select formControlName="country" placeholder="Select Country">
+          <label>City (English)</label>
+          <!-- <mat-select formControlName="cityEn" placeholder="Select City English" class="mt-20">
             <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
-          </mat-select>
+          </mat-select> -->
+          <input formControlName="cityEn" placeholder="Enter City English" class="mt-20" />
+
         </div>
 
-        <div class="form-group p-10">
-          <label>City</label>
-          <mat-select formControlName="city" placeholder="Select City">
+        <div class="form-group p-10 mt-10">
+          <label>City (Arabic)</label>
+          <!-- <mat-select formControlName="cityAr" placeholder="Select City Arabic" class="mt-20">
             <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
-          </mat-select>
+          </mat-select> -->
+          <input formControlName="cityAr" placeholder="Enter City Arabic" class="mt-20" />
         </div>
       </div>
 
       <!-- Coordinates -->
-      <div class="p-10">
+      <div class="p-10 mt-10">
         <div class="form-group">
           <label>Latitude</label>
-          <input formControlName="latitude" placeholder="Enter Latitude" />
+          <input formControlName="latitude" placeholder="Enter Latitude" class="mt-20" />
         </div>
 
-        <div class="form-group p-10">
+        <div class="form-group p-10 mt-10">
           <label>Longitude</label>
-          <input formControlName="longitude" placeholder="Enter Longitude" />
+          <input formControlName="longitude" placeholder="Enter Longitude" class="mt-20" />
         </div>
       </div>
 
       <!-- Working Hours -->
-      <div class="p-10">
+      <div class="p-10 mt-10">
         <div class="form-group">
           <label>Timing</label>
-          <input formControlName="timing" placeholder="Enter timing" />
+          <input formControlName="timing" placeholder="Enter timing" class="mt-20" />
         </div>
 
-        <div class="form-group p-10">
-          <label>Working Hours</label>
-          <mat-select formControlName="workingHours" placeholder="Select Hours">
+        <div class="form-group p-10 mt-10">
+          <label>Working Hours (English)</label>
+          <mat-select formControlName="workingHoursEn" placeholder="Select Hours" class="mt-20">
+            <mat-option *ngFor="let day of WeekDays" [value]="day">
+              {{ day }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+
+        <div class="form-group mt-10">
+          <label>From Time</label>
+          <input type="time" formControlName="fromTime" class="mt-20">
+        </div>
+
+        <div class="form-group mt-10">
+          <label>To Time</label>
+          <input type="time" formControlName="toTime" class="mt-20">
+        </div>
+
+        <div class="form-group p-10 mt-10">
+          <label>Working Hours (Arabic)</label>
+          <mat-select formControlName="workingHoursAr" placeholder="Select Hours" class="mt-20">
             <mat-option value="24x7">24x7</mat-option>
             <mat-option value="Day">Day</mat-option>
             <mat-option value="Night">Night</mat-option>
@@ -75,38 +98,86 @@
         </div>
       </div>
 
+      <div class="form-group mt-10">
+        <label>Installation Date</label>
+        <input formControlName="installationDate" placeholder="Enter timing" type="datetime-local" class="mt-20" />
+      </div>
+
       <!-- Checkbox Section -->
-      <h3>ATM Type</h3>
-      <div class="checkbox-group">
-        <mat-checkbox formControlName="cashDispenser"><span class="fs-16">Cash Dispenser</span></mat-checkbox>
-        <mat-checkbox formControlName="recycler"><span class="fs-16">Recycler</span></mat-checkbox>
-        <mat-checkbox formControlName="cdm"><span class="fs-16">CDM</span></mat-checkbox>
-        <mat-checkbox formControlName="chequeDM"><span class="fs-16">Cheque DM</span></mat-checkbox>
-      </div>
+      <h3>Cash Deposit</h3>
 
-      <h3>Facilities</h3>
-      <div class="checkbox-group">
-        <mat-checkbox formControlName="ramp"><span class="fs-16">Ramp Access</span></mat-checkbox>
-        <mat-checkbox formControlName="wheelchair" class="fs-16"><span class="fs-16">Wheelchair</span></mat-checkbox>
-      </div>
+      <mat-radio-group formControlName="cashDeposit" class="radio-group">
+        <mat-radio-button value="Y">
+          <span class="fs-16">Yes</span>
+        </mat-radio-button>
 
-      <h3>Currency Supported</h3>
-      <div class="checkbox-group">
-        <mat-checkbox formControlName="inr"><span class="fs-16">INR</span></mat-checkbox>
-        <mat-checkbox formControlName="qar"><span class="fs-16">QAR</span></mat-checkbox>
-        <mat-checkbox formControlName="aed"><span class="fs-16">AED</span></mat-checkbox>
-        <mat-checkbox formControlName="usd"><span class="fs-16">USD</span></mat-checkbox>
-      </div>
+        <mat-radio-button value="N">
+          <span class="fs-16">No</span>
+        </mat-radio-button>
+      </mat-radio-group>
 
-      <h3>ATM Features</h3>
-      <div class="checkbox-group">
-        <mat-checkbox formControlName="feature1"><span class="fs-16">Feature 1</span></mat-checkbox>
-        <mat-checkbox formControlName="feature2"><span class="fs-16">Feature 2</span></mat-checkbox>
-        <mat-checkbox formControlName="feature3"><span class="fs-16">Feature 3</span></mat-checkbox>
-        <mat-checkbox formControlName="feature4"><span class="fs-16">Feature 4</span></mat-checkbox>
-      </div>
 
-      <div class="p-10 full-width">
+      <h3>Cash Out</h3>
+
+      <mat-radio-group formControlName="cashOut" class="radio-group">
+        <mat-radio-button value="Y">
+          <span class="fs-16">Yes</span>
+        </mat-radio-button>
+
+        <mat-radio-button value="N">
+          <span class="fs-16">No</span>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <h3>Cheque Deposit</h3>
+
+      <mat-radio-group formControlName="chequeDeposit" class="radio-group">
+        <mat-radio-button value="Y">
+          <span class="fs-16">Yes</span>
+        </mat-radio-button>
+
+        <mat-radio-button value="N">
+          <span class="fs-16">No</span>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <h3>Disabled People</h3>
+
+      <mat-radio-group formControlName="disabledPeople" class="radio-group">
+        <mat-radio-button value="Y">
+          <span class="fs-16">Yes</span>
+        </mat-radio-button>
+
+        <mat-radio-button value="N">
+          <span class="fs-16">No</span>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <h3>Online Location</h3>
+
+      <mat-radio-group formControlName="onlineLocation" class="radio-group">
+        <mat-radio-button value="Y">
+          <span class="fs-16">Yes</span>
+        </mat-radio-button>
+
+        <mat-radio-button value="N">
+          <span class="fs-16">No</span>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <h3>Mode</h3>
+
+      <mat-radio-group formControlName="mode" class="radio-group">
+        <mat-radio-button value="Y">
+          <span class="fs-16">Online</span>
+        </mat-radio-button>
+
+        <mat-radio-button value="N">
+          <span class="fs-16">Offline</span>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <!-- <div class="p-10 full-width">
         <label>Contact Details</label>
         <input formControlName="latitude" placeholder="Enter Latitude" />
       </div>
@@ -119,7 +190,7 @@
       <div class="p-10 full-width">
         <label>Installation Date</label>
         <input formControlName="latitude" placeholder="Enter Latitude" />
-      </div>
+      </div> -->
       <!-- Status -->
       <!-- <div class="">
         <label>Status</label>
@@ -129,7 +200,7 @@
       <!-- Buttons -->
       <div class="form-actions p-10">
         <button type="submit" mat-raised-button color="primary" class="btn-cancel" (click)="closeForm()">Cancel</button>
-        <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+        <button type="button" mat-raised-button color="accent" class="btn-save" (click)="submitForm()">Save</button>
       </div>
     </form>
   </div>

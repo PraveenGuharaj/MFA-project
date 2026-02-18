@@ -133,6 +133,10 @@ export class AdminCenterManageLocators {
 
   ngOnInit() {
     this.getAtmLoactor();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getAtmLoactor();
+    });
   }
 
   getAtmLoactor() {
