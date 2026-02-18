@@ -3,3 +3,28 @@
 .search-wrapper {
     width: 100%;
 }
+
+.product-table-container {
+    overflow-x: auto;
+}
+
+.product-table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    white-space: nowrap;
+}
+
+
+
+.w-180 {
+    width: 180px;
+    max-width: 180px;
+    word-wrap: break-word;
+    white-space: normal !important;
+
+}

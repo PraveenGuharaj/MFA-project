@@ -15,12 +15,29 @@
     <table class="product-table">
         <thead>
             <tr>
-                <th *ngIf="!subProduct">Name</th>
+                <!-- <th *ngIf="!subProduct">Name</th>
                 <th *ngIf="!subProduct">ATM Code</th>
                 <th *ngIf="!subProduct">City</th>
                 <th *ngIf="!subProduct">Country</th>
                 <th *ngIf="!subProduct">ATM Type</th>
                 <th *ngIf="!subProduct">Coordinates</th>
+                <th *ngIf="!subProduct">Status</th>
+                <th *ngIf="!subProduct">Actions</th> -->
+
+                <th *ngIf="!subProduct">Locator ID</th>
+                <th *ngIf="!subProduct">Code</th>
+                <th *ngIf="!subProduct">City</th>
+                <th *ngIf="!subProduct">City (Arabic)</th>
+                <th *ngIf="!subProduct">Full Address(English)</th>
+                <th *ngIf="!subProduct">Full Address(Arabic)</th>
+                <th *ngIf="!subProduct">Working Hours(English)</th>
+                <th *ngIf="!subProduct">Working Hours(Arabic)</th>
+                <th *ngIf="!subProduct">Mode</th>
+                <th *ngIf="!subProduct">Installation Date</th>
+                <th *ngIf="!subProduct">Lattitude</th>
+                <th *ngIf="!subProduct">Longitude</th>
+                <th *ngIf="!subProduct">Day Time</th>
+                <th *ngIf="!subProduct">ATM Capability</th>
                 <th *ngIf="!subProduct">Status</th>
                 <th *ngIf="!subProduct">Actions</th>
 
@@ -40,25 +57,39 @@
 
         <tbody>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.name }}</td>
-                <td>{{ p.atmCode}}</td>
-                <td>{{ p.city}}</td>
-                <td>{{ p.country}}</td>
-                <td>{{ p.atmType}}</td>
-                <td>{{ p.coordinates}}</td>
-                <!-- <td>{{ p.status}}</td> -->
+            <tr *ngFor="let p of getAtm">
+                <td class="w-180">{{ p.locatorId }}</td>
+                <td class="w-180">{{ p.code}}</td>
+                <td class="w-180">{{ p.city}}</td>
+                <td class="w-180">{{ p.cityInArabic}}</td>
+                <td class="w-180">{{ p.fullAddress}}</td>
+                <td class="w-180">{{ p.fullAddressArb}}</td>
+                <td class="w-180">{{ p.workingHours}}</td>
+                <td class="w-180">{{ p.workingHoursInArb}}</td>
+                <td class="w-180">{{ p.mode}}</td>
+                <td class="w-180">{{ p.installationDate}}</td>
+                <td class="w-180">{{ p.latitude}}</td>
+                <td class="w-180">{{ p.longitude}}</td>
+                <td class="w-180">{{ p.dayTime[0]?.fromTime}} -{{ p.dayTime[0]?.toTime}}</td>
+                <td>
+                    <ul class="atm-list">
+                        <li *ngIf="p.cashDeposit >= 1">Cash Deposit</li>
+                        <li *ngIf="p.chequeDeposit >= 1">Cheque Deposit</li>
+                        <li *ngIf="p.cashOut >= 1">Cash Out</li>
+                    </ul>
+                </td>
+                <!-- <td>{{ p.isActive}}</td> -->
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.isActive === 'Y',
+          'inactive': p.isActive === 'N'
         }">
-                        {{ p.status }}
+                        {{ p.isActive === 'Y' ? 'Active' : p.isActive === 'N' ? 'Inactive' : p.isActive }}
                     </span>
                 </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />

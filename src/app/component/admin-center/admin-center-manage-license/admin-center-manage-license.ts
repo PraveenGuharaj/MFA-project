@@ -70,7 +70,7 @@ export class AdminCenterManageLicense {
   getLicense() {
     this.adminCenterService.getLicense().subscribe((res: any) => {
       this.getLicenseData = res.data
-      this.totalPages = Math.ceil(this.getLicenseData.length / this.pageSize);
+      this.totalPages = Math.ceil(this.getLicenseData?.length / this.pageSize);
       this.setPage(1);
     })
   }
@@ -121,7 +121,7 @@ export class AdminCenterManageLicense {
     this.currentPage = page;
     const start = (page - 1) * this.pageSize;
     const end = start + this.pageSize;
-    this.pagedProducts = this.getLicenseData.slice(start, end);
+    this.pagedProducts = this.getLicenseData?.slice(start, end);
   }
 
   get pages(): number[] {
