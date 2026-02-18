@@ -2,12 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddAtm } from '../admin-center-add-atm/admin-center-add-atm';
 
 @Component({
   selector: 'app-admin-center-manage-locators',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-manage-locators.html',
   styleUrl: './admin-center-manage-locators.scss',
@@ -15,121 +20,16 @@ import { AdminCenterService } from '../admin-center-service';
 export class AdminCenterManageLocators {
   @Input() subProduct: boolean = false;
   getAtm: any;
+  selectedProduct: any;
+  pageSize = 10;
+  currentPage = 1;
+  totalPages = 0;
+  showDeleteConfirm: boolean = false;
 
-  constructor(private adminCenterService: AdminCenterService) { }
+  pagedProducts: any[] = [];
 
-  products = [
-    {
-      name: 'ATM 01',
-      atmCode: '1234',
-      city: 'Doha',
-      country: 'Qatar',
-      atmType: 'Mobile ATM',
-      coordinates: '28.6139° N,77.2088° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 02',
-      atmCode: '1234',
-      city: 'Delhi',
-      country: 'India',
-      atmType: 'Cash Dispenser ATM',
-      coordinates: '25.2854° N,51.5310° E',
-      deliveryModes: 'PUSH',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 03',
-      atmCode: '1234',
-      city: 'Doha',
-      country: 'Qatar',
-      atmType: 'Basic ATM',
-      coordinates: '28.6139° N,77.2088° E',
-      deliveryModes: 'PUSH',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 04',
-      atmCode: '1234',
-      city: 'Dubai',
-      country: 'Qatar',
-      atmType: 'Basic ATM',
-      coordinates: '25.2854° N,51.5310° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 05',
-      atmCode: '1234',
-      city: 'Delhi',
-      country: 'India',
-      atmType: 'Mobile ATM',
-      coordinates: '28.6139° N,77.2088° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 06',
-      atmCode: '1234',
-      city: 'Delhi',
-      country: 'India',
-      atmType: 'Cash Dispenser ATM',
-      coordinates: '25.2854° N,51.5310° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 07',
-      atmCode: '1234',
-      city: 'Doha',
-      country: 'Qatar',
-      atmType: 'Basic ATM',
-      coordinates: '28.6139° N,77.2088° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 08',
-      atmCode: '1234',
-      city: 'Delhi',
-      country: 'India',
-      atmType: 'White Label ATM',
-      coordinates: '25.2854° N,51.5310° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 09',
-      atmCode: '1234',
-      city: 'Doha',
-      country: 'Qatar',
-      atmType: 'Mobile ATM',
-      coordinates: '28.6139° N,77.2088° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      name: 'ATM 10',
-      atmCode: 'Delhi',
-      city: 'CRD-004',
-      country: 'India',
-      atmType: 'Cash Dispenser ATM',
-      coordinates: '25.2854° N,51.5310° E',
-      deliveryModes: 'SMS',
-      status: 'Active',
-      actionsType: 'image'
-    }
-  ];
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster) { }
 
   ngOnInit() {
     this.getAtmLoactor();
@@ -151,4 +51,67 @@ export class AdminCenterManageLocators {
     this.subProduct = subProduct;
   }
 
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddAtm, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getAtmLoactor();
+        // this.loadSubProducts(); // 🔥 refresh list / API call
+      }
+    });
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+
+      licenseId: this.selectedProduct.licenseId,
+      domainName: null,
+      expiryDate: null,
+      warningStatus: null,
+      alertStatus: null,
+      status: null,
+      createdBy: null,
+      action: "DELETE",
+      notificationDeliveries: null
+
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteLicense(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('Product License Deleted Successfully');
+        this.getAtm();
+      }
+
+    })
+  }
 }

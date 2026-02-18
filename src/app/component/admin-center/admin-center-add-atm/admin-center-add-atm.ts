@@ -64,6 +64,63 @@ export class AdminCenterAddAtm {
 
   }
 
+  ngOnInit() {
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
+  }
+
+  patchForm(p: any) {
+    console.log('data', this.data);
+
+    if (!p) return;
+
+    const numberToYesNo = (value: number) => {
+      return value === 1 ? 'Y' : 'N';
+    };
+
+    const formatToDateTimeLocal = (dateStr: string) => {
+      if (!dateStr) return null;
+
+      const [day, month, year] = dateStr.split('/');
+      return `${year}-${month}-${day}T00:00`;
+    };
+
+    this.productForm.patchValue({
+
+      atmCode: p.code,
+      fullAddressEn: p.fullAddress,
+      fullAddressAr: p.fullAddressArb,
+
+      cityEn: p.city,
+      cityAr: p.cityInArabic,
+
+      latitude: p.latitude,
+      longitude: p.longitude,
+
+      workingHoursEn: p.dayTime?.[0]?.day || '',
+      workingHoursAr: p.workingHoursInArb,
+
+      installationDate: formatToDateTimeLocal(p.installationDate),
+
+      cashDeposit: numberToYesNo(p.cashDeposit),
+      cashOut: numberToYesNo(p.cashOut),
+      chequeDeposit: numberToYesNo(p.chequeDeposit),
+
+      disabledPeople: numberToYesNo(p.disablePeople),
+      onlineLocation: numberToYesNo(p.onlineLocation),
+
+      mode: p.mode === 'Online' ? 'Y' : 'N',
+
+      fromTime: p.dayTime?.[0]?.fromTime || '',
+      toTime: p.dayTime?.[0]?.toTime || ''
+    });
+
+    console.log('Form Patched:', this.productForm.value);
+  }
+
+
   submitForm() {
 
     const formValue = this.productForm.value;
@@ -117,17 +174,18 @@ export class AdminCenterAddAtm {
         ]
         : [],
 
-      mode: formValue.mode === 'Y' ? 'Online' : 'Offline'
+      mode: formValue.mode === 'Y' ? 'Online' : 'Offline',
+      locatorId: this.isEditMode ? this.data.editData.locatorId : ''
     };
 
     console.log('Final Payload:', payload);
 
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.updateAtm(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Product created successfully');
+          this.commonToaster.showSuccess(res.status.description);
           this.dialogRef.close('retaiClose');
         } else {
 
