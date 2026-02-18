@@ -48,17 +48,19 @@
                 <label>Upload Image</label>
 
                 <div class="upload-box">
-                    <span class="placeholder-text">Upload the file here</span>
+                    <span class="placeholder-text">
+                        {{ imageEnFileName }}
+                    </span>
 
                     <button type="button" class="upload-btn">
                         <mat-icon>upload</mat-icon>
                         Upload
                     </button>
 
-                    <input type="file" class="file-input" formControlName="iphonePushCertificate"
-                        (change)="onFileSelected($event)">
+                    <input type="file" class="file-input" (change)="onImageSelect($event)">
                 </div>
             </div>
+
 
             <div class=" mt-20   ">
                 <label class="mr-10">Status</label>

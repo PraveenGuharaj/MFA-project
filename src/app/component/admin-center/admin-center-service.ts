@@ -851,4 +851,18 @@ export class AdminCenterService {
     );
   }
 
+  updateLinkConfig(payload: any) {
+    const headers = new HttpHeaders({
+      userid: sessionStorage.getItem('userId') || '',
+      serviceid: ''
+    });
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/followus/update',
+      payload,
+      { headers }
+    );
+  }
+
+
+
 }

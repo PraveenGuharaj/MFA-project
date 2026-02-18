@@ -36,6 +36,18 @@ export class AdminCenterAddLinkConfiguration {
   imageBase64: string = '';
   imageFileName: string = '';
   isEditMode = false;
+  imagePreview: string | null = null;
+  imageName: any;
+
+
+  iphoneCertFileName: string = '';
+  iphoneCertBase64: any = '';
+  imageEnFileName: any;
+  imageArFileName: any;
+  imageEnBase64: any;
+  imageArBase64: any;
+
+
 
 
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AdminCenterAddLinkConfiguration>,
@@ -56,6 +68,42 @@ export class AdminCenterAddLinkConfiguration {
     });
   }
 
+
+  ngOnInit() {
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
+  }
+  patchForm(form: any) {
+    console.log('form', this.data);
+
+    this.productForm.patchValue({
+      groupNameEn: form.groupInEnglish,
+      groupNameAr: form.groupInArabic,
+      rowNumber: form.rowNumber,
+      englishName: form.englishName,
+      arabicName: form.arabicName,
+      englishLink: form.englishLink,
+      arabicLink: form.arabicLink,
+      status: form.status ? 'Y' : 'N'
+    });
+
+    // existing image names
+    this.imageEnFileName = form.imageName || 'Existing image';
+    this.imageArFileName = form.productImageAr || 'Existing image';
+
+    this.imageEnBase64 = form.imageEn;
+    this.imageArBase64 = form.imageAr;
+
+    // Add this for iphone certificate
+    this.iphoneCertFileName = form.iphoneCertFileName || 'Existing certificate';
+    this.iphoneCertBase64 = form.iphoneCertFile;
+  }
+
+
+
+
   submitForm() {
     const form = this.productForm.value;
 
@@ -68,13 +116,21 @@ export class AdminCenterAddLinkConfiguration {
       groupInArabic: form.groupNameAr || '',
       status: form.status ? 'Y' : 'N',
       rowNumber: Number(form.rowNumber) || 0,
-      imageName: this.imageFileName || '',
-      imageBase64: this.imageBase64 || ''
+
+      // FIXED IMAGE PART
+      imageName: this.imageEnFileName || '',
+      imageBase64: this.imageEnBase64 || '',
+      imageAr: this.imageArBase64 || '',
+
+      followUsId: this.isEditMode
+        ? this.data?.editData.followUsId
+        : 0
     };
 
     console.log('payload', payload);
+    console.log('payload', payload);
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.updateLinkConfig(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
@@ -102,19 +158,22 @@ export class AdminCenterAddLinkConfiguration {
     const file = event.target.files[0];
 
     if (file) {
-      this.imageFileName = file.name;
+      this.iphoneCertFileName = file.name;
 
       const reader = new FileReader();
       reader.onload = () => {
-        const base64String = reader.result as string;
-
-        // Remove data:image/...;base64, prefix
-        this.imageBase64 = base64String.split(',')[1];
+        const base64 = reader.result as string;
+        this.imageEnBase64 = base64.split(',')[1]; // 🔥 remove prefix
       };
 
       reader.readAsDataURL(file);
+
+      this.productForm.patchValue({
+        iphonePushCertificate: file
+      });
     }
   }
+
 
   closeForm() { }
 
@@ -125,4 +184,25 @@ export class AdminCenterAddLinkConfiguration {
   closeModal() {
     this.dialogRef.close();
   }
+
+
+  onImageSelect(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.imageEnFileName = file.name;
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const base64 = reader.result as string;
+
+        //  REMOVE data:image/... prefix
+        this.imageEnBase64 = base64.split(',')[1];
+      };
+    }
+  }
+
+
 }

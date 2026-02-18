@@ -3,13 +3,18 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminCenterAddLinkConfiguration } from '../admin-center-add-link-configuration/admin-center-add-link-configuration';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 
 @Component({
   selector: 'app-admin-center-link-configuration',
   imports: [
     CommonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    ComonPopup
   ],
   templateUrl: './admin-center-link-configuration.html',
   styleUrl: './admin-center-link-configuration.scss',
@@ -18,8 +23,16 @@ export class AdminCenterLinkConfiguration {
   @Input() subProduct: boolean = false;
   getLinkConfig: any;
   baseImageUrl = 'https://yourdomain.com/uploads/';
+  showDeleteConfirm: boolean = false;
+  selectedProduct: any;
+  pageSize = 10;
+  currentPage = 1;
+  totalPages = 0;
+  pagedProducts: any[] = [];
 
-  constructor(private adminCenterService: AdminCenterService) { }
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
 
   ngOnInit() {
     this.getLinkConfigApi();
@@ -167,5 +180,68 @@ export class AdminCenterLinkConfiguration {
     return this.baseImageUrl + imageName;
   }
 
+  openModal(product: any) {
+    console.log('product', product);
+
+    const dialogRef = this.dialog.open(AdminCenterAddLinkConfiguration, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    //  THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getLinkConfigApi();
+        // this.loadSubProducts(); //  refresh list / API call
+      }
+    });
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+
+      licenseId: this.selectedProduct.licenseId,
+      domainName: null,
+      expiryDate: null,
+      warningStatus: null,
+      alertStatus: null,
+      status: null,
+      createdBy: null,
+      action: "DELETE",
+      notificationDeliveries: null
+
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteLicense(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess('Product License Deleted Successfully');
+        this.getLinkConfigApi();
+      }
+
+    })
+  }
 
 }
