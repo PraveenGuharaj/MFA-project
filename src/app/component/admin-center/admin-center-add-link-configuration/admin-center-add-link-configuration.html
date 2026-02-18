@@ -11,41 +11,41 @@
 
             <div class="form-row full-width">
                 <label>Group Name (English)</label>
-                <input placeholder="Enter Group Name in English" />
+                <input placeholder="Enter Group Name in English" formControlName="groupNameEn" />
             </div>
 
             <div class="form-row full-width">
                 <label>Group Name (Arabic)</label>
-                <input placeholder="Enter Group Name in Arabic" />
+                <input placeholder="Enter Group Name in Arabic" formControlName="groupNameAr" />
             </div>
 
             <div class="form-row full-width">
                 <label>Row Number</label>
-                <input placeholder="Enter Row Number" />
+                <input placeholder="Enter Row Number" formControlName="rowNumber" />
             </div>
 
             <div class="form-row full-width">
                 <label>English Name</label>
-                <input placeholder="Enter English Name" />
+                <input placeholder="Enter English Name" formControlName="englishName" />
             </div>
 
             <div class="form-row full-width">
                 <label>Arabic Name</label>
-                <input placeholder="Enter Arabic Name" />
+                <input placeholder="Enter Arabic Name" formControlName="arabicName" />
             </div>
 
             <div class="form-row full-width">
                 <label>English Link</label>
-                <input placeholder="Enter English Link" />
+                <input placeholder="Enter English Link" formControlName="englishLink" />
             </div>
 
             <div class="form-row full-width">
                 <label>Arabic Link</label>
-                <input placeholder="Enter Arabic Link" />
+                <input placeholder="Enter Arabic Link" formControlName="arabicLink" />
             </div>
 
             <div class="upload-wrapper mt-24">
-                <label>Upload iPhone Push Certificate</label>
+                <label>Upload Image</label>
 
                 <div class="upload-box">
                     <span class="placeholder-text">Upload the file here</span>
@@ -55,15 +55,22 @@
                         Upload
                     </button>
 
-                    <input type="file" class="file-input">
+                    <input type="file" class="file-input" formControlName="iphonePushCertificate"
+                        (change)="onFileSelected($event)">
                 </div>
+            </div>
+
+            <div class=" mt-20   ">
+                <label class="mr-10">Status</label>
+                <mat-slide-toggle formControlName="status" color="primary"></mat-slide-toggle>
             </div>
 
             <!-- Buttons -->
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>

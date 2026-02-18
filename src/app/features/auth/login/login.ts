@@ -63,6 +63,7 @@ export class Login {
       console.log('resssssss', res);
       if (res?.authStatus === 'LOGIN SUCCESS') {
         localStorage.setItem('authorization', res.token);
+        sessionStorage.setItem('userId', res.userId);
         console.log('Navigating to dashboard...');
         this.commonToaster.showSuccess(res.authStatus);
         this.router.navigate(['/dashboard']).then(r => {

@@ -48,14 +48,14 @@
         <tbody>
 
             <tr *ngFor="let p of getLinkConfig">
-                <td class="w-180">{{ p.rowNumber }}</td>
-                <td class="w-180">{{ p.englishName }}</td>
-                <td class="w-180">{{ p.groupInEnglish }}</td>
-                <td class="w-180">{{ p.englishLink }}</td>
-                <td class="w-180">{{ p.groupInArabic }}</td>
-                <td class="w-180">{{ p.arabicName }}</td>
-                <td class="w-180">{{ p.arabicLink }}</td>
-                <td class="w-180">
+                <td>{{ p.rowNumber }}</td>
+                <td>{{ p.englishName }}</td>
+                <td>{{ p.groupInEnglish }}</td>
+                <td>{{ p.englishLink }}</td>
+                <td>{{ p.groupInArabic }}</td>
+                <td>{{ p.arabicName }}</td>
+                <td>{{ p.arabicLink }}</td>
+                <td>
                     <span class="status" [ngClass]="{
           'active': p.status === 'Y',
           'inactive': p.status === 'N'

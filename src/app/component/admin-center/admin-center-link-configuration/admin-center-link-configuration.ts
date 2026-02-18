@@ -23,6 +23,10 @@ export class AdminCenterLinkConfiguration {
 
   ngOnInit() {
     this.getLinkConfigApi();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getLinkConfigApi();
+    });
   }
 
   products = [
