@@ -11,8 +11,8 @@
             <!-- Product Name -->
             <div class="form-row full-width">
                 <label>Unit</label>
-                <mat-select formControlName="domain" placeholder="Select" class="mt-0 w-100">
-                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
+                <mat-select formControlName="unit" placeholder="Select Unit" class="mt-0 w-100">
+                    <mat-option *ngFor="let d of getUnit" [value]="d">{{ d.unitDesc }}</mat-option>
                 </mat-select>
             </div>
 
@@ -20,32 +20,26 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Channel</label>
-                    <mat-select formControlName="channel" placeholder="False">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="channel" placeholder="Select Channel">
+                        <mat-option *ngFor="let c of getChannel" [value]="c">{{ c.channelDesc }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group">
                     <label>Key</label>
-                    <mat-select formControlName="category" placeholder="True">
-                        <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
-                    </mat-select>
+                    <input placeholder="Enter Key" formControlName="key" class="p-23">
                 </div>
             </div>
 
             <div class="form-row full-width">
                 <label>Value</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0 w-100">
-                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
+                <input placeholder="Enter Value" formControlName="value">
             </div>
 
 
             <div class="form-row full-width">
                 <label>Remarks</label>
-                <mat-select formControlName="domain" placeholder="Enter Name" class="mt-0 w-100">
-                    <mat-option *ngFor="let d of domains" [value]="d">{{ d }}</mat-option>
-                </mat-select>
+                <input placeholder="Enter Remarks" formControlName="remarks">
             </div>
 
             <!-- Status -->
@@ -56,10 +50,11 @@
             </div>
 
             <!-- Buttons -->
-            <div class="form-actions">
+            <div class="form-actions p-10 bottom-btn">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Cancel</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>

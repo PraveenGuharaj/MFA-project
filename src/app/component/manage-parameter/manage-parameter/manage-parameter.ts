@@ -18,81 +18,14 @@ export class ManageParameter {
 
   constructor(private adminCenterService: AdminCenterService) { }
 
-  products = [
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    },
-    {
-      key: 1,
-      value: 'Banner testing',
-      remarks: 'BannerID6',
-      status: 'Active',
-      actionsType: 'image'
-    }
-  ];
+
 
   ngOnInit() {
     this.getManageParameterApi();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getManageParameterApi();
+    });
   }
 
   onProductremarksChanged(subProduct: boolean) {

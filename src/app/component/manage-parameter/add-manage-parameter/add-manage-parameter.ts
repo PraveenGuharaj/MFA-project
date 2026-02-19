@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -31,37 +33,86 @@ export class AddManageParameter {
   blockDurations = ["30 Sec", "1 Min", "2 Min", "5 Min"];
   types = ["Primary", "Secondary", "Backup"];
   deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
+  getUnit: any;
+  getChannel: any;
+  isEditMode = false;
 
-  constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService) {
+  constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService, private commonToaster: CommonToaster, private dialogRef: MatDialogRef<AddManageParameter>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     this.productForm = this.fb.group({
-      productName: ['', Validators.required],
       channel: ['', Validators.required],
-      category: ['', Validators.required],
-
-      // Newly mapped fields
-      otpLength: ['', Validators.required],
-      maxAttempts: ['', Validators.required],
-      otpExpiry: ['', Validators.required],
-      blockDuration: ['', Validators.required],
-      domain: ['', Validators.required],
-      deliveryModes: [[], Validators.required], // Multiple select
-
-      type: ['', Validators.required],
-      status: [true]
+      key: ['', Validators.required],
+      value: ['', Validators.required],
+      remarks: ['', Validators.required],
+      unit: ['', Validators.required],
+      status: ['', Validators.required],
     });
   }
 
   ngOnInit() {
-
+    this.getUnitApi();
+    this.getChannelApi();
   }
 
+  getUnitApi() {
+    this.adminCenterService.getUnits().subscribe((res: any) => {
+      this.getUnit = res.data.units;
+    })
+  }
+
+  getChannelApi() {
+    this.adminCenterService.getMasterChannel().subscribe((res: any) => {
+      this.getChannel = res.data;
+    })
+  }
 
   submitForm() {
-    if (this.productForm.valid) {
+    const form = this.productForm.value;
+    console.log('form', form);
+
+
+    const payload = [
+      {
+        unitId: form.unitCode, // or from dropdown
+        channelId: form.channel?.channelId,
+        paramDetails: [
+          {
+            action: 'ADD', // or 'UPDATE' if edit mode
+            key: form.key,
+            value: form.value,
+            remark: form.remarks,
+            status: form.status ? 'ACT' : 'IAC'
+          }
+        ]
+      }
+    ];
+
+    console.log(payload);
+
+    if (this.isEditMode) {
+      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+        console.log('ressss', res);
+
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess('Product created successfully');
+          this.dialogRef.close('retaiClose');
+        } else {
+
+        }
+      })
     } else {
-      this.productForm.markAllAsTouched();
+      this.adminCenterService.createManageParameter(payload).subscribe((res: any) => {
+        console.log('create', res);
+        if (res?.result.code == "000000") {
+          this.commonToaster.showSuccess(res.result.description);
+          this.dialogRef.close('retaiClose');
+          this.adminCenterService.trigger();
+        }
+
+      })
     }
   }
+
 
   closeForm() { }
 }
