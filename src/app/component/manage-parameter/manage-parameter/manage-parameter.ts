@@ -100,26 +100,32 @@ export class ManageParameter {
   confirmDelete() {
     console.log('Deleting product:', this.selectedProduct);
 
-    const payload = {
+    const payload = [
+      {
+        // unitId: form.unit?.unitCode, // or from dropdown
+        // channelId: form.channel?.channelId,
 
-      licenseId: this.selectedProduct.licenseId,
-      domainName: null,
-      expiryDate: null,
-      warningStatus: null,
-      alertStatus: null,
-      status: null,
-      createdBy: null,
-      action: "DELETE",
-      notificationDeliveries: null
 
-    }
+        unitId: this.selectedUnit,
+        channelId: this.selectedChannel,
+        paramDetails: [
+          {
+            action: 'DELETE',
+            key: this.selectedProduct.key,
+            value: this.selectedProduct.value,
+            remark: this.selectedProduct.description,
+            status: "Active"
+          }
+        ]
+      }
+    ];
 
     this.showDeleteConfirm = false;
     // this.selectedProduct = null;
-    this.adminCenterService.deleteLicense(payload).subscribe((res) => {
+    this.adminCenterService.createManageParameter(payload).subscribe((res: any) => {
       console.log('res', res);
-      if (res.status.code == "000000") {
-        this.commonToaster.showSuccess('Product License Deleted Successfully');
+      if (res.result.code == "000000") {
+        this.commonToaster.showSuccess(res.result.description);
         this.getManageParameterApi();
       }
 
