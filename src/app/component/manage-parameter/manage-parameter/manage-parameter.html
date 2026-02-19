@@ -1,22 +1,26 @@
 <div class="dropdown-container manage-content-header">
     <div>
-        <select class="dropdown">
-            <option>Unit</option>
-            <option>Option 1</option>
-            <option>Option 2</option>
+        <select class="dropdown" [(ngModel)]="selectedUnit">
+            <option value="" disabled selected>Select Unit</option>
+            <option *ngFor="let u of getUnit" [value]="u.unitCode">
+                {{ u.unitDesc }}
+            </option>
         </select>
-        <select class="dropdown">
-            <option>Channel</option>
-            <option>Option 1</option>
-            <option>Option 2</option>
+
+        <select class="dropdown" [(ngModel)]="selectedChannel">
+            <option value="" disabled selected>Select Channel</option>
+            <option *ngFor="let c of getChannel" [value]="c.channelId">
+                {{ c.channelDesc }}
+            </option>
         </select>
     </div>
+
 
 
     <div>
-        <button class="reset-button">Reset</button>
+        <button class="reset-button mr-10" (click)="onSearch()">Search</button>
+        <button class="reset-button" (click)="onReset()">Reset</button>
     </div>
-
 </div>
 
 
@@ -70,8 +74,8 @@
                     <!-- Use images -->
                     <ng-container>
                         <img src="images/eye.png" />
-                        <img src="images/edit.png" />
-                        <img src="images/trash_red.png" />
+                        <img src="images/edit.png" (click)="openModal(p)" />
+                        <img src="images/trash_red.png" (click)="openDeletePopup(p)" />
                     </ng-container>
 
                 </td>
@@ -89,5 +93,10 @@
         <button>10</button>
         <button>&gt;</button>
     </div>
+
+    <app-comon-popup [visible]="showDeleteConfirm" title="Delete Product"
+        message="Are you sure you want to make changes to the License? Click on delete to remove the license"
+        (confirm)="confirmDelete()" (cancel)="cancelDelete()">
+    </app-comon-popup>
 
 </div>

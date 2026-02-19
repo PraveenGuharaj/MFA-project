@@ -52,6 +52,10 @@ export class AddManageParameter {
   ngOnInit() {
     this.getUnitApi();
     this.getChannelApi();
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
   }
 
   getUnitApi() {
@@ -73,11 +77,22 @@ export class AddManageParameter {
 
     const payload = [
       {
-        unitId: form.unitCode, // or from dropdown
-        channelId: form.channel?.channelId,
+        // unitId: form.unit?.unitCode, // or from dropdown
+        // channelId: form.channel?.channelId,
+
+
+        unitId: this.isEditMode
+          ? this.data?.unitId
+          : form.unit?.unitCode,
+
+
+
+        channelId: this.isEditMode
+          ? this.data?.channelId
+          : form.channel?.channelId,
         paramDetails: [
           {
-            action: 'ADD', // or 'UPDATE' if edit mode
+            action: this.isEditMode ? 'MODIFY' : 'ADD',
             key: form.key,
             value: form.value,
             remark: form.remarks,
@@ -90,11 +105,11 @@ export class AddManageParameter {
     console.log(payload);
 
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.createManageParameter(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
-        if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Product created successfully');
+        if (res?.result.code == "000000") {
+          this.commonToaster.showSuccess(res.result.description);
           this.dialogRef.close('retaiClose');
         } else {
 
@@ -111,6 +126,16 @@ export class AddManageParameter {
 
       })
     }
+  }
+
+  patchForm(p: any) {
+    console.log('p', p);
+    const parameterForm = p;
+    this.productForm.patchValue({
+      key: parameterForm.key,
+      value: parameterForm.value,
+      remarks: parameterForm.description
+    })
   }
 
 
