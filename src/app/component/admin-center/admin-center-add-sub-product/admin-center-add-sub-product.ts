@@ -124,7 +124,7 @@ export class AdminCenterAddSubProduct {
     console.log('form', form)
 
     const payload = {
-      subProductId: this.data.isEdit.subProductId,
+      subProductId: this.data?.isEdit?.subProductId,
       productId: form.product.id,
       subProductType: form.subProductType,
       nameEn: form.subProductNameEn,
