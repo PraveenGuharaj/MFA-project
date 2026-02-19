@@ -55,21 +55,20 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.key }}</td>
-                <td>{{ p.value}}</td>
-                <td>{{ p.remarks}}</td>
+            <tr *ngFor="let p of getManageParameter">
+                <td class="w-180">{{ p.key }}</td>
+                <td class="w-180">{{ p.value}}</td>
+                <td class="w-180">{{ p.description}}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IAC'
         }">
-                        {{ p.status }}
-                    </span>
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }} </span>
                 </td>
                 <td class="actions d-flex">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/eye.png" />
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />

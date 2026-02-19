@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class AddManageParameter {
   types = ["Primary", "Secondary", "Backup"];
   deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adminCenterService: AdminCenterService) {
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
       channel: ['', Validators.required],
@@ -49,6 +50,11 @@ export class AddManageParameter {
       status: [true]
     });
   }
+
+  ngOnInit() {
+
+  }
+
 
   submitForm() {
     if (this.productForm.valid) {

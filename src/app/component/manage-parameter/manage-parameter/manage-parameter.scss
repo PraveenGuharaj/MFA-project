@@ -28,3 +28,49 @@
 .d-flex {
     justify-content: center;
 }
+
+// .w-180 {
+//     width: 180px;
+//     max-width: 180px;
+//     word-wrap: break-word;
+//     white-space: normal;
+
+// }
+
+.product-table {
+    width: 100%;
+    table-layout: fixed; // makes columns equal
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    word-break: break-word;
+}
+
+/* Status column (4th column) */
+.product-table th:nth-child(4),
+.product-table td:nth-child(4) {
+    width: 120px;
+    text-align: center;
+}
+
+/* Actions column (5th column) */
+.product-table th:nth-child(5),
+.product-table td:nth-child(5) {
+    width: 120px;
+    text-align: center;
+}
+
+/* Remaining columns share space equally */
+.product-table th:not(:nth-child(4)):not(:nth-child(5)),
+.product-table td:not(:nth-child(4)):not(:nth-child(5)) {
+    width: auto;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}

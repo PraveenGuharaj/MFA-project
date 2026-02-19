@@ -876,4 +876,11 @@ export class AdminCenterService {
       { headers }
     );
   }
+
+  getManageParameter(payload: any) {
+    return this.http.post(
+      'http://34.18.92.50:8443/backoffice-service/parameter/list',
+      payload
+    );
+  }
 }
