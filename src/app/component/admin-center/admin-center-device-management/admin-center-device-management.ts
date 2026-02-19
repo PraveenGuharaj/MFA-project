@@ -87,23 +87,28 @@ export class AdminCenterDeviceManagement {
   }
 
   get pages(): number[] {
-    if (this.totalPages <= 5) {
-      return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    const total = this.totalPages;
+    const current = this.currentPage;
+
+    if (total <= 5) {
+      return Array.from({ length: total }, (_, i) => i + 1);
     }
 
-    if (this.currentPage <= 3) {
-      return [1, 2, 3];
-    }
+    const pages = new Set<number>();
 
-    if (this.currentPage >= this.totalPages - 2) {
-      return [this.totalPages - 2, this.totalPages - 1, this.totalPages];
-    }
+    // Always include first and last
+    pages.add(1);
+    pages.add(total);
 
-    return [
-      this.currentPage - 1,
-      this.currentPage,
-      this.currentPage + 1
-    ];
+    // Include current and neighbors
+    pages.add(current);
+    pages.add(current - 1);
+    pages.add(current + 1);
+
+    // Remove invalid numbers
+    return Array.from(pages)
+      .filter(p => p > 0 && p <= total)
+      .sort((a, b) => a - b);
   }
 
   openDeletePopup(product: any) {
@@ -135,4 +140,6 @@ export class AdminCenterDeviceManagement {
 
     })
   }
+
+
 }

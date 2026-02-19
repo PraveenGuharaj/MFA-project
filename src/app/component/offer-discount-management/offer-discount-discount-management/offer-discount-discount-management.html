@@ -102,23 +102,32 @@
 
     <!-- Pagination -->
     <div class="pagination">
+
+        <!-- Previous -->
         <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">
             ‹
         </button>
 
-        <button *ngFor="let page of pages" (click)="setPage(page)" [class.active-page]="page === currentPage">
-            {{ page }}
-        </button>
+        <!-- Page Numbers -->
+        <ng-container *ngFor="let page of pages; let i = index">
 
-        <span *ngIf="totalPages > 5">…</span>
+            <!-- Ellipsis -->
+            <span *ngIf="i > 0 && page - pages[i - 1] > 1">
+                ...
+            </span>
 
-        <button *ngIf="totalPages > 3" (click)="setPage(totalPages)">
-            {{ totalPages }}
-        </button>
+            <!-- Page Button -->
+            <button (click)="setPage(page)" [class.active-page]="page === currentPage">
+                {{ page }}
+            </button>
 
+        </ng-container>
+
+        <!-- Next -->
         <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">
             ›
         </button>
+
     </div>
 
     <app-comon-popup [visible]="showDeleteConfirm" title="Delete Discount"
