@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 
 @Component({
@@ -14,69 +15,27 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class WorkFlowProductManagement {
   @Input() subProduct: boolean = false;
+  getProductMgmt: any;
 
-  products = [
-    {
-      domain: 'BO',
-      unit: 'PRD',
-      productCode: 'USER_MANAGEMENT_CONFIG',
-      productDescription: 'User Management',
-      priority: 1,
-      status: 'Active',
-      actionsType: 'image'
+  constructor(private adminCenterService: AdminCenterService) { }
 
-    },
-    {
-      domain: 'BO',
-      unit: 'PRD',
-      productCode: 'PARTNER_ONBOARDING_CONFIG',
-      productDescription: 'Partner Onboarding',
-      priority: 1,
-      status: 'Active',
-      actionsType: 'image'
+  ngOnInit() {
+    this.getPoductMgmtAPi();
+  }
 
-    },
-    {
-      domain: 'BO',
-      unit: 'PRD',
-      productCode: 'CUSTOMER_SERVICE_CONFIG',
-      productDescription: 'Customer Service',
-      priority: 1,
-      status: 'Active',
-      actionsType: 'image'
 
-    },
-    {
-      domain: 'BO',
-      unit: 'PRD',
-      productCode: 'NOTIFICATIONS_MANAGEMENT_CONFIG',
-      productDescription: 'Notifications Management',
-      priority: 1,
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'BO',
-      unit: 'PRD',
-      productCode: 'LICENSE_CONFIG',
-      productDescription: 'License Management',
-      priority: 1,
-      status: 'Active',
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'BO',
-      unit: 'PRD',
-      productCode: 'OTP_BIO_CONFIGURATION',
-      productDescription: 'User Management',
-      priority: 1,
-      status: 'Active',
-      actionsType: 'image'
-
+  getPoductMgmtAPi() {
+    const payload = {
+      "domainId": "BO",
+      "name": "",
+      "unitId": ""
     }
-  ];
+
+
+    this.adminCenterService.getProductMgmt(payload).subscribe((res: any) => {
+      this.getProductMgmt = res.data;
+    })
+  }
 
 
   onProductTypeChanged(subProduct: boolean) {
