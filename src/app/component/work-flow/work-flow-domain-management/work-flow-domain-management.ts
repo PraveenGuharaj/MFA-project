@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 @Component({
   selector: 'app-work-flow-domain-management',
@@ -13,60 +14,22 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class WorkFlowDomainManagement {
   @Input() subProduct: boolean = false;
+  getDomainMgmt: any;
 
-  products = [
-    {
-      domain: 'PARTNER',
-      domainDescription: 'Partners',
-      status: 'Active',
-      priority: 2,
-      actionsType: 'image'
+  constructor(private adminCenterService: AdminCenterService) { }
 
-    },
-    {
-      domain: 'BO',
-      domainDescription: 'BackOffice',
-      status: 'Active',
-      priority: 4,
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'GATEWAY',
-      domainDescription: 'API Gateway Portal',
-      status: 'Inactive',
-      priority: 6,
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'GATEWAYPORTAL',
-      domainDescription: 'Gateway Portal-unused',
-      status: 'Active',
-      priority: 8,
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'CMC',
-      domainDescription: 'Corporate App',
-      status: 'Active',
-      priority: 10,
-      actionsType: 'image'
-
-    },
-    {
-      domain: 'BOAPP',
-      domainDescription: 'BOAPP',
-      status: 'Inactive',
-      priority: 12,
-      actionsType: 'image'
-
-    }
-  ];
+  ngOnInit() {
+    this.getDomainMgmtApi();
+  }
 
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getDomainMgmtApi() {
+    this.adminCenterService.getDomainMgmt().subscribe((res: any) => {
+      this.getDomainMgmt = res.data;
+    })
   }
 }

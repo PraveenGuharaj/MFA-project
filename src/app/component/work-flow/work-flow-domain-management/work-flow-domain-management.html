@@ -66,22 +66,22 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products">
-                <td>{{ p.domain }}</td>
-                <td>{{ p.domainDescription }}</td>
+            <tr *ngFor="let p of getDomainMgmt">
+                <td>{{ p.domainId }}</td>
+                <td class="w-180">{{ p.domainDesc }}</td>
                 <!-- <td>{{ p.status }}</td> -->
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IAC'
         }">
-                        {{ p.status }}
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }}
                     </span>
                 </td>
                 <td>{{ p.priority }}</td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />
                     </ng-container>
