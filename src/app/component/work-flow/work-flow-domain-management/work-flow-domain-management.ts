@@ -20,6 +20,9 @@ export class WorkFlowDomainManagement {
 
   ngOnInit() {
     this.getDomainMgmtApi();
+    this.adminCenterService.refresh$.subscribe(() => {
+      this.getDomainMgmtApi();
+    });
   }
 
 
