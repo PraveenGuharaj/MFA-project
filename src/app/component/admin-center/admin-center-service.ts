@@ -908,4 +908,13 @@ export class AdminCenterService {
 
     return this.http.post(`${'http://34.18.92.50:8443/bko-domain/delete'}`, productId);
   }
+
+
+  getManageUser() {
+    return this.http.post(
+      'http://34.18.92.50:8443/bko-user/fetchAll',
+      {}
+    );
+  }
+
 }

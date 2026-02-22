@@ -69,24 +69,24 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
-                <td>{{ p.userId }}</td>
-                <td>{{ p.userName }}</td>
-                <td>{{ p.unit }}</td>
-                <td>{{ p.group }}</td>
+            <tr *ngFor="let p of getManageUser;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
+                <td>{{ p.domainId }}</td>
+                <td>{{ p.firstName }}</td>
+                <td>{{ getUnits(p.groups) }}</td>
+                <td>{{ getGroups(p.groups) }}</td>
                 <td>{{ p.role }}</td>
-                <td>{{ p.mfa }}</td>
+                <td>{{ p.mfaYn }}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IAC'
         }">
-                        {{ p.status }}
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }}
                     </span>
                 </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />
                     </ng-container>
