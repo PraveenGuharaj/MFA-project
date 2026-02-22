@@ -49,6 +49,13 @@ export class WorkFlowAddDomain {
     });
   }
 
+  ngOnInit() {
+    if (this.data?.editData) {
+      this.isEditMode = true;
+      this.patchForm(this.data.editData);
+    }
+  }
+
   submitForm() {
     console.log('adminCenterService', this.productForm.value);
     const domainForm = this.productForm.value;
@@ -61,7 +68,7 @@ export class WorkFlowAddDomain {
     }
 
     if (this.isEditMode) {
-      this.adminCenterService.updateLicense(payload).subscribe((res: any) => {
+      this.adminCenterService.createDomainMgmt(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
@@ -82,6 +89,21 @@ export class WorkFlowAddDomain {
 
       })
     }
+  }
+
+
+  patchForm(p: any) {
+    console.log('patch', p);
+    console.log('data', this.data);
+    const domainForm = p;
+
+
+    this.productForm.patchValue({
+      domainId: domainForm.domainId,
+      domainDescription: domainForm.domainDesc,
+      priority: domainForm.priority,
+      status: domainForm.status === 'ACT' ? true : false
+    })
   }
 
   closeForm() { }
