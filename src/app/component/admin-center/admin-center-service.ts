@@ -148,8 +148,8 @@ export class AdminCenterService {
     );
   }
 
-  trigger() {
-    this.refreshSource.next();
+  trigger(data?: any) {
+    this.refreshSource.next(data);
   }
 
   getBranchLocator() {
@@ -922,6 +922,17 @@ export class AdminCenterService {
     return this.http.post('http://34.18.92.50:8443/bko-product/fetchByCriteria',
       payload
     )
+  }
+
+  createWorkFlowProduct(payload: any) {
+    return this.http.post('http://34.18.92.50:8443/bko-product/post',
+      payload
+    );
+  }
+
+  deleteProductMgmt(productId: any): Observable<any> {
+
+    return this.http.post(`${'http://34.18.92.50:8443/bko-product/delete'}`, productId);
   }
 
 }
