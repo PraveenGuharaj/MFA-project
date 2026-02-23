@@ -965,4 +965,16 @@ export class AdminCenterService {
       payload
     );
   }
+
+  getSubMenuDropDown(payload: any) {
+    return this.http.post('http://34.18.92.50:8443/bko-subProduct/fetchby-prodCode',
+      payload
+    );
+  }
+
+  createChildProduct(payload: any) {
+    return this.http.post('http://34.18.92.50:8443/bko-childMenu/post',
+      payload
+    );
+  }
 }

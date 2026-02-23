@@ -112,7 +112,6 @@ export class WorkFlowAddSubproudct {
   patchForm(p: any) {
     console.log('Edit Data:', p);
 
-    // 1️⃣ Find selected domain object
     const selectedDomain = this.getDomainMgmt?.find(
       (d: any) => d.name === p.domainId
     );
