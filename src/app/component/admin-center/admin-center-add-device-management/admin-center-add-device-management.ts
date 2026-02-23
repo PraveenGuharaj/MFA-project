@@ -118,7 +118,7 @@ export class AdminCenterAddDeviceManagement {
 
     const payload = [{
       action: this.isEditMode ? 'UPDATE' : 'ADD',
-      id: this.data.editData.id,
+      id: this.data?.editData.id,
       applicationMode: applicationMode[0],
       bundleIdentifier: form.bundleIdentifier,
       iphoneCertPassword: encryptedPwd,

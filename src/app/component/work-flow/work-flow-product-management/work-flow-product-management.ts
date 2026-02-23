@@ -30,6 +30,8 @@ export class WorkFlowProductManagement {
   pagedProducts: any[] = [];
   domainId: any;
 
+
+
   constructor(private adminCenterService: AdminCenterService,
     public dialog: MatDialog,
     private commonToaster: CommonToaster
@@ -55,6 +57,8 @@ export class WorkFlowProductManagement {
 
     this.adminCenterService.getProductMgmt(payload).subscribe((res: any) => {
       this.getProductMgmt = res.data;
+      this.totalPages = Math.ceil(this.getProductMgmt.length / this.pageSize);
+      this.setPage(1)
     })
   }
 
@@ -116,5 +120,39 @@ export class WorkFlowProductManagement {
       }
 
     })
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+
+    this.currentPage = page;
+    const start = (page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedProducts = this.getProductMgmt.slice(start, end);
+  }
+
+  get pages(): number[] {
+    const total = this.totalPages;
+    const current = this.currentPage;
+
+    if (total <= 5) {
+      return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    const pages = new Set<number>();
+
+    // Always include first and last
+    pages.add(1);
+    pages.add(total);
+
+    // Include current and neighbors
+    pages.add(current);
+    pages.add(current - 1);
+    pages.add(current + 1);
+
+    // Remove invalid numbers
+    return Array.from(pages)
+      .filter(p => p > 0 && p <= total)
+      .sort((a, b) => a - b);
   }
 }
