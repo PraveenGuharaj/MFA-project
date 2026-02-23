@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 
 @Component({
   selector: 'app-work-flow-child-product-manangement',
@@ -13,6 +16,31 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class WorkFlowChildProductManangement {
   @Input() subProduct: boolean = false;
+  getChildProduct: any;
+
+  constructor(private adminCenterService: AdminCenterService,
+    public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
+
+
+  ngOnInit() {
+    this.getChildProductApi();
+    this.adminCenterService.refresh$.subscribe((res: any) => {
+      console.log('Refreshing table...', res);
+      // this.domainId = res;
+      this.getChildProductApi();
+    });
+  }
+
+  getChildProductApi() {
+    const payload = {
+      domainId: "BO"
+    }
+    this.adminCenterService.getChildProductMgmt(payload).subscribe((res: any) => {
+      this.getChildProduct = res.data;
+    })
+  }
 
   products = [
     {
