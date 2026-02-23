@@ -31,12 +31,6 @@ export class WorkFlowAddChildProduct {
   productForm!: FormGroup;
 
   // Dropdown Options
-  channels = ["SMS", "Email", "App", "Web"];
-  categories = ["Login", "Transaction", "Reset", "Verification"];
-  domains = ["Banking", "Insurance", "Fintech", "Wallet"];
-  blockDurations = ["30 Sec", "1 Min", "2 Min", "5 Min"];
-  types = ["Primary", "Secondary", "Backup"];
-  deliveryModesOptions = ["SMS", "Email", "WhatsApp", "IVR"];
   isEditMode = false;
   getDomainMgmt: any;
   domainId: any;
@@ -76,63 +70,70 @@ export class WorkFlowAddChildProduct {
 
 
   loadEditData(p: any) {
+    console.log('pppp', p);
+
     if (!this.getDomainMgmt) return;
 
+    // 1️⃣ Match domain using domainDesc (because domainId is null)
     const selectedDomain = this.getDomainMgmt.find(
-      (d: any) => d.name === p.domainId
+      (d: any) => d.desc === p.domainDesc
     );
 
     if (!selectedDomain) return;
 
     this.domainId = selectedDomain.name;
 
-    const payload = {
+    const domainPayload = {
       domainId: selectedDomain.name
     };
 
-    this.adminCenterService.getMenuDropDown(payload).subscribe((res: any) => {
+    // 2️⃣ Load Products
+    this.adminCenterService.getMenuDropDown(domainPayload)
+      .subscribe((res: any) => {
 
-      this.getMenuDropdown = res.data;
+        this.getMenuDropdown = res.data;
 
-      const selectedProduct = this.getMenuDropdown.find(
-        (prod: any) => prod.name === p.productCode
-      );
+        const selectedProduct = this.getMenuDropdown.find(
+          (prod: any) => prod.name === p.productCode
+        );
 
-      this.productForm.patchValue({
-        domain: selectedDomain,
-        product: selectedProduct,
-        subProductCode: p.subProductCode,
-        subProductDescription: p.subProductDesc,
-        subProductURL: p.subProductUrl,
-        priority: p.priority,
-        status: p.status === 'ACT'
+        if (!selectedProduct) return;
+
+        const productPayload = {
+          productCode: selectedProduct.name
+        };
+
+        // 3️⃣ Load SubProducts
+        this.adminCenterService.getSubMenuDropDown(productPayload)
+          .subscribe((subRes: any) => {
+
+            this.getSubMenuDropdown = subRes.data;
+            console.log('getSubMenuDropdown', this.getSubMenuDropdown);
+
+
+            const selectedSubProduct = this.getSubMenuDropdown.find(
+              (sub: any) => sub.subProductCode === p.subProductCode
+            );
+
+            console.log('selectedSubProduct', selectedSubProduct);
+
+
+            // 4️⃣ Finally Patch Form
+            this.productForm.patchValue({
+              domain: selectedDomain,
+              product: selectedProduct,
+              subProduct: selectedSubProduct,
+              childMenuProductCode: p.childMenuProdCode,
+              childMenuDescription: p.childMenuDesc,
+              childMenuURL: p.childMenuUrl,
+              priority: p.priority,
+              status: p.status === 'ACT'
+            });
+          });
       });
-    });
   }
 
-  patchForm(p: any) {
-    console.log('data', this.data);
 
-
-    // if (!this.getDomainMgmt || !this.getUnits) return;
-
-    const selectedDomain = this.getDomainMgmt.find(
-      (d: any) => d.domainId === p.domainId
-    );
-
-    // const selectedUnit = this.getUnits.find(
-    //   (u: any) => u.unitCode === p.unit
-    // );
-
-    this.productForm.patchValue({
-      domain: selectedDomain,
-      // unit: selectedUnit,
-      // productCode: p.productCode,
-      // productDescription: p.productDescription,
-      // priority: p.priority,
-      // status: p.status === 'ACT'
-    });
-  }
 
 
 
@@ -154,13 +155,15 @@ export class WorkFlowAddChildProduct {
 
 
     if (this.isEditMode) {
-      this.adminCenterService.createWorkFlowProduct(payload).subscribe((res: any) => {
+      this.adminCenterService.createChildProduct(payload).subscribe((res: any) => {
         console.log('ressss', res);
 
         if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess('Otp created successfully');
+          console.log('data', this.data);
+
+          this.commonToaster.showSuccess(res.status.description);
           this.dialogRef.close('retaiClose');
-          this.adminCenterService.trigger(this.data?.editData?.domain);
+          this.adminCenterService.trigger(this.productForm.value.domain.name);
         } else {
 
         }
