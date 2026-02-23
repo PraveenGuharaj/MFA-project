@@ -10,6 +10,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
 import { CommonToaster } from '../../../shared/services/common-toaster';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-work-flow-add-subproudct',
@@ -55,64 +56,128 @@ export class WorkFlowAddSubproudct {
   }
 
   ngOnInit() {
-    this.getDomainMgmtApi();
+    this.isEditMode = !!this.data?.editData;
+
+    forkJoin({
+      domains: this.adminCenterService.getBoDropdown()
+    }).subscribe((res: any) => {
+
+      this.getDomainMgmt = res.domains?.data;
+
+      if (this.isEditMode) {
+        this.loadEditData(this.data.editData);
+      }
+    });
+  }
+
+  loadEditData(p: any) {
+    if (!this.getDomainMgmt) return;
+
+    // 1️⃣ Find selected domain
+    const selectedDomain = this.getDomainMgmt.find(
+      (d: any) => d.name === p.domainId
+    );
+
+    if (!selectedDomain) return;
+
+    this.domainId = selectedDomain.name;
+
+    // 2️⃣ Load products based on domain
+    const payload = {
+      domainId: selectedDomain.name
+    };
+
+    this.adminCenterService.getMenuDropDown(payload).subscribe((res: any) => {
+
+      this.getMenuDropdown = res.data;
+
+      // 3️⃣ Find selected product
+      const selectedProduct = this.getMenuDropdown.find(
+        (prod: any) => prod.name === p.productCode
+      );
+
+      // 4️⃣ Patch form
+      this.productForm.patchValue({
+        domain: selectedDomain,
+        product: selectedProduct,
+        subProductCode: p.subProductCode,
+        subProductDescription: p.subProductDesc,
+        subProductURL: p.subProductUrl,
+        priority: p.priority,
+        status: p.status === 'ACT'
+      });
+    });
+  }
+
+  patchForm(p: any) {
+    console.log('Edit Data:', p);
+
+    // 1️⃣ Find selected domain object
+    const selectedDomain = this.getDomainMgmt?.find(
+      (d: any) => d.name === p.domainId
+    );
+
+    if (selectedDomain) {
+      this.domainId = selectedDomain.name;
+
+      // Load product dropdown based on domain
+      const payload = {
+        domainId: selectedDomain.name
+      };
+
+      this.adminCenterService.getMenuDropDown(payload).subscribe((res: any) => {
+        this.getMenuDropdown = res.data;
+
+        const selectedProduct = this.getMenuDropdown?.find(
+          (prod: any) => prod.name === p.productCode
+        );
+
+        this.productForm.patchValue({
+          domain: selectedDomain,
+          product: selectedProduct,
+          subProductCode: p.subProductCode,
+          subProductDescription: p.subProductDesc,
+          subProductURL: p.subProductUrl,
+          priority: p.priority,
+          status: p.status === 'ACT'
+        });
+      });
+    }
   }
 
   submitForm() {
-    const subProductForm = this.productForm.value;
-    console.log('product', this.productForm.value)
+    const form = this.productForm.value;
 
     const payload = {
-      domain: subProductForm.domain.desc,
-      productCode: subProductForm.product.desc,
-      subProductCode: subProductForm.subProductCode,
-      subProductDesc: subProductForm.subProductDescription,
-      priority: subProductForm.priority,
-      status: subProductForm.status === true ? 'ACT' : 'IAC',
-      subProductUrl: subProductForm.subProductURL,
-      action: this.isEditMode ? 'UPDATE' : 'ADD',
-    }
-    // const payload = {
-    //   productCode: productForm.productCode,
-    //   productDesc: productForm.productDescription,
-    //   priority: productForm.priority,
-    //   unit: productForm.unit.unitCode,
-    //   status: productForm.status === true ? 'ACT' : 'IAC',
-    //   // domain: productForm.domain.name,
-    //   domain: this.isEditMode ? this.data?.editData?.domain : productForm.domain.name,
+      domain: this.isEditMode
+        ? this.data?.editData?.domainId
+        : form.domain.name,
 
-    //   action: this.isEditMode ? 'UPDATE' : 'ADD',
-    // }
+      productCode: form.product.name,
 
+      subProductCode: form.subProductCode,
+      subProductDesc: form.subProductDescription,
+      subProductUrl: form.subProductURL,
+      priority: form.priority,
+      status: form.status ? 'ACT' : 'IAC',
+      action: this.isEditMode ? 'UPDATE' : 'ADD'
+    };
 
+    this.adminCenterService
+      .createWorkFlowSubProduct(payload)
+      .subscribe((res: any) => {
 
-    if (this.isEditMode) {
-      this.adminCenterService.createWorkFlowProduct(payload).subscribe((res: any) => {
-        console.log('ressss', res);
-
-        if (res?.status.code == "000000") {
+        if (res?.status.code === "000000") {
           this.commonToaster.showSuccess(res.status.description);
           this.dialogRef.close('retaiClose');
-          this.adminCenterService.trigger(this.data?.editData?.domain);
-        } else {
 
+          this.adminCenterService.trigger(
+            this.isEditMode
+              ? this.data?.editData?.domainId
+              : form.domain.name
+          );
         }
-      })
-    } else {
-      this.adminCenterService.createWorkFlowSubProduct(payload).subscribe((res: any) => {
-        console.log('create', res);
-        if (res?.status.code == "000000") {
-          this.commonToaster.showSuccess(res.status.description);
-          this.dialogRef.close('retaiClose');
-          this.adminCenterService.trigger(this.productForm.value.domain.name);
-        }
-
-      })
-    }
-    // if (this.productForm.valid) {
-    // } else {
-    //   this.productForm.markAllAsTouched();
-    // }
+      });
   }
 
   getDomainMgmtApi() {
@@ -123,16 +188,21 @@ export class WorkFlowAddSubproudct {
 
   closeForm() { }
 
-  selectDomain(domainId: any) {
-    console.log('data', domainId);
-    this.domainId = domainId.name;
-    const payload = {
-      domainId: domainId.name
-    }
-    this.adminCenterService.getMenuDropDown(payload).subscribe((res: any) => {
-      console.log('menu', res);
-      this.getMenuDropdown = res.data;
-    })
+  selectDomain(domain: any) {
+    this.domainId = domain.name;
 
+    const payload = {
+      domainId: domain.name
+    };
+
+    this.adminCenterService.getMenuDropDown(payload)
+      .subscribe((res: any) => {
+        this.getMenuDropdown = res.data;
+
+        // clear product when domain changes
+        this.productForm.patchValue({
+          product: ''
+        });
+      });
   }
 }
