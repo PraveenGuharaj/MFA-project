@@ -53,7 +53,9 @@
                 <th *ngIf="!subProduct">Sub-Product Code</th>
                 <th *ngIf="!subProduct">Sub-Product Description</th>
                 <th *ngIf="!subProduct">Enter Sub-Product URL</th>
+                <th *ngIf="!subProduct">Priority</th>
                 <th *ngIf="!subProduct">Status</th>
+                <th *ngIf="!subProduct">Actions</th>
 
                 <th *ngIf="subProduct">Sub-Product Name</th>
                 <th *ngIf="subProduct">Parent Product</th>
@@ -67,19 +69,29 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
-                <td>{{ p.domain }}</td>
-                <td>{{ p.product }}</td>
+            <tr *ngFor="let p of getSubProduct;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
+                <td>{{ p.domainDesc }}</td>
+                <td>{{ p.productDesc }}</td>
                 <td>{{ p.subProductCode }}</td>
-                <td>{{ p.subProductDescription }}</td>
-                <td>{{ p.enterSubProductURL }}</td>
+                <td>{{ p.subProductDesc }}</td>
+                <td>{{ p.subProductUrl }}</td>
+                <td>{{ p.priority }}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IAC'
         }">
-                        {{ p.status }}
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }}
                     </span>
+                </td>
+
+                <td class="actions">
+                    <!-- Use images -->
+                    <ng-container>
+                        <img src="images/edit.png" />
+                        <img src="images/trash_red.png" />
+                    </ng-container>
+
                 </td>
             </tr>
         </tbody>

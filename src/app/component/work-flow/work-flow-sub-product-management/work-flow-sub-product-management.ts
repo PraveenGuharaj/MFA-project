@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
 
 @Component({
   selector: 'app-work-flow-sub-product-management',
@@ -13,6 +14,19 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class WorkFlowSubProductManagement {
   @Input() subProduct: boolean = false;
+  domainId: any;
+  getSubProduct: any;
+
+  constructor(private adminCenterService: AdminCenterService) { }
+
+  ngOnInit() {
+    this.getSubProductApi();
+    this.adminCenterService.refresh$.subscribe((res: any) => {
+      console.log('Refreshing table...', res);
+      this.domainId = res;
+      this.getSubProductApi();
+    });
+  }
 
   products = [
     {
@@ -75,4 +89,18 @@ export class WorkFlowSubProductManagement {
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
   }
+
+  getSubProductApi() {
+
+    const payload = {
+      "domainId": this.domainId || 'BO',
+      "productCode": "",
+      "subProductCode": ""
+    }
+
+    this.adminCenterService.getWorkflowSubProduct(payload).subscribe((res: any) => {
+      this.getSubProduct = res.data;
+    })
+  }
+
 }
