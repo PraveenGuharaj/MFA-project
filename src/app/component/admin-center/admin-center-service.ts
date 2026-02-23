@@ -942,4 +942,17 @@ export class AdminCenterService {
     )
   }
 
+  getMenuDropDown(payload: any) {
+    return this.http.post('http://34.18.92.50:8443/bko-product/fetchAll-DD',
+      payload
+    );
+  }
+
+
+  createWorkFlowSubProduct(payload: any) {
+    return this.http.post('http://34.18.92.50:8443/bko-subProduct/post',
+      payload
+    );
+  }
+
 }

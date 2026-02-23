@@ -13,36 +13,38 @@
             <div class="form-row full-width">
                 <div class="form-group">
                     <label>Domain </label>
-                    <mat-select formControlName="channel" placeholder="Select Product" class="mt-20">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="domain" placeholder="Select Product" class="mt-20">
+                        <mat-option *ngFor="let c of getDomainMgmt" [value]="c" (click)="selectDomain(c)">{{ c.desc
+                            }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group">
                     <label>Product </label>
-                    <mat-select formControlName="channel" placeholder="Select Role" class="mt-20">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="product" placeholder="Select Role" class="mt-20">
+                        <mat-option *ngFor="let c of getMenuDropdown" [value]="c">{{ c.desc }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group">
                     <label>Sub-Product Code</label>
-                    <input placeholder="Enter Sub-Product Code" class="mt-20" />
+                    <input placeholder="Enter Sub-Product Code" class="mt-20" formControlName="subProductCode" />
                 </div>
 
                 <div class="form-group">
                     <label>Sub-Product Description</label>
-                    <input placeholder="Enter Sub-Product Description" class="mt-20" />
+                    <input placeholder="Enter Sub-Product Description" class="mt-20"
+                        formControlName="subProductDescription" />
                 </div>
 
                 <div class="form-group">
                     <label>Sub-Product URL</label>
-                    <input placeholder="Enter Sub-Product URL" class="mt-20" />
+                    <input placeholder="Enter Sub-Product URL" class="mt-20" formControlName="subProductURL" />
                 </div>
 
                 <div class="form-group">
                     <label>Priority</label>
-                    <input placeholder="Enter Priority" class="mt-20" />
+                    <input placeholder="Enter Priority" class="mt-20" formControlName="priority" />
                 </div>
             </div>
 
@@ -55,7 +57,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Discard</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>
