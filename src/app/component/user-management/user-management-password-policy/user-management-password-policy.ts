@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonToaster } from '../../../shared/services/common-toaster';
 
 @Component({
   selector: 'app-user-management-password-policy',
@@ -13,72 +16,35 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class UserManagementPasswordPolicy {
   @Input() subProduct: boolean = false;
+  domainId: any;
+  getPasswordPolicy: any;
 
-  products = [
-    {
-      domain: 'AUS',
-      policyName: 'Australia',
-      channel: 'BannerID6',
-      category: 'AUS',
-      rules: 'Blue',
-      status: 'Yes',
-      actionsType: 'image',
-
-    },
-    {
-      domain: 'USA',
-      policyName: 'United States of America',
-      channel: 'Banner56',
-      category: 'USA',
-      rules: 'Green',
-      status: 'Yes',
-      actionsType: 'image',
-
-    },
-    {
-      domain: 'BRA',
-      policyName: 'Brazil',
-      channel: 'Terms',
-      category: 'BRA',
-      rules: 'Yellow',
-      status: 'Yes',
-      actionsType: 'image',
-
-    },
-    {
-      domain: 'FRA',
-      policyName: 'France',
-      channel: 'Language',
-      category: 'FRA',
-      rules: 'Green',
-      status: 'Yes',
-      actionsType: 'image',
-
-    },
-    {
-      domain: 'IND',
-      policyName: 'India',
-      channel: 'Banner56',
-      category: 'IND',
-      rules: 'Green',
-      status: 'Yes',
-      actionsType: 'image',
-
-    },
-    {
-      domain: 'FRA',
-      policyName: 'France',
-      channel: 'Language',
-      category: 'FRA',
-      rules: 'Green',
-      status: 'Yes',
-      actionsType: 'image',
-
-    }
-  ];
+  constructor(private adminCenterService: AdminCenterService,
+    public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
 
 
+  ngOnInit() {
+    this.getPasswordPolicyAPi();
+    this.adminCenterService.refresh$.subscribe((res: any) => {
+      console.log('Refreshing table...', res);
+      this.domainId = res;
+      this.getPasswordPolicyAPi();
+    });
+  }
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getPasswordPolicyAPi() {
+
+    const payload = {
+      domainId: this.domainId || 'BO'
+    }
+
+    this.adminCenterService.getPasswordPolicy(payload).subscribe((res: any) => {
+      this.getPasswordPolicy = res.data;
+    })
   }
 }
