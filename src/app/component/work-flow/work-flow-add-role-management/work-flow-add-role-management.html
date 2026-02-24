@@ -13,23 +13,27 @@
             <div class="form-row full-width">
                 <div class="form-group">
                     <label>Domain </label>
-                    <mat-select formControlName="channel" placeholder="Select Unit" class="mt-20">
-                        <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
+                    <mat-select formControlName="domain" placeholder="Select Unit" class="mt-20">
+                        <mat-option *ngFor="let c of getDomain" [value]="c">{{ c.desc }}</mat-option>
                     </mat-select>
                 </div>
 
                 <div class="form-group">
                     <label>Description </label>
-                    <mat-select formControlName="channel" placeholder="Enter Description" class="mt-20">
+                    <!-- <mat-select formControlName="description" placeholder="Enter Description" class="mt-20">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input class="role-input" placeholder="Enter Description" formControlName="description" />
                 </div>
 
                 <div class="form-group">
                     <label>Approval Flow</label>
-                    <mat-radio-group aria-label="Select MFA option" class="d-block">
-                        <mat-radio-button value="yes">Hierarchical</mat-radio-button>
-                        <mat-radio-button value="no">Non-Hierarchical</mat-radio-button>
+
+                    <mat-radio-group formControlName="approvalFlow" aria-label="Select Approval Flow" class="d-block">
+
+                        <mat-radio-button value="H">Hierarchical</mat-radio-button>
+                        <mat-radio-button value="NH">Non-Hierarchical</mat-radio-button>
+
                     </mat-radio-group>
                 </div>
 
@@ -42,9 +46,12 @@
                         <span class="h-title">Hierarchy</span>
                         <span class="r-title">Role Name</span>
                     </div>
-                    <div class="role-row" *ngFor="let h of hierarchyList">
-                        <span class="h-number">{{h}}.</span>
-                        <input class="role-input" placeholder="Enter Description" />
+                    <div formArrayName="hierarchyRoles">
+                        <div class="role-row" *ngFor="let h of hierarchyList; let i = index">
+                            <span class="h-number">{{ h }}.</span>
+
+                            <input class="role-input" placeholder="Enter Description" [formControlName]="i" />
+                        </div>
                     </div>
                 </div>
 
@@ -54,7 +61,8 @@
             <div class="form-actions">
                 <button type="submit" mat-raised-button color="primary" class="btn-cancel"
                     (click)="closeForm()">Discard</button>
-                <button type="button" mat-raised-button color="accent" class="btn-save">Save</button>
+                <button type="button" mat-raised-button color="accent" class="btn-save"
+                    (click)="submitForm()">Save</button>
             </div>
         </form>
     </div>
