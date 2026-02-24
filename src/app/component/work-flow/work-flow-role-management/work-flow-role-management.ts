@@ -4,12 +4,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonToaster } from '../../../shared/services/common-toaster';
+import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
+import { WorkFlowAddRoleManagement } from '../work-flow-add-role-management/work-flow-add-role-management';
 
 @Component({
   selector: 'app-work-flow-role-management',
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    ComonPopup
   ],
   templateUrl: './work-flow-role-management.html',
   styleUrl: './work-flow-role-management.scss',
@@ -99,7 +102,7 @@ export class WorkFlowRoleManagement {
 
   getRoleMgmtApi() {
     const payload = {
-      "domainId": this.domainId || 'BO',
+      "domainId": this.domainId || 'DKBBO',
       "productCode": "",
       "subProductCode": ""
     }
@@ -145,9 +148,61 @@ export class WorkFlowRoleManagement {
       .sort((a, b) => a - b);
   }
 
+  openModal(product: any) {
+    console.log('product', product);
 
+    const dialogRef = this.dialog.open(WorkFlowAddRoleManagement, {
+      width: '60%',
+      height: 'auto',
+      position: { right: '0' },
+      data: {
+        editData: product,
+        isEdit: true
+      }
+    });
+
+    // 👇 THIS IS THE IMPORTANT PART
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with:', result);
+
+      if (result === 'retaiClose') {
+        console.log('success');
+        this.getRoleMgmtApi();
+        // this.loadSubProducts(); // 🔥 refresh list / API call
+      }
+    });
+  }
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  openDeletePopup(product: any) {
+    this.selectedProduct = product;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    console.log('Deleting product:', this.selectedProduct);
+
+    const payload = {
+      name: this.selectedProduct.domainId
+    }
+
+    this.showDeleteConfirm = false;
+    // this.selectedProduct = null;
+    this.adminCenterService.deleteDomainMgmt(payload).subscribe((res) => {
+      console.log('res', res);
+      if (res.status.code == "000000") {
+        this.commonToaster.showSuccess(res.status.description);
+        this.getRoleMgmtApi();
+      }
+
+    })
   }
 }

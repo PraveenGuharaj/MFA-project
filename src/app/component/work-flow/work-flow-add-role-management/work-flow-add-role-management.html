@@ -18,7 +18,7 @@
                     </mat-select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" *ngIf="!isEditMode">
                     <label>Description </label>
                     <!-- <mat-select formControlName="description" placeholder="Enter Description" class="mt-20">
                         <mat-option *ngFor="let c of channels" [value]="c">{{ c }}</mat-option>
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="role-wrapper">
-                    <div class="btn-header">
+                    <div class="btn-header" *ngIf="!isEditMode">
                         <button class="retail_product ">
                             <img src="images/plus-mini.png">Add Role Management</button>
                     </div>
@@ -47,8 +47,8 @@
                         <span class="r-title">Role Name</span>
                     </div>
                     <div formArrayName="hierarchyRoles">
-                        <div class="role-row" *ngFor="let h of hierarchyList; let i = index">
-                            <span class="h-number">{{ h }}.</span>
+                        <div class="role-row" *ngFor="let control of hierarchyRoles.controls; let i = index">
+                            <span class="h-number">{{ i + 1 }}.</span>
 
                             <input class="role-input" placeholder="Enter Description" [formControlName]="i" />
                         </div>
@@ -56,6 +56,12 @@
                 </div>
 
             </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <mat-slide-toggle formControlName="status" color="primary" class="pl-10"></mat-slide-toggle>
+            </div>
+
 
             <!-- Buttons -->
             <div class="form-actions">

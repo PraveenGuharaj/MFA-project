@@ -10,6 +10,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AdminCenterService } from '../../admin-center/admin-center-service';
 import { CommonToaster } from '../../../shared/services/common-toaster';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -49,19 +50,66 @@ export class WorkFlowAddRoleManagement {
       domain: ['', Validators.required],
       description: ['', Validators.required],
       approvalFlow: ['', Validators.required],
-      hierarchyRoles: this.fb.array([])
+      hierarchyRoles: this.fb.array([]),
+      status: ['']
 
 
     });
+    const count = this.isEditMode ? 1 : this.hierarchyList.length;
 
-    this.hierarchyList.forEach(() => {
+    for (let i = 0; i < count; i++) {
       this.hierarchyRoles.push(this.fb.control(''));
-    });
+    }
   }
+
+
 
   ngOnInit() {
-    this.getDomainApi();
+    this.isEditMode = !!this.data?.editData;
+
+    // Clear first (safety)
+    this.hierarchyRoles.clear();
+
+    const count = this.isEditMode ? 1 : this.hierarchyList.length;
+
+    for (let i = 0; i < count; i++) {
+      this.hierarchyRoles.push(this.fb.control(''));
+    }
+
+    forkJoin({
+      domains: this.adminCenterService.getBoDropdown()
+    }).subscribe((res: any) => {
+      this.getDomain = res.domains?.data;
+
+      if (this.isEditMode) {
+        this.loadEditData(this.data.editData);
+      }
+    });
   }
+
+  loadEditData(data: any) {
+
+    const selectedDomain = this.getDomain.find(
+      (d: any) => d.name === data.domainId
+    );
+
+    this.productForm.patchValue({
+      domain: selectedDomain,
+      description: data.description,
+      approvalFlow: data.userRoleHierarchy === 'Yes' ? 'H' : 'NH',
+      status: data.status === 'ACT'
+
+
+    });
+
+    this.hierarchyRoles.clear();   // remove existing
+
+    // Add only ONE control in edit mode
+    this.hierarchyRoles.push(
+      this.fb.control(data.userLevelName || '')
+    );
+  }
+
 
   get hierarchyRoles(): FormArray {
     return this.productForm.get('hierarchyRoles') as FormArray;
@@ -72,43 +120,44 @@ export class WorkFlowAddRoleManagement {
     const formValue = this.productForm.value;
 
     const payload = formValue.hierarchyRoles
-      .filter((role: string) => role && role.trim() !== '') // remove empty rows
-      .map((role: string, index: number) => ({
-        roleId: '',
+      .filter((role: string) => role && role.trim() !== '')
+      .map((role: string) => ({
+
+        roleId: this.isEditMode
+          ? this.data.editData.roleId
+          : '',
+
         userLevelName: role,
         userRoleHierarchy: formValue.approvalFlow === 'H' ? 'Yes' : 'No',
         domainId: formValue.domain.name,
+
         description: formValue.description
       }));
 
     console.log('Final Payload:', payload);
 
     if (this.isEditMode) {
-      this.adminCenterService.createChildProduct(payload).subscribe((res: any) => {
-        console.log('ressss', res);
 
-        if (res?.status.code == "000000") {
-          console.log('data', this.data);
-
-          this.commonToaster.showSuccess(res.status.description);
-          this.dialogRef.close('retaiClose');
-          this.adminCenterService.trigger(this.productForm.value.domain.name);
-        } else {
-
-        }
-      })
-    } else {
       this.adminCenterService.createRoleMgmt(payload).subscribe((res: any) => {
-        console.log('create', res);
+
         if (res?.status.code == "000000") {
           this.commonToaster.showSuccess(res.status.description);
           this.dialogRef.close('retaiClose');
-          this.adminCenterService.trigger(this.productForm.value.domain.name);
+          this.adminCenterService.trigger(formValue.domain.name);
         }
+      });
 
-      })
+    } else {
+
+      this.adminCenterService.createRoleMgmt(payload).subscribe((res: any) => {
+
+        if (res?.status.code == "000000") {
+          this.commonToaster.showSuccess(res.status.description);
+          this.dialogRef.close('retaiClose');
+          this.adminCenterService.trigger(formValue.domain.name);
+        }
+      });
     }
-
   }
 
   closeForm() { }
@@ -117,6 +166,10 @@ export class WorkFlowAddRoleManagement {
     this.adminCenterService.getBoDropdown().subscribe((res: any) => {
       this.getDomain = res.data;
     })
+  }
+
+  get visibleHierarchyList() {
+    return this.isEditMode ? [1] : this.hierarchyList;
   }
 
 }
