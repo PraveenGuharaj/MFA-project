@@ -131,7 +131,8 @@ export class WorkFlowAddRoleManagement {
         userRoleHierarchy: formValue.approvalFlow === 'H' ? 'Yes' : 'No',
         domainId: formValue.domain.name,
 
-        description: formValue.description
+        description: formValue.description,
+        status: formValue.status === true ? 'ACT' : 'IAC',
       }));
 
     console.log('Final Payload:', payload);

@@ -43,66 +43,9 @@ export class WorkFlowRoleManagement {
     });
   }
 
-  products = [
-    {
-      domainName: 'BO',
-      roleName: 'PRD',
-      roleID: 'USER_MANAGEMENT_CONFIG',
-      hierarchyLevel: 'User Management',
-      actionsType: 'image',
-      status: 'Active'
-
-    },
-    {
-      domainName: 'BO',
-      roleName: 'PRD',
-      roleID: 'PARTNER_ONBOARDING_CONFIG',
-      hierarchyLevel: 'Partner Onboarding',
-      actionsType: 'image',
-      status: 'Active'
-
-    },
-    {
-      domainName: 'BO',
-      roleName: 'PRD',
-      roleID: 'CUSTOMER_SERVICE_CONFIG',
-      hierarchyLevel: 'Customer Service',
-      actionsType: 'image',
-      status: 'Active'
-
-    },
-    {
-      domainName: 'BO',
-      roleName: 'PRD',
-      roleID: 'NOTIFICATIONS_MANAGEMENT_CONFIG',
-      hierarchyLevel: 'Notifications Management',
-      actionsType: 'image',
-      status: 'Active'
-
-    },
-    {
-      domainName: 'BO',
-      roleName: 'PRD',
-      roleID: 'LICENSE_CONFIG',
-      hierarchyLevel: 'License Management',
-      actionsType: 'image',
-      status: 'Active'
-
-    },
-    {
-      domainName: 'BO',
-      roleName: 'PRD',
-      roleID: 'OTP_BIO_CONFIGURATION',
-      hierarchyLevel: 'User Management',
-      actionsType: 'image',
-      status: 'Active'
-
-    }
-  ];
-
   getRoleMgmtApi() {
     const payload = {
-      "domainId": this.domainId || 'DKBBO',
+      "domainId": this.domainId || 'BO',
       "productCode": "",
       "subProductCode": ""
     }
@@ -191,12 +134,13 @@ export class WorkFlowRoleManagement {
     console.log('Deleting product:', this.selectedProduct);
 
     const payload = {
-      name: this.selectedProduct.domainId
+      name: this.selectedProduct.roleId,
+      domainId: this.selectedProduct.domainId
     }
 
     this.showDeleteConfirm = false;
     // this.selectedProduct = null;
-    this.adminCenterService.deleteDomainMgmt(payload).subscribe((res) => {
+    this.adminCenterService.deleteRoleMgmt(payload).subscribe((res) => {
       console.log('res', res);
       if (res.status.code == "000000") {
         this.commonToaster.showSuccess(res.status.description);
@@ -205,4 +149,5 @@ export class WorkFlowRoleManagement {
 
     })
   }
+
 }
