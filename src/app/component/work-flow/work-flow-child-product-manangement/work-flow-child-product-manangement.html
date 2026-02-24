@@ -67,7 +67,7 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of getChildProduct;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
+            <tr *ngFor="let p of pagedProducts;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
                 <td>{{ p.domainDesc }}</td>
                 <td>{{ p.productCode }}</td>
                 <td>{{ p.subProductCode }}</td>

@@ -67,16 +67,16 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
-                <td>{{ p.domain }}</td>
-                <td>{{ p.product }}</td>
+            <tr *ngFor="let p of getAccessPermissionMgmt;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
+                <td>{{ p.domainId }}</td>
+                <td>{{ p.productCode }}</td>
                 <td>{{ p.subProductCode }}</td>
-                <td>{{ p.accessCode }}</td>
-                <td>{{ p.accessDescription }}</td>
+                <td>{{ p.functionCode }}</td>
+                <td>{{ p.functionDesc }}</td>
                 <td>{{ p.priority }}</td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />
                     </ng-container>

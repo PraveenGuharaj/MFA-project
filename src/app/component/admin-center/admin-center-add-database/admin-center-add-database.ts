@@ -68,7 +68,7 @@ export class AdminCenterAddDatabase {
     const isEncrypted = dataBaseForm.encryptedPassword === 'Yes';
 
     const payload = {
-      id: this.data.editData.id,
+      id: this.data?.editData.id,
       dbType: dataBaseForm.dataBaseType,
       hostName: dataBaseForm.hostName,
       port: Number(dataBaseForm.portName),

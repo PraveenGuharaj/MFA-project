@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonToaster } from '../../../shared/services/common-toaster';
+import { AdminCenterService } from '../../admin-center/admin-center-service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-work-flow-access-permission-management',
@@ -13,6 +16,20 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class WorkFlowAccessPermissionManagement {
   @Input() subProduct: boolean = false;
+  domainId: any;
+  getAccessPermissionMgmt: any;
+
+  constructor(private adminCenterService: AdminCenterService, public dialog: MatDialog,
+    private commonToaster: CommonToaster
+  ) { }
+
+  ngOnInit() {
+    this.getAccessPermissionMgmtApi();
+    this.adminCenterService.refresh$.subscribe(() => {
+      console.log('Refreshing table...');
+      this.getAccessPermissionMgmtApi();
+    });
+  }
 
   products = [
     {
@@ -80,5 +97,14 @@ export class WorkFlowAccessPermissionManagement {
 
   onProductTypeChanged(subProduct: boolean) {
     this.subProduct = subProduct;
+  }
+
+  getAccessPermissionMgmtApi() {
+    const payload = {
+      domainId: this.domainId || 'BO',
+    }
+    this.adminCenterService.getAccessPermissionMgmt(payload).subscribe((res: any) => {
+      this.getAccessPermissionMgmt = res.data;
+    })
   }
 }

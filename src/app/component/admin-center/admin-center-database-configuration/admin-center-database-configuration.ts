@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminCenterService } from '../admin-center-service';
 import { MatDialog } from '@angular/material/dialog';
-import { AdminCenterReadyToSync } from '../admin-center-ready-to-sync/admin-center-ready-to-sync';
 import { AdminCenterAddDatabase } from '../admin-center-add-database/admin-center-add-database';
 import { CommonToaster } from '../../../shared/services/common-toaster';
 import { ComonPopup } from '../../../shared/comon-popup/comon-popup';
