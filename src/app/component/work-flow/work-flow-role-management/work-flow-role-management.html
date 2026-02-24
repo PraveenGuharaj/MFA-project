@@ -67,22 +67,22 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let p of products;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
-                <td>{{ p.domainName }}</td>
-                <td>{{ p.roleName }}</td>
-                <td>{{ p.roleID }}</td>
-                <td>{{ p.hierarchyLevel }}</td>
+            <tr *ngFor="let p of getRoleMgmt;let i=index;" [ngClass]="{'bg-grey': i%2 != 0}">
+                <td>{{ p.domainDesc }}</td>
+                <td>{{ p.userLevelName }}</td>
+                <td>{{ p.roleId }}</td>
+                <td>{{ p.userRoleHierarchy }}</td>
                 <td>
                     <span class="status" [ngClass]="{
-          'active': p.status === 'Active',
-          'inactive': p.status === 'Inactive'
+          'active': p.status === 'ACT',
+          'inactive': p.status === 'IAC'
         }">
-                        {{ p.status }}
+                        {{ p.status === 'ACT' ? 'Active' : p.status === 'IAC' ? 'Inactive' : p.status }}
                     </span>
                 </td>
                 <td class="actions">
                     <!-- Use images -->
-                    <ng-container *ngIf="p.actionsType === 'image'">
+                    <ng-container>
                         <img src="images/edit.png" />
                         <img src="images/trash_red.png" />
                     </ng-container>
